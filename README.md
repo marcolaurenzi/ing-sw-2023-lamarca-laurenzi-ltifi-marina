@@ -1,6 +1,6 @@
 # ing-sw-2023-lamarca-laurenzi-ltifi-marina
 
-This is the **Ingegneria del Software**'s final test held at **Politecnico di Milano** (A:Y: 2022/2023)
+This is the **Ingegneria del Software**'s final test held at **Politecnico di Milano** (A.Y. 2022/2023)
 
 ## Team Members
 
