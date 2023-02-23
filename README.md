@@ -4,7 +4,7 @@ This is the **Ingegneria del Software**'s final test held at **Politecnico di Mi
 
 ## Team Members
 
-The team members are: [Riccardo Lamarca](), [Marco Laurenzi](https://github.com/marcolaurenzi), [Mouadh Ltifi](https://github.com/mouadhltifi), [Alessandro Aldo Marina](https://github.com/Hackingale) <br>
+The team members are: [Riccardo Lamarca](https://github.com/Riccardo250), [Marco Laurenzi](https://github.com/marcolaurenzi), [Mouadh Ltifi](https://github.com/mouadhltifi), [Alessandro Aldo Marina](https://github.com/Hackingale) <br>
 Professor: Pierluigi San Pietro
 
 ## My Shelfie Board Game
