@@ -2515,9 +2515,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2151,
-											"width": 151,
+											"width": 221.04443359375,
 											"height": 13,
-											"text": "CommonGoalType0"
+											"text": "SixGroupsOfMinTwoTilesSameType"
 										},
 										{
 											"_type": "LabelView",
@@ -2550,7 +2550,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2144,
-									"width": 161,
+									"width": 231.04443359375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R6TjGO68cw="
@@ -2577,7 +2577,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2169,
-									"width": 161,
+									"width": 231.04443359375,
 									"height": 10
 								},
 								{
@@ -2592,7 +2592,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2179,
-									"width": 161,
+									"width": 231.04443359375,
 									"height": 10
 								},
 								{
@@ -2632,8 +2632,8 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2144,
-							"width": 161,
-							"height": 58,
+							"width": 231.04443359375,
+							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R6TjGO5GEk="
 							},
@@ -2691,9 +2691,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2215,
-											"width": 151.46142578125,
+											"width": 234.2666015625,
 											"height": 13,
-											"text": "CommonGoalType1"
+											"text": "FourGroupsOfMinFourTilesSameType"
 										},
 										{
 											"_type": "LabelView",
@@ -2726,7 +2726,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2208,
-									"width": 161.46142578125,
+									"width": 244.2666015625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R9L63oZ6LM="
@@ -2753,7 +2753,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2233,
-									"width": 161.46142578125,
+									"width": 244.2666015625,
 									"height": 10
 								},
 								{
@@ -2768,7 +2768,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2243,
-									"width": 161.46142578125,
+									"width": 244.2666015625,
 									"height": 10
 								},
 								{
@@ -2808,7 +2808,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2208,
-							"width": 161.46142578125,
+							"width": 244.2666015625,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R9L63oY9JI="
@@ -2867,9 +2867,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2279,
-											"width": 151.46142578125,
+											"width": 219.35595703125,
 											"height": 13,
-											"text": "CommonGoalType2"
+											"text": "SameTypeAtFourBookshelfCorners"
 										},
 										{
 											"_type": "LabelView",
@@ -2902,7 +2902,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2272,
-									"width": 161.46142578125,
+									"width": 229.35595703125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R9i43xT6Cg="
@@ -2929,7 +2929,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2297,
-									"width": 161.46142578125,
+									"width": 229.35595703125,
 									"height": 10
 								},
 								{
@@ -2944,7 +2944,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2307,
-									"width": 161.46142578125,
+									"width": 229.35595703125,
 									"height": 10
 								},
 								{
@@ -2984,7 +2984,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2272,
-							"width": 161.46142578125,
+							"width": 229.35595703125,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R9i43xS1AQ="
@@ -3043,9 +3043,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2343,
-											"width": 151.46142578125,
+											"width": 157.00927734375,
 											"height": 13,
-											"text": "CommonGoalType3"
+											"text": "TwoGroups2x2SameType"
 										},
 										{
 											"_type": "LabelView",
@@ -3078,7 +3078,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2336,
-									"width": 161.46142578125,
+									"width": 167.00927734375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R9zfYGlQi8="
@@ -3105,7 +3105,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2361,
-									"width": 161.46142578125,
+									"width": 167.00927734375,
 									"height": 10
 								},
 								{
@@ -3120,7 +3120,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2371,
-									"width": 161.46142578125,
+									"width": 167.00927734375,
 									"height": 10
 								},
 								{
@@ -3160,7 +3160,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2336,
-							"width": 161.46142578125,
+							"width": 167.00927734375,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R9zfYGk8Eg="
@@ -3219,9 +3219,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2407,
-											"width": 399.115234375,
+											"width": 237.2119140625,
 											"height": 13,
-											"text": "ThreeColumnsOfSixTilesWithMaxThreeDifferencesCommonGoal"
+											"text": "ThreeColumnsSixTilesMaxThreeTypes"
 										},
 										{
 											"_type": "LabelView",
@@ -3254,7 +3254,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2400,
-									"width": 409.115234375,
+									"width": 247.2119140625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R+N6Y2stF4="
@@ -3281,7 +3281,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2425,
-									"width": 409.115234375,
+									"width": 247.2119140625,
 									"height": 10
 								},
 								{
@@ -3296,7 +3296,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2435,
-									"width": 409.115234375,
+									"width": 247.2119140625,
 									"height": 10
 								},
 								{
@@ -3336,7 +3336,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2400,
-							"width": 409.115234375,
+							"width": 247.2119140625,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R+N6Y2rBO0="
@@ -3395,9 +3395,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2471,
-											"width": 151.46142578125,
+											"width": 125.9501953125,
 											"height": 13,
-											"text": "CommonGoalType5"
+											"text": "EightTilesSameType"
 										},
 										{
 											"_type": "LabelView",
@@ -3430,7 +3430,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2464,
-									"width": 161.46142578125,
+									"width": 135.9501953125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R+hXZNBoNw="
@@ -3457,7 +3457,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2489,
-									"width": 161.46142578125,
+									"width": 135.9501953125,
 									"height": 10
 								},
 								{
@@ -3472,7 +3472,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2499,
-									"width": 161.46142578125,
+									"width": 135.9501953125,
 									"height": 10
 								},
 								{
@@ -3487,7 +3487,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1504,
-									"top": -304,
+									"top": -312,
 									"width": 10,
 									"height": 10
 								},
@@ -3503,7 +3503,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1504,
-									"top": -304,
+									"top": -312,
 									"width": 10,
 									"height": 10
 								}
@@ -3512,7 +3512,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2464,
-							"width": 161.46142578125,
+							"width": 135.9501953125,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R+hXZNAQR0="
@@ -3571,9 +3571,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2535,
-											"width": 151.46142578125,
+											"width": 271.146484375,
 											"height": 13,
-											"text": "CommonGoalType6"
+											"text": "FiveTilesSameTypeFormingDiagonalPattern"
 										},
 										{
 											"_type": "LabelView",
@@ -3606,7 +3606,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2528,
-									"width": 161.46142578125,
+									"width": 281.146484375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R+9nJvuBWk="
@@ -3633,7 +3633,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2553,
-									"width": 161.46142578125,
+									"width": 281.146484375,
 									"height": 10
 								},
 								{
@@ -3648,7 +3648,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2563,
-									"width": 161.46142578125,
+									"width": 281.146484375,
 									"height": 10
 								},
 								{
@@ -3688,7 +3688,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2528,
-							"width": 161.46142578125,
+							"width": 281.146484375,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R+9nJvtnIQ="
@@ -3747,9 +3747,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2599,
-											"width": 151.46142578125,
+											"width": 215.53466796875,
 											"height": 13,
-											"text": "CommonGoalType7"
+											"text": "FourLinesFiveTilesMaxThreeTypes"
 										},
 										{
 											"_type": "LabelView",
@@ -3782,7 +3782,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2592,
-									"width": 161.46142578125,
+									"width": 225.53466796875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4R/e1bEb0SM="
@@ -3809,7 +3809,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2617,
-									"width": 161.46142578125,
+									"width": 225.53466796875,
 									"height": 10
 								},
 								{
@@ -3824,7 +3824,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2627,
-									"width": 161.46142578125,
+									"width": 225.53466796875,
 									"height": 10
 								},
 								{
@@ -3864,7 +3864,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2592,
-							"width": 161.46142578125,
+							"width": 225.53466796875,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4R/e1bEa+fU="
@@ -3964,7 +3964,7 @@
 								"$ref": "AAAAAAGG4R6TjGO4BsY="
 							},
 							"lineStyle": 1,
-							"points": "3223:2171;2824:2168;2714:1809",
+							"points": "3223:2166;2824:2168;2714:1809",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGG4SJ+CYGlbOA="
@@ -4340,7 +4340,7 @@
 								"$ref": "AAAAAAGG4R+N6Y2q3qo="
 							},
 							"lineStyle": 1,
-							"points": "3223:2423;2824:2424;2702:1809",
+							"points": "3223:2422;2824:2424;2702:1809",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGG4SMFl7uKLYs="
@@ -4528,7 +4528,7 @@
 								"$ref": "AAAAAAGG4R+9nJvstL4="
 							},
 							"lineStyle": 1,
-							"points": "3223:2550;2824:2552;2698:1809",
+							"points": "3223:2551;2824:2552;2698:1809",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGG4SMzQcwsNes="
@@ -4704,9 +4704,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2663,
-											"width": 151.46142578125,
+											"width": 236.208984375,
 											"height": 13,
-											"text": "CommonGoalType8"
+											"text": "TwoColumnsSixTilesAllDifferentTypes"
 										},
 										{
 											"_type": "LabelView",
@@ -4739,7 +4739,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2656,
-									"width": 161.46142578125,
+									"width": 246.208984375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4SeKQX8ZxLQ="
@@ -4766,7 +4766,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2681,
-									"width": 161.46142578125,
+									"width": 246.208984375,
 									"height": 10
 								},
 								{
@@ -4781,7 +4781,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2691,
-									"width": 161.46142578125,
+									"width": 246.208984375,
 									"height": 10
 								},
 								{
@@ -4821,7 +4821,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2656,
-							"width": 161.46142578125,
+							"width": 246.208984375,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4SeKQX8Ya1E="
@@ -4880,9 +4880,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2727,
-											"width": 151,
+											"width": 214.55078125,
 											"height": 13,
-											"text": "CommonGoalType9"
+											"text": "TwoLinesSixTilesAllDifferentTypes"
 										},
 										{
 											"_type": "LabelView",
@@ -4915,7 +4915,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2720,
-									"width": 161,
+									"width": 224.55078125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4SeiS4H43sQ="
@@ -4942,7 +4942,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2745,
-									"width": 161,
+									"width": 224.55078125,
 									"height": 10
 								},
 								{
@@ -4957,7 +4957,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2755,
-									"width": 161,
+									"width": 224.55078125,
 									"height": 10
 								},
 								{
@@ -4997,7 +4997,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2720,
-							"width": 161,
+							"width": 224.55078125,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4SeiS4H3A6c="
@@ -5056,9 +5056,9 @@
 											"font": "Arial;13;1",
 											"left": 3229,
 											"top": 2791,
-											"width": 151,
+											"width": 224.9228515625,
 											"height": 13,
-											"text": "CommonGoalType10"
+											"text": "FiveTilesSameTypeFormingXPattern"
 										},
 										{
 											"_type": "LabelView",
@@ -5091,7 +5091,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2784,
-									"width": 161,
+									"width": 234.9228515625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGG4SfmEo175rw="
@@ -5118,7 +5118,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2809,
-									"width": 161,
+									"width": 234.9228515625,
 									"height": 10
 								},
 								{
@@ -5133,7 +5133,7 @@
 									"font": "Arial;13;0",
 									"left": 3224,
 									"top": 2819,
-									"width": 161,
+									"width": 234.9228515625,
 									"height": 10
 								},
 								{
@@ -5173,7 +5173,7 @@
 							"containerChangeable": true,
 							"left": 3224,
 							"top": 2784,
-							"width": 161,
+							"width": 234.9228515625,
 							"height": 45,
 							"nameCompartment": {
 								"$ref": "AAAAAAGG4SfmEo16P+Q="
@@ -5234,7 +5234,7 @@
 											"top": 2863,
 											"width": 151,
 											"height": 13,
-											"text": "CommonGoalType11"
+											"text": "SubMatrix5to1AnyType"
 										},
 										{
 											"_type": "LabelView",
@@ -15709,32 +15709,351 @@
 						},
 						{
 							"_type": "UMLNoteView",
-							"_id": "AAAAAAGHCNc5Xy4LC+4=",
+							"_id": "AAAAAAGHCXp/rTEuuBA=",
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 3688,
-							"top": 2400,
-							"width": 185,
-							"height": 49,
-							"text": "tre colonne da 6 caselle con al massimo 3 colori diversi"
+							"left": 3896,
+							"top": 2128,
+							"width": 233,
+							"height": 79,
+							"text": "Six groups each containing at least 2 tiles of the same type.\nThe tiles of one group can be different from those of another group."
 						},
 						{
 							"_type": "UMLNoteLinkView",
-							"_id": "AAAAAAGHCNeyGXIkcjo=",
+							"_id": "AAAAAAGHCXrew0TkFkU=",
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
 							"head": {
-								"$ref": "AAAAAAGHCNc5Xy4LC+4="
+								"$ref": "AAAAAAGG4R6TjGO4BsY="
 							},
 							"tail": {
-								"$ref": "AAAAAAGG4R+N6Y2q3qo="
+								"$ref": "AAAAAAGHCXp/rTEuuBA="
 							},
 							"lineStyle": 1,
-							"points": "3633:2423;3687:2423"
+							"points": "3895:2167;3455:2166"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCXuLPIbBZyc=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3600,
+							"top": 2200,
+							"width": 249,
+							"height": 68,
+							"text": "Four groups each containing at least\n4 tiles of the same type.\nThe tiles of one group can be different from those of another group."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCXue+o50GYU=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R9L6noXxNw="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCXuLPIbBZyc="
+							},
+							"lineStyle": 1,
+							"points": "3599:2232;3468:2231"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCXw6g7Lc5tA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3928,
+							"top": 2272,
+							"width": 161,
+							"height": 51,
+							"text": "Four tiles of the same type in the four corners of the bookshelf."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCXxQZbyfoGw=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R9i43xRoOE="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCXw6g7Lc5tA="
+							},
+							"lineStyle": 1,
+							"points": "3927:2297;3453:2295"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCX4lVv2Sc8A=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3600,
+							"top": 2328,
+							"width": 257,
+							"height": 64,
+							"text": "Two groups each containing 4 tiles of the same type in a 2x2 square. The tiles of one square can be different from those of the other square."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCX4+EAaV4Qs=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R9zfYGjjP8="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCX4lVv2Sc8A="
+							},
+							"lineStyle": 1,
+							"points": "3599:2359;3391:2358"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCX+GHUk3qWY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3904,
+							"top": 2392,
+							"width": 257,
+							"height": 64,
+							"text": "Three columns each formed by 6 tiles of maximum three different types. One column can show the same or a different combination of another column."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCX+bD1WaVoc=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R+N6Y2q3qo="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCX+GHUk3qWY="
+							},
+							"lineStyle": 1,
+							"points": "3903:2423;3471:2422"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYEMw574+Ic=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3600,
+							"top": 2464,
+							"width": 249,
+							"height": 55,
+							"text": "Eight tiles of the same type. There’s no\nrestriction about the position of these\ntiles."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYEeYaYb9Tg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R+hXZM/2uY="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYEMw574+Ic="
+							},
+							"lineStyle": 1,
+							"points": "3599:2490;3360:2487"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYKja+gtyJ8=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3944,
+							"top": 2536,
+							"width": 177,
+							"height": 38,
+							"text": "Five tiles of the same type forming a diagonal."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYK3HPVQjIg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R+9nJvstL4="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYKja+gtyJ8="
+							},
+							"lineStyle": 1,
+							"points": "3943:2553;3505:2551"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYOblRlaRcc=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3592,
+							"top": 2592,
+							"width": 297,
+							"height": 51,
+							"text": "Four lines each formed by 5 tiles of maximum three different types. One line can show the same or a different combination of another line."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYOtQSDdigo=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4R/e1LEZjWU="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYOblRlaRcc="
+							},
+							"lineStyle": 1,
+							"points": "3591:2616;3450:2615"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYUCnU25/Uo=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3952,
+							"top": 2664,
+							"width": 209,
+							"height": 40,
+							"text": "Two columns each formed by 6\ndifferent types of tiles."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYUVXljMHNs=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4SeKQX8XTk8="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYUCnU25/Uo="
+							},
+							"lineStyle": 1,
+							"points": "3951:2682;3470:2679"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYWRe3akUF0=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3608,
+							"top": 2720,
+							"width": 265,
+							"height": 51,
+							"text": "Two lines each formed by 5 different types of tiles. One line can show the same or a different combination of the other line."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYWhVn3HoKQ=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4SeiS4H2Euc="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYWRe3akUF0="
+							},
+							"lineStyle": 1,
+							"points": "3607:2744;3449:2743"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYaPCaKQVtk=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3968,
+							"top": 2792,
+							"width": 177,
+							"height": 38,
+							"text": "Five tiles of the same type forming an X."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYaj261DHoA=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4SfmEo15EXE="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYaPCaKQVtk="
+							},
+							"lineStyle": 1,
+							"points": "3967:2810;3459:2807"
+						},
+						{
+							"_type": "UMLNoteView",
+							"_id": "AAAAAAGHCYgHldlgaCg=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"left": 3576,
+							"top": 2848,
+							"width": 361,
+							"height": 66,
+							"text": "Five columns of increasing or decreasing height. Starting from the first column on the left or on the right, each next column must be made of exactly one more tile.\nTiles can be of any type."
+						},
+						{
+							"_type": "UMLNoteLinkView",
+							"_id": "AAAAAAGHCYgXY9/DSqY=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAGG4Sf6XY+zgrU="
+							},
+							"tail": {
+								"$ref": "AAAAAAGHCYgHldlgaCg="
+							},
+							"lineStyle": 1,
+							"points": "3575:2879;3385:2878"
 						}
 					]
 				},
@@ -18006,7 +18325,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType0",
+					"name": "SixGroupsOfMinTwoTilesSameType",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18029,7 +18348,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType1",
+					"name": "FourGroupsOfMinFourTilesSameType",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18052,7 +18371,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType2",
+					"name": "SameTypeAtFourBookshelfCorners",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18075,7 +18394,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType3",
+					"name": "TwoGroups2x2SameType",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18098,7 +18417,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ThreeColumnsOfSixTilesWithMaxThreeDifferencesCommonGoal",
+					"name": "ThreeColumnsSixTilesMaxThreeTypes",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18121,7 +18440,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType5",
+					"name": "EightTilesSameType",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18144,7 +18463,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType6",
+					"name": "FiveTilesSameTypeFormingDiagonalPattern",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18167,7 +18486,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType7",
+					"name": "FourLinesFiveTilesMaxThreeTypes",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18190,7 +18509,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType8",
+					"name": "TwoColumnsSixTilesAllDifferentTypes",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18213,7 +18532,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType9",
+					"name": "TwoLinesSixTilesAllDifferentTypes",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18236,7 +18555,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType10",
+					"name": "FiveTilesSameTypeFormingXPattern",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18259,7 +18578,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "CommonGoalType11",
+					"name": "SubMatrix5to1AnyType",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
