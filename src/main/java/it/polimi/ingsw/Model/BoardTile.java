@@ -30,7 +30,12 @@ public class BoardTile {
             System.out.println("The tile is not empty!");
         }
     }
-    /** this method is used to draw the item from the tile if it's present*/
+
+    /**
+     * This method is used to draw the item from the tale if it's present
+     *
+     * @return returns null if it's empty, returns the item otherwise
+     */
     private Item drawItem(){
         if(!this.isEmpty()){
             Item temp = this.placedItem;
@@ -41,9 +46,14 @@ public class BoardTile {
             return null;
         }
     }
-    /** this method is used to check which item is placed one the tile
-    * It is useful in case the game runs in the mode without the GUI
-    * Hence this allows the player to check the item without drawing it*/
+
+    /**
+     * this method is used to check which item is placed one the tile
+     * It is useful in case the game runs in the mode without the GUI
+     * Hence this allows the player to check the item without drawing
+     *
+     * @return the placed item in case it's not empty
+     */
     private Item checkItem(){
         if(this.isEmpty()){
             System.out.println("The tile is empty");
