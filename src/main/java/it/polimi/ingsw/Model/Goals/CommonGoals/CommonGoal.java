@@ -1,4 +1,6 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.Goals.CommonGoals;
+
+import it.polimi.ingsw.Model.Goals.Goal;
 
 /**
  * This class is an abstract class representing all the
@@ -7,6 +9,6 @@ package it.polimi.ingsw.Model;
  * goal is achieved or not
  */
 
-public abstract class CommonGoal implements Goal{
+public abstract class CommonGoal implements Goal {
 
 }
