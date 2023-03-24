@@ -1,4 +1,7 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.Goals.CommonGoals;
+
+import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
 
 /**
  * This class represents the CommonGoal number 4
@@ -8,7 +11,7 @@ package it.polimi.ingsw.Model;
  */
 
 
-public class ThreeColumnsOfSixTilesWithMaxThreeDifferencesCommonGoal extends CommonGoal{
+public class ThreeColumnsOfSixTilesWithMaxThreeDifferencesCommonGoal extends CommonGoal {
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
