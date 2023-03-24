@@ -19,11 +19,11 @@ public class BoardTile {
         this.placedItem = null;
     }
     /** this method tells whether the tile is empty or not */
-    private boolean isEmpty(){
+    protected boolean isEmpty(){
         return placedItem == null;
     }
     /** this method is used to place an item on the tile if it's empty*/
-    private void placeItem(Item itemToPlace){
+    protected void placeItem(Item itemToPlace){
         if(this.isEmpty()) {
             this.placedItem = itemToPlace;
         }else{
@@ -36,7 +36,7 @@ public class BoardTile {
      *
      * @return returns null if it's empty, returns the item otherwise
      */
-    private Item drawItem(){
+    protected Item drawItem(){
         if(!this.isEmpty()){
             Item temp = this.placedItem;
             this.placedItem = null;
@@ -54,7 +54,7 @@ public class BoardTile {
      *
      * @return the placed item in case it's not empty
      */
-    private Item checkItem(){
+    protected Item checkItem(){
         if(this.isEmpty()){
             System.out.println("The tile is empty");
             return null;
