@@ -5,7 +5,7 @@ import it.polimi.ingsw.Model.Goals.Goal;
 /**
  * This class is an abstract class representing all the
  * CommonGoals the game has, and implements the Goal interface
- * that gives it the isAchieved() method to check weather the
+ * that gives it the isAchieved() method to check whether the
  * goal is achieved or not
  */
 

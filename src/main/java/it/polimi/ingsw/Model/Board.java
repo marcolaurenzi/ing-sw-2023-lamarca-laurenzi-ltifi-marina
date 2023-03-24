@@ -5,11 +5,14 @@ package it.polimi.ingsw.Model;
 public class Board {
     private BoardTile[][] gameBoard;
     public Board() {
-        /* to be finished  */
+
+        // todo
     }
 
-    private boolean hasfree(int x, int y){
-    /* to be finished */
+    private boolean hasFree(int x, int y){
+        // todo
+
+        return true;
     }
 
 }
