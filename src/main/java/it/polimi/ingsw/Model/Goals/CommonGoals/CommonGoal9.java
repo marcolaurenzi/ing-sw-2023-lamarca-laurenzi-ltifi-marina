@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
 
 /**
  * This class represents the CommonGoal number 10 in the UML model.
@@ -9,7 +8,7 @@ import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
  *                          One line can show the same or a different combination of the other line.
  */
 
-public class TwoLinesFiveTilesAllDifferentTypes extends CommonGoal {
+public class CommonGoal9 extends CommonGoal {
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
