@@ -1,17 +1,13 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
 
 /**
- * This class represents the CommonGoal number 4
- * (based on the official Rulebook file starting with number 0 from the top left corner and finishing with number 11 in the bottom right corner)
- * saying that a player must have, to achieve the goal, 3 different columns
- * of 6 Tiles with no more than 3 different colours in it
+ * This class represents the CommonGoal number 9 in the UML model.
+ * Common Goal description: Two columns each formed by 6 different types of tiles
  */
 
-
-public class ThreeColumnsOfSixTilesWithMaxThreeDifferencesCommonGoal extends CommonGoal {
+public class CommonGoal8 extends CommonGoal {
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
@@ -24,4 +20,5 @@ public class ThreeColumnsOfSixTilesWithMaxThreeDifferencesCommonGoal extends Com
     public boolean isAchieved(BookShelf bookShelf) {
         return true;
     }
+
 }

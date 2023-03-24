@@ -25,6 +25,11 @@ public class BookShelf {
     }
 
     /**
+     * This method checks whether the Matrix is empty of not
+     */
+    public boolean isEmpty() {return freeTiles == 30; }
+
+    /**
      *
      * @param column
      * @param pick

@@ -2517,7 +2517,7 @@
 											"top": 2151,
 											"width": 221.04443359375,
 											"height": 13,
-											"text": "SixGroupsOfMinTwoTilesSameType"
+											"text": "CommonGoal0"
 										},
 										{
 											"_type": "LabelView",
@@ -2693,7 +2693,7 @@
 											"top": 2215,
 											"width": 234.2666015625,
 											"height": 13,
-											"text": "FourGroupsOfMinFourTilesSameType"
+											"text": "CommonGoal1"
 										},
 										{
 											"_type": "LabelView",
@@ -2869,7 +2869,7 @@
 											"top": 2279,
 											"width": 219.35595703125,
 											"height": 13,
-											"text": "SameTypeAtFourBookshelfCorners"
+											"text": "CommonGoal2"
 										},
 										{
 											"_type": "LabelView",
@@ -3045,7 +3045,7 @@
 											"top": 2343,
 											"width": 157.00927734375,
 											"height": 13,
-											"text": "TwoGroups2x2SameType"
+											"text": "CommonGoal3"
 										},
 										{
 											"_type": "LabelView",
@@ -3221,7 +3221,7 @@
 											"top": 2407,
 											"width": 237.2119140625,
 											"height": 13,
-											"text": "ThreeColumnsSixTilesMaxThreeTypes"
+											"text": "CommonGoal4"
 										},
 										{
 											"_type": "LabelView",
@@ -3397,7 +3397,7 @@
 											"top": 2471,
 											"width": 125.9501953125,
 											"height": 13,
-											"text": "EightTilesSameType"
+											"text": "CommonGoal5"
 										},
 										{
 											"_type": "LabelView",
@@ -3573,7 +3573,7 @@
 											"top": 2535,
 											"width": 271.146484375,
 											"height": 13,
-											"text": "FiveTilesSameTypeFormingDiagonalPattern"
+											"text": "CommonGoal6"
 										},
 										{
 											"_type": "LabelView",
@@ -3749,7 +3749,7 @@
 											"top": 2599,
 											"width": 215.53466796875,
 											"height": 13,
-											"text": "FourLinesFiveTilesMaxThreeTypes"
+											"text": "CommonGoal7"
 										},
 										{
 											"_type": "LabelView",
@@ -4706,7 +4706,7 @@
 											"top": 2663,
 											"width": 236.208984375,
 											"height": 13,
-											"text": "TwoColumnsSixTilesAllDifferentTypes"
+											"text": "CommonGoal8"
 										},
 										{
 											"_type": "LabelView",
@@ -4882,7 +4882,7 @@
 											"top": 2727,
 											"width": 214.55078125,
 											"height": 13,
-											"text": "TwoLinesSixTilesAllDifferentTypes"
+											"text": "CommonGoal9"
 										},
 										{
 											"_type": "LabelView",
@@ -5058,7 +5058,7 @@
 											"top": 2791,
 											"width": 224.9228515625,
 											"height": 13,
-											"text": "FiveTilesSameTypeFormingXPattern"
+											"text": "CommonGoal10"
 										},
 										{
 											"_type": "LabelView",
@@ -5234,7 +5234,7 @@
 											"top": 2863,
 											"width": 151,
 											"height": 13,
-											"text": "SubMatrix5to1AnyType"
+											"text": "CommonGoal11"
 										},
 										{
 											"_type": "LabelView",
@@ -18325,7 +18325,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "SixGroupsOfMinTwoTilesSameType",
+					"name": "CommonGoal0",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18348,7 +18348,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "FourGroupsOfMinFourTilesSameType",
+					"name": "CommonGoal1",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18371,7 +18371,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "SameTypeAtFourBookshelfCorners",
+					"name": "CommonGoal2",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18394,7 +18394,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "TwoGroups2x2SameType",
+					"name": "CommonGoal3",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18417,7 +18417,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "ThreeColumnsSixTilesMaxThreeTypes",
+					"name": "CommonGoal4",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18440,7 +18440,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "EightTilesSameType",
+					"name": "CommonGoal5",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18463,7 +18463,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "FiveTilesSameTypeFormingDiagonalPattern",
+					"name": "CommonGoal6",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18486,7 +18486,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "FourLinesFiveTilesMaxThreeTypes",
+					"name": "CommonGoal7",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18509,7 +18509,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "TwoColumnsSixTilesAllDifferentTypes",
+					"name": "CommonGoal8",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18532,7 +18532,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "TwoLinesSixTilesAllDifferentTypes",
+					"name": "CommonGoal9",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18555,7 +18555,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "FiveTilesSameTypeFormingXPattern",
+					"name": "CommonGoal10",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -18578,7 +18578,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "SubMatrix5to1AnyType",
+					"name": "CommonGoal11",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",

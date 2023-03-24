@@ -1,16 +1,16 @@
 package it.polimi.ingsw.Model;
 
 public class Item {
-    private final String type;
+    private final ColorEnum color;
     private final String picture;
 
-    public Item(String type, String picture) {
-        this.type = type;
+    public Item(ColorEnum color, String picture) {
+        this.color = color;
         this.picture = picture;
     }
 
-    public String getType() {
-        return type;
+    public ColorEnum getColor() {
+        return color;
     }
 
     public String getPicture() {
