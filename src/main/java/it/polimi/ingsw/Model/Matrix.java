@@ -12,8 +12,8 @@ public class Matrix<T> {
 
     public Matrix(int numberOfRows, int numberOfColumns) {
         Matrix = (T[][]) new Object[numberOfRows][numberOfColumns];
-        ColumnDimension = numberOfColumns;
-        RowDimension = numberOfRows;
+        ColumnDimension = numberOfRows;
+        RowDimension = numberOfColumns;
     }
     public int getColumnDimension() {
         return ColumnDimension;
