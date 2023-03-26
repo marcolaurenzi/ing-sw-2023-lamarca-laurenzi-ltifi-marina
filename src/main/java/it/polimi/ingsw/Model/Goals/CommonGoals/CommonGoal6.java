@@ -16,40 +16,36 @@ public class CommonGoal6 extends CommonGoal{
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
         ColorEnum last;
-        last = null;
         int count = 0;
-        for(int a = 0; a < 2; a++){
-            count = 0;
-            for(int i = 0;i < 5; i++){
-                if(last == null){
-                    last = bookShelf.get(i,i + a).getColor();
-                }
-                if(bookShelf.get(i,i+a).getColor() == null) {
-                    break;
-                }
-                if(bookShelf.get(i,i + a).getColor().equals(last)){
-                    count++;
-                }
+        last = null;
+        for(int i = 0; i < 5; i++){
+            if(bookShelf.get(i,i) == null)
+            {
+                break;
             }
-            if(count == 5){
-                return true;
+            if(last == null){
+                last = bookShelf.get(i,i).getColor();
             }
-            count = 0;
-            for(int i = 4;i >= 0; i--){
-                if(last == null){
-                    last = bookShelf.get(i,(4 - i)+ a).getColor();
-                }
-                if(bookShelf.get(i,4 - i + a).getColor() == null) {
-                    break;
-                }
-                if(bookShelf.get(i,4 - i + a).getColor().equals(last)){
-                    count++;
-                }
-            }
-            if(count == 5){
-                return true;
+            if(bookShelf.get(i,i).getColor().equals(last)){
+                count++;
             }
         }
-        return (count == 5);
+        if(count == 5){
+            return true;
+        }
+        count = 0;
+        last = null;
+        for(int i = 1; i < 6; i++){
+            if(bookShelf.get(i, i - 1) == null){
+                break;
+            }
+            if(last == null){
+                last = bookShelf.get(i, i -1).getColor();
+            }
+            if(bookShelf.get(i,i - 1).getColor().equals(last)){
+                count++;
+            }
+        }
+        return count == 5;
     }
 }
