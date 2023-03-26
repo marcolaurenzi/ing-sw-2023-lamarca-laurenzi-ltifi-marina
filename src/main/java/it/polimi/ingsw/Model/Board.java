@@ -6,74 +6,82 @@ public class Board {
     private BoardTile[][] gameBoard;
 
     /**
-     * This method overrides the constructor and it initialize to the correct value each tile present in the board
+     * This method overrides the constructor, and it initializes to the correct value each tile present in the board
      * The number 5 is set to represent a tile which is not physically available on the board
      */
     public Board() {
 
-        for(int i = 0; i < 10;i++)
-            for(int j = 0; j < 10;j++){
-                if(i == 0 && j == 0) gameBoard[i][j] = new BoardTile(5);
-                if(i == 0 && j == 1) gameBoard[i][j] = new BoardTile(5);
-                if(i == 0 && j == 2) gameBoard[i][j] = new BoardTile(5);
-                if(i == 0 && j == 5) gameBoard[i][j] = new BoardTile(5);
-                if(i == 0 && j == 6) gameBoard[i][j] = new BoardTile(5);
-                if(i == 0 && j == 7) gameBoard[i][j] = new BoardTile(5);
-                if(i == 0 && j == 8) gameBoard[i][j] = new BoardTile(5);
 
-                if(i == 1 && j == 0) gameBoard[i][j] = new BoardTile(5);
-                if(i == 1 && j == 1) gameBoard[i][j] = new BoardTile(5);
-                if(i == 1 && j == 2) gameBoard[i][j] = new BoardTile(5);
-                if(i == 1 && j == 6) gameBoard[i][j] = new BoardTile(5);
-                if(i == 1 && j == 7) gameBoard[i][j] = new BoardTile(5);
-                if(i == 1 && j == 8) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[0][0] = new BoardTile(5);
+            gameBoard[0][1] = new BoardTile(5);
+            gameBoard[0][2] = new BoardTile(5);
+            gameBoard[0][5] = new BoardTile(5);
+            gameBoard[0][6] = new BoardTile(5);
+            gameBoard[0][7] = new BoardTile(5);
+            gameBoard[0][8] = new BoardTile(5);
 
-                if(i == 2 && j == 0) gameBoard[i][j] = new BoardTile(5);
-                if(i == 2 && j == 1) gameBoard[i][j] = new BoardTile(5);
-                if(i == 2 && j == 7) gameBoard[i][j] = new BoardTile(5);
-                if(i == 2 && j == 8) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[1][0] = new BoardTile(5);
+            gameBoard[1][1] = new BoardTile(5);
+            gameBoard[1][2] = new BoardTile(5);
+            gameBoard[1][6] = new BoardTile(5);
+            gameBoard[1][7] = new BoardTile(5);
+            gameBoard[1][8] = new BoardTile(5);
 
-                if(i == 3 && j == 0) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[2][0] = new BoardTile(5);
+            gameBoard[2][1] = new BoardTile(5);
+            gameBoard[2][7] = new BoardTile(5);
+            gameBoard[2][8] = new BoardTile(5);
 
-                if(i == 5 && j == 8) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[3][0] = new BoardTile(5);
 
-                if(i == 6 && j == 0) gameBoard[i][j] = new BoardTile(5);
-                if(i == 6 && j == 1) gameBoard[i][j] = new BoardTile(5);
-                if(i == 6 && j == 7) gameBoard[i][j] = new BoardTile(5);
-                if(i == 6 && j == 8) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[5][8] = new BoardTile(5);
 
-                if(i == 7 && j == 0) gameBoard[i][j] = new BoardTile(5);
-                if(i == 7 && j == 1) gameBoard[i][j] = new BoardTile(5);
-                if(i == 7 && j == 2) gameBoard[i][j] = new BoardTile(5);
-                if(i == 7 && j == 6) gameBoard[i][j] = new BoardTile(5);
-                if(i == 7 && j == 7) gameBoard[i][j] = new BoardTile(5);
-                if(i == 7 && j == 8) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[6][0] = new BoardTile(5);
+            gameBoard[6][1] = new BoardTile(5);
+            gameBoard[6][7] = new BoardTile(5);
+            gameBoard[6][8] = new BoardTile(5);
 
-                if(i == 8 && j == 0) gameBoard[i][j] = new BoardTile(5);
-                if(i == 8 && j == 1) gameBoard[i][j] = new BoardTile(5);
-                if(i == 8 && j == 2) gameBoard[i][j] = new BoardTile(5);
-                if(i == 8 && j == 3) gameBoard[i][j] = new BoardTile(5);
-                if(i == 8 && j == 6) gameBoard[i][j] = new BoardTile(5);
-                if(i == 8 && j == 7) gameBoard[i][j] = new BoardTile(5);
-                if(i == 8 && j == 8) gameBoard[i][j] = new BoardTile(5);
+            gameBoard[7][0] = new BoardTile(5);
+            gameBoard[7][1] = new BoardTile(5);
+            gameBoard[7][2] = new BoardTile(5);
+            gameBoard[7][6] = new BoardTile(5);
+            gameBoard[7][7] = new BoardTile(5);
+            gameBoard[7][8] = new BoardTile(5);
 
-                if(i == 0 && j == 3) gameBoard[i][j] = new BoardTile(3);
-                if(i == 0 && j == 4) gameBoard[i][j] = new BoardTile(4);
-                if(i == 1 && j == 5) gameBoard[i][j] = new BoardTile(4);
-                if(i == 2 && j == 6) gameBoard[i][j] = new BoardTile(3);
-                if(i == 3 && j == 8) gameBoard[i][j] = new BoardTile(3);
-                if(i == 4 && j == 8) gameBoard[i][j] = new BoardTile(4);
-                if(i == 5 && j == 7) gameBoard[i][j] = new BoardTile(4);
-                if(i == 6 && j == 6) gameBoard[i][j] = new BoardTile(3);
-                if(i == 8 && j == 5) gameBoard[i][j] = new BoardTile(3);
-                if(i == 8 && j == 4) gameBoard[i][j] = new BoardTile(4);
-                if(i == 7 && j == 3) gameBoard[i][j] = new BoardTile(4);
-                if(i == 6 && j == 2) gameBoard[i][j] = new BoardTile(3);
-                if(i == 5 && j == 0) gameBoard[i][j] = new BoardTile(3);
-                if(i == 4 && j == 0) gameBoard[i][j] = new BoardTile(4);
-                if(i == 3 && j == 1) gameBoard[i][j] = new BoardTile(4);
-                if(i == 2 && j == 2) gameBoard[i][j] = new BoardTile(3);
+            gameBoard[8][0] = new BoardTile(5);
+            gameBoard[8][1] = new BoardTile(5);
+            gameBoard[8][2] = new BoardTile(5);
+            gameBoard[8][3] = new BoardTile(5);
+            gameBoard[8][6] = new BoardTile(5);
+            gameBoard[8][7] = new BoardTile(5);
+            gameBoard[8][8] = new BoardTile(5);
+
+            gameBoard[0][3] = new BoardTile(3);
+            gameBoard[0][4] = new BoardTile(4);
+            gameBoard[1][5] = new BoardTile(4);
+            gameBoard[2][6] = new BoardTile(3);
+            gameBoard[3][8] = new BoardTile(3);
+            gameBoard[4][8] = new BoardTile(4);
+            gameBoard[5][7] = new BoardTile(4);
+            gameBoard[6][6] = new BoardTile(3);
+            gameBoard[8][5] = new BoardTile(3);
+            gameBoard[8][4] = new BoardTile(4);
+            gameBoard[8][3] = new BoardTile(4);
+            gameBoard[7][2] = new BoardTile(3);
+            gameBoard[5][0] = new BoardTile(3);
+            gameBoard[4][0] = new BoardTile(4);
+            gameBoard[3][1] = new BoardTile(4);
+            gameBoard[2][2] = new BoardTile(3);
+
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    if(gameBoard[i][j] == null) {
+                        gameBoard[i][j] = new BoardTile(2);
+                    }
+                }
             }
+
+
 
     }
 
