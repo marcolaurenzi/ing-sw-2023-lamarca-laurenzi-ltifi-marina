@@ -37,7 +37,7 @@ public class CommonGoal6 extends CommonGoal{
             count = 0;
             for(int i = 4;i >= 0; i--){
                 if(last == null){
-                    last = bookShelf.get(i,4 - i + a).getColor();
+                    last = bookShelf.get(i,(4 - i)+ a).getColor();
                 }
                 if(bookShelf.get(i,4 - i + a).getColor() == null) {
                     break;
