@@ -19,12 +19,12 @@ public class CommonGoal1 extends CommonGoal{
         last = null;
         for(int i = 0; i < 6;i += 5){
             for(int j = 0; j < 5; j += 4){
+                if(bookShelf.get(i,j) == null){
+                    return false;
+                }
                 if(last == null) {
                     last = bookShelf.get(i, j).getColor();
                 }
-                if(bookShelf.get(i,j).getColor() == null){
-                        return false;
-                    }
                 if(!bookShelf.get(i,j).getColor().equals(last)){
                     return false;
                 }
