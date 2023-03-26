@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Model.Deck;
+package it.polimi.ingsw.Model.Decks;
 
 /**
  * Concrete class used to dynamically create the CommonGoalDeck class

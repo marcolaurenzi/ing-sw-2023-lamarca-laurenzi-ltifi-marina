@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Model.Deck;
+package it.polimi.ingsw.Model.Decks;
 
 import it.polimi.ingsw.Model.ColorEnum;
 import it.polimi.ingsw.Model.Item;

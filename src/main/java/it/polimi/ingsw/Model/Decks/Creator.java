@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Model.Deck;
+package it.polimi.ingsw.Model.Decks;
 
 /**
  * This abstract class is part of the Design Pattern Factory

@@ -1,6 +1,4 @@
-package it.polimi.ingsw.Model.Deck;
-
-import it.polimi.ingsw.Model.*;
+package it.polimi.ingsw.Model.Decks;
 
 /**
  * This class represents the concrete CommonGoalDeck

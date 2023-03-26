@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Model.Deck;
+package it.polimi.ingsw.Model.Decks;
 
 import java.util.ArrayList;
 import java.util.Collections;
