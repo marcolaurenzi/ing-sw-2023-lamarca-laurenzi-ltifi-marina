@@ -53,7 +53,7 @@ public abstract class PersonalGoal {
         return matches;
     }
 
-    int personalGoalScore(PersonalGoal playerBookshelf){
+    public int personalGoalScore(PersonalGoal playerBookshelf){
         int tmp = numOfMatches(playerBookshelf);
 
         return switch (tmp) {
