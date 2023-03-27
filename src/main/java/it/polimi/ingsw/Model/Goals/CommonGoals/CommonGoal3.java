@@ -1,7 +1,12 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Matrix;
 import it.polimi.ingsw.Model.TypeEnum;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This class represents the CommonGoal number 3
@@ -18,7 +23,31 @@ public class CommonGoal3 extends CommonGoal{
      */
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
-        // todo
-        return true;
+
+        Set<TypeEnum> temp = new HashSet<>();
+        Matrix<Boolean> copy = new Matrix<>(6,5, true);
+
+        int count = 0;
+
+        for(int i = 0; i < bookShelf.getRowDimension(); i++) {
+            for(int j = 0; j < bookShelf.getColumnDimension(); j++) {
+                if(copy.get(i, j)) {
+                    temp.add(bookShelf.get(i, j).getType());
+                    temp.add(bookShelf.get(i+1, j).getType());
+                    temp.add(bookShelf.get(i, j+1).getType());
+                    temp.add(bookShelf.get(i+1, j+1).getType());
+
+                    if(temp.size() == 1) {
+                        count++;
+                    }
+                    copy.set(i, j, false);
+                    copy.set(i+1, j, false);
+                    copy.set(i, j+1, false);
+                    copy.set(i+1, j+1, false);
+                    temp.clear();
+                }
+            }
+        }
+        return count >= 2;
     }
 }

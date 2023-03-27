@@ -27,8 +27,8 @@ public class CommonGoal5 extends CommonGoal{
         found.put(TypeEnum.BOOKS, 0);
         found.put(TypeEnum.PLANTS, 0);
         found.put(TypeEnum.TROPHIES, 0);
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < bookShelf.getRowDimension(); i++) {
+            for (int j = 0; j < bookShelf.getColumnDimension(); j++) {
                 if (bookShelf.get(i, j) == null) continue;
                 found.put(bookShelf.get(i, j).getType(), found.get(bookShelf.get(i, j).getType()) + 1);
             }

@@ -20,7 +20,7 @@ public class CommonGoal6 extends CommonGoal{
         TypeEnum last;
         int count = 0;
         last = null;
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < bookShelf.getColumnDimension(); i++){
             if(bookShelf.get(i,i) == null)
             {
                 break;
@@ -37,7 +37,7 @@ public class CommonGoal6 extends CommonGoal{
         }
         count = 0;
         last = null;
-        for(int i = 1; i < 6; i++){
+        for(int i = 1; i < bookShelf.getRowDimension(); i++){
             if(bookShelf.get(i, i - 1) == null){
                 break;
             }

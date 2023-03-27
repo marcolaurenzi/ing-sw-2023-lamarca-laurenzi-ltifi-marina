@@ -19,8 +19,8 @@ public class CommonGoal2 extends CommonGoal{
     public boolean isAchieved(BookShelf bookShelf) {
         TypeEnum last;
         last = null;
-        for(int i = 0; i < 6;i += 5){
-            for(int j = 0; j < 5; j += 4){
+        for(int i = 0; i < bookShelf.getRowDimension();i += 5){
+            for(int j = 0; j < bookShelf.getColumnDimension(); j += 4){
                 if(bookShelf.get(i,j) == null){
                     return false;
                 }

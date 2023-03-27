@@ -12,13 +12,14 @@ public class CommonGoal11 extends CommonGoal{
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
      * @param bookShelf is the reference to the actual BookShelf Object where the Algorithm works on
+     *                  
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
         int count = 0;
         if (bookShelf.get(0, 4) != null) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < bookShelf.getColumnDimension(); i++) {
                 if ((4 - i - 1) >= 0 && bookShelf.get(i, 4 - i - 1) != null) {
                     break;
                 }
@@ -28,12 +29,11 @@ public class CommonGoal11 extends CommonGoal{
                     count++;
                 }
             }
-            System.out.println(count);
-            if (count == 5) {
-                return true;
-            }
+
+            return count == 5;
+
         } else if (bookShelf.get(1, 4) != null) {
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < bookShelf.getRowDimension(); i++) {
                 if ((5 - i - 1) >= 0 && bookShelf.get(i, 5 - i - 1) != null) {
                     break;
                 }
@@ -43,12 +43,11 @@ public class CommonGoal11 extends CommonGoal{
                     count++;
                 }
             }
-            if (count == 5) {
-                return true;
-            }
+            return count == 5;
         }
+
         if (bookShelf.get(0,0) != null){
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < bookShelf.getColumnDimension(); i++) {
                 if ((i + 1) < 5 && bookShelf.get(i, i + 1) != null) {
                     break;
                 }
@@ -58,11 +57,10 @@ public class CommonGoal11 extends CommonGoal{
                     count++;
                 }
             }
-            if (count == 5) {
-                return true;
-            }
+            return count == 5;
+
         } else if (bookShelf.get(1,0) != null) {
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < bookShelf.getRowDimension(); i++) {
                 if ((i) < 5 && bookShelf.get(i, i) != null) {
                     break;
                 }
@@ -72,10 +70,9 @@ public class CommonGoal11 extends CommonGoal{
                     count++;
                 }
             }
-            if (count == 5) {
-                return true;
-            }
+            return count == 5;
         }
+
         return false;
     }
 }
