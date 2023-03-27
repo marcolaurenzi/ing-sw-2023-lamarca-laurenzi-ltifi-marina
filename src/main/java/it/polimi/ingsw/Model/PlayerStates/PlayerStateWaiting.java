@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * This state represents the state of a player that is waiting his turn
  */
 public class PlayerStateWaiting extends PlayerState{
+
     /**
      *
      * @throws PlayerIsWaitingException
@@ -20,6 +21,7 @@ public class PlayerStateWaiting extends PlayerState{
     public void select(ArrayList<Coordinates> tilesSelection, Board board, int i, int j) throws PlayerIsWaitingException {
         throw new PlayerIsWaitingException();
     }
+
     /**
      *
      * @throws PlayerIsWaitingException

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * This state represent the state of a player that is selecting the tiles from the board
  */
 public class PlayerStateSelecting extends PlayerState{
+
     /**
      * This method adds the coordinate i, j to the selection. It is called by the controller
      * when the player selects a tile
@@ -26,9 +27,11 @@ public class PlayerStateSelecting extends PlayerState{
         }
         tilesSelection.add(new Coordinates(i, j));
     }
+
     /**
      * Assign the selected tiles to the pickedItems array. Only if the selection is the pick conditions are met
      * @param board the board of the game
+     *
      * @throws SelectionNotValidException if the selection is not valid AKA not all the selected tiles have at least one
      * side free or the selected tiles are not adjacent
      * @throws SelectionIsEmptyException if the selection is empty
@@ -55,9 +58,11 @@ public class PlayerStateSelecting extends PlayerState{
 
         return ret;
     }
+
     /**
      * insert the pickedItems in bookShelf
      * @param column the column where the player wants to put the items
+     *
      * @throws ColumnNotValidException if the items don't fit the column
      */
     @Override

@@ -2,7 +2,17 @@ package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
 
+/**
+ *
+ */
 public class CommonGoal10 extends CommonGoal{
+
+    /**
+     *
+     * @param bookShelf
+     *
+     * @return
+     */
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 

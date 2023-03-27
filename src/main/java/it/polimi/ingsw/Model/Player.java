@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Model;
 
-
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 import it.polimi.ingsw.Model.PlayerStates.PlayerState;
@@ -8,6 +7,9 @@ import it.polimi.ingsw.Model.PlayerStates.PlayerStateWaiting;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Player {
     private final String playerID;
     private int points;
@@ -37,6 +39,7 @@ public class Player {
 
     /**
      * This method is called at the end of the game
+     *
      * @return  the points earned by the player from the personal goal
      */
     private int getRewardPersonalGoal(){
@@ -52,6 +55,7 @@ public class Player {
      * @param bookShelf the bookShelf
      * @param supportMatrix the supportMatrix
      * @param type the type of the Item in booKShelf[i][j]
+     *
      * @return 1 + the number of adjacent elements that are the same color of the current element and are set to true
      *         in the supportMatrix
      */
@@ -78,8 +82,10 @@ public class Player {
 
         return ret;
     }
+
     /**
      * This method calculates the points earned by the player referring to the general goals and returns them
+     *
      * @return the points that the player earned by the general goal
      */
     private int getRewardGeneralGoal() {
@@ -111,6 +117,7 @@ public class Player {
 
         return ret;
     }
+
     /**
      * this method initialize a new clean selection. It is called by the controller when the player selects
      * the first tile
@@ -118,6 +125,7 @@ public class Player {
     public void initializeSelection() {
         tilesSelection = new ArrayList<>(3);
     }
+
     /**
      * This method adds the coordinate i, j to the selection. It is called by the controller
      * when the player selects a tile
@@ -128,6 +136,7 @@ public class Player {
     public void select(Board board, int i, int j) throws SelectionIsFullException, PlayerIsWaitingException {
             state.select(this.tilesSelection , board, i, j);
     }
+
     /**
      * this method remove a coordinate from the tilesSelection. It is useful if the player changes is mind and want
      * to select another tile
@@ -141,9 +150,11 @@ public class Player {
                 break;
             }
     }
+
     /**
      * Assign the selected tiles to the pickedItems array. Only if the selection is the pick conditions are met
      * @param board the board of the game
+     *
      * @throws PlayerIsWaitingException if the player state is waiting
      * @throws SelectionNotValidException if the selection is not valid AKA not all the selected tiles have at least one
      * side free or the selected tiles are not adjacent
@@ -152,6 +163,7 @@ public class Player {
     public void pick(Board board) throws PlayerIsWaitingException, SelectionNotValidException, SelectionIsEmptyException {
         this.pickedItems = state.pick(this.tilesSelection, board);
     }
+
     /**
      * this method changes the state of the player. It is called by the controller
      * @param state next state
@@ -159,14 +171,17 @@ public class Player {
     public void changeState (PlayerState state) {
         this.state = state;
     }
+
     /**
      * insert the pickedItems in bookShelf
      * @param column the column where the player wants to put the items
+     *
      * @throws ColumnNotValidException if the items don't fit the column
      */
     public void insertPickInBookShelf (int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException {
         this.state.insertPickInBookShelf(this.pickedItems, this.bookShelf, column, order);
     }
+
     /**
      * This method is called at the end of every turn of a player and checks if one of the two common goal of the game
      * is achieved. If this is the case it updates the points and set isCommonGoalAlreadyAchieved to true so the player
@@ -187,6 +202,7 @@ public class Player {
             }
         }
     }
+
     /**
      * This method is called at the end of the game. Updates the points counting the personalGoal points and the
      * generalGoal points

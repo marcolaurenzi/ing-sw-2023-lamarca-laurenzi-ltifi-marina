@@ -9,7 +9,7 @@ import it.polimi.ingsw.Model.Item;
 public class ItemDeck extends Deck{
 
     /**
-     * This method is used to correctly initialize the concrete instance of the deck
+     * This method is used to correctly initialize the concrete instance of the deck and to shuffle it
      */
     @Override
     public void initializeDeck() {
@@ -21,5 +21,7 @@ public class ItemDeck extends Deck{
             }
             j++;
         }
+
+        this.shuffle();
     }
 }

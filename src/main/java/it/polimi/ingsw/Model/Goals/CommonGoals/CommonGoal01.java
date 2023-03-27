@@ -5,15 +5,15 @@ import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Matrix;
 
 /**
- * This class represents the CommonGoal number 10 in the UML model.
+ * This class represents the CommonGoal number 0 and 1
  * Common Goal description: numberOfGroups groups each containing at least dim tiles of the same type.
  * the tiles of one group can be different from those of another group
  */
-public class CommonGoal0 extends CommonGoal {
+public class CommonGoal01 extends CommonGoal {
     private final int dim;
     private final int numberOfGroups;
 
-    public CommonGoal0(int dim, int numberOfGroups) {
+    public CommonGoal01(int dim, int numberOfGroups) {
         this.dim = dim;
         this.numberOfGroups = numberOfGroups;
     }

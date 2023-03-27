@@ -12,8 +12,8 @@ import it.polimi.ingsw.Model.Matrix;
  * goal is achieved or not
  */
 public abstract class PersonalGoal {
-    // per la numerazione dei personalgoals seguo quella usata negli asset grafici forniti
-    //da fare costruttore
+
+    // per la numerazione dei personalGoals seguo quella usata negli asset grafici forniti
     private Matrix<Item> personalGoal;
 
     public PersonalGoal() {

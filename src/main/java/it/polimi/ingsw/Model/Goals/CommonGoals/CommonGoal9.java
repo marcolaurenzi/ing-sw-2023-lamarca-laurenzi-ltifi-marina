@@ -11,7 +11,6 @@ import java.util.Set;
  * Common Goal description: Two lines each formed by 5 different types of tiles.
  * One line can show the same or a different combination of the other line.
  */
-
 public class CommonGoal9 extends CommonGoal {
 
     /**
