@@ -13,13 +13,13 @@ public class CommonGoal10 extends CommonGoal{
                         bookShelf.get(i + 1, j + 1) == null ||
                         bookShelf.get(i + 2, j) == null ||
                         bookShelf.get(i + 2, j + 2) == null) {
-                    break; //no point in checking that column, a full column of different colors needed
+                    break; // if there is a null, there is no need to check the other cells
                 } else if (bookShelf.get(i, j).getType() == bookShelf.get(i + 2, j).getType() &&
                         bookShelf.get(i, j).getType() == bookShelf.get(i + 1, j + 1).getType() &&
                         bookShelf.get(i, j).getType() == bookShelf.get(i + 2, j).getType() &&
                         bookShelf.get(i, j).getType() == bookShelf.get(i + 2, j + 2).getType()) {
                     return true;
-                }
+                } // if all the cells have the same type, the goal is achieved
             }
         }
         return false;
