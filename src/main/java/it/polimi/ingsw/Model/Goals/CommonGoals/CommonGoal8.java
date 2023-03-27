@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class CommonGoal8 extends CommonGoal {
     public boolean isAchieved(BookShelf bookShelf) {
 
         // times stores how many colors the algorithm already found
-        Set<ColorEnum> colorsFound = new HashSet<>();
+        Set<TypeEnum> typesFound = new HashSet<>();
 
         // number of valid columns found
         int validColumns = 0;
@@ -39,13 +39,13 @@ public class CommonGoal8 extends CommonGoal {
                     break; //no point in checking that column, a full column of different colors needed
                 }
                 else {
-                    colorsFound.add(bookShelf.get(i,j).getColor());
+                    typesFound.add(bookShelf.get(i,j).getType());
                 }
 
             }
-            if(colorsFound.size() == 6) {
+            if(typesFound.size() == 6) {
                 validColumns++;
-                colorsFound.clear();
+                typesFound.clear();
             }
         }
 

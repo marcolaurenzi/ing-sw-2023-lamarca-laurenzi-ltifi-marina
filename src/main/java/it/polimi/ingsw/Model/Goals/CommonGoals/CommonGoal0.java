@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Matrix;
 
 /**
@@ -30,23 +30,23 @@ public class CommonGoal0 extends CommonGoal {
      * @param supportMatrix supportMatrix
      * @param color color
      */
-    private void spreadFalse(int i, int j, BookShelf bookShelf, Matrix<Boolean> supportMatrix, ColorEnum color) {
+    private void spreadFalse(int i, int j, BookShelf bookShelf, Matrix<Boolean> supportMatrix, TypeEnum color) {
         supportMatrix.set(i, j, false);
 
         if(i + 1 < supportMatrix.getColumnDimension() && bookShelf.get(i + 1, j) != null)
-            if(bookShelf.get(i + 1, j).getColor() == color && supportMatrix.get(i + 1, j))
+            if(bookShelf.get(i + 1, j).getType() == color && supportMatrix.get(i + 1, j))
                 spreadFalse(i +1, j, bookShelf, supportMatrix, color);
 
         if(i - 1 >= 0 && bookShelf.get(i - 1, j) != null)
-            if(bookShelf.get(i - 1, j).getColor() == color && supportMatrix.get(i - 1, j))
+            if(bookShelf.get(i - 1, j).getType() == color && supportMatrix.get(i - 1, j))
                 spreadFalse(i - 1, j, bookShelf, supportMatrix, color);
 
         if(j + 1 < supportMatrix.getRowDimension() && bookShelf.get(i, j + 1)!= null)
-            if(bookShelf.get(i, j + 1).getColor() == color && supportMatrix.get(i, j + 1))
+            if(bookShelf.get(i, j + 1).getType() == color && supportMatrix.get(i, j + 1))
                 spreadFalse(i, j + 1, bookShelf, supportMatrix, color);
 
         if(j - 1 >= 0 && bookShelf.get(i, j - 1) != null)
-            if(bookShelf.get(i, j - 1).getColor() == color && supportMatrix.get(i, j - 1))
+            if(bookShelf.get(i, j - 1).getType() == color && supportMatrix.get(i, j - 1))
                 spreadFalse(i, j - 1, bookShelf, supportMatrix, color);
     }
 
@@ -71,7 +71,7 @@ public class CommonGoal0 extends CommonGoal {
             for (int j = 0; j < bookShelf.getRowDimension(); j++) {
 
                 if(bookShelf.get(i, j) != null) {
-                    ColorEnum currentColor = bookShelf.get(i, j).getColor();
+                    TypeEnum currentColor = bookShelf.get(i, j).getType();
 
 
                     if (i < supportMatrix.getColumnDimension() - (dim - 1)) {
@@ -79,7 +79,7 @@ public class CommonGoal0 extends CommonGoal {
                         for (int k = 0; k < dim; k++) {
                             if (bookShelf.get(i+ k, j) == null)
                                 break;
-                            else if (supportMatrix.get(i + k, j) && bookShelf.get(i + k, j).getColor() == currentColor) {
+                            else if (supportMatrix.get(i + k, j) && bookShelf.get(i + k, j).getType() == currentColor) {
                                 tempCounter++;
                             } else
                                 break;
@@ -96,7 +96,7 @@ public class CommonGoal0 extends CommonGoal {
                         for (int k = 0; k < dim; k++) {
                             if (bookShelf.get(i, j + k) == null)
                                 break;
-                            if (supportMatrix.get(i, j + k) && bookShelf.get(i, j + k).getColor() == currentColor) {
+                            if (supportMatrix.get(i, j + k) && bookShelf.get(i, j + k).getType() == currentColor) {
                                 tempCounter++;
                             } else
                                 break;

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 
 /**
  * This class represents the CommonGoal number 11

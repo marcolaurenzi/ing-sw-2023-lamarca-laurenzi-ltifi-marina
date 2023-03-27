@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 import java.util.*;
 
 /**
@@ -25,7 +25,7 @@ public class CommonGoal4 extends CommonGoal {
     public boolean isAchieved(BookShelf bookShelf) {
 
         // times stores how many colors the algorithm already found
-        Set<ColorEnum> times = new HashSet<>();
+        Set<TypeEnum> times = new HashSet<>();
 
         // counters counts how many times the pattern is found
         int counter = 0;
@@ -38,7 +38,7 @@ public class CommonGoal4 extends CommonGoal {
                     j ++;
                 }
                 else{
-                    times.add(bookShelf.get(i,j).getColor());
+                    times.add(bookShelf.get(i,j).getType());
                 }
 
             }

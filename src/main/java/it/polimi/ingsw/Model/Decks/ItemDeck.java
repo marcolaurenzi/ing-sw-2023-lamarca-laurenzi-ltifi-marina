@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Decks;
 
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Item;
 
 /**
@@ -16,9 +16,9 @@ public class ItemDeck extends Deck{
     public void initializeDeck() {
         int j = 0;
 
-        for(ColorEnum colorEnum : ColorEnum.values()) {
+        for(TypeEnum typeEnum : TypeEnum.values()) {
             for(int i = 0; i < 22; i++) {
-                deck.set(i+22*j, new Item(colorEnum, "temp"));
+                deck.set(i+22*j, new Item(typeEnum));
             }
             j++;
         }

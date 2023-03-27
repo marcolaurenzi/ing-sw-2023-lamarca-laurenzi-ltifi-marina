@@ -1,11 +1,8 @@
 package it.polimi.ingsw.Model.Goals.PersonalGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Item;
 import it.polimi.ingsw.Model.Matrix;
-
-import java.util.ArrayList;
 
 /**
  * This class is an abstract class representing all the
@@ -16,10 +13,16 @@ import java.util.ArrayList;
 
 public abstract class PersonalGoal {
     // per la numerazione dei personalgoals seguo quella usata negli asset grafici forniti
+    //da fare costruttore
 
 
-    public abstract Matrix<Item> createpersonalGoal();
-    private Matrix<Item> personalGoal = createpersonalGoal();
+    private Matrix<Item> personalGoal;
+
+    public PersonalGoal(Matrix<Item> personalGoal) {
+        this.personalGoal = personalGoal;
+    }
+
+    public abstract Matrix<Item> PersonalGoal();
 
     /*
     protected PersonalGoal(BookShelf personalGoal) {
@@ -27,8 +30,8 @@ public abstract class PersonalGoal {
     }
     */
 
-    public ColorEnum get(int i, int j) {
-        return personalGoal.get(i,j).getColor();
+    public TypeEnum getType(int i, int j) {
+        return personalGoal.get(i,j).getType();
     }
 
     //in each goal we'll need to set the matrix of the shelf
@@ -40,7 +43,7 @@ public abstract class PersonalGoal {
         for(int i = 0; i<personalGoal.getRowDimension(); i++) {
             for(int j = 0; j < personalGoal.getColumnDimension(); j++) {
                 if(personalGoal.get(i,j) != null) {
-                    if(personalGoal.get(i,j).getColor()==playerBookShelf.get(i,j)){
+                    if(personalGoal.get(i,j).getType()==playerBookShelf.getType(i,j)){
                         matches++;
                     }
                 }

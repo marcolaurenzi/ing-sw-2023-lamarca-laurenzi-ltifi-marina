@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 
 import java.util.HashMap;
 /**
@@ -17,17 +17,17 @@ public class CommonGoal5 extends CommonGoal{
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
         boolean result = false;
-        HashMap<ColorEnum, Integer> found = new HashMap<ColorEnum, Integer>();
-        found.put(ColorEnum.BLUE, 0);
-        found.put(ColorEnum.GREEN, 0);
-        found.put(ColorEnum.YELLOW, 0);
-        found.put(ColorEnum.WHITE, 0);
-        found.put(ColorEnum.PINK, 0);
-        found.put(ColorEnum.LIGHTBLUE, 0);
+        HashMap<TypeEnum, Integer> found = new HashMap<TypeEnum, Integer>();
+        found.put(TypeEnum.FRAMES, 0);
+        found.put(TypeEnum.CATS, 0);
+        found.put(TypeEnum.GAMES, 0);
+        found.put(TypeEnum.BOOKS, 0);
+        found.put(TypeEnum.PLANTS, 0);
+        found.put(TypeEnum.TROPHIES, 0);
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 5; j++) {
                 if (bookShelf.get(i, j) == null) continue;
-                found.put(bookShelf.get(i, j).getColor(), found.get(bookShelf.get(i, j).getColor()) + 1);
+                found.put(bookShelf.get(i, j).getType(), found.get(bookShelf.get(i, j).getType()) + 1);
             }
         }
         for (Integer value : found.values()) {

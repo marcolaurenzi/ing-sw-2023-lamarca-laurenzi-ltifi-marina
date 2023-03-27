@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
-import it.polimi.ingsw.Model.ColorEnum;
+import it.polimi.ingsw.Model.TypeEnum;
 
 /**
  * This class represents the CommonGoal number 6
@@ -15,7 +15,7 @@ public class CommonGoal6 extends CommonGoal{
      */
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
-        ColorEnum last;
+        TypeEnum last;
         int count = 0;
         last = null;
         for(int i = 0; i < 5; i++){
@@ -24,9 +24,9 @@ public class CommonGoal6 extends CommonGoal{
                 break;
             }
             if(last == null){
-                last = bookShelf.get(i,i).getColor();
+                last = bookShelf.get(i,i).getType();
             }
-            if(bookShelf.get(i,i).getColor().equals(last)){
+            if(bookShelf.get(i,i).getType().equals(last)){
                 count++;
             }
         }
@@ -40,9 +40,9 @@ public class CommonGoal6 extends CommonGoal{
                 break;
             }
             if(last == null){
-                last = bookShelf.get(i, i -1).getColor();
+                last = bookShelf.get(i, i -1).getType();
             }
-            if(bookShelf.get(i,i - 1).getColor().equals(last)){
+            if(bookShelf.get(i,i - 1).getType().equals(last)){
                 count++;
             }
         }
