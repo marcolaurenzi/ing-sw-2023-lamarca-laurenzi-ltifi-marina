@@ -30,11 +30,26 @@ public class BookShelf {
 
     /**
      *
-     * @param column
-     * @param pick
+     * Insert the array of items pick in column
+     * @param column in which you put pick
+     * @param pick the pick you put in column
      */
-    public void Insert(int column, ArrayList<Item> pick) {
-        //TODO
+    public void insert(int column, ArrayList<Item> pick) {
+        int base = 0;
+        for(int i = this.getColumnDimension() - 1; i >= 0; i--)
+            if(this.get(i, column) == null) {
+                base = i;
+                break;
+            }
+
+        for(int i = 0; i < 3; i++) {
+            if(pick.get(i) == null)
+                break;
+            else {
+                this.set(base - i, column, pick.get(i));
+                freeTiles--;
+            }
+        }
     }
 
     /**
@@ -63,8 +78,8 @@ public class BookShelf {
         return items.getColumnDimension();
     }
 
-
-    private void set(int i, int j, Item item) {
+    //public for debugging reasons
+    public void set(int i, int j, Item item) {
         items.set(i, j, item);
     }
 }

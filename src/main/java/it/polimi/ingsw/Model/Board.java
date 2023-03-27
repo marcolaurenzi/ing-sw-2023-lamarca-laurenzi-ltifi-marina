@@ -91,7 +91,7 @@ public class Board {
      * @param y is the second axis of the board representing the column of the tile
      * @return returns the number of free sides in the range (0 to 4)
      */
-    private int hasFree(int x, int y) {
+    public int hasFree(int x, int y) {
         int freeSides = 0;
         for(int i = x - 1; i < x + 2;i += 2){
             if(i < 0) continue;
@@ -124,7 +124,7 @@ public class Board {
      * @param y is the second axis of the board representing the column of the tile
      * @return returns the tile if it is present, returns null otherwise
      */
-    private Item drawItem(int x, int y){
+    public Item drawItem(int x, int y){
         return this.gameBoard[x][y].drawItem();
     }
 
