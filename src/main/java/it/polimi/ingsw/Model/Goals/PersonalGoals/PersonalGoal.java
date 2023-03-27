@@ -15,9 +15,11 @@ import it.polimi.ingsw.Model.Matrix;
 public abstract class PersonalGoal {
     // per la numerazione dei personalgoals seguo quella usata negli asset grafici forniti
     //da fare costruttore
-
-
     private Matrix<Item> personalGoal;
+
+    public PersonalGoal() {
+        //empty constructor
+    }
 
     public PersonalGoal(Matrix<Item> personalGoal) {
         this.personalGoal = personalGoal;
