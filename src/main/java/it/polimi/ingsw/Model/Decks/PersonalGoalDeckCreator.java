@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model.Decks;
 /**
  * Concrete class used to dynamically create the PersonalGoalDeck class
  */
-
 public class PersonalGoalDeckCreator extends Creator {
 
     /**

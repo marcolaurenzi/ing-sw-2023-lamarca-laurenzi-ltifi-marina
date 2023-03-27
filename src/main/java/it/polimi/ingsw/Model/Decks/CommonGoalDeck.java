@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model.Decks;
 /**
  * This class represents the concrete CommonGoalDeck
  */
-
 public class CommonGoalDeck extends Deck{
 
     /**

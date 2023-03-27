@@ -8,6 +8,7 @@ import it.polimi.ingsw.Model.TypeEnum;
  * This goal is achieved when there are 5 columns that progressively have one tile more than the previous one
  */
 public class CommonGoal11 extends CommonGoal{
+
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
      * @param bookShelf is the reference to the actual BookShelf Object where the Algorithm works on

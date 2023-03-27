@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * This class represents the CommonGoal number 9 in the UML model.
  * Common Goal description: Two lines each formed by 5 different types of tiles.
- *                          One line can show the same or a different combination of the other line.
+ * One line can show the same or a different combination of the other line.
  */
 
 public class CommonGoal9 extends CommonGoal {
@@ -20,7 +20,6 @@ public class CommonGoal9 extends CommonGoal {
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
-
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 

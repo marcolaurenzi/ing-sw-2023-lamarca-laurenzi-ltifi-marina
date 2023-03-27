@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model.Decks;
 /**
  * Concrete class used to dynamically create the CommonGoalDeck class
  */
-
 public class CommonGoalDeckCreator extends Creator {
 
     /**

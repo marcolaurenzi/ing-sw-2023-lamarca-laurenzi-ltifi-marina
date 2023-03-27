@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model.Decks;
 /**
  * This class represents the concrete PersonalGoalDeck
  */
-
 public class PersonalGoalDeck extends Deck{
 
     /**

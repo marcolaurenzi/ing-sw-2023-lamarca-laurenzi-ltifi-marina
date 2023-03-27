@@ -1,7 +1,8 @@
 package it.polimi.ingsw.Model;
 
-import java.awt.*;
-
+/**
+ *
+ */
 public class Item {
     private final TypeEnum type;
     //private final PictureEnum picture;
@@ -11,6 +12,10 @@ public class Item {
         //this.picture = picture;
     }
 
+    /**
+     *
+     * @return
+     */
     public TypeEnum getType() {
         return type;
     }

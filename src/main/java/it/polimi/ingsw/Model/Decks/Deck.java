@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * This abstract class represents the abstract concept of a generic Deck made of Objects
  */
-
 public abstract class Deck {
     List<Object> deck;
 

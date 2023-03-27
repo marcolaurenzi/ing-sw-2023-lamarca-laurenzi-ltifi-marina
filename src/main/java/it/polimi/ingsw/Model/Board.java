@@ -1,4 +1,5 @@
 package it.polimi.ingsw.Model;
+
 /**
  * this class represents the game board of the game
  */
@@ -10,7 +11,6 @@ public class Board {
      * The number 5 is set to represent a tile which is not physically available on the board
      */
     public Board() {
-
 
             gameBoard[0][0] = new BoardTile(5);
             gameBoard[0][1] = new BoardTile(5);
@@ -127,6 +127,7 @@ public class Board {
     private Item drawItem(int x, int y){
         return this.gameBoard[x][y].drawItem();
     }
+
     /**
      * This method is used to call the BoardTile class' method to check the item present on the single tile
      *

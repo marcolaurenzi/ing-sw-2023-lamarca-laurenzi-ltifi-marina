@@ -4,6 +4,9 @@ import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Item;
 import it.polimi.ingsw.Model.Matrix;
 
+/**
+ *
+ */
 public class PersonalGoal2 extends PersonalGoal{
 
     public PersonalGoal2(Matrix<Item> personalGoal) {

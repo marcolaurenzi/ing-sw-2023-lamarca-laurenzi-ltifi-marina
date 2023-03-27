@@ -1,11 +1,10 @@
 package it.polimi.ingsw.Model;
+
 import java.util.ArrayList;
 
 /**
  * This class represents the BookSelf of the game, a 6x5 Matrix of int elements.
  */
-
-
 public class BookShelf {
     private final Matrix<Item> items;
     private int freeTiles;

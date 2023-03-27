@@ -2,10 +2,8 @@ package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.BookShelf;
 import it.polimi.ingsw.Model.TypeEnum;
-
 import java.util.HashSet;
 import java.util.Set;
-
 
 /**
  * This class represents the CommonGoal number 7
@@ -13,8 +11,6 @@ import java.util.Set;
  * saying that a player must have, to achieve the goal, 4 different rows
  * of 6 consecutive Tiles with no more than 3 different colours in it
  */
-
-
 public class CommonGoal7 extends CommonGoal {
 
     /**
@@ -23,7 +19,6 @@ public class CommonGoal7 extends CommonGoal {
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
-
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 

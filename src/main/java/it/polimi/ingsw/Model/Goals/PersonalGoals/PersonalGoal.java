@@ -11,7 +11,6 @@ import it.polimi.ingsw.Model.Matrix;
  * that gives it the isAchieved() method to check whether the
  * goal is achieved or not
  */
-
 public abstract class PersonalGoal {
     // per la numerazione dei personalgoals seguo quella usata negli asset grafici forniti
     //da fare costruttore
@@ -33,6 +32,12 @@ public abstract class PersonalGoal {
     }
     */
 
+    /**
+     *
+     * @param i
+     * @param j
+     * @return
+     */
     public TypeEnum getType(int i, int j) {
         return personalGoal.get(i,j).getType();
     }
@@ -56,6 +61,11 @@ public abstract class PersonalGoal {
         return matches;
     }
 
+    /**
+     *
+     * @param playerBookshelf
+     * @return
+     */
     public int personalGoalScore(BookShelf playerBookshelf){
         int tmp = numOfMatches(playerBookshelf);
 

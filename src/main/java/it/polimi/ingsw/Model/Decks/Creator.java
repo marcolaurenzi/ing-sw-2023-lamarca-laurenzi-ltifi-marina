@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model.Decks;
 /**
  * This abstract class is part of the Design Pattern Factory
  */
-
 public abstract class Creator {
 
     /**
@@ -11,7 +10,6 @@ public abstract class Creator {
      *
      * @return the correct Deck instance
      */
-
     public abstract Deck factoryMethod();
 
 }

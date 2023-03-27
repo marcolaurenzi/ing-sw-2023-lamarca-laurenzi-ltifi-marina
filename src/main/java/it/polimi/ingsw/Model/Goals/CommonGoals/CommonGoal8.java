@@ -10,7 +10,6 @@ import java.util.Set;
  * This class represents the CommonGoal number 8 in the UML model.
  * Common Goal description: Two columns each formed by 6 different types of tiles
  */
-
 public class CommonGoal8 extends CommonGoal {
 
     /**
@@ -19,7 +18,6 @@ public class CommonGoal8 extends CommonGoal {
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
-
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 

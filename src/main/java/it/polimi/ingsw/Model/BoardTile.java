@@ -4,25 +4,36 @@ package it.polimi.ingsw.Model;
  * This class represents the single tile of the game board
  * It has methods to check the single tile content and to change it
  */
-
 public class BoardTile {
-    /** numberOfPlayersSign attribute is used to determine if the tile
-    * must be left empty or not based on the numbers of players at the beginning of the game
-    */
+
     private final int numberOfPlayersSign;
+
     private Item placedItem;
-    /** the constructor is used when the board is initialized and
-    * all the number of each board tile must be assigned
-    * the placed item field is set to null as it is empty at the beginning of the game*/
+
+    /**
+     * the constructor is used when the board is initialized and
+     * all the number of each board tile must be assigned
+     * the placed item field is set to null as it is empty at the beginning of the game
+     * @param numberOfPlayersSign
+     */
     public BoardTile(int numberOfPlayersSign){
         this.numberOfPlayersSign = numberOfPlayersSign;
         this.placedItem = null;
     }
-    /** this method tells whether the tile is empty or not */
+
+    /**
+     * this method tells whether the tile is empty or not
+     *
+     * @return
+     */
     protected boolean isEmpty(){
         return placedItem == null;
     }
-    /** this method is used to place an item on the tile if it's empty*/
+
+    /**
+     * this method is used to place an item on the tile if it's empty
+     * @param itemToPlace
+     */
     protected void placeItem(Item itemToPlace){
         if(this.isEmpty()) {
             this.placedItem = itemToPlace;

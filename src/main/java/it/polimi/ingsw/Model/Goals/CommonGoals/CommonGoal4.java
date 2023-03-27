@@ -10,8 +10,6 @@ import java.util.*;
  * saying that a player must have, to achieve the goal, 3 different columns
  * of 6 consecutive Tiles with no more than 3 different colours in it
  */
-
-
 public class CommonGoal4 extends CommonGoal {
 
     /**
@@ -20,7 +18,6 @@ public class CommonGoal4 extends CommonGoal {
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
-
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 

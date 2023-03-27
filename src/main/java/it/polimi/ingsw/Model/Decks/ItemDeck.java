@@ -6,7 +6,6 @@ import it.polimi.ingsw.Model.Item;
 /**
  * This class represents the concrete ItemDeck
  */
-
 public class ItemDeck extends Deck{
 
     /**

@@ -7,8 +7,7 @@ import it.polimi.ingsw.Model.Matrix;
 /**
  * This class represents the CommonGoal number 10 in the UML model.
  * Common Goal description: numberOfGroups groups each containing at least dim tiles of the same type.
- *                          the tiles of one group can be different from those of another group
- *
+ * the tiles of one group can be different from those of another group
  */
 public class CommonGoal0 extends CommonGoal {
     private final int dim;
@@ -51,7 +50,9 @@ public class CommonGoal0 extends CommonGoal {
     }
 
     /**
+     *
      * @param bookShelf bookShelf
+     *
      * @return the return is true is the goal is achieved is false otherwise
      */
     @Override
