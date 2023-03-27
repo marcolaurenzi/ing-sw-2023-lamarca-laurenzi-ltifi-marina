@@ -15,4 +15,7 @@ public abstract class CommonGoal {
         return false;
     }
 
+    public CommonGoal getCommonGoal(){
+        return this;
+    }
 }
