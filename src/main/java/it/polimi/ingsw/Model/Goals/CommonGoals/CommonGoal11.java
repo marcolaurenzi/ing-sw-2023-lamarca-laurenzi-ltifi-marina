@@ -15,47 +15,66 @@ public class CommonGoal11 extends CommonGoal{
      */
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
-        boolean result = false;
-        ColorEnum last;
-        last = null;
         int count = 0;
-        for (int a = 0; a < 2; a++) {
-            count = 0;
+        if (bookShelf.get(0, 4) != null) {
             for (int i = 0; i < 5; i++) {
-                if (last == null) {
-                    last = bookShelf.get(i, i + a).getColor();
-                }
-                if (bookShelf.get(i, i + a).getColor() == null) {
+                if ((4 - i - 1) >= 0 && bookShelf.get(i, 4 - i - 1) != null) {
                     break;
                 }
-                if (bookShelf.get(i, i + a) != null) {
+                if (bookShelf.get(i, 4 - i) == null) {
+                    break;
+                } else if (bookShelf.get(i, 4 - i) != null) {
+                    count++;
+                }
+            }
+            System.out.println(count);
+            if (count == 5) {
+                return true;
+            }
+        } else if (bookShelf.get(1, 4) != null) {
+            for (int i = 1; i < 6; i++) {
+                if ((5 - i - 1) >= 0 && bookShelf.get(i, 5 - i - 1) != null) {
+                    break;
+                }
+                if (bookShelf.get(i, 5 - i) == null) {
+                    break;
+                } else if (bookShelf.get(i, 5 - i) != null) {
                     count++;
                 }
             }
             if (count == 5) {
-                result = true;
-                break;
+                return true;
             }
-            count = 0;
-            for (int i = 4; i >= 0; i--) {
-                if (last == null) {
-                    last = bookShelf.get(i, (4 - i) + a).getColor();
-                }
-                if (bookShelf.get(i, 4 - i + a).getColor() == null) {
+        }
+        if (bookShelf.get(0,0) != null){
+            for (int i = 0; i < 5; i++) {
+                if ((i + 1) < 5 && bookShelf.get(i, i + 1) != null) {
                     break;
                 }
-                if (bookShelf.get(i, i + a).getColor() != null) {
+                if (bookShelf.get(i, i) == null) {
+                    break;
+                } else if (bookShelf.get(i, i) != null) {
                     count++;
                 }
             }
             if (count == 5) {
-                result = true;
-                break;
+                return true;
+            }
+        } else if (bookShelf.get(1,0) != null) {
+            for (int i = 1; i < 6; i++) {
+                if ((i) < 5 && bookShelf.get(i, i) != null) {
+                    break;
+                }
+                if (bookShelf.get(i, i - 1) == null) {
+                    break;
+                } else if (bookShelf.get(i, i - 1) != null) {
+                    count++;
+                }
+            }
+            if (count == 5) {
+                return true;
             }
         }
-        if (!result) {
-            result = (count == 5);
-        }
-        return result;
+        return false;
     }
 }
