@@ -22,7 +22,7 @@ public class CommonGoal7 extends CommonGoal {
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 
-        // times stores how many colors the algorithm already found
+        // times stores how many types the algorithm already found
         Set<TypeEnum> times = new HashSet<>();
 
         // counters counts how many times the pattern is found

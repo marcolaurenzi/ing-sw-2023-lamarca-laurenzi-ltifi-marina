@@ -22,8 +22,8 @@ public class CommonGoal9 extends CommonGoal {
     @Override
     public boolean isAchieved(BookShelf bookShelf) {
 
-        // times stores how many colors the algorithm already found
-        Set<TypeEnum> colorsFound = new HashSet<>();
+        // times stores how many types the algorithm already found
+        Set<TypeEnum> typesFound = new HashSet<>();
 
         // number of valid columns found
         int validRows = 0;
@@ -35,16 +35,16 @@ public class CommonGoal9 extends CommonGoal {
         for(int i = 0; i<bookShelf.getRowDimension(); i++) {
             for(int j = 0; j < bookShelf.getColumnDimension(); j++) {
                 if(bookShelf.get(i,j) == null) {
-                    break; //no point in checking that row, a full row of different colors needed
+                    break; //no point in checking that row, a full row of different types needed
                 }
                 else {
-                    colorsFound.add(bookShelf.get(i,j).getType());
+                    typesFound.add(bookShelf.get(i,j).getType());
                 }
 
             }
-            if(colorsFound.size() == 5) {
+            if(typesFound.size() == 5) {
                 validRows++;
-                colorsFound.clear();
+                typesFound.clear();
             }
         }
 

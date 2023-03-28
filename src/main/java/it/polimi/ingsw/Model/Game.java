@@ -1,9 +1,7 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Decks.Creator;
-import it.polimi.ingsw.Model.Decks.Deck;
-import it.polimi.ingsw.Model.Decks.DeckEnum;
-import it.polimi.ingsw.Model.Decks.DeckFactory;
+import it.polimi.ingsw.Model.Decks.*;
+import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
 import it.polimi.ingsw.Model.GameState.*;
 
 import java.io.IOException;
@@ -15,15 +13,18 @@ public class Game {
     private Deck itemDeck;
     private Deck commonGoalDeck;
     private Deck personalGoalDeck;
+    private CommonGoalPointStack[] commonGoalPointStacks;
     final int maxPlayers;
     private int currentPlayer;
-    ArrayList<Player> players;
-    Board board;
+    private ArrayList<Player> players;
+    private Board board;
     public Game(String gameId, int maxPlayers){
         gameState = new GameStateStarting();
         this.gameID = gameId;
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
+
+
     }
 
     /**
@@ -31,7 +32,7 @@ public class Game {
      * but does not create a new Player object
      * @param player
      */
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) throws IOException, NumberOfPlayersException {
         if(players.size() < maxPlayers){
             players.add(player);
         }
@@ -45,8 +46,8 @@ public class Game {
      * after creating a new Player object
      * @param playerID
      */
-    public void addPlayer(String playerID){
-        if (players.size() < maxPlayers){
+    public void addPlayer(String playerID) throws IOException, NumberOfPlayersException {
+        if (players.size() <= maxPlayers){
             players.add(new Player(playerID, this));
         }else if(players.size() == maxPlayers){
             startGame();
@@ -54,6 +55,18 @@ public class Game {
     }
     public void initializeBoard(){
         this.board = new Board();
+
+        Matrix<BoardTile> gameBoard = board.getGameBoard();
+
+        for(int i = 0; i < gameBoard.getColumnDimension(); i++) {
+            for(int j = 0; j < gameBoard.getRowDimension(); j++) {
+                if(gameBoard.get(i, j).getNumberOfPlayersSign() <= maxPlayers) {
+                    gameBoard.get(i, j).placeItem(itemDeck.draw());
+                }
+            }
+        }
+
+
     }
     public void nextPlayer(){
         currentPlayer = (currentPlayer + 1) % players.size();
@@ -70,18 +83,28 @@ public class Game {
     public ArrayList<Player> getPlayers(){
         return players;
     }
-    public void startGame() throws IOException {
+    public void startGame() throws IOException, NumberOfPlayersException {
 
         DeckFactory deckFactory = new DeckFactory();
 
         this.itemDeck = deckFactory.factoryMethod(DeckEnum.ITEM).initializeDeck();
         this.personalGoalDeck = deckFactory.factoryMethod(DeckEnum.PERSONAL).initializeDeck();
         this.commonGoalDeck = deckFactory.factoryMethod(DeckEnum.COMMON).initializeDeck();
+        this.commonGoalPointStacks = new CommonGoalPointStack[2];
 
-        this.gameState = new GameStatePlaying();
+        commonGoalPointStacks[0] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers);
+        commonGoalPointStacks[1] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers);
+
+        initializeBoard();
+
+        this.gameState = new GameStateRunning();
     }
 
 
-
-
+    public Deck getPersonalGoalDeck() {
+        return personalGoalDeck;
+    }
+    public CommonGoalPointStack[] getCommonGoalPointStacks() {
+        return commonGoalPointStacks;
+    }
 }

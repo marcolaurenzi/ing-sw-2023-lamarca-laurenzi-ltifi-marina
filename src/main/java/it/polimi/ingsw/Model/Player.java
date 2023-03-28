@@ -189,15 +189,15 @@ public class Player {
      */
     public void getRewardCommonGoals() {
         if(!this.isCommonGoalAlreadyAchieved[0]) {
-            if(Game.getCommonGoalPointStacks()[0].getCommonGoal().isAchieved(this.bookShelf)) {
-                points += Game.getCommonGoalPointStacks()[0].draw();
+            if(game.getCommonGoalPointStacks()[0].getCommonGoal().isAchieved(this.bookShelf)) {
+                points += game.getCommonGoalPointStacks()[0].draw();
                 this.isCommonGoalAlreadyAchieved[0] = true;
             }
         }
 
         if(!this.isCommonGoalAlreadyAchieved[1]) {
-            if(Game.getCommonGoalPointStacks()[1].getCommonGoal().isAchieved(this.bookShelf)) {
-                points += Game.getCommonGoalPointStacks()[1].draw();
+            if(game.getCommonGoalPointStacks()[1].getCommonGoal().isAchieved(this.bookShelf)) {
+                points += game.getCommonGoalPointStacks()[1].draw();
                 this.isCommonGoalAlreadyAchieved[1] = true;
             }
         }

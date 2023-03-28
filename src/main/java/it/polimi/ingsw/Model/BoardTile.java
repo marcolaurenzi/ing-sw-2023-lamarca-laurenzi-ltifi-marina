@@ -74,4 +74,7 @@ public class BoardTile {
         }
     }
 
+    public int getNumberOfPlayersSign() {
+        return numberOfPlayersSign;
+    }
 }
