@@ -26,19 +26,18 @@ public class CommonGoal4 extends CommonGoal {
         // counters counts how many times the pattern is found
         int counter = 0;
 
-        for(int i = 0; i < bookShelf.getColumnDimension(); i++) {
-            for(int j = 0; j < bookShelf.getRowDimension(); j++) {
+        for(int i = 0; i < bookShelf.getRowDimension(); i++) {
+            for(int j = 0; j < bookShelf.getColumnDimension(); j++) {
                 // if the first tile is null, no 6 tiles columns can be there
                 if(bookShelf.get(i,j) == null) {
-                    i = 0;
-                    j ++;
+                    break;
                 }
                 else{
                     times.add(bookShelf.get(i,j).getType());
                 }
 
             }
-            if(times.size() <= 3) {
+            if(times.size() <= 3 && times.size() > 0) {
                 counter++;
                 times.clear();
             }

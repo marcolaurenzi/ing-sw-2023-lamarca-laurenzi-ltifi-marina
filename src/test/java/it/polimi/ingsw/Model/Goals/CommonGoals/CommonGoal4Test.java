@@ -6,18 +6,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ * testing isAchieved() method
+ */
 public class CommonGoal4Test {
 
-    @Before
-    public void commonGoalCreation() {
-        CommonGoal commonGoal = new CommonGoal4();
-        BookShelf bookShelf = new BookShelf();
-    }
-
-    /**
-     * testing isAchieved() method
-     */
 
     @Test
     public void voidMatrixCheck() {
@@ -25,6 +18,6 @@ public class CommonGoal4Test {
         BookShelf bookShelf = new BookShelf();
         CommonGoal commonGoal4 = new CommonGoal4();
 
-        assertEquals(commonGoal4.isAchieved(bookShelf), false);
+        assertEquals(false, commonGoal4.isAchieved(bookShelf));
     }
 }
