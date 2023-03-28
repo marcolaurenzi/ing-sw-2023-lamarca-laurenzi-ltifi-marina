@@ -34,7 +34,7 @@ public class BoardTile {
      * this method is used to place an item on the tile if it's empty
      * @param itemToPlace
      */
-    protected void placeItem(Item itemToPlace){
+    public void placeItem(Item itemToPlace){
         if(this.isEmpty()) {
             this.placedItem = itemToPlace;
         }else{

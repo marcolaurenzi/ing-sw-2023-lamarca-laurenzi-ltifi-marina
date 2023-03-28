@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Model.Decks.*;
 import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
 import it.polimi.ingsw.Model.GameState.*;
+import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ public class Game {
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
 
-
     }
 
     /**
@@ -33,12 +33,7 @@ public class Game {
      * @param player
      */
     public void addPlayer(Player player) throws IOException, NumberOfPlayersException {
-        if(players.size() < maxPlayers){
-            players.add(player);
-        }
-        if(players.size() == maxPlayers){
-            startGame();
-        }
+        gameState.addPlayer(this, player);
     }
 
     /**
@@ -47,32 +42,16 @@ public class Game {
      * @param playerID
      */
     public void addPlayer(String playerID) throws IOException, NumberOfPlayersException {
-        if (players.size() <= maxPlayers){
-            players.add(new Player(playerID, this));
-        }else if(players.size() == maxPlayers){
-            startGame();
-        }
+        gameState.addPlayer(this, playerID);
     }
-    public void initializeBoard(){
-        this.board = new Board();
-
-        Matrix<BoardTile> gameBoard = board.getGameBoard();
-
-        for(int i = 0; i < gameBoard.getColumnDimension(); i++) {
-            for(int j = 0; j < gameBoard.getRowDimension(); j++) {
-                if(gameBoard.get(i, j).getNumberOfPlayersSign() <= maxPlayers) {
-                    gameBoard.get(i, j).placeItem(itemDeck.draw());
-                }
-            }
-        }
-
-
+    public void initializeBoard(Board board, ItemDeck itemDeck, int maxPlayers){
+        gameState.initializeBoard(board, itemDeck, maxPlayers);
     }
     public void nextPlayer(){
-        currentPlayer = (currentPlayer + 1) % players.size();
+        gameState.nextPlayer(currentPlayer, players);
     }
     public Player getCurrentPlayer(){
-        return players.get(currentPlayer);
+        return gameState.getCurrentPlayer(players, currentPlayer);
     }
     public int getMaxPlayers(){
         return maxPlayers;
@@ -92,10 +71,10 @@ public class Game {
         this.commonGoalDeck = deckFactory.factoryMethod(DeckEnum.COMMON).initializeDeck();
         this.commonGoalPointStacks = new CommonGoalPointStack[2];
 
-        commonGoalPointStacks[0] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers);
-        commonGoalPointStacks[1] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers);
+        commonGoalPointStacks[0] = new CommonGoalPointStack((CommonGoal) commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
+        commonGoalPointStacks[1] = new CommonGoalPointStack((CommonGoal) commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
 
-        initializeBoard();
+        gameState.initializeBoard(this.board, (ItemDeck) itemDeck, this.maxPlayers); //TODO cast to be solved
 
         this.gameState = new GameStateRunning();
     }
@@ -107,4 +86,5 @@ public class Game {
     public CommonGoalPointStack[] getCommonGoalPointStacks() {
         return commonGoalPointStacks;
     }
+
 }

@@ -1,50 +1,38 @@
 package it.polimi.ingsw.Model.GameState;
 
+import it.polimi.ingsw.Model.Board;
+import it.polimi.ingsw.Model.Decks.ItemDeck;
+import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
 import java.util.ArrayList;
 
 public class GameStateLastTurn implements GameState{
     @Override
-    public void addPlayer(Player player) {
+    public void addPlayer(Game game, Player player) {
         throw new IllegalStateException("Game is already started");
     }
-    public void addPlayer(String playerID) {
-        throw new IllegalStateException("Game is already started");
-    }
-
-    @Override
-    public void initializeBoard() {
+    public void addPlayer(Game game, String playerID) {
         throw new IllegalStateException("Game is already started");
     }
 
     @Override
-    public void nextPlayer() {
+    public void initializeBoard(Board board, ItemDeck itemDeck, int maxPlayers) {
+        throw new IllegalStateException("Game is already started");
+    }
+
+    @Override
+    public void nextPlayer(int currentPlayer, ArrayList<Player> players) {
 
     }
 
     @Override
-    public Player getCurrentPlayer() {
+    public Player getCurrentPlayer(ArrayList<Player> players, int currentPlayer) {
         return null;
     }
 
     @Override
-    public int getMaxPlayers() {
-        return 0;
-    }
-
-    @Override
-    public String getGameID() {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Player> getPlayers() {
-        return null;
-    }
-
-    @Override
-    public void startGame() {
+    public void startGame(Game game) {
         throw new IllegalStateException("Game is already started");
     }
 }
