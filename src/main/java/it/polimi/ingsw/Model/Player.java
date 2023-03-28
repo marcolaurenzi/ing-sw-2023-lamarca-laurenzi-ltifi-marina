@@ -16,7 +16,7 @@ public class Player {
     private ArrayList<Coordinates> tilesSelection;
     private ArrayList<Item> pickedItems;
     private PlayerState state;
-    private final BookShelf bookShelf;
+    private final Bookshelf bookshelf;
     private final PersonalGoal personalGoal;
     private boolean[] isCommonGoalAlreadyAchieved;
     private final Game game;
@@ -31,7 +31,7 @@ public class Player {
         this.playerID = playerID;
         this.game = game;
         points = 0;
-        bookShelf = new BookShelf();
+        bookshelf = new Bookshelf();
         personalGoal = null; game.getPersonalGoalDeck().draw();
         isCommonGoalAlreadyAchieved = new boolean[]{false, false};
         state = new PlayerStateWaiting();
@@ -43,7 +43,7 @@ public class Player {
      * @return  the points earned by the player from the personal goal
      */
     private int getRewardPersonalGoal(){
-        return personalGoal.personalGoalScore(this.bookShelf);
+        return personalGoal.personalGoalScore(this.bookshelf);
     }
 
     /**
@@ -52,32 +52,32 @@ public class Player {
      *
      * @param i x coordinate
      * @param j y coordinate
-     * @param bookShelf the bookShelf
+     * @param bookshelf the bookShelf
      * @param supportMatrix the supportMatrix
      * @param type the type of the Item in booKShelf[i][j]
      *
      * @return 1 + the number of adjacent elements that are the same color of the current element and are set to true
      *         in the supportMatrix
      */
-    private int numberOfAdjacentSameTypeAndSpreadFalse(int i, int j, BookShelf bookShelf, Matrix<Boolean> supportMatrix, TypeEnum type) {
+    private int numberOfAdjacentSameTypeAndSpreadFalse(int i, int j, Bookshelf bookshelf, Matrix<Boolean> supportMatrix, TypeEnum type) {
         int ret = 1;
         supportMatrix.set(i, j, false);
 
-        if(i + 1 < supportMatrix.getColumnDimension() && bookShelf.get(i + 1, j) != null)
-            if(bookShelf.get(i + 1, j).getType() == type && supportMatrix.get(i + 1, j))
-                ret += numberOfAdjacentSameTypeAndSpreadFalse(i +1, j, bookShelf, supportMatrix, type);
+        if(i + 1 < supportMatrix.getColumnDimension() && bookshelf.get(i + 1, j) != null)
+            if(bookshelf.get(i + 1, j).getType() == type && supportMatrix.get(i + 1, j))
+                ret += numberOfAdjacentSameTypeAndSpreadFalse(i +1, j, bookshelf, supportMatrix, type);
 
-        if(i - 1 >= 0 && bookShelf.get(i - 1, j) != null)
-            if(bookShelf.get(i - 1, j).getType() == type && supportMatrix.get(i - 1, j))
-                ret += numberOfAdjacentSameTypeAndSpreadFalse(i - 1, j, bookShelf, supportMatrix, type);
+        if(i - 1 >= 0 && bookshelf.get(i - 1, j) != null)
+            if(bookshelf.get(i - 1, j).getType() == type && supportMatrix.get(i - 1, j))
+                ret += numberOfAdjacentSameTypeAndSpreadFalse(i - 1, j, bookshelf, supportMatrix, type);
 
-        if(j + 1 < supportMatrix.getRowDimension() && bookShelf.get(i, j + 1)!= null)
-            if(bookShelf.get(i, j + 1).getType() == type && supportMatrix.get(i, j + 1))
-                ret += numberOfAdjacentSameTypeAndSpreadFalse(i, j + 1, bookShelf, supportMatrix, type);
+        if(j + 1 < supportMatrix.getRowDimension() && bookshelf.get(i, j + 1)!= null)
+            if(bookshelf.get(i, j + 1).getType() == type && supportMatrix.get(i, j + 1))
+                ret += numberOfAdjacentSameTypeAndSpreadFalse(i, j + 1, bookshelf, supportMatrix, type);
 
-        if(j - 1 >= 0 && bookShelf.get(i, j - 1) != null)
-            if(bookShelf.get(i, j - 1).getType() == type && supportMatrix.get(i, j - 1))
-                ret += numberOfAdjacentSameTypeAndSpreadFalse(i, j - 1, bookShelf, supportMatrix, type);
+        if(j - 1 >= 0 && bookshelf.get(i, j - 1) != null)
+            if(bookshelf.get(i, j - 1).getType() == type && supportMatrix.get(i, j - 1))
+                ret += numberOfAdjacentSameTypeAndSpreadFalse(i, j - 1, bookshelf, supportMatrix, type);
 
 
         return ret;
@@ -100,8 +100,8 @@ public class Player {
             for(int j = 0; j < supportMatrix.getRowDimension(); j++) {
                 if (supportMatrix.get(i, j)) {
                     supportMatrix.set(i, j, false);
-                    if (this.bookShelf.get(i, j) != null) {
-                        int numberOfAdjacentSameType = numberOfAdjacentSameTypeAndSpreadFalse(i, j, this.bookShelf, supportMatrix, this.bookShelf.get(i, j).getType());
+                    if (this.bookshelf.get(i, j) != null) {
+                        int numberOfAdjacentSameType = numberOfAdjacentSameTypeAndSpreadFalse(i, j, this.bookshelf, supportMatrix, this.bookshelf.get(i, j).getType());
 
                         if (numberOfAdjacentSameType == 3)
                             ret += 2;
@@ -179,7 +179,7 @@ public class Player {
      * @throws ColumnNotValidException if the items don't fit the column
      */
     public void insertPickInBookShelf (int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException {
-        this.state.insertPickInBookShelf(this.pickedItems, this.bookShelf, column, order);
+        this.state.insertPickInBookShelf(this.pickedItems, this.bookshelf, column, order);
     }
 
     /**
@@ -189,14 +189,14 @@ public class Player {
      */
     public void getRewardCommonGoals() {
         if(!this.isCommonGoalAlreadyAchieved[0]) {
-            if(game.getCommonGoalPointStacks()[0].getCommonGoal().isAchieved(this.bookShelf)) {
+            if(game.getCommonGoalPointStacks()[0].getCommonGoal().isAchieved(this.bookshelf)) {
                 points += game.getCommonGoalPointStacks()[0].draw();
                 this.isCommonGoalAlreadyAchieved[0] = true;
             }
         }
 
         if(!this.isCommonGoalAlreadyAchieved[1]) {
-            if(game.getCommonGoalPointStacks()[1].getCommonGoal().isAchieved(this.bookShelf)) {
+            if(game.getCommonGoalPointStacks()[1].getCommonGoal().isAchieved(this.bookshelf)) {
                 points += game.getCommonGoalPointStacks()[1].draw();
                 this.isCommonGoalAlreadyAchieved[1] = true;
             }

@@ -5,11 +5,11 @@ import java.util.ArrayList;
 /**
  * This class represents the BookSelf of the game, a 6x5 Matrix of int elements.
  */
-public class BookShelf {
+public class Bookshelf {
     private final Matrix<Item> items;
     private int freeTiles;
 
-    public BookShelf() {
+    public Bookshelf() {
         items = new Matrix<>(6, 5);
         freeTiles = 30;
     }

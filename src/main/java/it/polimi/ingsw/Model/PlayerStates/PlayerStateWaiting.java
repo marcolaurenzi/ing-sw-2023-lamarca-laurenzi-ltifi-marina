@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.PlayerStates;
 
 import it.polimi.ingsw.Model.Board;
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.PlayerIsWaitingException;
 import it.polimi.ingsw.Model.Item;
@@ -36,7 +36,7 @@ public class PlayerStateWaiting extends PlayerState{
      * @throws PlayerIsWaitingException
      */
     @Override
-    public void insertPickInBookShelf(ArrayList<Item> pickedItems, BookShelf bookShelf, int column, int[] order) throws PlayerIsWaitingException {
+    public void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws PlayerIsWaitingException {
         throw new PlayerIsWaitingException();
     }
 

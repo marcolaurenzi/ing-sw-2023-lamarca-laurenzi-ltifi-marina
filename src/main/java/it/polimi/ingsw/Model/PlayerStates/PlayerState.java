@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.PlayerStates;
 
 import it.polimi.ingsw.Model.Board;
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Item;
@@ -110,14 +110,14 @@ public abstract class PlayerState {
      *
      * @param pickLen
      * @param column
-     * @param bookShelf
+     * @param bookshelf
      *
      * @return
      */
-    protected Boolean isColumnValid(int pickLen, int column, BookShelf bookShelf) {
+    protected Boolean isColumnValid(int pickLen, int column, Bookshelf bookshelf) {
         int freeTiles = 0;
-        for(int i = 0; i < bookShelf.getColumnDimension(); i++) {
-            if(bookShelf.get(i, column) != null)
+        for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            if(bookshelf.get(i, column) != null)
                 break;
             else
                 freeTiles++;
@@ -153,12 +153,12 @@ public abstract class PlayerState {
     /**
      *
      * @param pickedItems
-     * @param bookShelf
+     * @param bookshelf
      * @param column
      * @param order
      *
      * @throws ColumnNotValidException
      * @throws PlayerIsWaitingException
      */
-    public abstract void insertPickInBookShelf(ArrayList<Item> pickedItems, BookShelf bookShelf, int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException;
+    public abstract void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException;
 }

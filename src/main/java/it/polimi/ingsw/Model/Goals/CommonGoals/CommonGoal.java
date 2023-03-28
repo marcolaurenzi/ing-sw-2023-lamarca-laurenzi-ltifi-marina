@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 
 /**
  * This class is an abstract class representing all the
@@ -14,10 +14,10 @@ public abstract class CommonGoal {
 
     /**
      *
-     * @param bookShelf
+     * @param bookshelf
      * @return
      */
-    public boolean isAchieved(BookShelf bookShelf) {
+    public boolean isAchieved(Bookshelf bookshelf) {
         return false;
     }
 

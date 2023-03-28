@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 import java.util.*;
 
@@ -13,12 +13,12 @@ public class CommonGoal4 extends CommonGoal {
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
-     * @param bookShelf is the reference to the actual BookShelf Object where the Algorithm works on
+     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
-    public boolean isAchieved(BookShelf bookShelf) {
+    public boolean isAchieved(Bookshelf bookshelf) {
 
         // times stores how many types the algorithm already found
         Set<TypeEnum> times = new HashSet<>();
@@ -26,14 +26,14 @@ public class CommonGoal4 extends CommonGoal {
         // counters counts how many times the pattern is found
         int counter = 0;
 
-        for(int i = 0; i < bookShelf.getRowDimension(); i++) {
-            for(int j = 0; j < bookShelf.getColumnDimension(); j++) {
+        for(int i = 0; i < bookshelf.getRowDimension(); i++) {
+            for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
                 // if the first tile is null, no 6 tiles columns can be there
-                if(bookShelf.get(i,j) == null) {
+                if(bookshelf.get(i,j) == null) {
                     break;
                 }
                 else{
-                    times.add(bookShelf.get(i,j).getType());
+                    times.add(bookshelf.get(i,j).getType());
                 }
 
             }

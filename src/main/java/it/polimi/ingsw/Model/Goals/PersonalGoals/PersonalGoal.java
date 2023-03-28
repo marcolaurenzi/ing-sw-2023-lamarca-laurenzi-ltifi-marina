@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Goals.PersonalGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Item;
 import it.polimi.ingsw.Model.Matrix;
@@ -45,7 +45,7 @@ public abstract class PersonalGoal {
     //in each goal we'll need to set the matrix of the shelf
 
     //returns the num of matches for the personal goal
-    private int numOfMatches(BookShelf playerBookShelf) {
+    private int numOfMatches(Bookshelf playerBookshelf) {
         int matches = 0;
 
         for(int i = 0; i<personalGoal.getRowDimension(); i++) {
@@ -66,7 +66,7 @@ public abstract class PersonalGoal {
      * @param playerBookshelf
      * @return
      */
-    public int personalGoalScore(BookShelf playerBookshelf){
+    public int personalGoalScore(Bookshelf playerBookshelf){
         int tmp = numOfMatches(playerBookshelf);
 
         return switch (tmp) {

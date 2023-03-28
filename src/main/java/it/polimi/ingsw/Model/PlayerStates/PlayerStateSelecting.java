@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.PlayerStates;
 
 import it.polimi.ingsw.Model.Board;
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Item;
@@ -66,7 +66,7 @@ public class PlayerStateSelecting extends PlayerState{
      * @throws ColumnNotValidException if the items don't fit the column
      */
     @Override
-    public void insertPickInBookShelf(ArrayList<Item> pickedItems, BookShelf bookShelf, int column, int[] order) throws ColumnNotValidException {
+    public void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException {
         //checkin len of pickedItems
         int pickedItemsLen = 0;
         for(int i = 0; i < 3; i++) {
@@ -76,11 +76,11 @@ public class PlayerStateSelecting extends PlayerState{
                 pickedItemsLen++;
         }
 
-        if(!isColumnValid(pickedItemsLen, column, bookShelf)) {
+        if(!isColumnValid(pickedItemsLen, column, bookshelf)) {
             throw new ColumnNotValidException();
         }
 
-        bookShelf.insert(column, pickedItems);
+        bookshelf.insert(column, pickedItems);
     }
 
 }

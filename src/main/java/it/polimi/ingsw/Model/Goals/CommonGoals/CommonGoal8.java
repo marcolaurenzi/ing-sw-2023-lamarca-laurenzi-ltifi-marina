@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 
 import java.util.HashSet;
@@ -14,12 +14,12 @@ public class CommonGoal8 extends CommonGoal {
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
-     * @param bookShelf is the reference to the actual BookShelf Object where the Algorithm works on
+     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
-    public boolean isAchieved(BookShelf bookShelf) {
+    public boolean isAchieved(Bookshelf bookshelf) {
 
         // times stores how many types the algorithm already found
         Set<TypeEnum> typesFound = new HashSet<>();
@@ -27,17 +27,17 @@ public class CommonGoal8 extends CommonGoal {
         // number of valid columns found
         int validColumns = 0;
 
-        if(bookShelf.isEmpty()) {
+        if(bookshelf.isEmpty()) {
             return false;
         }
 
-        for(int i = 0; i<bookShelf.getColumnDimension(); i++) {
-            for(int j = 0; j < bookShelf.getColumnDimension(); j++) {
-                if(bookShelf.get(i,j) == null) {
+        for(int i = 0; i< bookshelf.getColumnDimension(); i++) {
+            for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
+                if(bookshelf.get(i,j) == null) {
                     break; //no point in checking that column, a full column of different types needed
                 }
                 else {
-                    typesFound.add(bookShelf.get(i,j).getType());
+                    typesFound.add(bookshelf.get(i,j).getType());
                 }
 
             }

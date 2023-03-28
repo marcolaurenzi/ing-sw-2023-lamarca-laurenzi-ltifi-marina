@@ -28,7 +28,7 @@ public class Matrix<T> {
      * @param value the value the matrix gets initialized with
      */
     public Matrix(int numberOfRows, int numberOfColumns, T value) {
-        matrix = (T[][]) new Object[numberOfRows][numberOfColumns];
+        matrix = (T[][]) new Object[numberOfColumns][numberOfRows];
         columnDimension = numberOfRows;
         rowDimension = numberOfColumns;
         for(int i = 0; i < this.getRowDimension(); i++) {

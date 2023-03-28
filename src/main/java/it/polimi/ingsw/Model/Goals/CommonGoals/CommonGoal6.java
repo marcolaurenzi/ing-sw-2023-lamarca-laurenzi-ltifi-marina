@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 
 /**
@@ -11,24 +11,24 @@ public class CommonGoal6 extends CommonGoal{
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
-     * @param bookShelf is the reference to the actual BookShelf Object where the Algorithm works on
+     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
-    public boolean isAchieved(BookShelf bookShelf) {
+    public boolean isAchieved(Bookshelf bookshelf) {
         TypeEnum last;
         int count = 0;
         last = null;
-        for(int i = 0; i < bookShelf.getColumnDimension(); i++){
-            if(bookShelf.get(i,i) == null)
+        for(int i = 0; i < bookshelf.getColumnDimension(); i++){
+            if(bookshelf.get(i,i) == null)
             {
                 break;
             }
             if(last == null){
-                last = bookShelf.get(i,i).getType();
+                last = bookshelf.get(i,i).getType();
             }
-            if(bookShelf.get(i,i).getType().equals(last)){
+            if(bookshelf.get(i,i).getType().equals(last)){
                 count++;
             }
         }
@@ -37,14 +37,14 @@ public class CommonGoal6 extends CommonGoal{
         }
         count = 0;
         last = null;
-        for(int i = 1; i < bookShelf.getRowDimension(); i++){
-            if(bookShelf.get(i, i - 1) == null){
+        for(int i = 1; i < bookshelf.getRowDimension(); i++){
+            if(bookshelf.get(i, i - 1) == null){
                 break;
             }
             if(last == null){
-                last = bookShelf.get(i, i -1).getType();
+                last = bookshelf.get(i, i -1).getType();
             }
-            if(bookShelf.get(i,i - 1).getType().equals(last)){
+            if(bookshelf.get(i,i - 1).getType().equals(last)){
                 count++;
             }
         }

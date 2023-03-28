@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
-import it.polimi.ingsw.Model.BookShelf;
+import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 
 /**
@@ -11,23 +11,23 @@ public class CommonGoal2 extends CommonGoal{
 
     /**
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
-     * @param bookShelf is the reference to the actual BookShelf Object where the Algorithm works on
+     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
-    public boolean isAchieved(BookShelf bookShelf) {
+    public boolean isAchieved(Bookshelf bookshelf) {
         TypeEnum last;
         last = null;
-        for(int i = 0; i < bookShelf.getRowDimension();i += 5){
-            for(int j = 0; j < bookShelf.getColumnDimension(); j += 4){
-                if(bookShelf.get(i,j) == null){
+        for(int i = 0; i < bookshelf.getRowDimension(); i += 5){
+            for(int j = 0; j < bookshelf.getColumnDimension(); j += 4){
+                if(bookshelf.get(i,j) == null){
                     return false;
                 }
                 if(last == null) {
-                    last = bookShelf.get(i, j).getType();
+                    last = bookshelf.get(i, j).getType();
                 }
-                if(!bookShelf.get(i,j).getType().equals(last)){
+                if(!bookshelf.get(i,j).getType().equals(last)){
                     return false;
                 }
             }
