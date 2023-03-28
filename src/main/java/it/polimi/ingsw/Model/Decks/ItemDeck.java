@@ -3,16 +3,34 @@ package it.polimi.ingsw.Model.Decks;
 import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Item;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * This class represents the concrete ItemDeck
  */
-public class ItemDeck extends Deck{
+public class ItemDeck implements Deck{
+
+    List<Item> deck;
+
+    static DeckEnum deckType = DeckEnum.ITEM;
+
+    @Override
+    public void shuffle() {
+        Collections.shuffle(deck);
+    }
+
+    @Override
+    public Object draw() {
+        return deck.get(0);
+    }
 
     /**
      * This method is used to correctly initialize the concrete instance of the deck and to shuffle it
      */
     @Override
-    public void initializeDeck() {
+    public Deck initializeDeck() {
+
         int j = 0;
 
         for(TypeEnum typeEnum : TypeEnum.values()) {
@@ -23,5 +41,10 @@ public class ItemDeck extends Deck{
         }
 
         this.shuffle();
+        return this;
+    }
+
+    public static DeckEnum getDeckType() {
+        return deckType;
     }
 }

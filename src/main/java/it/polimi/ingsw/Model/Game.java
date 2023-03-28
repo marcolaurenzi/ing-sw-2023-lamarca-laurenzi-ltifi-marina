@@ -2,11 +2,12 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.Creator;
 import it.polimi.ingsw.Model.Decks.Deck;
-import it.polimi.ingsw.Model.Decks.ItemDeck;
+import it.polimi.ingsw.Model.Decks.DeckEnum;
+import it.polimi.ingsw.Model.Decks.DeckFactory;
 import it.polimi.ingsw.Model.GameState.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Game {
     private GameState gameState; //to be fixed by moving the methods body into the states and callign gameState.methods in this class
@@ -69,10 +70,14 @@ public class Game {
     public ArrayList<Player> getPlayers(){
         return players;
     }
-    public void startGame(){
-        this.itemDeck = Creator.createItemDeck(); //TODO: check if this is the right place to create the decks
-        this.commonGoalDeck = Creator.createCommonGoalDeck();//TODO: check if this is the right way of implementing the decks through the factory method
-        this.personalGoalDeck = Creator.createPersonalGoalDeck();
+    public void startGame() throws IOException {
+
+        DeckFactory deckFactory = new DeckFactory();
+
+        this.itemDeck = deckFactory.factoryMethod(DeckEnum.ITEM).initializeDeck();
+        this.personalGoalDeck = deckFactory.factoryMethod(DeckEnum.PERSONAL).initializeDeck();
+        this.commonGoalDeck = deckFactory.factoryMethod(DeckEnum.COMMON).initializeDeck();
+
         this.gameState = new GameStatePlaying();
     }
 
