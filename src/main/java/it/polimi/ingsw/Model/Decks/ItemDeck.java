@@ -15,11 +15,19 @@ public class ItemDeck implements Deck{
 
     static DeckEnum deckType = DeckEnum.ITEM;
 
+    /**
+     *
+     */
     @Override
     public void shuffle() {
         Collections.shuffle(deck);
     }
 
+    /**
+     *
+     *
+     * @return
+     */
     @Override
     public Object draw() {
         return deck.get(0);
@@ -44,6 +52,11 @@ public class ItemDeck implements Deck{
         return this;
     }
 
+    /**
+     *
+     * 
+     * @return
+     */
     public static DeckEnum getDeckType() {
         return deckType;
     }

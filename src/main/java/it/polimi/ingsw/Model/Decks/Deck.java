@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * This abstract class represents the abstract concept of a generic Deck made of Objects
  */
-public interface Deck {
+public interface Deck<T> {
 
     /**
      * This method uses the Collections class's method shuffle() to shuffle the Deck
@@ -19,7 +19,7 @@ public interface Deck {
      *
      * @return the first Object in the list
      */
-    public Object draw();
+    public T draw();
 
     /**
      * This abstract method is implemented form each concrete class and is used to
