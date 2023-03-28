@@ -11,7 +11,7 @@ public class BoardTile {
     private Item placedItem;
 
     /**
-     * the constructor is used when the board is initialized and
+     * The constructor is used when the board is initialized and
      * all the number of each board tile must be assigned
      * the placed item field is set to null as it is empty at the beginning of the game
      * @param numberOfPlayersSign

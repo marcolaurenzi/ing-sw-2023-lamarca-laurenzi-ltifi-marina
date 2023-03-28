@@ -6,7 +6,7 @@ package it.polimi.ingsw.Model;
  */
 public class Matrix<T> {
     private final T[][] matrix;
-    private final int  columnDimension;
+    private final int columnDimension;
     private final int rowDimension;
 
     /**
