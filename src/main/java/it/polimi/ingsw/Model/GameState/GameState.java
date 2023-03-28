@@ -15,7 +15,7 @@ public interface GameState {
     public void initializeBoard(Board board, ItemDeck itemDeck, int maxPlayers);
     public void nextPlayer(int currentPlayer, ArrayList<Player> players);
     public Player getCurrentPlayer(ArrayList<Player> players, int currentPlayer);
-    public void startGame(Game game);
+    public void startGame(Board board, ItemDeck itemdeck, int maxPlayers);
 
 
 

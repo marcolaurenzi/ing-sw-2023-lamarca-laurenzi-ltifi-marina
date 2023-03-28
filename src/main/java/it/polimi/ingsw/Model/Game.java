@@ -12,6 +12,7 @@ public class Game {
     private GameState gameState; //to be fixed by moving the methods body into the states and callign gameState.methods in this class
     final String gameID;
     private Deck itemDeck;
+    DeckFactory deckFactory = new DeckFactory();
     private Deck commonGoalDeck;
     private Deck personalGoalDeck;
     private CommonGoalPointStack[] commonGoalPointStacks;
@@ -19,13 +20,15 @@ public class Game {
     private int currentPlayer;
     private ArrayList<Player> players;
     private Board board;
-    public Game(String gameId, int maxPlayers){
+    public Game(String gameId, int maxPlayers) throws NumberOfPlayersException, IOException {
         gameState = new GameStateStarting();
         this.gameID = gameId;
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
-
+        board = new Board();
+        this.initializeDeck();
     }
+
 
     /**
      * This method is called when a player joins the game and adds him to the list of players
@@ -62,27 +65,35 @@ public class Game {
     public ArrayList<Player> getPlayers(){
         return players;
     }
-    public void startGame() throws IOException, NumberOfPlayersException {
 
+    /**
+     * This method initializes the decks of the game
+     * and it is called only once at the beginning of the game
+     * by the constructor
+     * @throws IOException
+     * @throws NumberOfPlayersException
+     */
+    public void initializeDeck() throws IOException, NumberOfPlayersException {
         DeckFactory deckFactory = new DeckFactory();
 
-        this.itemDeck = deckFactory.factoryMethod(DeckEnum.ITEM).initializeDeck();
-        this.personalGoalDeck = deckFactory.factoryMethod(DeckEnum.PERSONAL).initializeDeck();
-        this.commonGoalDeck = deckFactory.factoryMethod(DeckEnum.COMMON).initializeDeck();
-        this.commonGoalPointStacks = new CommonGoalPointStack[2];
+        itemDeck = deckFactory.factoryMethod(DeckEnum.ITEM).initializeDeck();
+        personalGoalDeck = deckFactory.factoryMethod(DeckEnum.PERSONAL).initializeDeck();
+        commonGoalDeck = deckFactory.factoryMethod(DeckEnum.COMMON).initializeDeck();
+        commonGoalPointStacks = new CommonGoalPointStack[2];
 
         commonGoalPointStacks[0] = new CommonGoalPointStack((CommonGoal) commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
         commonGoalPointStacks[1] = new CommonGoalPointStack((CommonGoal) commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
-
-        gameState.initializeBoard(this.board, (ItemDeck) itemDeck, this.maxPlayers); //TODO cast to be solved
-
-        this.gameState = new GameStateRunning();
     }
 
+    public void startGame() throws IOException, NumberOfPlayersException {
+        gameState.startGame(board, (ItemDeck) itemDeck, maxPlayers);
+        this.gameState = new GameStateRunning();
+    }
 
     public Deck getPersonalGoalDeck() {
         return personalGoalDeck;
     }
+
     public CommonGoalPointStack[] getCommonGoalPointStacks() {
         return commonGoalPointStacks;
     }

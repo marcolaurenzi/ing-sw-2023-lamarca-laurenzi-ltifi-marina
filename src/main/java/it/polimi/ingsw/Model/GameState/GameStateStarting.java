@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model.GameState;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.Decks.Deck;
+import it.polimi.ingsw.Model.Decks.DeckFactory;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
 
@@ -30,8 +32,6 @@ public class GameStateStarting implements GameState{
 
     @Override
     public void initializeBoard(Board board, ItemDeck itemDeck, int maxPlayers) {
-        board = new Board();
-
         Matrix<BoardTile> gameBoard = board.getGameBoard();
 
         for(int i = 0; i < gameBoard.getColumnDimension(); i++) {
@@ -53,8 +53,12 @@ public class GameStateStarting implements GameState{
         return players.get(currentPlayer);
     }
 
+    /**
+     * This method is called when the game is ready to start and initializes the board
+     * @throws IOException
+     */
     @Override
-    public void startGame(Game game) {
-
+    public void startGame(Board board, ItemDeck itemdeck, int maxPlayers) {
+        this.initializeBoard(board, itemdeck, maxPlayers);
     }
 }

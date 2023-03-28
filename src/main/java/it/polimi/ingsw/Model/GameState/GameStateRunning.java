@@ -34,7 +34,7 @@ public class GameStateRunning implements GameState {
     }
 
     @Override
-    public void startGame(Game game) {
+    public void startGame(Board board, ItemDeck itemdeck, int maxPlayers) {
 
     }
 }
