@@ -25,5 +25,5 @@ public interface Deck {
      * This abstract method is implemented form each concrete class and is used to
      * initialize correctly the concrete instance of the deck
      */
-    public abstract Deck initializeDeck();
+    public Deck initializeDeck();
 }
