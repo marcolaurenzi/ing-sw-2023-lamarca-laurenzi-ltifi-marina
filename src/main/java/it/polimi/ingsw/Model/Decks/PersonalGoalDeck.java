@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * This class represents the concrete PersonalGoalDeck
  */
-public class PersonalGoalDeck implements Deck{
+public class PersonalGoalDeck implements Deck<PersonalGoal> {
 
     List<PersonalGoal> deck;
 
@@ -20,7 +20,7 @@ public class PersonalGoalDeck implements Deck{
     }
 
     @Override
-    public Object draw() {
+    public PersonalGoal draw() {
         return deck.get(0);
     }
 

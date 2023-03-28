@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * This class represents the concrete CommonGoalDeck
  */
-public class CommonGoalDeck implements Deck{
+public class CommonGoalDeck implements Deck<CommonGoal> {
 
     List<CommonGoal> deck;
 
@@ -20,7 +20,7 @@ public class CommonGoalDeck implements Deck{
     }
 
     @Override
-    public Object draw() {
+    public CommonGoal draw() {
         return deck.get(0);
     }
 

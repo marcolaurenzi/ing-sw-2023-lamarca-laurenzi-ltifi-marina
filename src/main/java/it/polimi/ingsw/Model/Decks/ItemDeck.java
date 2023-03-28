@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * This class represents the concrete ItemDeck
  */
-public class ItemDeck implements Deck{
+public class ItemDeck implements Deck<Item> {
 
     List<Item> deck;
 
@@ -29,7 +29,7 @@ public class ItemDeck implements Deck{
      * @return
      */
     @Override
-    public Object draw() {
+    public Item draw() {
         return deck.get(0);
     }
 
@@ -54,7 +54,7 @@ public class ItemDeck implements Deck{
 
     /**
      *
-     * 
+     *
      * @return
      */
     public static DeckEnum getDeckType() {
