@@ -1,14 +1,26 @@
-package it.polimi.ingsw.Model.Parser;
+package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.BoardTile;
-import it.polimi.ingsw.Model.Matrix;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.io.IOException;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Parser {
+public class Utils {
+
+    /* ************************************************************************************************************
+     *                          START OF JSON FUNCTIONS
+     ************************************************************************************************************ */
+
+    public static void writeBookshelf(Bookshelf bookshelf, String pathToFIle) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writeValue(new File(pathToFIle), bookshelf);
+
+    }
+
     public static Matrix<BoardTile> parseIntMatrixFromJsonFile(String filePath) throws IOException {
         // Read the contents of the JSON file into a string
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -35,4 +47,7 @@ public class Parser {
         return matrix;
     }
 
+    /* ************************************************************************************************************
+     *                          END OF JSON FUNCTIONS
+     ************************************************************************************************************ */
 }

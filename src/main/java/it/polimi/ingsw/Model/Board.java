@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Parser.Parser;
-
 import java.io.IOException;
 
 /**
@@ -15,7 +13,7 @@ public class Board {
      * The number 5 is set to represent a tile which is not physically available on the board
      */
     public Board() throws IOException {
-            gameBoard = Parser.parseIntMatrixFromJsonFile("src/main/resources/configurations/MatrixSetup.json");
+            gameBoard = Utils.parseIntMatrixFromJsonFile("src/main/resources/configurations/MatrixSetup.json");
     }
 
     /**
