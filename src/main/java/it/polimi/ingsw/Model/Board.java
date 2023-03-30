@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Parser.Parser;
+
+import java.io.IOException;
+
 /**
  * this class represents the game board of the game
  */
@@ -10,79 +14,8 @@ public class Board {
      * This method overrides the constructor, and it initializes to the correct value each tile present in the board
      * The number 5 is set to represent a tile which is not physically available on the board
      */
-    public Board() {
-
-            gameBoard.set(0, 0, new BoardTile(5));
-            gameBoard.set(0, 1, new BoardTile(5));
-            gameBoard.set(0, 2, new BoardTile(5));
-            gameBoard.set(0, 5, new BoardTile(5));
-            gameBoard.set(0, 6, new BoardTile(5));
-            gameBoard.set(0, 7, new BoardTile(5));
-            gameBoard.set(0, 8, new BoardTile(5));
-
-            gameBoard.set(1, 0, new BoardTile(5));
-            gameBoard.set(1, 1, new BoardTile(5));
-            gameBoard.set(1, 2, new BoardTile(5));
-            gameBoard.set(1, 6, new BoardTile(5));
-            gameBoard.set(1, 7, new BoardTile(5));
-            gameBoard.set(1, 8, new BoardTile(5));
-
-            gameBoard.set(2, 0, new BoardTile(5));
-            gameBoard.set(2, 1, new BoardTile(5));
-            gameBoard.set(2, 7, new BoardTile(5));
-            gameBoard.set(2, 8, new BoardTile(5));
-
-            gameBoard.set(3, 0, new BoardTile(5));
-
-            gameBoard.set(5, 8, new BoardTile(5));
-
-            gameBoard.set(6, 0, new BoardTile(5));
-            gameBoard.set(6, 1, new BoardTile(5));
-            gameBoard.set(6, 7, new BoardTile(5));
-            gameBoard.set(6, 8, new BoardTile(5));
-
-            gameBoard.set(7, 0, new BoardTile(5));
-            gameBoard.set(7, 1, new BoardTile(5));
-            gameBoard.set(7, 2, new BoardTile(5));
-            gameBoard.set(7, 6, new BoardTile(5));
-            gameBoard.set(7, 7, new BoardTile(5));
-            gameBoard.set(7, 8, new BoardTile(5));
-
-            gameBoard.set(8, 0, new BoardTile(5));
-            gameBoard.set(8, 1, new BoardTile(5));
-            gameBoard.set(8, 2, new BoardTile(5));
-            gameBoard.set(8, 3, new BoardTile(5));
-            gameBoard.set(8, 6, new BoardTile(5));
-            gameBoard.set(8, 7, new BoardTile(5));
-            gameBoard.set(8, 8, new BoardTile(5));
-
-            gameBoard.set(0, 3, new BoardTile(3));
-            gameBoard.set(0, 4, new BoardTile(4));
-            gameBoard.set(1, 5, new BoardTile(4));
-            gameBoard.set(2, 6, new BoardTile(3));
-            gameBoard.set(3, 8, new BoardTile(3));
-            gameBoard.set(4, 8, new BoardTile(4));
-            gameBoard.set(5, 7, new BoardTile(4));
-            gameBoard.set(6, 6, new BoardTile(3));
-            gameBoard.set(8, 5, new BoardTile(3));
-            gameBoard.set(8, 4, new BoardTile(4));
-            gameBoard.set(8, 3, new BoardTile(4));
-            gameBoard.set(7, 2, new BoardTile(3));
-            gameBoard.set(5, 0, new BoardTile(3));
-            gameBoard.set(4, 0, new BoardTile(4));
-            gameBoard.set(3, 1, new BoardTile(4));
-            gameBoard.set(2, 2, new BoardTile(3));
-
-            for(int i = 0; i < 9; i++){
-                for(int j = 0; j < 9; j++){
-                    if(gameBoard.get(i, j) == null) {
-                        gameBoard.set(i, j, new BoardTile(2));
-                    }
-                }
-            }
-
-
-
+    public Board() throws IOException {
+            gameBoard = Parser.parseIntMatrixFromJsonFile("src/main/resources/configurations/MatrixSetup.json");
     }
 
     /**
@@ -141,5 +74,14 @@ public class Board {
 
     public Matrix<BoardTile> getGameBoard() {
         return gameBoard;
+    }
+
+    public void printBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.println(gameBoard.get(i, j).getNumberOfPlayersSign());
+
+            }
+        }
     }
 }
