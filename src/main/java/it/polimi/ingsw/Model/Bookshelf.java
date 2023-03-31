@@ -30,7 +30,7 @@ public class Bookshelf {
 
     /**
      *
-     * Insert the array of items pick in column
+     * Insert the array of items picks in column
      * @param column in which you put pick
      * @param pick the pick you put in column
      */
@@ -47,7 +47,6 @@ public class Bookshelf {
                 break;
             else {
                 this.set(base - i, column, pick.get(i));
-                freeTiles--;
             }
         }
     }
@@ -81,5 +80,6 @@ public class Bookshelf {
     //public for debugging reasons
     public void set(int i, int j, Item item) {
         items.set(i, j, item);
+        freeTiles--;
     }
 }

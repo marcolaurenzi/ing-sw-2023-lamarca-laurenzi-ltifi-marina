@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Model.GameState;
 
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Model.Decks.Deck;
-import it.polimi.ingsw.Model.Decks.DeckFactory;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
 

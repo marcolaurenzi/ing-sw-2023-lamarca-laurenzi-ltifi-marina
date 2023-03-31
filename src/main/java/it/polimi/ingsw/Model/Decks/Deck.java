@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model.Decks;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,5 +27,5 @@ public interface Deck<T> {
      * This abstract method is implemented form each concrete class and is used to
      * initialize correctly the concrete instance of the deck
      */
-    public Deck initializeDeck();
+    public void initializeDeck() throws IOException;
 }

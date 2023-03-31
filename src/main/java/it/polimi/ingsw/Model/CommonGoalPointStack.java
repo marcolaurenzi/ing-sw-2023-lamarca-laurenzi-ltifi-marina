@@ -14,28 +14,27 @@ public class CommonGoalPointStack{
 
     private final CommonGoal commonGoal;
 
-    public CommonGoalPointStack(CommonGoal commonGoal, int numberOfPlayers) throws NumberOfPlayersException {
+    public CommonGoalPointStack(CommonGoal commonGoal, int numberOfPlayers) {
         this.commonGoal = commonGoal;
         pointStack = new Stack<>();
 
         switch (numberOfPlayers) {
-            case 2:
+            case 2: {
                 pointStack.push(4);
                 pointStack.push(8);
-            case 3:
+            }
+            case 3: {
                 pointStack.push(4);
                 pointStack.push(6);
                 pointStack.push(8);
-            case 4:
+            }
+            case 4: {
                 pointStack.push(2);
                 pointStack.push(4);
                 pointStack.push(6);
                 pointStack.push(8);
-
-            default:
-                throw new NumberOfPlayersException();
+            }
         }
-
     }
 
     public int draw() {

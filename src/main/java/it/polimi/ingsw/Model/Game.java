@@ -12,7 +12,6 @@ public class Game {
     private GameState gameState; //to be fixed by moving the methods body into the states and callign gameState.methods in this class
     final String gameID;
     private Deck itemDeck;
-    DeckFactory deckFactory = new DeckFactory();
     private Deck commonGoalDeck;
     private Deck personalGoalDeck;
     private CommonGoalPointStack[] commonGoalPointStacks;
@@ -21,11 +20,14 @@ public class Game {
     private ArrayList<Player> players;
     private Board board;
     public Game(String gameId, int maxPlayers) throws NumberOfPlayersException, IOException {
+        if(maxPlayers > 4 || maxPlayers < 2) {
+            throw new NumberOfPlayersException();
+        }
         gameState = new GameStateStarting();
         this.gameID = gameId;
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
-        board = new Board();
+        board = Utils.loadBoardFromFile("src/main/resources/configurations/BoardConfiguration.JSON");
         this.initializeDeck();
     }
 
@@ -67,20 +69,20 @@ public class Game {
     }
 
     /**
-     * This method initializes the decks of the game
+     * This method initializes the decks of the game,
      * and it is called only once at the beginning of the game
      * by the constructor
+     *
      * @throws IOException
      * @throws NumberOfPlayersException
      */
     public void initializeDeck() throws IOException, NumberOfPlayersException {
-        DeckFactory deckFactory = new DeckFactory();
 
-        itemDeck = deckFactory.factoryMethod(DeckEnum.ITEM).initializeDeck();
-        personalGoalDeck = deckFactory.factoryMethod(DeckEnum.PERSONAL).initializeDeck();
-        commonGoalDeck = deckFactory.factoryMethod(DeckEnum.COMMON).initializeDeck();
+        (itemDeck = new ItemDeck()).initializeDeck();
+        (commonGoalDeck = new CommonGoalDeck()).initializeDeck();
+        (personalGoalDeck = new PersonalGoalDeck()).initializeDeck();
+
         commonGoalPointStacks = new CommonGoalPointStack[2];
-
         commonGoalPointStacks[0] = new CommonGoalPointStack((CommonGoal) commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
         commonGoalPointStacks[1] = new CommonGoalPointStack((CommonGoal) commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
     }

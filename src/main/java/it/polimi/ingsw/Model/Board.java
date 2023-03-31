@@ -9,14 +9,6 @@ public class Board {
     private Matrix<BoardTile> gameBoard;
 
     /**
-     * This method overrides the constructor, and it initializes to the correct value each tile present in the board
-     * The number 5 is set to represent a tile which is not physically available on the board
-     */
-    public Board() throws IOException {
-            gameBoard = Utils.parseIntMatrixFromJsonFile("src/main/resources/configurations/MatrixSetup.json");
-    }
-
-    /**
      * This method is used to determine how many free sides the single tile on the board has
      * @param x is the first axis of the board representing the row of the tile
      * @param y is the second axis of the board representing the column of the tile

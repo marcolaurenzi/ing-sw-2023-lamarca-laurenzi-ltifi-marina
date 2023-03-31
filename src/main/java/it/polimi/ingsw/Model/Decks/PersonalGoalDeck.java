@@ -1,7 +1,10 @@
 package it.polimi.ingsw.Model.Decks;
 
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
+import it.polimi.ingsw.Model.Utils;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,8 +14,6 @@ import java.util.List;
 public class PersonalGoalDeck implements Deck<PersonalGoal> {
 
     List<PersonalGoal> deck;
-
-    static DeckEnum deckType = DeckEnum.PERSONAL;
 
     @Override
     public void shuffle() {
@@ -28,28 +29,14 @@ public class PersonalGoalDeck implements Deck<PersonalGoal> {
      * This method is used to correctly initialize the concrete instance of the deck and to shuffle it
      */
     @Override
-    public Deck initializeDeck() {
-        /*
-        deck.add(new PersonalGoal0());
-        deck.add(new PersonalGoal1());
-        deck.add(new PersonalGoal2());
-        deck.add(new PersonalGoal3());
-        deck.add(new PersonalGoal4());
-        deck.add(new PersonalGoal5());
-        deck.add(new PersonalGoal6());
-        deck.add(new PersonalGoal7());
-        deck.add(new PersonalGoal8());
-        deck.add(new PersonalGoal9());
-        deck.add(new PersonalGoal10());
-        deck.add(new PersonalGoal11());
+    public void initializeDeck() throws IOException {
+
+        deck = new ArrayList<>();
+        /*for(int i = 0; i < Utils.parseIntFromJsonFile("src/main/resources/configurations/GameSettings.json", "PersonalGoalDeckDimension"); i++) {
+            // deck.add(new ());
+        }
+
          */
-
         this.shuffle();
-
-        return this;
-    }
-
-    public static DeckEnum getDeckType() {
-        return deckType;
     }
 }

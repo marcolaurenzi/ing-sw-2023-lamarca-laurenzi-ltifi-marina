@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
+import it.polimi.ingsw.Model.Matrix;
 
 /**
  * This class is an abstract class representing all the
