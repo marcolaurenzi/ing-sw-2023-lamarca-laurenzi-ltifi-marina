@@ -13,6 +13,12 @@ public class Utils {
      *                          START OF JSON FUNCTIONS
      ************************************************************************************************************ */
 
+    public static Bookshelf loadBookshelfFromFile(String fileName) throws IOException {
+        Gson gson = new Gson();
+        String json = new String(Files.readAllBytes(Paths.get(fileName)));
+        return gson.fromJson(json, Bookshelf.class);
+    }
+
     public static Board loadBoardFromFile(String fileName) throws IOException {
 
         Gson gson = new Gson();
