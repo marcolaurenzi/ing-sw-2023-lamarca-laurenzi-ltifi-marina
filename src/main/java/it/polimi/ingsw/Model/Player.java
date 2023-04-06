@@ -210,4 +210,8 @@ public class Player {
     public void getRewardFinalGoals() {
         points += getRewardPersonalGoal() + getRewardGeneralGoal();
     }
+
+    public String getPlayerID() {
+        return playerID;
+    }
 }
