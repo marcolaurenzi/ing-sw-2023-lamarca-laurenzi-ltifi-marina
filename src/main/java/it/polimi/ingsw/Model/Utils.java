@@ -13,9 +13,20 @@ import java.nio.file.Paths;
 
 public class Utils {
 
+    private static String configurationPath = "src/main/resources/configurations";
+    private static String testFilesPath = "src/test/testFiles";
+
     /* ************************************************************************************************************
      *                          START OF JSON FUNCTIONS
      ************************************************************************************************************ */
+
+    public static String getConfigurationPath() {
+        return configurationPath;
+    }
+
+    public static String getTestFilesPath() {
+        return testFilesPath;
+    }
 
     public static Board loadBoardFromFile(String filePath) throws IOException {
 

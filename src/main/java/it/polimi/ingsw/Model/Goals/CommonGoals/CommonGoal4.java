@@ -20,7 +20,11 @@ public class CommonGoal4 extends CommonGoal {
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
-    public boolean isAchieved(Bookshelf bookshelf) {
+    public boolean isAchieved(Bookshelf bookshelf) throws NullPointerException{
+
+        if(bookshelf == null) {
+            throw new NullPointerException();
+        }
 
         // times stores how many types the algorithm already found
         Set<TypeEnum> times = new HashSet<>();
