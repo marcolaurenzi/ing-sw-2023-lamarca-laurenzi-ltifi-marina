@@ -66,7 +66,7 @@ public class PlayerStateSelecting extends PlayerState{
      * @throws ColumnNotValidException if the items don't fit the column
      */
     @Override
-    public void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException {
+    public void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         //checkin len of pickedItems
         int pickedItemsLen = 0;
         for(int i = 0; i < 3; i++) {

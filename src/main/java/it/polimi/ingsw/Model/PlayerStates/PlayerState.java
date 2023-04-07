@@ -160,5 +160,5 @@ public abstract class PlayerState {
      * @throws ColumnNotValidException
      * @throws PlayerIsWaitingException
      */
-    public abstract void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException;
+    public abstract void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException;
 }

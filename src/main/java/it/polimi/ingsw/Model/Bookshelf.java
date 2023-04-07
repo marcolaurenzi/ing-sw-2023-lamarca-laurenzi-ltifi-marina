@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Exceptions.PickDoesntFitColumnException;
+import it.polimi.ingsw.Model.Exceptions.PickedColumnOutOfBoundsException;
+
 import java.util.ArrayList;
 
 /**
@@ -30,11 +33,28 @@ public class Bookshelf {
 
     /**
      *
-     * Insert the array of items picks in column
+     * Insert the array of items picks in column, the first element of the array is the first inserted
      * @param column in which you put pick
      * @param pick the pick you put in column
      */
-    public void insert(int column, ArrayList<Item> pick) {
+    public void insert(int column, ArrayList<Item> pick) throws PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
+        if(column < 0 || column > getColumnDimension() - 1)
+            throw new PickedColumnOutOfBoundsException();
+
+        //checking if the pick fits in the column
+        int freeTiles = 0;
+        for(int i = 0; i < this.getColumnDimension(); i++) {
+            if(this.get(i, column) != null)
+                break;
+            else
+                freeTiles++;
+        }
+
+        if(pick.size() > freeTiles)
+            throw new PickDoesntFitColumnException();
+        //end of check
+
+
         int base = 0;
         for(int i = this.getColumnDimension() - 1; i >= 0; i--)
             if(this.get(i, column) == null) {
@@ -42,13 +62,8 @@ public class Bookshelf {
                 break;
             }
 
-        for(int i = 0; i < 3; i++) {
-            if(pick.get(i) == null)
-                break;
-            else {
-                this.set(base - i, column, pick.get(i));
-            }
-        }
+        for(int i = 0; i < pick.size(); i++)
+            this.set(base - i, column, pick.get(i));
     }
 
     /**

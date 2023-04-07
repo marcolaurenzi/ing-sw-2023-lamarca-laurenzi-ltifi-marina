@@ -180,7 +180,7 @@ public class Player {
      *
      * @throws ColumnNotValidException if the items don't fit the column
      */
-    public void insertPickInBookShelf (int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException {
+    public void insertPickInBookShelf (int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         this.state.insertPickInBookShelf(this.pickedItems, this.bookshelf, column, order);
     }
 
