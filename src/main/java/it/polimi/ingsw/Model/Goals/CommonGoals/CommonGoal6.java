@@ -20,7 +20,7 @@ public class CommonGoal6 extends CommonGoal{
         TypeEnum last;
         int count = 0;
         last = null;
-        for(int i = 0; i < bookshelf.getColumnDimension(); i++){
+        for(int i = 0; i < bookshelf.getColumnDimension() -1 ; i++){
             if(bookshelf.get(i,i) == null)
             {
                 break;
@@ -37,17 +37,50 @@ public class CommonGoal6 extends CommonGoal{
         }
         count = 0;
         last = null;
-        for(int i = 1; i < bookshelf.getRowDimension(); i++){
+        for(int i = 1; i < bookshelf.getColumnDimension(); i++){
             if(bookshelf.get(i, i - 1) == null){
                 break;
             }
             if(last == null){
-                last = bookshelf.get(i, i -1).getType();
+                last = bookshelf.get(i, i - 1).getType();
             }
             if(bookshelf.get(i,i - 1).getType().equals(last)){
                 count++;
             }
         }
+        if(count == 5){
+            return true;
+        }
+        count = 0;
+        last = null;
+        for(int i = 0; i < bookshelf.getColumnDimension() - 1; i++){
+            if(bookshelf.get(i, bookshelf.getRowDimension() - i - 1) == null){
+                break;
+            }
+            if(last == null){
+                last = bookshelf.get(i, bookshelf.getRowDimension() - i - 1).getType();
+            }
+            if(bookshelf.get(i, bookshelf.getRowDimension() - i - 1).getType().equals(last)){
+                count++;
+            }
+        }
+        if(count == 5){
+            return true;
+        }
+        count = 0;
+        last = null;
+        for(int i = 1; i < bookshelf.getColumnDimension(); i++){
+            if(bookshelf.get(i, bookshelf.getRowDimension() - i) == null){
+                break;
+            }
+            if(last == null){
+                last = bookshelf.get(i, bookshelf.getRowDimension() - i).getType();
+            }
+            if(bookshelf.get(i, bookshelf.getRowDimension() - i).getType().equals(last)){
+                count++;
+            }
+        }
+
         return count == 5;
     }
 }
