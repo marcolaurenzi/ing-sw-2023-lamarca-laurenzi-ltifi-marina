@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model.Decks;
 
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
-import it.polimi.ingsw.Model.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,11 +31,8 @@ public class PersonalGoalDeck implements Deck<PersonalGoal> {
     public void initializeDeck() throws IOException {
 
         deck = new ArrayList<>();
-        /*for(int i = 0; i < Utils.parseIntFromJsonFile("src/main/resources/configurations/GameSettings.json", "PersonalGoalDeckDimension"); i++) {
-            // deck.add(new ());
+        for(int i = 0; i<12; i++) {
+            deck.add(i, new PersonalGoal(i));
         }
-
-         */
-        this.shuffle();
     }
 }

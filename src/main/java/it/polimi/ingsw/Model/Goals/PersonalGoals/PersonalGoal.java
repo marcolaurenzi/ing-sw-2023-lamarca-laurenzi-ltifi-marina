@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Model.Goals.PersonalGoals;
 
-import it.polimi.ingsw.Model.Bookshelf;
-import it.polimi.ingsw.Model.TypeEnum;
-import it.polimi.ingsw.Model.Item;
-import it.polimi.ingsw.Model.Matrix;
+import it.polimi.ingsw.Model.*;
+
+import java.awt.print.Book;
+import java.io.IOException;
 
 /**
  * This class is an abstract class representing all the
@@ -11,73 +11,52 @@ import it.polimi.ingsw.Model.Matrix;
  * that gives it the isAchieved() method to check whether the
  * goal is achieved or not
  */
-public abstract class PersonalGoal {
+public class PersonalGoal {
 
     // per la numerazione dei personalGoals seguo quella usata negli asset grafici forniti
     private Matrix<Item> personalGoal;
 
-    public PersonalGoal() {
-        //empty constructor
+    public PersonalGoal(int i) throws IOException {
+        Utils.loadBookshelfFromFile("src/main/resources/configurations/PGConfig.JSON", i);
     }
 
-    public PersonalGoal(Matrix<Item> personalGoal) {
-        this.personalGoal = personalGoal;
-    }
-
-    public abstract Matrix<Item> PersonalGoal();
-
-    /*
-    protected PersonalGoal(BookShelf personalGoal) {
-        this.personalGoal = personalGoal;
-    }
-    */
-
-    /**
-     *
-     * @param i
-     * @param j
-     * @return
-     */
-    public TypeEnum getType(int i, int j) {
-        return personalGoal.get(i,j).getType();
-    }
-
-    //in each goal we'll need to set the matrix of the shelf
-
-    //returns the num of matches for the personal goal
-    private int numOfMatches(Bookshelf playerBookshelf) {
-        int matches = 0;
-
-        for(int i = 0; i<personalGoal.getRowDimension(); i++) {
+    public boolean isAchived(Bookshelf bookshelf) {
+        for(int i = 0; i < personalGoal.getRowDimension(); i++) {
             for(int j = 0; j < personalGoal.getColumnDimension(); j++) {
-                if(personalGoal.get(i,j) != null) {
-                    if(personalGoal.get(i,j).getType()==this.getType(i,j)){
-                        matches++;
-                    }
+                if(personalGoal.get(i,j) != null && personalGoal.get(i,j) != bookshelf.get(i,j)) {
+                    return false;
                 }
             }
         }
-
-        return matches;
+        return true;
     }
 
-    /**
-     *
-     * @param playerBookshelf
-     * @return
-     */
-    public int personalGoalScore(Bookshelf playerBookshelf){
-        int tmp = numOfMatches(playerBookshelf);
-
-        return switch (tmp) {
-            case 1 -> 1;
-            case 2 -> 2;
-            case 3 -> 4;
-            case 4 -> 6;
-            case 5 -> 9;
-            case 6 -> 12;
-            default -> 0;
-        };
+    public int getPoints(Bookshelf bookshelf) throws IOException {
+        int counter = 0;
+        for(int i = 0; i < personalGoal.getRowDimension(); i++) {
+            for(int j = 0; j < personalGoal.getColumnDimension(); j++) {
+                if(personalGoal.get(i,j) != null && personalGoal.get(i,j) != bookshelf.get(i,j)) {
+                    counter++;
+                }
+            }
+        }
+        return points(counter);
     }
+
+    private int points(int i) throws IOException {
+        int result;
+        switch (i) {
+            case 1 -> result = 1;
+            case 2 -> result = 2;
+            case 3 -> result = 4;
+            case 4 -> result = 6;
+            case 5 -> result = 9;
+            case 6 -> result = 12;
+            default -> throw new IOException();
+        }
+        return result;
+    }
+
+
 
 }
