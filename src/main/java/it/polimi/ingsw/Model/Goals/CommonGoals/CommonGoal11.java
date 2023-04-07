@@ -18,7 +18,7 @@ public class CommonGoal11 extends CommonGoal{
     public boolean isAchieved(Bookshelf bookshelf) {
         int count = 0;
         if (bookshelf.get(0, 4) != null) {
-            for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            for (int i = 0; i < bookshelf.getColumnDimension() - 1; i++) {
                 if ((4 - i - 1) >= 0 && bookshelf.get(i, 4 - i - 1) != null) {
                     break;
                 }
@@ -32,7 +32,7 @@ public class CommonGoal11 extends CommonGoal{
             return count == 5;
 
         } else if (bookshelf.get(1, 4) != null) {
-            for (int i = 1; i < bookshelf.getRowDimension(); i++) {
+            for (int i = 1; i < bookshelf.getColumnDimension(); i++) {
                 if ((5 - i - 1) >= 0 && bookshelf.get(i, 5 - i - 1) != null) {
                     break;
                 }
@@ -46,7 +46,7 @@ public class CommonGoal11 extends CommonGoal{
         }
 
         if (bookshelf.get(0,0) != null){
-            for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            for (int i = 0; i < bookshelf.getColumnDimension()-1; i++) {
                 if ((i + 1) < 5 && bookshelf.get(i, i + 1) != null) {
                     break;
                 }
@@ -59,7 +59,7 @@ public class CommonGoal11 extends CommonGoal{
             return count == 5;
 
         } else if (bookshelf.get(1,0) != null) {
-            for (int i = 1; i < bookshelf.getRowDimension(); i++) {
+            for (int i = 1; i < bookshelf.getColumnDimension(); i++) {
                 if ((i) < 5 && bookshelf.get(i, i) != null) {
                     break;
                 }
