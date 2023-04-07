@@ -44,7 +44,7 @@ public class Utils {
     public static Bookshelf loadBookshelfFromFile(String filePath, int index) throws IOException {
 
         String jsonString = "";
-        try (FileReader reader = new FileReader("src/main/resources/configurations/CommonGoalsConfiguration.JSON")) {
+        try (FileReader reader = new FileReader(filePath)) {
             int character;
             while ((character = reader.read()) != -1) {
                 jsonString += (char) character;
@@ -57,9 +57,7 @@ public class Utils {
         Gson gson = new Gson();
         Bookshelf[] bookshelves = gson.fromJson(jsonString, Bookshelf[].class);
 
-        // Extract the nth object from the array
-        int n = 1; // Extract the second object (n=1)
-        Bookshelf bookshelf = bookshelves[n];
+        Bookshelf bookshelf = bookshelves[index];
         return bookshelf;
     }
 
