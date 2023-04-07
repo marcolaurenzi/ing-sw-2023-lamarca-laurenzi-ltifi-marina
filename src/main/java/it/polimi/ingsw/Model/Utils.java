@@ -24,6 +24,12 @@ public class Utils {
         return gson.fromJson(json, Board.class);
     }
 
+    public static Bookshelf loadBookshelfFromFile(String filePath) throws IOException {
+        Gson gson = new Gson();
+        String json = new String(Files.readAllBytes(Paths.get(filePath)));
+        return gson.fromJson(json, Bookshelf.class);
+    }
+
     public static Bookshelf loadBookshelfFromFile(String filePath, int index) throws IOException {
 
         String jsonString = "";
