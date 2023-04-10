@@ -17,7 +17,7 @@ public class CommonGoal4 extends CommonGoal {
      * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
      * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
-     * @return the method returns true weather the Goals is Achieved and false otherwise
+     * @return the method returns true weather the Goals is achieved and false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) throws NullPointerException{
@@ -35,18 +35,18 @@ public class CommonGoal4 extends CommonGoal {
         for(int i = 0; i < bookshelf.getRowDimension(); i++) {
             for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
                 // if the first tile is null, no 6 tiles columns can be there
-                if(bookshelf.get(i,j) == null) {
+                if(bookshelf.get(j,i) == null) {
                     break;
                 }
                 else{
-                    times.add(bookshelf.get(i,j).getType());
+                    times.add(bookshelf.get(j,i).getType());
                 }
 
             }
             if(times.size() <= 3 && times.size() > 0) {
                 counter++;
-                times.clear();
             }
+            times.clear();
         }
         return counter >= 3;
     }
