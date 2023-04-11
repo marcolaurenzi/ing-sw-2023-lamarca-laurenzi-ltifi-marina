@@ -17,12 +17,14 @@ public class PersonalGoal {
     private Matrix<Item> personalGoal;
 
     public PersonalGoal(int i) throws IOException {
-        Utils.loadBookshelfFromFile("src/main/resources/configurations/PGConfig.JSON", i);
+        Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.JSON", i);
     }
 
-    public boolean isAchived(Bookshelf bookshelf) {
-        for(int i = 0; i < personalGoal.getRowDimension(); i++) {
-            for(int j = 0; j < personalGoal.getColumnDimension(); j++) {
+    public boolean isAchieved(Bookshelf bookshelf) {
+        int numberOfRows = personalGoal.getColumnDimension();
+        int numberOfColumns = personalGoal.getRowDimension();
+        for(int i = 0; i < numberOfRows; i++) {
+            for(int j = 0; j < numberOfColumns; j++) {
                 if(personalGoal.get(i,j) != null && personalGoal.get(i,j) != bookshelf.get(i,j)) {
                     return false;
                 }
@@ -32,9 +34,11 @@ public class PersonalGoal {
     }
 
     public int getPoints(Bookshelf bookshelf) throws IOException {
+        int numberOfRows = personalGoal.getColumnDimension();
+        int numberOfColumns = personalGoal.getRowDimension();
         int counter = 0;
-        for(int i = 0; i < personalGoal.getRowDimension(); i++) {
-            for(int j = 0; j < personalGoal.getColumnDimension(); j++) {
+        for(int i = 0; i < numberOfRows; i++) {
+            for(int j = 0; j < numberOfColumns; j++) {
                 if(personalGoal.get(i,j) != null && personalGoal.get(i,j) != bookshelf.get(i,j)) {
                     counter++;
                 }
