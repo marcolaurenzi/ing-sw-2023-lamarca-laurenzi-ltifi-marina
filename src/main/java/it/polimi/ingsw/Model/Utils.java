@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 
 public class Utils {
 
-    private static String configurationPath = "src/main/resources/configurations";
-    private static String testFilesPath = "src/test/testFiles";
+    private static String configurationPath = "src/main/resources/configurations/";
+    private static String testFilesPath = "src/test/testFiles/";
 
     /* ************************************************************************************************************
      *                          START OF JSON FUNCTIONS

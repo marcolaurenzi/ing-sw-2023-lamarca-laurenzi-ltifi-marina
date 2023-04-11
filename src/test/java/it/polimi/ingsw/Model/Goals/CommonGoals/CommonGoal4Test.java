@@ -24,7 +24,7 @@ public class CommonGoal4Test {
      */
     @Test
     public void nullPointerTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "/nullBookShelfTest.JSON");
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookShelfTest.JSON");
         assertThrows(NullPointerException.class, () -> goal.isAchieved(bookshelf));
     }
 
@@ -35,7 +35,7 @@ public class CommonGoal4Test {
      */
     @Test
     public void nullBookshelfTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "/commonGoal4Test.JSON", 0);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 0);
         assertEquals(false, goal.isAchieved(bookshelf));
     }
 
@@ -46,7 +46,7 @@ public class CommonGoal4Test {
      */
     @Test
     public void threeColumnsBookshelf() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "/commonGoal4Test.JSON", 1);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 1);
         assertEquals(true, goal.isAchieved(bookshelf));
     }
 
@@ -57,7 +57,7 @@ public class CommonGoal4Test {
      */
     @Test
     public void twoColumnsBookshelfTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "/commonGoal4Test.JSON", 2);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 2);
         assertEquals(false, goal.isAchieved(bookshelf));
     }
 }

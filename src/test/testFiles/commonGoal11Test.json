@@ -11,7 +11,7 @@
         [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
       "columnDimension":6,
       "rowDimension":5},
-    "freeTiles":30},
+    "freeTiles":15},
     {
       "items":
       {
@@ -24,7 +24,7 @@
           [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
         "columnDimension":6,
         "rowDimension":5},
-      "freeTiles":30},
+      "freeTiles":10},
   {
     "items":
     {
@@ -37,7 +37,7 @@
         [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
       "columnDimension":6,
       "rowDimension":5},
-    "freeTiles":30},
+    "freeTiles":15},
   {
     "items":
     {
@@ -50,7 +50,7 @@
         [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
       "columnDimension":6,
       "rowDimension":5},
-    "freeTiles":30},
+    "freeTiles":10},
   {
     "items":
     {
@@ -63,7 +63,7 @@
         [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
       "columnDimension":6,
       "rowDimension":5},
-    "freeTiles":30},
+    "freeTiles":9},
   {
     "items":
     {
@@ -76,5 +76,5 @@
         [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
       "columnDimension":6,
       "rowDimension":5},
-    "freeTiles":30}
+    "freeTiles":11}
 ]

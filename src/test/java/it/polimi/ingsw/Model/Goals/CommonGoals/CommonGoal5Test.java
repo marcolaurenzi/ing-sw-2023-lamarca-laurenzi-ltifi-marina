@@ -16,26 +16,26 @@ public class CommonGoal5Test {
     @Test
     @DisplayName("Test if the empty Bookshelf is handled correctly")
     public void emptyBookshelfTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile("src/test/testFiles/bookshelfOfNullTest.json");
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "bookshelfOfNullTest.json");
         assertFalse("The empty bookshelf should not achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
     @Test
     @DisplayName("Test if the Bookshelf with less than 8 elements of one kind is handled correctly")
     public void bookshelfWithLessThan8ElementsOfOneKindTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile("src/test/testFiles/commonGoal5Test.json", 0);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test.json", 0);
         assertFalse("The bookshelf with less than 8 elements of one kind should not achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
 
     @Test
     @DisplayName("Test if the Bookshelf with exactly 8 elements of one kind achieves the goal")
     public void bookshelfWith8ElementsOfOneKindTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile("src/test/testFiles/commonGoal5Test.json", 1);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test.json", 1);
         assertTrue("The bookshelf with 8 elements of one kind should achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
     @Test
     @DisplayName("Test if the Bookshelf with more than 8 elements of one kind achieves the goal")
     public void bookshelfWithMoreThan8ElementsOfOneKindTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile("src/test/testFiles/commonGoal5Test.json", 2);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test.json", 2);
         assertTrue("The bookshelf with more than 8 elements of one kind should achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
 
