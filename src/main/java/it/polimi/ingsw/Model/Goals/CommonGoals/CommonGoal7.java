@@ -22,30 +22,34 @@ public class CommonGoal7 extends CommonGoal {
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
 
+        int numberOfRows = bookshelf.getColumnDimension();
+        int numberOfColumns = bookshelf.getRowDimension();
+
+        if(bookshelf.isEmpty()) {
+            return false;
+        }
+
         // times stores how many types the algorithm already found
         Set<TypeEnum> times = new HashSet<>();
 
         // counters counts how many times the pattern is found
         int counter = 0;
 
-        if(bookshelf.isEmpty()) {
-            return false;
-        }
-
-        for(int i = 0; i< bookshelf.getRowDimension(); i++) {
-            for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
+        for(int i = 0; i < numberOfRows; i++) {
+            for(int j = 0; j < numberOfColumns; j++) {
                 if(bookshelf.get(i,j) == null) {
-                    j++;
+                    j = numberOfColumns + 1;
+                    times.clear();
                 }
                 else {
                     times.add(bookshelf.get(i,j).getType());
                 }
 
             }
-            if(times.size() == 1) {
+            if(times.size() <= 3 && times.size() > 0) {
                 counter++;
-                times.clear();
             }
+            times.clear();
         }
 
         return counter >= 4;

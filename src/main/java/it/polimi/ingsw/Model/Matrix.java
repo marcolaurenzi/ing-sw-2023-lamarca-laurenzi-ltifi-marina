@@ -28,11 +28,11 @@ public class Matrix<T> {
      * @param value the value the matrix gets initialized with
      */
     public Matrix(int numberOfRows, int numberOfColumns, T value) {
-        matrix = (T[][]) new Object[numberOfColumns][numberOfRows];
+        matrix = (T[][]) new Object[numberOfRows][numberOfColumns];
         columnDimension = numberOfRows;
         rowDimension = numberOfColumns;
-        for(int i = 0; i < this.getRowDimension(); i++) {
-            for(int j = 0; j < this.getColumnDimension(); j++) {
+        for(int i = 0; i < this.getColumnDimension(); i++) {
+            for(int j = 0; j < this.getRowDimension(); j++) {
                 this.set(i, j, value);
             }
         }

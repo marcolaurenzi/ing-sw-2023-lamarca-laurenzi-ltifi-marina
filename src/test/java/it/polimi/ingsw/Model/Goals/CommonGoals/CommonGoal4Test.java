@@ -34,7 +34,7 @@ public class CommonGoal4Test {
      * @throws IOException
      */
     @Test
-    public void nullBookshelfTest() throws IOException {
+    public void voidBookshelfTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 0);
         assertEquals(false, goal.isAchieved(bookshelf));
     }
@@ -45,19 +45,30 @@ public class CommonGoal4Test {
      * @throws IOException
      */
     @Test
-    public void threeColumnsBookshelf() throws IOException {
+    public void enoughColumnsEnoughTypesTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 1);
         assertEquals(true, goal.isAchieved(bookshelf));
     }
 
     /**
-     * Testing the corner case where there are only 2 columns with 4 different types in each column
+     * Testing the corner case where there are 3 columns with 4 different types in each column
      *
      * @throws IOException
      */
     @Test
-    public void twoColumnsBookshelfTest() throws IOException {
+    public void moreTypesTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 2);
+        assertEquals(false, goal.isAchieved(bookshelf));
+    }
+
+    /**
+     * Testing the corner case where there are only 2 columns with 3 different types in each column
+     *
+     * @throws IOException
+     */
+    @Test
+    public void lessColumnsTest() throws IOException {
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal4Test.JSON", 3);
         assertEquals(false, goal.isAchieved(bookshelf));
     }
 }

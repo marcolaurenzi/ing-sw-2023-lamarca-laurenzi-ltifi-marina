@@ -22,6 +22,9 @@ public class CommonGoal4 extends CommonGoal {
     @Override
     public boolean isAchieved(Bookshelf bookshelf) throws NullPointerException{
 
+        int numberOfRows = bookshelf.getColumnDimension();
+        int numberOfColumns = bookshelf.getRowDimension();
+
         if(bookshelf == null) {
             throw new NullPointerException();
         }
@@ -32,8 +35,8 @@ public class CommonGoal4 extends CommonGoal {
         // counters counts how many times the pattern is found
         int counter = 0;
 
-        for(int i = 0; i < bookshelf.getRowDimension(); i++) {
-            for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
+        for(int i = 0; i < numberOfColumns; i++) {
+            for(int j = 0; j < numberOfRows; j++) {
                 // if the first tile is null, no 6 tiles columns can be there
                 if(bookshelf.get(j,i) == null) {
                     break;

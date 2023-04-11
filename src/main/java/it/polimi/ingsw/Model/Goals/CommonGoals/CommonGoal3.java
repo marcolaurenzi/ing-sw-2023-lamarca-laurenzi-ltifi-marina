@@ -23,15 +23,18 @@ public class CommonGoal3 extends CommonGoal{
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
 
+        int numberOfRows = bookshelf.getColumnDimension();
+        int numberOfColumns = bookshelf.getRowDimension();
+
         Set<TypeEnum> goodTypes = new HashSet<>();
         Set<TypeEnum> badTypes = new HashSet<>();
 
-        Matrix<Boolean> copy = new Matrix<>(6,5, true);
+        Matrix<Boolean> copy = new Matrix<>(numberOfRows, numberOfColumns, true);
 
         int count = 0;
 
-        for(int i = 0; i < bookshelf.getColumnDimension()-1; i++) {
-            for(int j = 0; j < bookshelf.getRowDimension()-1; j++) {
+        for(int i = 0; i < numberOfRows-1; i++) {
+            for(int j = 0; j < numberOfColumns-1; j++) {
                 if(bookshelf.get(i, j) != null && copy.get(i, j)) {
                     goodTypes.add(bookshelf.get(i, j).getType());
                     goodTypes.add(bookshelf.get(i+1, j).getType());
@@ -39,31 +42,42 @@ public class CommonGoal3 extends CommonGoal{
                     goodTypes.add(bookshelf.get(i+1, j+1).getType());
 
                     if(goodTypes.size() == 1) {
-                        if(!(bookshelf.getRowDimension() - j < 3)) {
+                        // if not in the right border
+                        if(j < numberOfColumns - 2) {
                             badTypes.add(bookshelf.get(i, j+2).getType());
-                            badTypes.add(bookshelf.get(i+1, j+2).getType());
+                            if(i < bookshelf.getColumnDimension() - 1) {
+                                badTypes.add(bookshelf.get(i+1, j+2).getType());
+                            }
                         }
-                        if(!(bookshelf.getRowDimension() - j == bookshelf.getRowDimension())) {
+                        // if not in the left border
+                        if(j != 0) {
                             badTypes.add(bookshelf.get(i, j-1).getType());
-                            badTypes.add(bookshelf.get(i+1, j-1).getType());
+                            if(i < numberOfRows - 1) {
+                                badTypes.add(bookshelf.get(i+1, j-1).getType());
+                            }
                         }
-                        if(!(bookshelf.getColumnDimension() - i < 3)) {
-                            badTypes.add(bookshelf.get(i+1, j).getType());
-                            badTypes.add(bookshelf.get(i+1, j+1).getType());
+                        // if not in the down border
+                        if(i < numberOfRows - 2) {
+                            badTypes.add(bookshelf.get(i+2, j).getType());
+                            if(j < numberOfColumns - 1)
+                                badTypes.add(bookshelf.get(i+2, j+1).getType());
                         }
-                        if(!(bookshelf.getColumnDimension() - i == bookshelf.getColumnDimension())) {
+                        // if not in the upper border
+                        if(i != 0) {
                             badTypes.add(bookshelf.get(i-1, j).getType());
-                            badTypes.add(bookshelf.get(i-1, j+1).getType());
+                            if(j < numberOfColumns - 1) {
+                                badTypes.add(bookshelf.get(i-1, j+1).getType());
+                            }
                         }
                         if(!badTypes.containsAll(goodTypes)) {
                             count++;
+                            copy.set(i+1, j+0, false);
+                            copy.set(i+0, j+1, false);
+                            copy.set(i+1, j+1, false);
                         }
                     }
 
-                    copy.set(i, j, false);
-                    copy.set(i+1, j, false);
-                    copy.set(i, j+1, false);
-                    copy.set(i+1, j+1, false);
+                    copy.set(i+0, j+0, false);
 
                     goodTypes.clear();
                     badTypes.clear();
@@ -71,63 +85,5 @@ public class CommonGoal3 extends CommonGoal{
             }
         }
         return count >= 2;
-    }
-
-    /**
-     * This method returns how many times the pattern is found.
-     * This method is used in the testing phase
-     *
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     * @return the method returns true weather the Goals is Achieved and false otherwise
-     */
-    public int numberOfTimes(Bookshelf bookshelf) {
-        Set<TypeEnum> goodTypes = new HashSet<>();
-        Set<TypeEnum> badTypes = new HashSet<>();
-
-        Matrix<Boolean> copy = new Matrix<>(6,5, true);
-
-        int count = 0;
-
-        for(int i = 0; i < bookshelf.getColumnDimension()-1; i++) {
-            for(int j = 0; j < bookshelf.getRowDimension()-1; j++) {
-                if(bookshelf.get(i, j) != null && copy.get(i, j)) {
-                    goodTypes.add(bookshelf.get(i, j).getType());
-                    goodTypes.add(bookshelf.get(i+1, j).getType());
-                    goodTypes.add(bookshelf.get(i, j+1).getType());
-                    goodTypes.add(bookshelf.get(i+1, j+1).getType());
-
-                    if(goodTypes.size() == 1) {
-                        if(!(bookshelf.getRowDimension() - j < 3)) {
-                            badTypes.add(bookshelf.get(i, j+2).getType());
-                            badTypes.add(bookshelf.get(i+1, j+2).getType());
-                        }
-                        if(!(bookshelf.getRowDimension() - j == bookshelf.getRowDimension())) {
-                            badTypes.add(bookshelf.get(i, j-1).getType());
-                            badTypes.add(bookshelf.get(i+1, j-1).getType());
-                        }
-                        if(!(bookshelf.getColumnDimension() - i < 3)) {
-                            badTypes.add(bookshelf.get(i+1, j).getType());
-                            badTypes.add(bookshelf.get(i+1, j+1).getType());
-                        }
-                        if(!(bookshelf.getColumnDimension() - i == bookshelf.getColumnDimension())) {
-                            badTypes.add(bookshelf.get(i-1, j).getType());
-                            badTypes.add(bookshelf.get(i-1, j+1).getType());
-                        }
-                        if(!badTypes.containsAll(goodTypes)) {
-                            count++;
-                        }
-                    }
-
-                    copy.set(i, j, false);
-                    copy.set(i+1, j, false);
-                    copy.set(i, j+1, false);
-                    copy.set(i+1, j+1, false);
-
-                    goodTypes.clear();
-                    badTypes.clear();
-                }
-            }
-        }
-        return count;
     }
 }

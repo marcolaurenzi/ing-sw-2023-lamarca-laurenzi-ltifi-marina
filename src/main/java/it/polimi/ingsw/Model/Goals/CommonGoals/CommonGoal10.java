@@ -20,12 +20,15 @@ public class CommonGoal10 extends CommonGoal{
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
 
+        int numberOfRows = bookshelf.getColumnDimension();
+        int numberOfColumns = bookshelf.getRowDimension();
+
         Set<TypeEnum> temp = new HashSet<>();
         int count = 0;
         TypeEnum currTypeEnum;
 
-        for(int i = 0; i < bookshelf.getColumnDimension()-2; i++) {
-            for(int j = 0; j < bookshelf.getRowDimension()-2; j++) {
+        for(int i = 0; i < numberOfRows-2; i++) {
+            for(int j = 0; j < numberOfColumns-2; j++) {
                 if(bookshelf.get(i,j) != null && bookshelf.get(i+2,j) != null &&
                         bookshelf.get(i+1,j+1) != null && bookshelf.get(i,j+2) != null &&
                         bookshelf.get(i+2,j+2) != null) {

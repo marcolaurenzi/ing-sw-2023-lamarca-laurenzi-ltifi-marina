@@ -29,7 +29,7 @@ public class CommonGoal10Test {
      * @throws IOException
      */
     @Test
-    public void nullBookshelfTest() throws IOException {
+    public void voidBookshelfTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 0);
         assertEquals(false, goal.isAchieved(bookshelf));
     }
