@@ -31,10 +31,11 @@ public class CommonGoal10 extends CommonGoal{
                         bookshelf.get(i+1,j+1) != null && bookshelf.get(i,j+2) != null &&
                         bookshelf.get(i+2,j+2) != null) {
                     currTypeEnum = bookshelf.get(i,j).getType();
-                    if(bookshelf.get(i,j).getType() == bookshelf.get(i+2,j).getType() &&
-                            bookshelf.get(i+2,j).getType() == bookshelf.get(i+2,j+2).getType() &&
-                            bookshelf.get(i+2,j+2).getType() == bookshelf.get(i,j+2).getType() &&
-                            bookshelf.get(i,j+2).getType() == bookshelf.get(i+1,j+1).getType()){
+                    if(bookshelf.get(i,j).getType() == currTypeEnum &&
+                            bookshelf.get(i+2,j).getType() == currTypeEnum &&
+                            bookshelf.get(i+2,j+2).getType() == currTypeEnum &&
+                            bookshelf.get(i,j+2).getType() == currTypeEnum &&
+                            bookshelf.get(i+1,j+1).getType() == currTypeEnum){
 
                         if(bookshelf.get(i+1,j) == null) {
                             count++;
