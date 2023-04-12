@@ -15,10 +15,10 @@ import java.util.Set;
 public class CommonGoal3 extends CommonGoal{
 
     /**
-     * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
+     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
      * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
-     * @return the method returns true weather the Goals is Achieved and false otherwise
+     * @return the method returns true whether the Goals is Achieved and false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {

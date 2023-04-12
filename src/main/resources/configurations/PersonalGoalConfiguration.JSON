@@ -2,61 +2,12 @@
   {
     "items": {
       "matrix": [
-        [
-          {
-            "type": "PLANTS"
-          },
-          null,
-          {
-            "type": "FRAMES"
-          },
-          null,
-          null
-        ],
-        [
-          null,
-          null,
-          null,
-          null,
-          {
-            "type": "CATS"
-          }
-        ],
-        [
-          null,
-          null,
-          null,
-          {
-            "type": "BOOKS"
-          },
-          null
-        ],
-        [
-          null,
-          {
-            "type": "GAMES"
-          },
-          null,
-          null,
-          null
-        ],
-        [
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          null,
-          null,
-          {
-            "type": "TROPHIES"
-          },
-          null,
-          null
-        ]
-      ],
+        [{"type": "PLANTS"},null,{"type": "FRAMES"}, null, null],
+        [null, null, null, null, {"type": "CATS"}],
+        [null, null, null, {"type": "BOOKS"}, null],
+        [null, {"type": "GAMES"}, null, null, null],
+        [null, null, null, null, null],
+        [null, null, {"type": "TROPHIES"}, null, null]],
       "columnDimension": 6,
       "rowDimension": 5
     },
@@ -65,61 +16,12 @@
   {
     "items": {
       "matrix": [
-        [
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          null,
-          {
-            "type": "PLANTS"
-          },
-          null,
-          null,
-          null
-        ],
-        [
-          {
-            "type": "CATS"
-          },
-          null,
-          {
-            "type": "GAMES"
-          },
-          null,
-          null
-        ],
-        [
-          null,
-          null,
-          null,
-          null,
-          {
-            "type": "BOOKS"
-          }
-        ],
-        [
-          null,
-          null,
-          null,
-          {
-            "type": "TROPHIES"
-          },
-          null
-        ],
-        [
-          null,
-          null,
-          null,
-          null,
-          {
-            "type": "FRAMES"
-          }
-        ]
-      ],
+        [null, null, null, null, null],
+        [null, {"type": "PLANTS"}, null, null, null],
+        [{"type": "CATS"}, null, {"type": "GAMES"}, null, null],
+        [null, null, null, null, {"type": "BOOKS"}],
+        [null, null, null, {"type": "TROPHIES"}, null],
+        [null, null, null, null, {"type": "FRAMES"}]],
       "columnDimension": 6,
       "rowDimension": 5
     },

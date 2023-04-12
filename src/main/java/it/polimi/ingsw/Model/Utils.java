@@ -2,7 +2,7 @@ package it.polimi.ingsw.Model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
+import it.polimi.ingsw.Model.Matrix;
 
 import java.awt.print.Book;
 import java.io.FileReader;

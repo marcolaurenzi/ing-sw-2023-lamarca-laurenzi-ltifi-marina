@@ -13,11 +13,10 @@ import java.io.IOException;
  */
 public class PersonalGoal {
 
-    // per la numerazione dei personalGoals seguo quella usata negli asset grafici forniti
-    private Matrix<Item> personalGoal;
+    private Bookshelf personalGoal;
 
     public PersonalGoal(int i) throws IOException {
-        Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.JSON", i);
+        personalGoal = Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.JSON", i);
     }
 
     public boolean isAchieved(Bookshelf bookshelf) {
@@ -61,6 +60,7 @@ public class PersonalGoal {
         return result;
     }
 
-
-
+    public Item get(int i, int j) {
+        return personalGoal.get(i,j);
+    }
 }
