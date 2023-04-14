@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.Decks.CommonGoalDeck;
 import it.polimi.ingsw.Model.Decks.Deck;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
+import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
 import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
 import it.polimi.ingsw.Model.GameState.GameState;
@@ -11,10 +12,16 @@ import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.GameState.GameStateStarting;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Game {
-    private GameState gameState; //to be fixed by moving the methods body into the states and callign gameState.methods in this class
+
+    /* ************************************************************************************************************
+     *                          START OF ATTRIBUTES DECLARATION
+     ************************************************************************************************************ */
+
+    private GameState gameState;
     final String gameID;
     private ItemDeck itemDeck;
     private CommonGoalDeck commonGoalDeck;
@@ -27,6 +34,19 @@ public class Game {
         return board;
     }
     private final Board board;
+
+    /* ************************************************************************************************************
+     *                          END OF ATTRIBUTES DECLARATION
+     *                          START OF CONSTRUCTORS
+     ************************************************************************************************************ */
+
+    /**
+     *
+     * @param gameId
+     * @param maxPlayers
+     * @throws MaxNumberOfPlayersException
+     * @throws IOException
+     */
     public Game(String gameId, int maxPlayers) throws MaxNumberOfPlayersException, IOException {
         if(maxPlayers > 4 || maxPlayers < 2) {
             throw new MaxNumberOfPlayersException();
@@ -36,16 +56,20 @@ public class Game {
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
         board = Utils.loadBoardFromFile("src/main/resources/configurations/BoardConfiguration.JSON");
-        this.initializeDeck();
     }
+
+    /* ************************************************************************************************************
+     *                          END OF CONSTRUCTORS
+     *                          START OF CUSTOM METHODS
+     ************************************************************************************************************ */
 
     /**
      * This method is called when a player joins the game and adds him to the list of players
      * but does not create a new Player object
      * @param player
      */
-    public void addPlayer(Player player) throws IOException, NumberOfPlayersException {
-        gameState.addPlayer(this, player);
+    public void addPlayer(Player player) throws IOException, NumberOfPlayersException, AlreadyStartedGameException {
+        players.add(player);
     }
 
     /**
@@ -53,26 +77,23 @@ public class Game {
      * after creating a new Player object
      * @param playerID
      */
-    public void addPlayer(String playerID) throws IOException, NumberOfPlayersException {
-        gameState.addPlayer(this, playerID);
+    public void addPlayer(String playerID) throws AlreadyStartedGameException {
+        if(players.size() == maxPlayers) {
+            throw new AlreadyStartedGameException();
+        }
+        players.add(new Player(playerID, this));
     }
-    public void initializeBoard(Board board, ItemDeck itemDeck, int maxPlayers){
-        gameState.initializeBoard(board, itemDeck, maxPlayers);
-    }
-    public void nextPlayer(){
-        gameState.nextPlayer(currentPlayer, players);
-    }
-    public Player getCurrentPlayer(){
-        return gameState.getCurrentPlayer(players, currentPlayer);
-    }
-    public int getMaxPlayers(){
-        return maxPlayers;
-    }
-    public String getGameID(){
-        return gameID;
-    }
-    public ArrayList<Player> getPlayers(){
-        return players;
+
+    /**
+     *
+     */
+    public void nextPlayer() { currentPlayer = gameState.nextPlayer(this, currentPlayer, players); }
+
+    /**
+     *
+     */
+    public void initializeBoard(){
+        board.initializeBoard(this);
     }
 
     /**
@@ -81,7 +102,6 @@ public class Game {
      * by the constructor
      *
      * @throws IOException
-     * @throws NumberOfPlayersException
      */
     public void initializeDeck() throws IOException {
 
@@ -90,13 +110,41 @@ public class Game {
         (personalGoalDeck = new PersonalGoalDeck()).initializeDeck();
 
         commonGoalPointStacks = new CommonGoalPointStack[2];
-        commonGoalPointStacks[0] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
-        commonGoalPointStacks[1] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers); //TODO cast to be solved
+        commonGoalPointStacks[0] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers);
+        commonGoalPointStacks[1] = new CommonGoalPointStack(commonGoalDeck.draw(), maxPlayers);
     }
 
-    public void startGame() throws IOException, NumberOfPlayersException {
-        gameState.startGame(board, itemDeck, maxPlayers);
-        this.gameState = new GameStateRunning();
+    /**
+     *
+     * @throws AlreadyStartedGameException
+     * @throws IOException
+     */
+    public void startGame() throws AlreadyStartedGameException, IOException {
+        this.initializeDeck();
+        this.initializeBoard();
+        setGameState(new GameStateRunning());
+    }
+
+    /**
+     *
+     */
+    public void refreshBoard() {
+        if(board.toRefresh()) {
+            board.refreshBoard(this);
+        }
+    }
+
+    /* ************************************************************************************************************
+     *                          END OF CUSTOM METHODS
+     *                          START OF GETTER METHODS
+     ************************************************************************************************************ */
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public ItemDeck getItemDeck() {
+        return itemDeck;
     }
 
     public Deck getPersonalGoalDeck() {
@@ -107,4 +155,27 @@ public class Game {
         return commonGoalPointStacks;
     }
 
+    public Player getCurrentPlayer() {
+        Player temp = players.get(currentPlayer);
+        return temp;
+    }
+    public int getMaxPlayers(){
+        return maxPlayers;
+    }
+    public ArrayList<Player> getPlayers(){
+        return players;
+    }
+
+    /* ************************************************************************************************************
+     *                          END OF GETTER METHODS
+     *                          START OF SETTER METHODS
+     ************************************************************************************************************ */
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    /* ************************************************************************************************************
+     *                          END OF SETTER METHODS
+     ************************************************************************************************************ */
 }

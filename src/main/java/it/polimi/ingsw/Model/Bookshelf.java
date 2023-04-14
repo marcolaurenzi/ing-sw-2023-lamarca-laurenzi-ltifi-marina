@@ -9,13 +9,29 @@ import java.util.ArrayList;
  * This class represents the BookSelf of the game, a 6x5 Matrix of int elements.
  */
 public class Bookshelf {
+
+    /* ************************************************************************************************************
+     *                          START OF ATTRIBUTES DECLARATION
+     ************************************************************************************************************ */
     private final Matrix<Item> items;
     private int freeTiles;
+
+    /* ************************************************************************************************************
+     *                          END OF ATTRIBUTES DECLARATION
+     *                          START OF CONSTRUCTORS
+     ************************************************************************************************************ */
+
 
     public Bookshelf() {
         items = new Matrix<>(6, 5);
         freeTiles = 30;
     }
+
+    /* ************************************************************************************************************
+     *                          END OF CONSTRUCTORS
+     *                          START OF CUSTOM METHODS
+     ************************************************************************************************************ */
+
 
     /**
      * This method checks whether the Matrix has some free spaces left or it is full.
@@ -54,7 +70,6 @@ public class Bookshelf {
             throw new PickDoesntFitColumnException();
         //end of check
 
-
         int base = 0;
         for(int i = this.getColumnDimension() - 1; i >= 0; i--)
             if(this.get(i, column) == null) {
@@ -67,10 +82,10 @@ public class Bookshelf {
     }
 
     /**
-     *
-     * @param i
-     * @param j
-     * @return
+     * This method returns the specified Item
+     * @param i row index
+     * @param j column index
+     * @return the specified Item
      */
     public Item get(int i, int j) {
         return this.items.get(i,j);
@@ -78,15 +93,14 @@ public class Bookshelf {
 
     /**
      *
-     * @return
+     * @return dimension of the row
      */
     public int getRowDimension() {
         return items.getRowDimension();
     }
 
     /**
-     *
-     * @return
+     * @return dimension of the column
      */
     public int getColumnDimension() {
         return items.getColumnDimension();
@@ -97,4 +111,9 @@ public class Bookshelf {
         items.set(i, j, item);
         freeTiles--;
     }
+
+    /* ************************************************************************************************************
+     *                          END OF CUSTOM METHODS
+     ************************************************************************************************************ */
+
 }

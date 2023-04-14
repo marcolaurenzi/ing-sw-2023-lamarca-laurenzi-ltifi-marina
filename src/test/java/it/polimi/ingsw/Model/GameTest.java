@@ -21,7 +21,7 @@ class GameTest {
     }
 
     @Test
-    void addFirstPlayer() throws MaxNumberOfPlayersException, IOException, NumberOfPlayersException {
+    void addFirstPlayer() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException {
         Game game = new Game("1", 4);
 
         String playerID = "54336";

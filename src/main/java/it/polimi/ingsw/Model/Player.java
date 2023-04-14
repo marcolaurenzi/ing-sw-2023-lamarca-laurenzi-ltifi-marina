@@ -11,6 +11,10 @@ import java.util.ArrayList;
  *
  */
 public class Player {
+
+    /* ************************************************************************************************************
+     *                          START OF ATTRIBUTES DECLARATION
+     ************************************************************************************************************ */
     private final String playerID;
     private int points;
     private ArrayList<Coordinates> tilesSelection;
@@ -20,6 +24,10 @@ public class Player {
     private final PersonalGoal personalGoal;
     private boolean[] isCommonGoalAlreadyAchieved;
     private final Game game;
+    /* ************************************************************************************************************
+     *                          END OF ATTRIBUTES DECLARATION
+     *                          START OF CONSTRUCTORS
+     ************************************************************************************************************ */
 
     /**
      * This is the player's constructor. It initializes some variables and initialize the state
@@ -37,6 +45,11 @@ public class Player {
         isCommonGoalAlreadyAchieved = new boolean[]{false, false};
         state = new PlayerStateWaiting();
     }
+
+    /* ************************************************************************************************************
+     *                          END OF CONSTRUCTORS
+     *                          START OF CUSTOM METHODS
+     ************************************************************************************************************ */
 
     /**
      * This method is called at the end of the game
@@ -212,7 +225,29 @@ public class Player {
         points += getRewardPersonalGoal() + getRewardGeneralGoal();
     }
 
+    /**
+     *
+     * @param comando
+     */
+    public void applyCommand(String comando) {
+        switch (comando) {
+
+        }
+    }
+
+    /* ************************************************************************************************************
+     *                          END OF CUSTOM METHODS
+     *                          START OF GETTER METHODS
+     ************************************************************************************************************ */
+
     public String getPlayerID() {
         return playerID;
     }
+
+    public Bookshelf getBookshelf() {
+        return bookshelf;
+    }
+    /* ************************************************************************************************************
+     *                          END OF GETTER METHODS
+     ************************************************************************************************************ */
 }

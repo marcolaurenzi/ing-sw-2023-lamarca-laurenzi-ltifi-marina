@@ -6,25 +6,40 @@ package it.polimi.ingsw.Model;
  */
 public class BoardTile {
 
-    private final int numberOfPlayersSign;
+    /* ************************************************************************************************************
+     *                          START OF ATTRIBUTES DECLARATION
+     ************************************************************************************************************ */
 
+    private final int numberOfPlayersSign;
     private Item placedItem;
+
+    /* ************************************************************************************************************
+     *                          END OF ATTRIBUTES DECLARATION
+     *                          START OF CONSTRUCTORS
+     ************************************************************************************************************ */
+
 
     /**
      * The constructor is used when the board is initialized and
      * all the number of each board tile must be assigned
      * the placed item field is set to null as it is empty at the beginning of the game
-     * @param numberOfPlayersSign
+     * @param numberOfPlayersSign the value written on the Board for that BoardTile
      */
     public BoardTile(int numberOfPlayersSign){
         this.numberOfPlayersSign = numberOfPlayersSign;
         this.placedItem = null;
     }
 
+    /* ************************************************************************************************************
+     *                          END OF CONSTRUCTORS
+     *                          START OF CUSTOM METHODS
+     ************************************************************************************************************ */
+
+
     /**
      * this method tells whether the tile is empty or not
      *
-     * @return
+     * @return true if it's empty, false otherwise
      */
     protected boolean isEmpty(){
         return placedItem == null;
@@ -32,7 +47,7 @@ public class BoardTile {
 
     /**
      * this method is used to place an item on the tile if it's empty
-     * @param itemToPlace
+     * @param itemToPlace the reference to item that must be placed
      */
     public void placeItem(Item itemToPlace){
         if(this.isEmpty()) {
@@ -74,7 +89,18 @@ public class BoardTile {
         }
     }
 
+    /* ************************************************************************************************************
+     *                          END OF CUSTOM METHODS
+     *                          START OF GETTER METHODS
+     ************************************************************************************************************ */
+
+
     public int getNumberOfPlayersSign() {
         return numberOfPlayersSign;
     }
+
+    /* ************************************************************************************************************
+     *                          END OF GETTER METHODS
+     ************************************************************************************************************ */
+
 }
