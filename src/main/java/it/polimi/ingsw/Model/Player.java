@@ -5,7 +5,6 @@ import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 import it.polimi.ingsw.Model.PlayerStates.PlayerState;
 import it.polimi.ingsw.Model.PlayerStates.PlayerStateWaiting;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -44,7 +43,7 @@ public class Player {
      *
      * @return  the points earned by the player from the personal goal
      */
-    private int getRewardPersonalGoal() throws IOException {
+    private int getRewardPersonalGoal() throws WrongConfigurationException {
         return personalGoal.getPoints(this.bookshelf);
     }
 
@@ -209,7 +208,7 @@ public class Player {
      * This method is called at the end of the game. Updates the points counting the personalGoal points and the
      * generalGoal points
      */
-    public void getRewardFinalGoals() throws IOException {
+    public void getRewardFinalGoals() throws WrongConfigurationException {
         points += getRewardPersonalGoal() + getRewardGeneralGoal();
     }
 
