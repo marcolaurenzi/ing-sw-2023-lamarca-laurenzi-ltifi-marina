@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface GameState {
-    public void addPlayer(Game game, Player player) throws IOException, NumberOfPlayersException;
+    public void addPlayer(Game game, Player player) throws IOException, NumberOfPlayersException, NumberOfPlayersException, NumberOfPlayersException;
     public void addPlayer(Game game, String playerID) throws IOException, NumberOfPlayersException;
     public void initializeBoard(Board board, ItemDeck itemDeck, int maxPlayers);
     public void nextPlayer(int currentPlayer, ArrayList<Player> players);

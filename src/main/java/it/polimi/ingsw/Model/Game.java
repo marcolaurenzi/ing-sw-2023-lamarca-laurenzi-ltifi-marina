@@ -1,10 +1,14 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Model.Decks.*;
+import it.polimi.ingsw.Model.Decks.CommonGoalDeck;
+import it.polimi.ingsw.Model.Decks.Deck;
+import it.polimi.ingsw.Model.Decks.ItemDeck;
+import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
 import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
-import it.polimi.ingsw.Model.GameState.*;
-import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
+import it.polimi.ingsw.Model.GameState.GameState;
+import it.polimi.ingsw.Model.GameState.GameStateRunning;
+import it.polimi.ingsw.Model.GameState.GameStateStarting;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +23,9 @@ public class Game {
     final int maxPlayers;
     private int currentPlayer;
     private ArrayList<Player> players;
+    public Board getBoard() {
+        return board;
+    }
     private final Board board;
     public Game(String gameId, int maxPlayers) throws MaxNumberOfPlayersException, IOException {
         if(maxPlayers > 4 || maxPlayers < 2) {

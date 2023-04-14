@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-import java.io.IOException;
-
 /**
  * this class represents the game board of the game
  */
@@ -73,5 +71,12 @@ public class Board {
 
             }
         }
+    }
+    public boolean toRefresh(){
+        //todo method that checks if the board needs to be refreshed
+        return false;
+    }
+    public void refreshBoard(){
+        //todo method that refreshes the board
     }
 }
