@@ -130,25 +130,13 @@ public abstract class PlayerState {
      *
      * @param tilesSelection
      * @param board
-     * @param i
-     * @param j
-     *
-     * @throws SelectionIsFullException
-     * @throws PlayerIsWaitingException
-     */
-    public abstract void select(ArrayList<Coordinates> tilesSelection, Board board, int i, int j) throws SelectionIsFullException, PlayerIsWaitingException;
-
-    /**
-     *
-     * @param tilesSelection
-     * @param board
      *
      * @return
      * @throws PlayerIsWaitingException
      * @throws SelectionIsEmptyException
      * @throws SelectionNotValidException
      */
-    public abstract ArrayList<Item> pick(ArrayList<Coordinates> tilesSelection, Board board) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException;
+    public abstract void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException;
 
     /**
      *

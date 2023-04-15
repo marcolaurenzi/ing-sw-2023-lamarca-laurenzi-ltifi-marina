@@ -18,16 +18,7 @@ public class PlayerStateWaiting extends PlayerState{
      * @throws PlayerIsWaitingException
      */
     @Override
-    public void select(ArrayList<Coordinates> tilesSelection, Board board, int i, int j) throws PlayerIsWaitingException {
-        throw new PlayerIsWaitingException();
-    }
-
-    /**
-     *
-     * @throws PlayerIsWaitingException
-     */
-    @Override
-    public ArrayList<Item> pick(ArrayList<Coordinates> tilesSelection, Board board) throws PlayerIsWaitingException{
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws PlayerIsWaitingException{
         throw new PlayerIsWaitingException();
     }
 

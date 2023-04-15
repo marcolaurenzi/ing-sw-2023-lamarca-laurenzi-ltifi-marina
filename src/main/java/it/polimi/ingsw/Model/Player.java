@@ -22,7 +22,7 @@ public class Player {
     private PlayerState state;
     private final Bookshelf bookshelf;
     private final PersonalGoal personalGoal;
-    private boolean[] isCommonGoalAlreadyAchieved;
+    private final boolean[] isCommonGoalAlreadyAchieved;
     private final Game game;
     /* ************************************************************************************************************
      *                          END OF ATTRIBUTES DECLARATION
@@ -133,49 +133,18 @@ public class Player {
     }
 
     /**
-     * this method initialize a new clean selection. It is called by the controller when the player selects
-     * the first tile
-     */
-    public void initializeSelection() {
-        tilesSelection = new ArrayList<>(3);
-    }
-
-    /**
-     * This method adds the coordinate i, j to the selection. It is called by the controller
-     * when the player selects a tile
-     * @param board the game board
-     * @param i the x coordinate of the tile to select
-     * @param j the y coordinate of the tile to select
-     */
-    public void select(Board board, int i, int j) throws SelectionIsFullException, PlayerIsWaitingException {
-            state.select(this.tilesSelection , board, i, j);
-    }
-
-    /**
-     * this method remove a coordinate from the tilesSelection. It is useful if the player changes is mind and want
-     * to select another tile
-     * @param i x coordinate of the tile to deselect
-     * @param j y coordinate of the tile to deselect
-     */
-    public void deSelect(int i, int j) {
-        for(int k = 0; k < 3; k++)
-            if(this.tilesSelection.get(k).getX() == i && this.tilesSelection.get(k).getY() == j) {
-                this.tilesSelection.remove(k);
-                break;
-            }
-    }
-
-    /**
-     * Assign the selected tiles to the pickedItems array. Only if the selection is the pick conditions are met
-     * @param board the board of the game
+     * This method take in input an ArrayList of coordinates from the controller indicating the tiles that the player
+     * want to pick and inserts the items in those tiles in the bookshelf in the order specified from the player. It
+     * also controls if it is possible to pick the selection according to the game's rules
+     *
      *
      * @throws PlayerIsWaitingException if the player state is waiting
      * @throws SelectionNotValidException if the selection is not valid AKA not all the selected tiles have at least one
      * side free or the selected tiles are not adjacent
      * @throws SelectionIsEmptyException if the selection is empty
      */
-    public void pick(Board board) throws PlayerIsWaitingException, SelectionNotValidException, SelectionIsEmptyException {
-        this.pickedItems = state.pick(this.tilesSelection, board);
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order) throws PlayerIsWaitingException, SelectionNotValidException, SelectionIsEmptyException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException {
+        state.pickAndInsertInBookshelf(tilesSelection, this.game.getBoard(), this.bookshelf, column, order);
     }
 
     /**
@@ -184,16 +153,6 @@ public class Player {
      */
     public void changeState (PlayerState state) {
         this.state = state;
-    }
-
-    /**
-     * insert the pickedItems in bookShelf
-     * @param column the column where the player wants to put the items
-     *
-     * @throws ColumnNotValidException if the items don't fit the column
-     */
-    public void insertPickInBookShelf (int column, int[] order) throws ColumnNotValidException, PlayerIsWaitingException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
-        this.state.insertPickInBookShelf(this.pickedItems, this.bookshelf, column, order);
     }
 
     /**

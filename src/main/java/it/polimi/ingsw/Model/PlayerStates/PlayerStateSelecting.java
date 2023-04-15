@@ -14,22 +14,15 @@ import java.util.ArrayList;
 public class PlayerStateSelecting extends PlayerState{
 
     /**
-     * This method adds the coordinate i, j to the selection. It is called by the controller
-     * when the player selects a tile
-     * @param board the game board
-     * @param i the x coordinate of the tile to select
-     * @param j the y coordinate of the tile to select
-     */
-    @Override
-    public void select(ArrayList<Coordinates> tilesSelection, Board board, int i, int j) throws SelectionIsFullException {
-        if(selectionIsFull(tilesSelection)) {
-            throw new SelectionIsFullException();
-        }
-        tilesSelection.add(new Coordinates(i, j));
-    }
-
-    /**
-     * Assign the selected tiles to the pickedItems array. Only if the selection is the pick conditions are met
+     * This method take in input an ArrayList of coordinates from the controller indicating the tiles that the player
+     * want to pick and inserts the items in those tiles in the bookshelf in the order specified from the player. It
+     * also controls if it is possible to pick the selection according to the game's rules.
+     * Explanation of the order:
+     * The controller specifies the order using an order array. The order array is an array of integer from 0 to
+     * tilesSelection.size()-1. The number n in a certain index i of the order array indicates that the player wants
+     * the tiles of index n in the tilesSelection in the index i of the orderedTilesSelection, for example:
+     * The player want picked the tiles in this order [CATS, TROPHIES, PLANTS] and the order is [1, 2, 0]. This means
+     * that the resulting ordered ArrayList inserted in the bookshelf will be : [TROPHIES, PLANTS, CATS]
      * @param board the board of the game
      *
      * @throws SelectionNotValidException if the selection is not valid AKA not all the selected tiles have at least one
@@ -37,26 +30,22 @@ public class PlayerStateSelecting extends PlayerState{
      * @throws SelectionIsEmptyException if the selection is empty
      */
     @Override
-    public ArrayList<Item> pick(ArrayList<Coordinates> tilesSelection, Board board) throws SelectionNotValidException, SelectionIsEmptyException {
-        ArrayList<Item> ret = new ArrayList<>(3);
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws SelectionNotValidException, SelectionIsEmptyException, PlayerIsWaitingException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException {
+        ArrayList<Item> itemsToInsert = new ArrayList<>(3);
 
-        if(tilesSelection.get(0) == null)
+        if (tilesSelection.get(0) == null)
             throw new SelectionIsEmptyException();
-        else if(isSelectionValid(tilesSelection, board))
+        else if (isSelectionValid(tilesSelection, board))
             throw new SelectionNotValidException();
+        else if (tilesSelection.size() != order.length)
+            throw new TilesSelectionSizeDifferentFromOrderLengthException();
 
         else {
-            for(int i = 0; i < 3; i++) {
-                if(tilesSelection.get(i) == null) {
-                    break;
-                }
-                else
-                    ret.add(board.drawItem(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()));
-            }
+            for (Coordinates coordinates : tilesSelection)
+                itemsToInsert.add(board.drawItem(coordinates.getX(), coordinates.getY()));
+
+            insertPickInBookShelf(itemsToInsert, bookshelf, column, order);
         }
-
-
-        return ret;
     }
 
     /**
@@ -67,20 +56,24 @@ public class PlayerStateSelecting extends PlayerState{
      */
     @Override
     public void insertPickInBookShelf(ArrayList<Item> pickedItems, Bookshelf bookshelf, int column, int[] order) throws ColumnNotValidException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
-        //checkin len of pickedItems
-        int pickedItemsLen = 0;
-        for(int i = 0; i < 3; i++) {
-            if(pickedItems.get(i) == null)
-                break;
-            else
-                pickedItemsLen++;
-        }
-
-        if(!isColumnValid(pickedItemsLen, column, bookshelf)) {
+        if(!isColumnValid(pickedItems.size(), column, bookshelf)) {
             throw new ColumnNotValidException();
         }
 
-        bookshelf.insert(column, pickedItems);
+        //reordering the ArrayList of picked items according to the order wanted to player
+        ArrayList<Item> orderedPickedItems = new ArrayList<>();
+
+        for(int i = 0; i < pickedItems.size(); i++)
+            orderedPickedItems.add(null);
+
+        int i = 0;
+        for (int n : order) {
+            orderedPickedItems.set(i, pickedItems.get(n));
+            i++;
+        }
+
+        //actual insert in bookshelf
+        bookshelf.insert(column, orderedPickedItems);
     }
 
 }
