@@ -13,15 +13,15 @@ import java.util.Set;
 public class CommonGoal8 extends CommonGoal {
 
     /**
-     * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
+     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
      * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
-     * @return the method returns true weather the Goals is Achieved and false otherwise
+     * @return the method returns true if the Goal is achieved and false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
 
-        // times stores how many types the algorithm already found
+        // typesFound stores how many types the algorithm already found
         Set<TypeEnum> typesFound = new HashSet<>();
 
         // number of valid columns found
@@ -31,15 +31,13 @@ public class CommonGoal8 extends CommonGoal {
             return false;
         }
 
-        for(int i = 0; i< bookshelf.getColumnDimension(); i++) {
-            for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
-                if(bookshelf.get(i,j) == null) {
+        for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            for(int j = 0; j < bookshelf.getRowDimension(); j++) {
+                if(bookshelf.get(i, j) == null) {
                     break; //no point in checking that column, a full column of different types needed
+                } else {
+                    typesFound.add(bookshelf.get(i, j).getType());
                 }
-                else {
-                    typesFound.add(bookshelf.get(i,j).getType());
-                }
-
             }
             if(typesFound.size() == 6) {
                 validColumns++;

@@ -12,42 +12,40 @@ import java.util.Set;
  * One line can show the same or a different combination of the other line.
  */
 public class CommonGoal9 extends CommonGoal {
+    private static final int NUM_TYPES_REQUIRED = 5;
 
     /**
-     * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
+     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
      * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
      *
      * @return the method returns true weather the Goals is Achieved and false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
-
-        // times stores how many types the algorithm already found
+        // types stores how many types the algorithm already found
         Set<TypeEnum> typesFound = new HashSet<>();
 
-        // number of valid columns found
-        int validRows = 0;
+        // number of valid lines found
+        int validLines = 0;
 
-        if(bookshelf.isEmpty()) {
+        if (bookshelf.isEmpty()) {
             return false;
         }
 
-        for(int i = 0; i< bookshelf.getRowDimension(); i++) {
-            for(int j = 0; j < bookshelf.getColumnDimension(); j++) {
-                if(bookshelf.get(i,j) == null) {
-                    break; //no point in checking that row, a full row of different types needed
+        for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            for (int j = 0; j < bookshelf.getRowDimension(); j++) {
+                if (bookshelf.get(i, j) == null) {
+                    break; //no point in checking that line, a full line of different types needed
+                } else {
+                    typesFound.add(bookshelf.get(i, j).getType());
                 }
-                else {
-                    typesFound.add(bookshelf.get(i,j).getType());
-                }
-
             }
-            if(typesFound.size() == 5) {
-                validRows++;
+            if (typesFound.size() == NUM_TYPES_REQUIRED) {
+                validLines++;
                 typesFound.clear();
             }
         }
 
-        return validRows >= 2;
+        return validLines >= 2;
     }
 }
