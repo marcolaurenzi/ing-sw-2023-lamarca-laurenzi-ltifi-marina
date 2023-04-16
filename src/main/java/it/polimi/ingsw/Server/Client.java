@@ -19,8 +19,8 @@ public class Client {
             System.out.println(dis.readUTF());
 
             String serverResponse = dis.readUTF();
+            System.out.println(serverResponse);
             if(serverResponse.equals("Server has created a new game, please insert the number of players: ")) {
-                System.out.println(serverResponse);
                 String numPlayers = scn.nextLine();
                 while(Integer.parseInt(numPlayers) > 4 || Integer.parseInt(numPlayers) < 2){
                     System.out.println("Please insert a number between 2 and 4");
