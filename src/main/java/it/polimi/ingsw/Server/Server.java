@@ -15,24 +15,25 @@ public class Server {
     static Game currentGame = null;
     static Integer currentGameId = 0;
     public static void main(String[] args) throws IOException {
+
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(59090);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        //statement that listens for incoming connections
         while (true) {
             Socket s = null;
             try {
-
                 s = serverSocket.accept();
-
                 DataInputStream dis = new DataInputStream(s.getInputStream());
                 DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                 System.out.println("New client connected");
                 System.out.println("Assign new thread for this client");
 
-
+                //call a new thread whenever a new client connects
                 Thread t = new ClientHandler(s, dis, dos);
                 t.start();
             } catch (IOException e) {

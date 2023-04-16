@@ -12,7 +12,6 @@ import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.GameState.GameStateStarting;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Game {
@@ -173,6 +172,10 @@ public class Game {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public String getId() {
+        return gameID;
     }
 
     /* ************************************************************************************************************
