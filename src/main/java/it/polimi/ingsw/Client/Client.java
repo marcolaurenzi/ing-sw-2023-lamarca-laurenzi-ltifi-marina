@@ -9,13 +9,12 @@ public class Client {
     static NetworkHandler networkHandler = new NetworkHandler();
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-
     public static void main(String[] args) throws IOException {
         networkHandler.createSocket();
-        String received;
 
         while(true) {
-            received = networkHandler.receiveFromServer();
+
+            String received = networkHandler.receiveFromServer();
             System.out.println(received);
 
             switch (received) {
@@ -32,13 +31,14 @@ public class Client {
 
     }
 
+    /**
+     * This method sends the username to the server
+     * @throws IOException if the username is already in use
+     */
     public static void sendUsername() throws IOException {
 
         String playerId = reader.readLine();
         networkHandler.sendToServer(playerId);
-
-        // ack message
-        //System.err.println(networkHandler.receiveFromServer());
 
         String received = networkHandler.receiveFromServer();
 
@@ -48,9 +48,6 @@ public class Client {
             playerId = reader.readLine();
             networkHandler.sendToServer(playerId);
 
-            // ack message
-            received = networkHandler.receiveFromServer();
-            System.err.println(received);
         }
 
         // availability message
@@ -58,6 +55,11 @@ public class Client {
 
     }
 
+
+    /**
+     * This method sends the number of players to the server
+     * @throws IOException if the number of players is not valid
+     */
     private static void sendNumberOfPlayers() throws IOException {
 
         Integer numberOfPlayers = Integer.parseInt(reader.readLine());

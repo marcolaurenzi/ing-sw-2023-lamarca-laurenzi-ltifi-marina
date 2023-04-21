@@ -49,7 +49,7 @@ public class ClientHandler extends Thread {
                 } else {
                     Server.currentGame.addPlayer(playerId);
                     socketOutput.writeUTF("Server has found a game" +
-                            "\nGame ID: " + game.getId() +
+                            "\nGame ID: " + Server.currentGame.getId() +
                             "\nMax number of players: " + Server.currentGame.getMaxPlayers() +
                             "\nPlayers already in the game: " + Server.currentGame.getPlayers().size());
                 }
@@ -62,6 +62,7 @@ public class ClientHandler extends Thread {
                     socketOutput.writeUTF("Please wait the start of the Game");
                 }
             }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (MaxNumberOfPlayersException e) {
@@ -93,7 +94,7 @@ public class ClientHandler extends Thread {
         }
     }
 
-    public void askForUsername() throws IOException {
+    public String askForUsername() throws IOException {
 
         socketOutput.writeUTF("Insert username: ");
         playerId = socketInput.readUTF();
@@ -116,6 +117,7 @@ public class ClientHandler extends Thread {
 
         // confirmation message
         socketOutput.writeUTF("Available username");
+        return playerId;
     }
 
 
@@ -134,4 +136,5 @@ public class ClientHandler extends Thread {
         return numPlayers;
 
     }
+
 }
