@@ -29,7 +29,9 @@ public class ClientHandler extends Thread {
             askForUsername();
 
             synchronized (currentGameLock) {
-                //if there is no game running or all the other games are already full, create a new game and ask the number of players to the first client
+
+                //if there is no game running or all the other games are already full,
+                // create a new game and ask the number of players to the first client
                 if (Server.currentGame == null) {
 
                     int numPlayers = askForNumberOfPlayers();
@@ -40,20 +42,20 @@ public class ClientHandler extends Thread {
                     Server.currentGameId++;
                     Server.games.add(game);
 
-                    socketOutput.writeUTF("Server has created a game, " +
+                    socketOutput.writeUTF("Server has created a game" +
                             "\nGame ID: " + game.getId() +
                             "\nMax number of players: " + numPlayers +
-                            "\nPlayers already in the game: " + Server.currentGame.getPlayers().size() +
-                            "\nPlease wait the start of the game");
+                            "\nPlayers already in the game: " + Server.currentGame.getPlayers().size());
                 } else {
                     Server.currentGame.addPlayer(playerId);
-                    socketOutput.writeUTF("Server has found a game, " +
+                    socketOutput.writeUTF("Server has found a game" +
                             "\nGame ID: " + game.getId() +
                             "\nMax number of players: " + Server.currentGame.getMaxPlayers() +
                             "\nPlayers already in the game: " + Server.currentGame.getPlayers().size());
                 }
                 if(Server.currentGame.getPlayers().size() == Server.currentGame.getMaxPlayers()) {
                     Server.currentGame.startGame();
+                    System.out.println("Game starting...");
                     Server.currentGame = null;
                 }
                 else {
@@ -98,7 +100,7 @@ public class ClientHandler extends Thread {
         System.err.println("Id received: " + playerId);
 
         // ack message
-        socketOutput.writeUTF("Server correctly received you id");
+        //socketOutput.writeUTF("Server correctly received you id");
 
         while(Server.alreadyUsedPlayerIds.contains(playerId)) {
 
@@ -107,7 +109,7 @@ public class ClientHandler extends Thread {
             System.err.println("Id received: " + playerId);
 
             // ack message
-            socketOutput.writeUTF("Server correctly received you id");
+            //socketOutput.writeUTF("Server correctly received you id");
         }
 
         Server.alreadyUsedPlayerIds.add(playerId);
@@ -119,7 +121,7 @@ public class ClientHandler extends Thread {
 
     public int askForNumberOfPlayers() throws IOException {
 
-        socketOutput.writeUTF("Server will create a new game, insert number of players: ");
+        socketOutput.writeUTF("Server has created a new game, insert number of players: ");
         int numPlayers = Integer.parseInt(socketInput.readUTF());
         while (numPlayers > 4 || numPlayers < 2) {
             socketOutput.writeUTF("Invalid number of players, please insert a number between 2 and 4");

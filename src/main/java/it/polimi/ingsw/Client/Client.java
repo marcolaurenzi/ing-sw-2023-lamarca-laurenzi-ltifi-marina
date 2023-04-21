@@ -38,7 +38,7 @@ public class Client {
         networkHandler.sendToServer(playerId);
 
         // ack message
-        System.err.println(networkHandler.receiveFromServer());
+        //System.err.println(networkHandler.receiveFromServer());
 
         String received = networkHandler.receiveFromServer();
 
@@ -61,9 +61,7 @@ public class Client {
     private static void sendNumberOfPlayers() throws IOException {
 
         Integer numberOfPlayers = Integer.parseInt(reader.readLine());
-
         networkHandler.sendToServer(numberOfPlayers.toString());
-        System.out.println("mando " + numberOfPlayers);
 
         // ricevo valid
         String received = networkHandler.receiveFromServer();
