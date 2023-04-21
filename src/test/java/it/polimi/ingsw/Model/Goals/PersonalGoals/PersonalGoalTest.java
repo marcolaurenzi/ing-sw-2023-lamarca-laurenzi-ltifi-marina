@@ -2,7 +2,7 @@ package it.polimi.ingsw.Model.Goals.PersonalGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Exceptions.WrongConfigurationException;
-import it.polimi.ingsw.Model.Utils;
+import it.polimi.ingsw.Utils.Utils;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 

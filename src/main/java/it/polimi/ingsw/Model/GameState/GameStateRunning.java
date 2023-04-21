@@ -10,7 +10,12 @@ public class GameStateRunning implements GameState {
     @Override
     public int nextPlayer(Game game, int currentPlayer, ArrayList<Player> players) {
         if(players.get(currentPlayer).getBookshelf().isFull()) {
-            game.setGameState(new GameStateLastTurn());
+            if(players.get(currentPlayer).equals(players.get(players.size()-1))) {
+                game.setGameState(new GameStateFinished());
+            }
+            else {
+                game.setGameState(new GameStateLastTurn());
+            }
         }
         return (currentPlayer + 1) % players.size();
     }

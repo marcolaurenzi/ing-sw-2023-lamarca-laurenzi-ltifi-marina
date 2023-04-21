@@ -16,7 +16,8 @@ public class Player {
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
     private final String playerID;
-    private int points;
+    private int totalPoints;
+    private int commonGoalPoints;
     private ArrayList<Coordinates> tilesSelection;
     private ArrayList<Item> pickedItems;
     private PlayerState state;
@@ -38,7 +39,7 @@ public class Player {
     public Player(String playerID, Game game) {
         this.playerID = playerID;
         this.game = game;
-        points = 0;
+        totalPoints = 0;
         bookshelf = new Bookshelf();
         personalGoal = null;
         game.getPersonalGoalDeck().draw();
@@ -143,7 +144,7 @@ public class Player {
      * side free or the selected tiles are not adjacent
      * @throws SelectionIsEmptyException if the selection is empty
      */
-    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order) throws PlayerIsWaitingException, SelectionNotValidException, SelectionIsEmptyException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException {
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order) throws PlayerIsWaitingException, SelectionNotValidException, SelectionIsEmptyException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, WrongConfigurationException {
         state.pickAndInsertInBookshelf(tilesSelection, this.game.getBoard(), this.bookshelf, column, order);
     }
 
@@ -157,31 +158,34 @@ public class Player {
 
     /**
      * This method is called at the end of every turn of a player and checks if one of the two common goal of the game
-     * is achieved. If this is the case it updates the points and set isCommonGoalAlreadyAchieved to true so the player
-     * can't achieve again the same commonGoal
+     * and checks if any other CommonGoal is achieved, if this is the ase updates the commonGoalsPoints attribute, if it's not, it just sums 0
+     * @return common goals points already achieved plus those just achieved
      */
-    public void getRewardCommonGoals() {
+    private int getRewardCommonGoals() {
+        int temp = 0;
         if(!this.isCommonGoalAlreadyAchieved[0]) {
             if(game.getCommonGoalPointStacks()[0].getCommonGoal().isAchieved(this.bookshelf)) {
-                points += game.getCommonGoalPointStacks()[0].draw();
                 this.isCommonGoalAlreadyAchieved[0] = true;
+                temp += game.getCommonGoalPointStacks()[0].draw();
+
             }
         }
 
         if(!this.isCommonGoalAlreadyAchieved[1]) {
             if(game.getCommonGoalPointStacks()[1].getCommonGoal().isAchieved(this.bookshelf)) {
-                points += game.getCommonGoalPointStacks()[1].draw();
                 this.isCommonGoalAlreadyAchieved[1] = true;
+                temp += game.getCommonGoalPointStacks()[1].draw();
             }
         }
+        return commonGoalPoints += temp;
     }
 
     /**
-     * This method is called at the end of the game. Updates the points counting the personalGoal points and the
+     * This method is called at the end of every turn. Updates the points counting personalGoal points, commonGoal ponts  and the
      * generalGoal points
      */
-    public void getRewardFinalGoals() throws WrongConfigurationException {
-        points += getRewardPersonalGoal() + getRewardGeneralGoal();
+    public void getRewardGoals() throws WrongConfigurationException {
+        totalPoints = getRewardPersonalGoal() + getRewardGeneralGoal() + getRewardCommonGoals();
     }
 
     /**
@@ -190,7 +194,6 @@ public class Player {
      */
     public void applyCommand(String comando) {
         switch (comando) {
-
         }
     }
 
@@ -205,6 +208,10 @@ public class Player {
 
     public Bookshelf getBookshelf() {
         return bookshelf;
+    }
+
+    public void endTurn() throws WrongConfigurationException {
+        getRewardGoals();
     }
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS

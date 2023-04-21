@@ -13,6 +13,8 @@ import it.polimi.ingsw.Model.Matrix;
  */
 public abstract class CommonGoal {
 
+    boolean achieved;
+
     /**
      *
      * @param bookshelf

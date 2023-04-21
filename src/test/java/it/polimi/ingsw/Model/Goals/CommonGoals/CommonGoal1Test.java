@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Utils.Utils;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.io.IOException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CommonGoal1Test {
     final CommonGoal goal = new CommonGoal01(4, 4);

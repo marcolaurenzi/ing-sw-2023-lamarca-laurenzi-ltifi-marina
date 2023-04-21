@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
-import it.polimi.ingsw.Model.Utils;
 
 import java.util.*;
 

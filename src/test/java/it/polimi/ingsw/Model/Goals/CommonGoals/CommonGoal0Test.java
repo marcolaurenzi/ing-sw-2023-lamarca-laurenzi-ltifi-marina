@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
+import it.polimi.ingsw.Utils.Utils;
 import org.junit.Test;
 import it.polimi.ingsw.Model.*;
 

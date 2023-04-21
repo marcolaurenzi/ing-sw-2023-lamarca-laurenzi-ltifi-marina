@@ -1,7 +1,9 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import it.polimi.ingsw.Model.Board;
+import it.polimi.ingsw.Model.Bookshelf;
 
 import java.io.FileReader;
 import java.io.FileWriter;

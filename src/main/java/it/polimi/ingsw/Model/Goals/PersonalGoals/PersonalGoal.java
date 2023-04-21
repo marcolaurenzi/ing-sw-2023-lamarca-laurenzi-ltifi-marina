@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.Goals.PersonalGoals;
 
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.WrongConfigurationException;
+import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
 

@@ -5,11 +5,13 @@ import it.polimi.ingsw.Model.Decks.Deck;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
 import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
+import it.polimi.ingsw.Model.Exceptions.FinishedGameException;
 import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
 import it.polimi.ingsw.Model.GameState.GameState;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.GameState.GameStateStarting;
+import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -86,7 +88,7 @@ public class Game {
     /**
      *
      */
-    public void nextPlayer() { currentPlayer = gameState.nextPlayer(this, currentPlayer, players); }
+    public void nextPlayer() throws FinishedGameException { currentPlayer = gameState.nextPlayer(this, currentPlayer, players); }
 
     /**
      *
