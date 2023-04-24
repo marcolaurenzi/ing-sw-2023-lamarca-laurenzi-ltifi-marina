@@ -23,7 +23,7 @@ public class Game {
      ************************************************************************************************************ */
 
     private GameState gameState;
-    final String gameID;
+    final int gameID;
     private ItemDeck itemDeck;
     private CommonGoalDeck commonGoalDeck;
     private PersonalGoalDeck personalGoalDeck;
@@ -48,7 +48,7 @@ public class Game {
      * @throws MaxNumberOfPlayersException
      * @throws IOException
      */
-    public Game(String gameId, int maxPlayers) throws MaxNumberOfPlayersException, IOException {
+    public Game(int gameId, int maxPlayers) throws MaxNumberOfPlayersException, IOException {
         if(maxPlayers > 4 || maxPlayers < 2) {
             throw new MaxNumberOfPlayersException();
         }
@@ -184,7 +184,7 @@ public class Game {
         this.gameState = gameState;
     }
 
-    public String getId() {
+    public int getId() {
         return gameID;
     }
 

@@ -1,24 +1,23 @@
 package it.polimi.ingsw.Server;
 
-import it.polimi.ingsw.Model.Game;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.Socket;
+import java.rmi.*;
+import java.rmi.registry.*;
+
+import it.polimi.ingsw.Controller.Controller;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 
 public class Server {
-    static List<Game> games = new ArrayList<Game>();
-    static Game currentGame = null;
-    static Integer currentGameId = 0;
-    static Set<String> alreadyUsedPlayerIds = new HashSet<>();
+    public static Controller controller;
+    public static void main(String[] args) throws IOException, AlreadyBoundException {
+        controller = new Controller();
 
-    public static void main(String[] args) throws IOException {
+        Registry registry = LocateRegistry.createRegistry(1099);
+        registry.bind("controller", controller);
 
         ServerSocket serverSocket = null;
         try {
@@ -27,7 +26,6 @@ public class Server {
             throw new RuntimeException(e);
         }
 
-        //statement that listens for incoming connections
         while (true) {
             Socket s = null;
             try {
@@ -44,6 +42,5 @@ public class Server {
                 throw new RuntimeException(e);
             }
         }
-
     }
 }
