@@ -6,31 +6,28 @@ import it.polimi.ingsw.Model.Game;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
     static List<Game> games = new ArrayList<>();
     static Game currentGame = null;
     static Integer currentGameId = 0;
     static String currentGameFirstPlayerId = null;
-    static Set<String> alreadyUsedPlayerIds = new HashSet<>();
+    static HashMap<String, Game> alreadyUsedPlayerIds = new HashMap<>();
 
     //maybe is useful
     public static Set<String> getAlreadyUsedPlayerIds() {
-        return alreadyUsedPlayerIds;
+        return alreadyUsedPlayerIds.keySet();
     }
 
     public Controller() throws RemoteException {
     }
 
     public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
-        if(alreadyUsedPlayerIds.contains(playerId))
+        if(getAlreadyUsedPlayerIds().contains(playerId))
             throw new PlayerIdAlreadyInUseException();
 
-        else alreadyUsedPlayerIds.add(playerId);
+        else alreadyUsedPlayerIds.put(playerId, null);
     }
 
     public synchronized int addPlayerToCreatedGame(String playerId) throws CreateNewGameException, AlreadyStartedGameException {
@@ -40,6 +37,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         else {
             int currentGameId = currentGame.getId();
             currentGame.addPlayer(playerId);
+            alreadyUsedPlayerIds.replace(playerId, currentGame);
             if(currentGame.getPlayers().size() == currentGame.getMaxPlayers())
                 currentGame = null;
 
@@ -53,6 +51,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         game.initializeGame();
         game.addPlayer(playerId);
         currentGame = game;
+        alreadyUsedPlayerIds.replace(playerId, currentGame);
         currentGameId++;
         games.add(game);
 
