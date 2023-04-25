@@ -14,17 +14,13 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     static Integer currentGameId = 0;
     static String currentGameFirstPlayerId = null;
     static HashMap<String, Game> alreadyUsedPlayerIds = new HashMap<>();
-
-    //maybe is useful
-    public static Set<String> getAlreadyUsedPlayerIds() {
-        return alreadyUsedPlayerIds.keySet();
-    }
+    
 
     public Controller() throws RemoteException {
     }
 
     public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
-        if(getAlreadyUsedPlayerIds().contains(playerId))
+        if(alreadyUsedPlayerIds.keySet().contains(playerId))
             throw new PlayerIdAlreadyInUseException();
 
         else alreadyUsedPlayerIds.put(playerId, null);
