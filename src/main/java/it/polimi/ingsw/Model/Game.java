@@ -31,9 +31,6 @@ public class Game {
     final int maxPlayers;
     private int currentPlayer;
     private ArrayList<Player> players;
-    public Board getBoard() {
-        return board;
-    }
     private final Board board;
 
     /* ************************************************************************************************************
@@ -173,6 +170,9 @@ public class Game {
     }
     public ArrayList<Player> getPlayers(){
         return players;
+    }
+    public Board getBoard() {
+        return board;
     }
 
     /* ************************************************************************************************************

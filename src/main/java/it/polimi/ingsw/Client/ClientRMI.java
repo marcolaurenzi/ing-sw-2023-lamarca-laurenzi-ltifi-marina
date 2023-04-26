@@ -2,12 +2,14 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Controller.ControllerRemoteInterface;
 import it.polimi.ingsw.Model.Exceptions.*;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.*;
 
 
-public class ClientRMI implements Client{
+public class ClientRMI implements Client {
+
     ControllerRemoteInterface controller;
     public ClientRMI() throws MalformedURLException, NotBoundException, RemoteException {
         controller = (ControllerRemoteInterface ) Naming.lookup("rmi://localhost/controller");

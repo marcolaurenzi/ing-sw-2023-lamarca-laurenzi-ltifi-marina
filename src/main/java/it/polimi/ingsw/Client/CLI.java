@@ -2,13 +2,20 @@ package it.polimi.ingsw.Client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import it.polimi.ingsw.Model.Exceptions.*;
+import java.util.List;
 
-public class CLI {
+import it.polimi.ingsw.Model.Board;
+import it.polimi.ingsw.Model.Bookshelf;
+import it.polimi.ingsw.Model.CommonGoalPointStack;
+import it.polimi.ingsw.Model.Exceptions.*;
+import it.polimi.ingsw.Utils.GameStatus;
+
+public class CLI implements RemoteObserver {
     static BufferedReader reader;
     static int gameId;
     static Client client;
     static String playerId;
+    static GameStatus game;
 
     public static void connectToServer() throws IOException {
         String userInput;
@@ -100,6 +107,53 @@ public class CLI {
             }
         }
     }
+
+    @Override
+    public void update(Object observable, GameStatus game) {
+        this.game = game;
+        printBookshelf();
+        printStack();
+        printBoard();
+        printPoints();
+        if(game.getPlayers().get(game.getCurrentPlayer()).equals(playerId)) {
+            System.out.println("It's your turn!");
+            playTurn();
+        }
+
+        else{
+            System.out.println("It's " + game.getCurrentPlayer() + "'s turn");
+        }
+    }
+
+    private void playTurn() {
+        //TODO
+    }
+
+    private void printPoints() {
+        for(Integer i : game.getPoints()) {
+            //TODO print points
+        }
+    }
+
+    private void printBoard() {
+        Board board = game.getBoard();
+        //TODO print board
+    }
+
+    private void printStack() {
+        CommonGoalPointStack[] stack = game.getCommonGoalPointStacks();
+        for(int i = 0; i < stack.length; i++) {
+            //TODO print stack
+        }
+    }
+
+    private void printBookshelf() {
+        List<Bookshelf> bookshelfList = game.getBookshelves();
+        for(Bookshelf bookshelf : bookshelfList) {
+            //TODO print bookshelf
+        }
+    }
+
     public static void main(String[] args) throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException {
         reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Welcome to MyShelfie!");
