@@ -54,7 +54,7 @@ public class ClientSocket implements Client{
             }
         }
 
-        //return
+        // todo migliorare il cast
         return ((Double)response.getReturnValue()).intValue();
     }
 

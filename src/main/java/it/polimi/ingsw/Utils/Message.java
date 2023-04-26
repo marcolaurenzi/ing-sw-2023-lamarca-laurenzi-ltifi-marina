@@ -29,7 +29,5 @@ public class Message {
         return method;
     }
     public Object getReturnValue() { return returnValue; }
-    public List<Object> getParameters() {
-        return parameters;
-    }
+    public List<Object> getParameters() {return parameters; }
 }

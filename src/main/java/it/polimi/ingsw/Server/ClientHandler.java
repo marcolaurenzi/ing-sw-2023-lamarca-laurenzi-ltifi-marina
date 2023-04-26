@@ -12,11 +12,9 @@ import java.net.Socket;
 
 public class ClientHandler extends Thread {
 
-
     final Socket socket;
     final DataInputStream socketDataInput;
     final DataOutputStream socketDataOutput;
-
     final Gson gson;
 
     public ClientHandler(Socket socket, DataInputStream socketDataInput, DataOutputStream socketDataOutput){
@@ -85,7 +83,7 @@ public class ClientHandler extends Thread {
                 switch (received.getMethod()) {
                     case choosePlayerId -> choosePlayerId((String)received.getParameters().get(0));
                     case addPlayerToCreatedGame -> addPlayerToCreatedGame((String)received.getParameters().get(0));
-                    //IMPORTANT gson sees all numbers as Double, so i have to cast it to Double and then use intValue()
+                    //IMPORTANT gson sees all numbers as Double, so I have to cast it to Double and then use intValue()
                     case createNewGameAndAddPlayer -> createNewGameAndAddPlayer((String)received.getParameters().get(0), ((Double)received.getParameters().get(1)).intValue());
                 }
 
