@@ -12,17 +12,17 @@ class GameTest {
 
     @Test
     void constructorThrowsNumberOfPlayerException() {
-        assertThrows(MaxNumberOfPlayersException.class, () -> new Game("3", 5));
+        assertThrows(MaxNumberOfPlayersException.class, () -> new Game(3, 5));
     }
 
     @Test
     void constructorThrowsNoException() {
-        assertDoesNotThrow(() -> new Game("3", 3));
+        assertDoesNotThrow(() -> new Game(3, 3));
     }
 
     @Test
     void addFirstPlayer() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException {
-        Game game = new Game("1", 4);
+        Game game = new Game(1, 4);
 
         String playerID = "54336";
         game.addPlayer(playerID);
@@ -32,7 +32,6 @@ class GameTest {
     @Test
     void testAddPlayer() {
     }
-
 
     @Test
     void initializeBoard() {
