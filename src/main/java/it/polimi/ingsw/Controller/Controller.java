@@ -74,7 +74,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             System.exit(-1);
         }
     }
-    public static void assignTurn(int game) throws RemoteException, MissingPlayerException {
+    public static void assignTurn(int game) throws RemoteException, MissingPlayerException, VoidBoardTileException {
         listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
     }
     private static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {

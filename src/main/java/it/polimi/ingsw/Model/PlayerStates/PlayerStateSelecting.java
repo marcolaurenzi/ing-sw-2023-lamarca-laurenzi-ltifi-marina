@@ -30,7 +30,7 @@ public class PlayerStateSelecting extends PlayerState{
      * @throws SelectionIsEmptyException if the selection is empty
      */
     @Override
-    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws SelectionNotValidException, SelectionIsEmptyException, PlayerIsWaitingException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException {
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws SelectionNotValidException, SelectionIsEmptyException, PlayerIsWaitingException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException {
         ArrayList<Item> itemsToInsert = new ArrayList<>(3);
 
         if (tilesSelection.get(0) == null)

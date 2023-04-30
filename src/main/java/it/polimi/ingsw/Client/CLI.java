@@ -128,7 +128,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
             System.out.println("It's " + game.getCurrentPlayer() + "'s turn");
         }
     }*/
-    public void playTurn() {
+    public void playTurn() throws VoidBoardTileException {
         System.out.println("write playturn to play");
         synchronized (scanner) {
             System.out.println("It's your turn!");
@@ -168,7 +168,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         String regex = "\\(\\s*\\d+\\s*;\\s*\\d+\\s*\\)";
         return input.matches(regex);
     }
-    protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) {
+    protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
         return (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
     }
     private Boolean areAllSameColumnAndAdjacents(ArrayList<Coordinates> tilesSelection) {
@@ -227,7 +227,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
 
         return ret;
     }
-    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) {
+    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
         Boolean ret = true;
 
         for(int i = 0; i < tilesSelection.size(); i++) {

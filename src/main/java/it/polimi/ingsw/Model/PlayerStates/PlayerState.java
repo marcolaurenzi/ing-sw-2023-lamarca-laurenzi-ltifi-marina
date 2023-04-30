@@ -80,7 +80,7 @@ public abstract class PlayerState {
      *
      * @return
      */
-    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) {
+    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
         Boolean ret = true;
 
         for(int i = 0; i < 3; i++) {
@@ -102,7 +102,7 @@ public abstract class PlayerState {
      *
      * @return
      */
-    protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) {
+    protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
         return (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
     }
 
@@ -136,7 +136,7 @@ public abstract class PlayerState {
      * @throws SelectionIsEmptyException
      * @throws SelectionNotValidException
      */
-    public abstract void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException;
+    public abstract void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, Board board, Bookshelf bookshelf, int column, int[] order) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException;
 
     /**
      *

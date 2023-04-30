@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ItemDeck implements Deck<Item> {
 
-    List<Item> deck;
+    private List<Item> deck;
 
     /**
      *
@@ -49,5 +49,9 @@ public class ItemDeck implements Deck<Item> {
         }
 
         this.shuffle();
+    }
+
+    public List<Item> getDeck() {
+        return deck;
     }
 }

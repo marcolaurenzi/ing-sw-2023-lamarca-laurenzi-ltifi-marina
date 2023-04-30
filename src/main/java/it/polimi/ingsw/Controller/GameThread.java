@@ -2,6 +2,7 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Exceptions.FinishedGameException;
 import it.polimi.ingsw.Model.Exceptions.MissingPlayerException;
+import it.polimi.ingsw.Model.Exceptions.VoidBoardTileException;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
 
@@ -29,6 +30,8 @@ public class GameThread extends Thread{
             } catch (MissingPlayerException e) {
                 throw new RuntimeException(e);
             } catch (FinishedGameException e) {
+                throw new RuntimeException(e);
+            } catch (VoidBoardTileException e) {
                 throw new RuntimeException(e);
             }
         }

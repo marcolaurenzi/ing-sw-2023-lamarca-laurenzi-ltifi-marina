@@ -44,6 +44,7 @@ public class Game {
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
         board = Utils.loadBoardFromFile("src/main/resources/configurations/BoardConfiguration.JSON");
+        board.setItemDeck(itemDeck);
         this.initializeGame();
     }
 
@@ -185,8 +186,7 @@ public class Game {
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
-<<<<<<< Updated upstream
-=======
+
     public ArrayList<Bookshelf> getBookshelves(){
         ArrayList<Bookshelf> bookshelves = new ArrayList<>();
         for (Player player : players) {
@@ -217,10 +217,6 @@ public class Game {
         }
         return playersIds;
     }
-    public int getId() {
-        return gameID;
-    }
->>>>>>> Stashed changes
 
     /* ************************************************************************************************************
      *                          END OF SETTER METHODS

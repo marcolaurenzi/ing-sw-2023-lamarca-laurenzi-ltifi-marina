@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Model.Decks.ItemDeck;
+import it.polimi.ingsw.Model.Exceptions.VoidBoardTileException;
+
 import java.io.Serializable;
 
 /**
@@ -11,18 +14,23 @@ public class Board implements Serializable {
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
     private Matrix<BoardTile> gameBoard;
+    private ItemDeck itemDeck;
 
     /* ************************************************************************************************************
      *                          END OF ATTRIBUTES DECLARATION
      *                          START OF CUSTOM METHODS
      ************************************************************************************************************ */
+
     /**
      * This method is used to determine how many free sides the single tile on the board has
      * @param x is the first axis of the board representing the row of the tile
      * @param y is the second axis of the board representing the column of the tile
      * @return returns the number of free sides in the range (0 to 4)
      */
-    public int hasFree(int x, int y) {
+    public int hasFree(int x, int y) throws VoidBoardTileException {
+        if(gameBoard.get(x,y).isEmpty() || gameBoard.get(x,y).getNumberOfPlayersSign() == 5) {
+            throw new VoidBoardTileException();
+        }
         int freeSides = 0;
         for(int i = x - 1; i < x + 2;i += 2){
             if(i < 0) continue;
@@ -46,6 +54,11 @@ public class Board implements Serializable {
      */
     private void placeItem(Item itemToPlace, int x, int y){
         this.gameBoard.get(x, y).placeItem(itemToPlace);
+    }
+
+    private void removeItem(int x, int y){
+        itemDeck.getDeck().add(gameBoard.get(x, y).getPlacedItem());
+        gameBoard.set(x, y, null);
     }
 
     /**
@@ -113,10 +126,22 @@ public class Board implements Serializable {
     public void refreshBoard(Game game){
         int rows = gameBoard.getColumnDimension();
         int columns = gameBoard.getRowDimension();
+
+        // empty the board
+        for(int i = 0; i<rows; i++) {
+            for(int j = 0; j<columns; j++) {
+                BoardTile curr = gameBoard.get(i,j);
+                if(curr != null) {
+                    removeItem(i,j);
+                }
+            }
+        }
+
+        // refill the board
         for(int i = 0; i < rows; i++) {
             for(int j = 0; j < columns; j++) {
                 BoardTile curr = gameBoard.get(i, j);
-                if(curr != null && curr.getNumberOfPlayersSign() <= game.getMaxPlayers()) {
+                if(curr.getNumberOfPlayersSign() <= game.getMaxPlayers()) {
                     gameBoard.get(i, j).placeItem(game.getItemDeck().draw());
                 }
             }
@@ -155,7 +180,7 @@ public class Board implements Serializable {
      * @return true if it's empty, false otherwise
      */
     public boolean isFreeSouth(int i,int j) {
-        return i == 5 ? true : gameBoard.get(i+1,j) == null;
+        return i == 8 ? true : gameBoard.get(i+1,j) == null;
     }
 
     /**
@@ -166,7 +191,7 @@ public class Board implements Serializable {
      * @return true if it's empty, false otherwise
      */
     public boolean isFreeEast(int i,int j) {
-        return j == 4 ? true : gameBoard.get(i,j+1) == null;
+        return j == 8 ? true : gameBoard.get(i,j+1) == null;
     }
 
     /**
@@ -192,4 +217,8 @@ public class Board implements Serializable {
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
      ************************************************************************************************************ */
+
+    public void setItemDeck(ItemDeck deck) {
+        this.itemDeck = deck;
+    }
 }
