@@ -48,4 +48,7 @@ public class CommonGoal9 extends CommonGoal {
 
         return validLines >= 2;
     }
+    public String printGoal() {
+        return "CommonGoal9";
+    }
 }

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serializable;
+
 /**
  * This class represents the single tile of the game board
  * It has methods to check the single tile content and to change it
  */
-public class BoardTile {
+public class BoardTile implements Serializable {
 
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION
@@ -89,6 +91,7 @@ public class BoardTile {
         }
     }
 
+
     /* ************************************************************************************************************
      *                          END OF CUSTOM METHODS
      *                          START OF GETTER METHODS
@@ -98,6 +101,8 @@ public class BoardTile {
     public int getNumberOfPlayersSign() {
         return numberOfPlayersSign;
     }
+    public Item getPlacedItem() {return placedItem; }
+
 
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS

@@ -4,5 +4,6 @@ public enum MethodNameEnum {
     choosePlayerId,
     addPlayerToCreatedGame,
     createNewGameAndAddPlayer,
+    addObserver,
 
 }

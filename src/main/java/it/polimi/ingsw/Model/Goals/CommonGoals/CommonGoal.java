@@ -1,7 +1,8 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
-import it.polimi.ingsw.Model.Matrix;
+
+import java.io.Serializable;
 
 /**
  * This class is an abstract class representing all the
@@ -11,7 +12,7 @@ import it.polimi.ingsw.Model.Matrix;
  * (based on the official ENG Rulebook file starting with number 0 from the top left corner
  * and finishing with number 11 in the bottom right corner)
  */
-public abstract class CommonGoal {
+public abstract class CommonGoal implements Serializable {
 
     boolean achieved;
 
@@ -31,4 +32,5 @@ public abstract class CommonGoal {
     public CommonGoal getCommonGoal(){
         return this;
     }
+    public abstract String printGoal();
 }

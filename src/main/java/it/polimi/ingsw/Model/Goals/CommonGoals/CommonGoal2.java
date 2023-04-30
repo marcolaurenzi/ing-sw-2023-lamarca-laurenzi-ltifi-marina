@@ -34,4 +34,7 @@ public class CommonGoal2 extends CommonGoal{
         }
         return true;
     }
+    public String printGoal() {
+        return "CommonGoal2";
+    }
 }

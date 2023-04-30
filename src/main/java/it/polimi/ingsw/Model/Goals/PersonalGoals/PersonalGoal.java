@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Exceptions.WrongConfigurationException;
 import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * This class is an abstract class representing all the
@@ -12,8 +13,7 @@ import java.io.IOException;
  * that gives it the isAchieved() method to check whether the
  * goal is achieved or not
  */
-public class PersonalGoal {
-
+public class PersonalGoal implements Serializable {
     private Bookshelf personalGoal;
 
     public PersonalGoal(int i) throws IOException {
@@ -58,5 +58,8 @@ public class PersonalGoal {
 
     public void setPersonalGoal(Bookshelf personalGoal) {
         this.personalGoal = personalGoal;
+    }
+    public Bookshelf getPersonalGoalBookshelf() {
+        return personalGoal;
     }
 }

@@ -1,9 +1,11 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serializable;
+
 /**
  * this class represents the game board of the game
  */
-public class Board {
+public class Board implements Serializable {
 
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION

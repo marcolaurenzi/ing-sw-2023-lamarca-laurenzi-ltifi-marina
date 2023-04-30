@@ -83,6 +83,8 @@ public class CommonGoal10 extends CommonGoal{
             }
         }
         return false;
-
+    }
+    public String printGoal() {
+        return "CommonGoal10";
     }
 }

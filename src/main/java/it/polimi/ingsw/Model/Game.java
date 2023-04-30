@@ -1,16 +1,13 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.CommonGoalDeck;
-import it.polimi.ingsw.Model.Decks.Deck;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
-import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
-import it.polimi.ingsw.Model.Exceptions.FinishedGameException;
-import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
-import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
+import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.GameState.GameState;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.GameState.GameStateStarting;
+import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
@@ -138,6 +135,10 @@ public class Game {
         }
     }
 
+    public void nextTurn() throws FinishedGameException {
+        currentPlayer = (currentPlayer + 1)%players.size();
+    }
+
     /* ************************************************************************************************************
      *                          END OF CUSTOM METHODS
      *                          START OF GETTER METHODS
@@ -151,7 +152,7 @@ public class Game {
         return itemDeck;
     }
 
-    public Deck getPersonalGoalDeck() {
+    public PersonalGoalDeck getPersonalGoalDeck() {
         return personalGoalDeck;
     }
 
@@ -184,6 +185,42 @@ public class Game {
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
+<<<<<<< Updated upstream
+=======
+    public ArrayList<Bookshelf> getBookshelves(){
+        ArrayList<Bookshelf> bookshelves = new ArrayList<>();
+        for (Player player : players) {
+            bookshelves.add(player.getBookshelf());
+        }
+        return bookshelves;
+    }
+    public PersonalGoal getPersonalGoal(String playerId) throws MissingPlayerException {
+        for(Player player : players) {
+            if(player.getPlayerID().equals(playerId)) {
+                return player.getPersonalGoal();
+            }
+        }
+        throw new MissingPlayerException();
+    }
+    public boolean[] getIsCommonGoalAchieved(String playerId) throws MissingPlayerException {
+        for(Player player : players) {
+            if(player.getPlayerID().equals(playerId)) {
+                return player.getIsCommonGoalAlreadyAchieved();
+            }
+        }
+        throw new MissingPlayerException();
+    }
+    public ArrayList<String> getPlayersId() {
+        ArrayList<String> playersIds = new ArrayList<>();
+        for(Player player : players) {
+            playersIds.add(player.getPlayerID());
+        }
+        return playersIds;
+    }
+    public int getId() {
+        return gameID;
+    }
+>>>>>>> Stashed changes
 
     /* ************************************************************************************************************
      *                          END OF SETTER METHODS

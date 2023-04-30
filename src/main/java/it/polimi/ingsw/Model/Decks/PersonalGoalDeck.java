@@ -21,7 +21,9 @@ public class PersonalGoalDeck implements Deck<PersonalGoal> {
 
     @Override
     public PersonalGoal draw() {
-        return deck.get(0);
+        PersonalGoal personalGoal = deck.get(0);
+        deck.remove(0);
+        return personalGoal;
     }
 
     /**

@@ -86,4 +86,7 @@ public class CommonGoal3 extends CommonGoal{
         }
         return count >= 2;
     }
+    public String printGoal() {
+        return "CommonGoal3";
+    }
 }

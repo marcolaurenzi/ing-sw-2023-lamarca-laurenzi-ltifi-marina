@@ -5,22 +5,24 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.CommonGoalPointStack;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameStatus {
+public class GameStatus implements Serializable {
     final int gameID;
     private CommonGoalPointStack[] commonGoalPointStacks;
+    private boolean[] isCommonGoalAlreadyAchieved;
     private PersonalGoal personalGoal;
-    private int currentPlayer;
+    private String currentPlayer;
     private ArrayList<String> players;
     private ArrayList<Integer> points;
     private ArrayList<Bookshelf> bookshelves;
     private final Board board;
-
-    public GameStatus(int gameID, CommonGoalPointStack[] commonGoalPointStacks, PersonalGoal personalGoal,
-                      int currentPlayer, ArrayList<String> players, ArrayList<Bookshelf> bookshelves, Board board) {
+    public GameStatus(int gameID, CommonGoalPointStack[] commonGoalPointStacks, boolean[] isCommonGoalAlreadyAchieved,PersonalGoal personalGoal,
+                      String currentPlayer, ArrayList<String> players, ArrayList<Bookshelf> bookshelves, Board board) {
         this.gameID = gameID;
         this.commonGoalPointStacks = commonGoalPointStacks;
+        this.isCommonGoalAlreadyAchieved = isCommonGoalAlreadyAchieved;
         this.personalGoal = personalGoal;
         this.currentPlayer = currentPlayer;
         this.players = players;
@@ -40,7 +42,7 @@ public class GameStatus {
         return personalGoal;
     }
 
-    public int getCurrentPlayer() {
+    public String getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -59,4 +61,8 @@ public class GameStatus {
     public Board getBoard() {
         return board;
     }
+    public boolean[] getIsCommonGoalAlreadyAchieved() {
+        return isCommonGoalAlreadyAchieved;
+    }
+
 }

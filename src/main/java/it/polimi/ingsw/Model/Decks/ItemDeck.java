@@ -29,7 +29,9 @@ public class ItemDeck implements Deck<Item> {
      */
     @Override
     public Item draw() {
-        return deck.get(0);
+        Item item = deck.get(0);
+        deck.remove(0);
+        return item;
     }
 
     /**

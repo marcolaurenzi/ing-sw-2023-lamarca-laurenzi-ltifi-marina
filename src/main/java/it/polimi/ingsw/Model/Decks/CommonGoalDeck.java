@@ -21,7 +21,9 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
 
     @Override
     public CommonGoal draw() {
-        return deck.get(0);
+        CommonGoal commonGoal = deck.get(0);
+        deck.remove(0);
+        return commonGoal;
     }
 
     /**

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serializable;
+
 /**
  * Matrix is the simplest possible implementation for a matrix of T type elements
  * @param <T> the generic element of the matrix
  */
-public class Matrix<T> {
+public class Matrix<T> implements Serializable {
     private final T[][] matrix;
     private final int columnDimension;
     private final int rowDimension;

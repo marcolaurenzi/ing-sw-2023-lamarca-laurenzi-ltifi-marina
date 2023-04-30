@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Server;
+
 import com.google.gson.Gson;
+import it.polimi.ingsw.Client.RemoteObserver;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.Message;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
@@ -74,7 +76,13 @@ public class ClientHandler extends Thread {
             socketDataOutput.writeUTF(gson.toJson(toSend));
         }
     }
+    private void addObserver(RemoteObserver observer, String playerId) throws IOException {
+        Message toSend;
 
+        Server.controller.addObserver(observer, playerId);
+        toSend = new Message(MessageTypeEnum.success, null, null, null, null);
+        socketDataOutput.writeUTF(gson.toJson(toSend));
+    }
     public void run() {
 
         while(true) {
@@ -85,6 +93,7 @@ public class ClientHandler extends Thread {
                     case addPlayerToCreatedGame -> addPlayerToCreatedGame((String)received.getParameters().get(0));
                     //IMPORTANT gson sees all numbers as Double, so I have to cast it to Double and then use intValue()
                     case createNewGameAndAddPlayer -> createNewGameAndAddPlayer((String)received.getParameters().get(0), ((Double)received.getParameters().get(1)).intValue());
+                    case addObserver -> addObserver((RemoteObserver)received.getParameters().get(0), ((String)received.getParameters().get(1)));
                 }
 
             } catch (IOException e) {

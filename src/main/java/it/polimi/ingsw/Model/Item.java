@@ -1,9 +1,11 @@
 package it.polimi.ingsw.Model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class Item {
+public class Item implements Serializable {
     private final TypeEnum type;
 
     public Item(TypeEnum type) {

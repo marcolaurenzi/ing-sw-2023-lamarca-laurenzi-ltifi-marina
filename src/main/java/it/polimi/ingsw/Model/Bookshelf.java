@@ -3,12 +3,13 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Model.Exceptions.PickDoesntFitColumnException;
 import it.polimi.ingsw.Model.Exceptions.PickedColumnOutOfBoundsException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * This class represents the BookSelf of the game, a 6x5 Matrix of int elements.
  */
-public class Bookshelf {
+public class Bookshelf implements Serializable {
 
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION

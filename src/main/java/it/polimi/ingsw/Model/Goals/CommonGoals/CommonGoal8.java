@@ -47,4 +47,7 @@ public class CommonGoal8 extends CommonGoal {
 
         return validColumns >= 2;
     }
+    public String printGoal() {
+        return "CommonGoal8";
+    }
 }

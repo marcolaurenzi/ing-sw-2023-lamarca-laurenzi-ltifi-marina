@@ -28,4 +28,7 @@ public class ClientRMI implements Client {
     public int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, GameAlreadyCreatedException, AlreadyStartedGameException, IOException {
         return controller.createNewGameAndAddPlayer(playerId, maxPlayers);
     }
+    public void addObserver(RemoteObserver observer, String playerId) throws IOException {
+        controller.addObserver(observer, playerId);
+    }
 }

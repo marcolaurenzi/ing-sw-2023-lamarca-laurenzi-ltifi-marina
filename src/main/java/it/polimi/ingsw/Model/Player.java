@@ -41,8 +41,7 @@ public class Player {
         this.game = game;
         totalPoints = 0;
         bookshelf = new Bookshelf();
-        personalGoal = null;
-        game.getPersonalGoalDeck().draw();
+        personalGoal = game.getPersonalGoalDeck().draw();
         isCommonGoalAlreadyAchieved = new boolean[]{false, false};
         state = new PlayerStateWaiting();
     }
@@ -212,6 +211,12 @@ public class Player {
 
     public void endTurn() throws WrongConfigurationException {
         getRewardGoals();
+    }
+    public PersonalGoal getPersonalGoal() {
+        return personalGoal;
+    }
+    public boolean[] getIsCommonGoalAlreadyAchieved() {
+        return isCommonGoalAlreadyAchieved;
     }
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
-import it.polimi.ingsw.Model.Exceptions.*;
+
+import java.io.Serializable;
 import java.util.Stack;
 
 
-public class CommonGoalPointStack{
+public class CommonGoalPointStack implements Serializable {
     private final Stack<Integer> pointStack;
     private Integer top;
 
@@ -38,7 +39,9 @@ public class CommonGoalPointStack{
         }
         top = 8;
     }
-
+    public Integer getTopPoints() {
+        return top;
+    }
     public int draw() {
         if(pointStack.size() > 1) {
             top = pointStack.get(1);

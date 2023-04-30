@@ -114,4 +114,12 @@ public class CommonGoal01 extends CommonGoal {
 
         return groupCounter >= numberOfGroups;
     }
+
+    @Override
+    public String printGoal() {
+        if(dim == 2){
+            return "CommonGoal0";
+        }
+        return "CommonGoal1";
+    }
 }

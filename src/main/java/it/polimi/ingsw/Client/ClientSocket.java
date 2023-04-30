@@ -80,4 +80,10 @@ public class ClientSocket implements Client{
         //return
         return  ((Double)response.getReturnValue()).intValue();
     }
+    public void addObserver(RemoteObserver observer, String playerId) throws IOException {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(observer);
+        parameters.add(playerId);
+        socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters)));
+    }
 }

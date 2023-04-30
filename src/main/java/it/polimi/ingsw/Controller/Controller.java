@@ -1,12 +1,17 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Client.RemoteObserver;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Utils.GameStatus;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
     static List<Game> games = new ArrayList<>();
@@ -14,9 +19,9 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     static Integer currentGameId = 0;
     static String currentGameFirstPlayerId = null;
     static HashMap<String, Game> alreadyUsedPlayerIds = new HashMap<>();
-    
-
+    static HashMap<String, RemoteObserver> listObserver = new HashMap<>();
     public Controller() throws RemoteException {
+        //thread.start();
     }
 
     public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
@@ -34,9 +39,12 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             int currentGameId = currentGame.getId();
             currentGame.addPlayer(playerId);
             alreadyUsedPlayerIds.replace(playerId, currentGame);
-            if(currentGame.getPlayers().size() == currentGame.getMaxPlayers())
+            if(currentGame.getPlayers().size() == currentGame.getMaxPlayers()) {
+                currentGame.startGame();
+                GameThread gameThread = new GameThread(currentGame);
+                gameThread.start();
                 currentGame = null;
-
+            }
             return currentGameId;
         }
     }
@@ -51,5 +59,34 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         games.add(game);
 
         return currentGame.getId();
+    }
+    public void addObserver(RemoteObserver observer, String playerId) throws RemoteException{
+        listObserver.put(playerId, observer);
+    }
+    public static void update(int gameID) throws RemoteException, MissingPlayerException {
+        try {
+            for (Player player : games.get(gameID).getPlayers()) {
+                listObserver.get(player.getPlayerID()).update(retrieveGameStatus(games.get(gameID), player.getPlayerID()));
+            }
+        } catch (MissingPlayerException e) {
+            System.out.println("Missing player in game " + gameID);
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+    public static void assignTurn(int game) throws RemoteException, MissingPlayerException {
+        listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
+    }
+    private static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
+        GameStatus gameStatus = new GameStatus(
+                game.getId(),
+                game.getCommonGoalPointStacks(),
+                game.getIsCommonGoalAchieved(playerId),
+                game.getPersonalGoal(playerId),
+                game.getCurrentPlayer().getPlayerID(),
+                game.getPlayersId(),
+                game.getBookshelves(),
+                game.getBoard());
+        return gameStatus;
     }
 }
