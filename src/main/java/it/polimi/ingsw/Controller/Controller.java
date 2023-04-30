@@ -1,9 +1,8 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Client.RemoteObserver;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Model.Game;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.GameStatus;
 
 import java.io.IOException;
@@ -74,7 +73,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             System.exit(-1);
         }
     }
-    public static void assignTurn(int game) throws RemoteException, MissingPlayerException, VoidBoardTileException {
+    public static void assignTurn(int game) throws RemoteException, MissingPlayerException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
     }
     private static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
@@ -88,5 +87,14 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getBookshelves(),
                 game.getBoard());
         return gameStatus;
+    }
+
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws RemoteException, PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException {
+        for(Player player : alreadyUsedPlayerIds.get(playerId).getPlayers()) {
+            if(player.getPlayerID().equals(playerId)){
+                player.pickAndInsertInBookshelf(tilesSelection, column, order);
+                break;
+            }
+        }
     }
 }

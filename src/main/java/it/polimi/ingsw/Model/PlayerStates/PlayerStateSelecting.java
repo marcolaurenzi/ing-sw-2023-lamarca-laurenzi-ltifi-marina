@@ -35,7 +35,7 @@ public class PlayerStateSelecting extends PlayerState{
 
         if (tilesSelection.get(0) == null)
             throw new SelectionIsEmptyException();
-        else if (isSelectionValid(tilesSelection, board))
+        else if (!isSelectionValid(tilesSelection, board))
             throw new SelectionNotValidException();
         else if (tilesSelection.size() != order.length)
             throw new TilesSelectionSizeDifferentFromOrderLengthException();

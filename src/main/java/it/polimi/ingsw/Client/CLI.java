@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -112,28 +113,13 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         }
     }
 
-    //@Override
-    /*public void update(Object observable, GameStatus game) {
-        this.game = game;
-        printBookshelf();
-        printStack();
-        printBoard();
-        printPoints();
-        if(game.getPlayers().get(game.getCurrentPlayer()).equals(playerId)) {
-            System.out.println("It's your turn!");
-            playTurn();
-        }
-
-        else{
-            System.out.println("It's " + game.getCurrentPlayer() + "'s turn");
-        }
-    }*/
-    public void playTurn() throws VoidBoardTileException {
+    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, RemoteException, PickDoesntFitColumnException {
         System.out.println("write playturn to play");
         synchronized (scanner) {
             System.out.println("It's your turn!");
             ArrayList<Coordinates> coordinates = new ArrayList<>();
             do {
+                coordinates.clear();
                 List<String> coordinateString = new ArrayList<>();
                 while (coordinateString.size() < 3) {
                     System.out.print("Enter a coordinate in the format (a;b) (or press Enter to finish): ");
@@ -154,13 +140,12 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
                     String[] values = coordinate.replaceAll("[()\\s]", "").split(";");
                     coordinates.add(new Coordinates(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
                 }
-                System.out.println("Coordinates entered:" + gameStatus.getBoard().getGameBoard().get(coordinates.get(0).getX(), coordinates.get(0).getY()).getPlacedItem().getType());
                 if (!isSelectionValid(coordinates, gameStatus.getBoard())) {
                     System.out.println("Invalid selection, all the tiles must be next to each other and must have at least one side free, please try again");
-                    coordinates.clear();
                 }
             } while (!isSelectionValid(coordinates, gameStatus.getBoard()));
-            printSelection(coordinates);
+            insertTiles(coordinates);
+
             scanner.notifyAll();
         }
     }
@@ -169,7 +154,18 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         return input.matches(regex);
     }
     protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+    }
+    private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
+        boolean ret = false;
+
+        for(int i = 0; i < tilesSelection.size(); i++) {
+            if (board.getGameBoard().get(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()).getPlacedItem() == null) {
+                ret = true;
+                break;
+            }
+        }
+        return ret;
     }
     private Boolean areAllSameColumnAndAdjacents(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
@@ -186,7 +182,89 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
 
         return ret;
     }
+    private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, RemoteException, PickDoesntFitColumnException, VoidBoardTileException {
+        String input = null;
+        boolean acceptedInsertion = false;
+        printSelection(tilesSelection);
+        System.out.println("This is your bookshelf: ");
+        printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
+        System.out.println("Please provide the indexes in order corresponding to your tiles selection: ");
+        while (!acceptedInsertion) {
+            do {
+                input = scanner.nextLine();
+
+                if (!isOrderValid(input, tilesSelection.size()) || !isIndexInRange(input, tilesSelection.size()))
+                    System.out.println("Invalid input, please try again");
+
+            } while (!isOrderValid(input, tilesSelection.size()) || !isIndexInRange(input, tilesSelection.size()));
+            System.out.print("This is the order in which the tiles will be inserted: ");
+            printItemsInOrder(tilesSelection, input);
+            System.out.println("Are you sure you want to proceed? y to accept");
+            String answer = scanner.nextLine();
+            if (answer.equals("y") || answer.equals("Y")){
+                acceptedInsertion = true;
+            } else {
+                System.out.println("Please provide the indexes in order corresponding to your tiles selection: ");
+            }
+        }
+        String[] stringNumbers = input.split(" ");
+        int[] order = new int[stringNumbers.length];
+        for (int i = 0; i < stringNumbers.length; i++) {
+            order[i] = Integer.parseInt(stringNumbers[i]);
+        }
+        printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
+        System.out.print("Choose the column in which the tiles has to be inserted: ");
+        int column = -1;
+        boolean validInput = false;
+        while(!validInput) {
+            try {
+                column = Integer.parseInt(scanner.nextLine());
+
+                if (column >= 0 && column < 5)
+                    validInput = true;
+                else
+                    System.out.print("Input must be a number (0 - 5) , try again: ");
+
+            } catch (NumberFormatException f) {
+                System.out.print("Input must be a number (0 - 5) , try again: ");
+            }
+        }
+        client.pickAndInsertInBookshelf(tilesSelection, column, order, playerId);
+    }
+    private boolean isOrderValid(String input, int numberOfTiles) {
+        String regex = "\\s*\\d+";
+        for (int i = 1; i < numberOfTiles; i++) {
+            regex += "\\s+\\d+";                 //regex is being built to match the input format
+        }
+        regex += "\\s*";
+        return input.matches(regex);
+    }
+    private void printItemsInOrder(ArrayList<Coordinates> tilesSelection, String input) {
+        String[] stringNumbers = input.split(" "); //----->>> gucci cane sas     |||| 2 0 1
+        int[] order = new int[stringNumbers.length];
+        for (int i = 0; i < stringNumbers.length; i++) {
+            order[i] = Integer.parseInt(stringNumbers[i]);
+        }
+        ArrayList<Coordinates> orderedPickedItems = new ArrayList<>();
+        for(int i = 0; i < tilesSelection.size(); i++)
+            orderedPickedItems.add(null);
+        int i = 0;
+        for (int n : order) {
+            orderedPickedItems.set(i, tilesSelection.get(n));
+            i++;
+        }
+        printSelection(orderedPickedItems);
+    }
+    private boolean isIndexInRange(String input, int numberOfTiles) {
+        String[] stringNumbers = input.split(" ");
+        HashSet<Integer> numbers = new HashSet<>();
+        for (int i = 0; i < stringNumbers.length; i++) {
+            numbers.add(Integer.parseInt(stringNumbers[i]));
+        }
+        return numbers.size() == numberOfTiles && numbers.stream().allMatch(n -> n >= 0 && n < numberOfTiles );
+    }
     private void printSelection(ArrayList<Coordinates> tilesSelection) {
+        System.out.print("You selected the following tiles: ");
         for(int i = 0; i < tilesSelection.size(); i++) {
             switch (gameStatus.getBoard().getGameBoard().get(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()).getPlacedItem().getType()) {
 
@@ -211,6 +289,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
             }
             System.out.printf(" ");
         }
+        System.out.printf("\n");
     }
     private Boolean areAllSameRowAndAdjacents(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
@@ -391,8 +470,10 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
                 String command = scanner.nextLine();
                 if(!command.equals("playturn")) {
                     executePlayerCommand(command);
-                } else {
+                } else if(gameStatus.getCurrentPlayer().equals(playerId)) {
                     scanner.wait();
+                } else {
+                    System.out.println("It's not your turn, please use another command");
                 }
                 scanner.notifyAll();
             }

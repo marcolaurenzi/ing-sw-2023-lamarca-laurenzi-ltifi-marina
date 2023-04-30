@@ -18,7 +18,7 @@ public abstract class PlayerState {
      */
     protected Boolean selectionIsFull(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < tilesSelection.size(); i++)
             if(tilesSelection.get(i) == null)
                 ret = false;
 
@@ -31,69 +31,7 @@ public abstract class PlayerState {
      *
      * @return true if and only if the tiles selected are all on the same column AKA all have the same y
      */
-    private Boolean areAllSameColumnAndAdjacents(ArrayList<Coordinates> tilesSelection) {
-        Boolean ret = true;
 
-        int x = tilesSelection.get(0).getX();
-        int y = tilesSelection.get(0).getY();
-
-        for(int i = 0; i < 3; i++) {
-            if(tilesSelection.get(i) == null)
-                break;
-            else if (tilesSelection.get(i).getY() != y || tilesSelection.get(i).getX() != x + i) {
-                ret = false;
-                break;
-            }
-        }
-
-        return ret;
-    }
-
-    /**
-     *
-     * @param tilesSelection
-     *
-     * @return
-     */
-    private Boolean areAllSameRowAndAdjacents(ArrayList<Coordinates> tilesSelection) {
-        Boolean ret = true;
-
-        int x = tilesSelection.get(0).getX();
-        int y = tilesSelection.get(0).getY();
-
-        for(int i = 1; i < 3; i++) {
-            if(tilesSelection.get(i) == null)
-                break;
-            else if (tilesSelection.get(i).getX() != x || tilesSelection.get(i).getY() != y + i ) {
-                ret = false;
-                break;
-            }
-        }
-
-        return ret;
-    }
-
-    /**
-     *
-     * @param tilesSelection
-     * @param board
-     *
-     * @return
-     */
-    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        Boolean ret = true;
-
-        for(int i = 0; i < 3; i++) {
-            if(tilesSelection.get(i) == null)
-                break;
-            else if (board.hasFree(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()) == 0) {
-                ret = false;
-                break;
-            }
-        }
-
-        return ret;
-    }
 
     /**
      *
@@ -103,7 +41,60 @@ public abstract class PlayerState {
      * @return
      */
     protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+    }
+    private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
+        boolean ret = false;
+
+        for(int i = 0; i < tilesSelection.size(); i++) {
+            if (board.getGameBoard().get(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()).getPlacedItem() == null) {
+                ret = true;
+                break;
+            }
+        }
+        return ret;
+    }
+    private Boolean areAllSameRowAndAdjacents(ArrayList<Coordinates> tilesSelection) {
+        Boolean ret = true;
+
+        int x = tilesSelection.get(0).getX();
+        int y = tilesSelection.get(0).getY();
+
+        for(int i = 1; i < tilesSelection.size(); i++) {
+            if (tilesSelection.get(i).getX() != x || tilesSelection.get(i).getY() != y + i ) {
+                ret = false;
+                break;
+            }
+        }
+
+        return ret;
+    }
+    private Boolean areAllSameColumnAndAdjacents(ArrayList<Coordinates> tilesSelection) {
+        Boolean ret = true;
+
+        int x = tilesSelection.get(0).getX();
+        int y = tilesSelection.get(0).getY();
+
+        for(int i = 0; i < tilesSelection.size(); i++) {
+            if (tilesSelection.get(i).getY() != y || tilesSelection.get(i).getX() != x + i) {
+                ret = false;
+                break;
+            }
+        }
+
+        return ret;
+    }
+    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
+        Boolean ret = true;
+
+        for(int i = 0; i < tilesSelection.size(); i++) {
+            if (board.hasFree(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()) == 0) {
+                ret = false;
+                break;
+            }
+        }
+
+        return ret;
     }
 
     /**

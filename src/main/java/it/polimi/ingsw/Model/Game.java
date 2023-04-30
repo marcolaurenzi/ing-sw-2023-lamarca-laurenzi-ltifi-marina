@@ -8,6 +8,8 @@ import it.polimi.ingsw.Model.GameState.GameState;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.GameState.GameStateStarting;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
+import it.polimi.ingsw.Model.PlayerStates.PlayerStateSelecting;
+import it.polimi.ingsw.Model.PlayerStates.PlayerStateWaiting;
 import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
@@ -137,7 +139,9 @@ public class Game {
     }
 
     public void nextTurn() throws FinishedGameException {
+        players.get(currentPlayer).changeState(new PlayerStateWaiting());
         currentPlayer = (currentPlayer + 1)%players.size();
+        players.get(currentPlayer).changeState(new PlayerStateSelecting());
     }
 
     /* ************************************************************************************************************
