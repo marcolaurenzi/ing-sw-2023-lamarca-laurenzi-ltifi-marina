@@ -7,6 +7,8 @@ import it.polimi.ingsw.Model.PlayerStates.PlayerStateWaiting;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.Model.TypeEnum.BOOKS;
+
 /**
  *
  */
@@ -218,7 +220,23 @@ public class Player {
     public boolean[] getIsCommonGoalAlreadyAchieved() {
         return isCommonGoalAlreadyAchieved;
     }
+    public int getTotalPoints() {
+        return totalPoints;
+    }
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
      ************************************************************************************************************ */
+
+
+    public void setBookshelf() throws PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+        ArrayList<Item> riempi = new ArrayList<>();
+        for(int j = 0; j < 6; j++){
+            riempi.add(new Item(BOOKS));
+        }
+        for(int i = 0; i < 5; i++){
+            bookshelf.insert(i, riempi);
+        }
+
+
+    }
 }

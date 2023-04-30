@@ -88,7 +88,25 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getBoard());
         return gameStatus;
     }
-
+    public static void sendWinnerInfo(int gameId){
+        String winnerPlayer = null;
+        int tempMaxPoints = 0;
+        for(Player player : games.get(gameId).getPlayers()){
+            if(player.getTotalPoints() > tempMaxPoints){
+                tempMaxPoints = player.getTotalPoints();
+                winnerPlayer = player.getPlayerID();
+            }
+        }
+        try {
+            for (Player player : games.get(gameId).getPlayers()) {
+                listObserver.get(player.getPlayerID()).endGame(winnerPlayer);
+            }
+        } catch (RemoteException e) {
+            System.out.println("Missing player in game " + gameId);
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws RemoteException, PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException {
         for(Player player : alreadyUsedPlayerIds.get(playerId).getPlayers()) {
             if(player.getPlayerID().equals(playerId)){
@@ -96,5 +114,8 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 break;
             }
         }
+    }
+    public void riempiTutto() throws PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+        currentGame.getCurrentPlayer().setBookshelf();
     }
 }

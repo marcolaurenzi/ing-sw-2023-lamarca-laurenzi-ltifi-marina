@@ -18,6 +18,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
     static int gameId;
     static Client client;
     static String playerId;
+    static boolean isEnded;
     static GameStatus gameStatus;
     protected CLI() throws RemoteException {
     }
@@ -365,6 +366,11 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
             System.out.printf("%d) %s: %d points, %s\n", i, commonGoals[i].getCommonGoal().printGoal(), commonGoals[i].getTopPoints(), gameStatus.getIsCommonGoalAlreadyAchieved()[i] ? "Achieved" : "Not achieved");
         }
     }
+    public void endGame(String winnerPlayer){
+        System.out.println("The game is over!");
+        isEnded = true;
+        System.out.println("The winner is player: " + winnerPlayer);
+    }
     private void printStack() {
         CommonGoalPointStack[] stack = gameStatus.getCommonGoalPointStacks();
         for(int i = 0; i < stack.length; i++) {
@@ -456,7 +462,10 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         }
         System.out.println("--------");
     }
-    public static void main(String[] args) throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException {
+    public static void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+        client.riempiTutto();
+    }
+    public static void main(String[] args) throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         scanner = new Scanner(new InputStreamReader(System.in));
         System.out.println("Welcome to MyShelfie!");
 
@@ -465,9 +474,12 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         addPlayer();
         addObserver();
 
-        while(true) {
+        while(!isEnded) {
             synchronized (scanner){
                 String command = scanner.nextLine();
+                if(command.equals("truccomagico")) {
+                    riempiTutto();
+                }
                 if(!command.equals("playturn")) {
                     executePlayerCommand(command);
                 } else if(gameStatus.getCurrentPlayer().equals(playerId)) {

@@ -1,17 +1,16 @@
 package it.polimi.ingsw.Model.GameState;
 
-import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
-import it.polimi.ingsw.Model.Exceptions.NumberOfPlayersException;
+import it.polimi.ingsw.Model.Exceptions.GameNotStartedException;
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.Player;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class  GameStateStarting implements GameState{
 
     @Override
-    public int nextPlayer(Game game, int currentPlayer, ArrayList<Player> players) {
-        return 0;
+    public void nextPlayer(Game game, ArrayList<Player> players) throws GameNotStartedException {
+        throw new GameNotStartedException();
     }
 
 }

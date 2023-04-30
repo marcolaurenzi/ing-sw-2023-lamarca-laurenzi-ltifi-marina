@@ -8,8 +8,6 @@ import it.polimi.ingsw.Model.GameState.GameState;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.GameState.GameStateStarting;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
-import it.polimi.ingsw.Model.PlayerStates.PlayerStateSelecting;
-import it.polimi.ingsw.Model.PlayerStates.PlayerStateWaiting;
 import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
@@ -83,7 +81,7 @@ public class Game {
      * This method changes the current player to the next one, is called at the end of each turn, and
      * it depends on the state of the game
      */
-    public void nextPlayer() throws FinishedGameException { currentPlayer = gameState.nextPlayer(this, currentPlayer, players); }
+    public void nextPlayer() throws FinishedGameException, GameNotStartedException { gameState.nextPlayer(this, players); }
 
     /**
      * This method initializes the board of the game, it is called only once at the beginning of the game by the
@@ -138,10 +136,8 @@ public class Game {
         }
     }
 
-    public void nextTurn() throws FinishedGameException {
-        players.get(currentPlayer).changeState(new PlayerStateWaiting());
-        currentPlayer = (currentPlayer + 1)%players.size();
-        players.get(currentPlayer).changeState(new PlayerStateSelecting());
+    public void nextTurn() throws FinishedGameException, GameNotStartedException {
+        gameState.nextPlayer(this, players);
     }
 
     /* ************************************************************************************************************
@@ -168,6 +164,9 @@ public class Game {
     public Player getCurrentPlayer() {
         Player temp = players.get(currentPlayer);
         return temp;
+    }
+    public int getCurrentPlayerIndex() {
+        return currentPlayer;
     }
     public int getMaxPlayers(){
         return maxPlayers;
@@ -222,6 +221,9 @@ public class Game {
         return playersIds;
     }
 
+    public void setCurrentPlayerIndex(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
     /* ************************************************************************************************************
      *                          END OF SETTER METHODS
      ************************************************************************************************************ */

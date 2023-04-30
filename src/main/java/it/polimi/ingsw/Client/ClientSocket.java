@@ -93,4 +93,7 @@ public class ClientSocket implements Client{
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException {
         //TODO no one uses socket
     }
+    public void riempiTutto() {
+        //TODO no one uses socket
+    }
 }

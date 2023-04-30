@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GameStateFinished implements GameState{
 
     @Override
-    public int nextPlayer(Game game, int currentPlayer, ArrayList<Player> players) throws FinishedGameException {
+    public void nextPlayer(Game game, ArrayList<Player> players) throws FinishedGameException {
         throw new FinishedGameException();
     }
 
