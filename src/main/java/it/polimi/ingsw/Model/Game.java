@@ -38,13 +38,6 @@ public class Game {
      *                          START OF CONSTRUCTORS
      ************************************************************************************************************ */
 
-    /**
-     *
-     * @param gameId
-     * @param maxPlayers
-     * @throws MaxNumberOfPlayersException
-     * @throws IOException
-     */
     public Game(int gameId, int maxPlayers) throws MaxNumberOfPlayersException, IOException {
         if(maxPlayers > 4 || maxPlayers < 2) {
             throw new MaxNumberOfPlayersException();
@@ -83,12 +76,14 @@ public class Game {
     }
 
     /**
-     *
+     * This method changes the current player to the next one, is called at the end of each turn and
+     * it depends on the state of the game
      */
     public void nextPlayer() throws FinishedGameException { currentPlayer = gameState.nextPlayer(this, currentPlayer, players); }
 
     /**
-     *
+     * This method initializes the board of the game, it is called only once at the beginning of the game by the
+     * initializeGame method
      */
     public void initializeBoard(){
         board.initializeBoard(this);
@@ -97,7 +92,7 @@ public class Game {
     /**
      * This method initializes the decks of the game,
      * and it is called only once at the beginning of the game
-     * by the constructor
+     * by the initializeGame method
      *
      * @throws IOException
      */
@@ -113,7 +108,8 @@ public class Game {
     }
 
     /**
-     *
+     * This method initializes the game, it is called only once at the beginning of the game,
+     * and it calls the methods to initialize the decks and the board
      * @throws AlreadyStartedGameException
      * @throws IOException
      */
@@ -123,16 +119,15 @@ public class Game {
     }
 
     /**
-     *
-     * @throws AlreadyStartedGameException
-     * @throws IOException
+     * This method is called when the game starts and sets the game state to running
      */
     public void startGame() {
         setGameState(new GameStateRunning());
     }
 
     /**
-     *
+     * This method is called every round and checks if the board needs to be refreshed, if so it refreshes it
+     * otherwise it does nothing
      */
     public void refreshBoard() {
         if(board.toRefresh()) {
@@ -174,6 +169,9 @@ public class Game {
     public Board getBoard() {
         return board;
     }
+    public int getId() {
+        return gameID;
+    }
 
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
@@ -182,10 +180,6 @@ public class Game {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
-    }
-
-    public int getId() {
-        return gameID;
     }
 
     /* ************************************************************************************************************

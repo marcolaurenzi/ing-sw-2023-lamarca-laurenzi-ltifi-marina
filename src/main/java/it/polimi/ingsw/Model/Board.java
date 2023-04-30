@@ -139,16 +139,10 @@ public class Board {
      * This method returns whether the northern BoardTile is empty or not
      * @param i row index
      * @param j column index
-     *
      * @return true if it's empty, false otherwise
      */
-    public boolean isFreeNorth(int i,int j) {
-        if(i == 0) {
-            return true;
-        }
-        else {
-            return gameBoard.get(i-1,j) == null;
-        }
+    public boolean isFreeNorth(int i, int j) {
+        return i == 0 ? true : gameBoard.get(i-1,j) == null;
     }
 
     /**
@@ -159,12 +153,7 @@ public class Board {
      * @return true if it's empty, false otherwise
      */
     public boolean isFreeSouth(int i,int j) {
-        if(i == 5) {
-            return true;
-        }
-        else {
-            return gameBoard.get(i+1,j) == null;
-        }
+        return i == 5 ? true : gameBoard.get(i+1,j) == null;
     }
 
     /**
@@ -175,12 +164,7 @@ public class Board {
      * @return true if it's empty, false otherwise
      */
     public boolean isFreeEast(int i,int j) {
-        if(j == 4) {
-            return true;
-        }
-        else {
-            return gameBoard.get(i,j+1) == null;
-        }
+        return j == 4 ? true : gameBoard.get(i,j+1) == null;
     }
 
     /**
@@ -191,12 +175,7 @@ public class Board {
      * @return true if it's empty, false otherwise
      */
     public boolean isFreeWest(int i,int j) {
-        if(j == 0) {
-            return true;
-        }
-        else {
-            return gameBoard.get(i,j-1) == null;
-        }
+        return j == 0 ? true : gameBoard.get(i,j-1) == null;
     }
 
     /* ************************************************************************************************************
