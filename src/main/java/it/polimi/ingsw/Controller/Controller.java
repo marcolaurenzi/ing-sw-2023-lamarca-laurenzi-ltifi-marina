@@ -44,7 +44,6 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         if(currentGame != null)
             throw new GameAlreadyCreatedException();
         Game game = new Game(currentGameId, maxPlayers);
-        game.initializeGame();
         game.addPlayer(playerId);
         currentGame = game;
         alreadyUsedPlayerIds.replace(playerId, currentGame);

@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
 
     @Test
-    void constructorThrowsNumberOfPlayerException() {
+    void constructorThrowsNumberOfPlayerExceptionTest() {
         assertThrows(MaxNumberOfPlayersException.class, () -> new Game(3, 5));
     }
 
     @Test
-    void constructorThrowsNoException() {
+    void constructorThrowsNoExceptionTest() {
         assertDoesNotThrow(() -> new Game(3, 3));
     }
 
     @Test
-    void addFirstPlayer() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException {
+    void addFirstPlayerTest() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException {
         Game game = new Game(1, 4);
 
         String playerID = "54336";
@@ -29,47 +29,21 @@ class GameTest {
         assertEquals(1, game.getPlayers().size());
         assertEquals(playerID, game.getPlayers().get(0).getPlayerID());
     }
-    @Test
-    void testAddPlayer() {
-    }
 
     @Test
-    void initializeBoard() {
-    }
+    void addPlayerTest() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException {
 
-    @Test
-    void nextPlayer() {
-    }
+        assertThrows(MaxNumberOfPlayersException.class, () -> new Game(1, 5));
 
-    @Test
-    void getCurrentPlayer() {
-    }
-
-    @Test
-    void getMaxPlayers() {
-    }
-
-    @Test
-    void getGameID() {
-    }
-
-    @Test
-    void getPlayers() {
-    }
-
-    @Test
-    void initializeDeck() {
-    }
-
-    @Test
-    void startGame() {
-    }
-
-    @Test
-    void getPersonalGoalDeck() {
-    }
-
-    @Test
-    void getCommonGoalPointStacks() {
+        Game game = new Game(1, 4);
+        game.addPlayer("54336");
+        assertEquals(1, game.getPlayers().size());
+        game.addPlayer("54337");
+        assertEquals(2, game.getPlayers().size());
+        game.addPlayer("54338");
+        assertEquals(3, game.getPlayers().size());
+        game.addPlayer("54339");
+        assertEquals(4, game.getPlayers().size());
+        assertThrows(AlreadyStartedGameException.class, () -> game.addPlayer("54340"));
     }
 }

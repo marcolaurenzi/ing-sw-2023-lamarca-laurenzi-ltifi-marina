@@ -30,7 +30,7 @@ public class Game {
     private CommonGoalPointStack[] commonGoalPointStacks;
     final int maxPlayers;
     private int currentPlayer;
-    private ArrayList<Player> players;
+    private final ArrayList<Player> players;
     private final Board board;
 
     /* ************************************************************************************************************
@@ -47,6 +47,7 @@ public class Game {
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
         board = Utils.loadBoardFromFile("src/main/resources/configurations/BoardConfiguration.JSON");
+        this.initializeGame();
     }
 
     /* ************************************************************************************************************
@@ -57,16 +58,19 @@ public class Game {
     /**
      * This method is called when a player joins the game and adds him to the list of players
      * but does not create a new Player object
-     * @param player
+     * @param player the player to be added
      */
-    public void addPlayer(Player player) throws IOException, NumberOfPlayersException, AlreadyStartedGameException {
+    public void addPlayer(Player player) throws AlreadyStartedGameException {
+        if(players.size() == maxPlayers) {
+            throw new AlreadyStartedGameException();
+        }
         players.add(player);
     }
 
     /**
      * This method is called when a player joins the game and adds him to the list of players
      * after creating a new Player object
-     * @param playerID
+     * @param playerID the ID of the player to be added
      */
     public void addPlayer(String playerID) throws AlreadyStartedGameException {
         if(players.size() == maxPlayers) {
@@ -76,7 +80,7 @@ public class Game {
     }
 
     /**
-     * This method changes the current player to the next one, is called at the end of each turn and
+     * This method changes the current player to the next one, is called at the end of each turn, and
      * it depends on the state of the game
      */
     public void nextPlayer() throws FinishedGameException { currentPlayer = gameState.nextPlayer(this, currentPlayer, players); }
@@ -94,7 +98,7 @@ public class Game {
      * and it is called only once at the beginning of the game
      * by the initializeGame method
      *
-     * @throws IOException
+     * @throws IOException if the file is not found
      */
     public void initializeDeck() throws IOException {
 
@@ -108,10 +112,9 @@ public class Game {
     }
 
     /**
-     * This method initializes the game, it is called only once at the beginning of the game,
+     * This method initializes the game, it is called only once at the beginning of the game by the constructor,
      * and it calls the methods to initialize the decks and the board
-     * @throws AlreadyStartedGameException
-     * @throws IOException
+     * @throws IOException if the file is not found
      */
     public void initializeGame() throws IOException {
         this.initializeDeck();
