@@ -14,6 +14,10 @@ public class ItemDeck implements Deck<Item> {
 
     private List<Item> deck;
 
+    public ItemDeck() {
+        initializeDeck();
+    }
+
     /**
      *
      */

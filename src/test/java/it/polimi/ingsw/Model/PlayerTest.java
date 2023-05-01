@@ -1,11 +1,10 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Model.PlayerStates.*;
-import it.polimi.ingsw.Model.PlayerStates.PlayerStateSelecting;
+import it.polimi.ingsw.Model.PlayerState.*;
+import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;

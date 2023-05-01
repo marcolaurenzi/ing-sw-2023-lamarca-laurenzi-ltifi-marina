@@ -2,8 +2,8 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
-import it.polimi.ingsw.Model.PlayerStates.PlayerState;
-import it.polimi.ingsw.Model.PlayerStates.PlayerStateWaiting;
+import it.polimi.ingsw.Model.PlayerState.PlayerState;
+import it.polimi.ingsw.Model.PlayerState.PlayerStateWaiting;
 
 import java.util.ArrayList;
 

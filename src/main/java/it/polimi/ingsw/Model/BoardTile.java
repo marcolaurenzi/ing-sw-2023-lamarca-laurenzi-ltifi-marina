@@ -55,8 +55,16 @@ public class BoardTile implements Serializable {
         if(this.isEmpty()) {
             this.placedItem = itemToPlace;
         }else{
-            System.out.println("The tile is not empty!");
+            System.err.println("The tile is not empty!");
         }
+    }
+
+    /**
+     * This method is used to place an item on the tile without checking if it's empty
+     * @param itemToPlace
+     */
+    public void brutePlaceItem(Item itemToPlace){
+        this.placedItem = itemToPlace;
     }
 
     /**
@@ -70,7 +78,7 @@ public class BoardTile implements Serializable {
             this.placedItem = null;
             return temp;
         }else{
-            System.out.println("The tile is empty!");
+            System.err.println("The tile is empty!");
             return null;
         }
     }
@@ -84,7 +92,7 @@ public class BoardTile implements Serializable {
      */
     protected Item checkItem(){
         if(this.isEmpty()){
-            System.out.println("The tile is empty");
+            System.err.println("The tile is empty");
             return null;
         }else{
             return this.placedItem;

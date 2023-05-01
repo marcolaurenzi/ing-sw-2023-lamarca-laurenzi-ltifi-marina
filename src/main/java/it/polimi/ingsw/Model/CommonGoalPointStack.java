@@ -9,11 +9,6 @@ import java.util.Stack;
 public class CommonGoalPointStack implements Serializable {
     private final Stack<Integer> pointStack;
     private Integer top;
-
-    public CommonGoal getCommonGoal() {
-        return commonGoal;
-    }
-
     private final CommonGoal commonGoal;
 
     public CommonGoalPointStack(CommonGoal commonGoal, int numberOfPlayers) {
@@ -42,13 +37,26 @@ public class CommonGoalPointStack implements Serializable {
     public Integer getTopPoints() {
         return top;
     }
-    public int draw() {
-        if(pointStack.size() > 1) {
-            top = pointStack.get(1);
+    public Integer draw() {
+        if (pointStack.isEmpty()) {
+            return null;
         }
         else {
-            top = null;
+            if(pointStack.size() > 1) {
+                top = pointStack.get(pointStack.size() - 2);
+            }
+            else {
+                top = null;
+            }
         }
         return pointStack.pop();
+    }
+
+    public CommonGoal getCommonGoal() {
+        return commonGoal;
+    }
+
+    public Stack<Integer> getPointStack() {
+        return pointStack;
     }
 }

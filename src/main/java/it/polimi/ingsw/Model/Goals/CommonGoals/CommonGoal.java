@@ -14,23 +14,16 @@ import java.io.Serializable;
  */
 public abstract class CommonGoal implements Serializable {
 
-    boolean achieved;
+    /**
+     * This method is used to check whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
+     * @return the method returns true whether the Goal is Achieved and false otherwise
+     */
+    public abstract boolean isAchieved(Bookshelf bookshelf);
 
     /**
-     *
-     * @param bookshelf
+     * This method is used to print the name of the goal
      * @return
      */
-    public boolean isAchieved(Bookshelf bookshelf) {
-        return false;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public CommonGoal getCommonGoal(){
-        return this;
-    }
     public abstract String printGoal();
 }

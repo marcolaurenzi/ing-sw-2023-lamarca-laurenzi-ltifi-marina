@@ -56,9 +56,17 @@ public class Board implements Serializable {
         this.gameBoard.get(x, y).placeItem(itemToPlace);
     }
 
-    private void removeItem(int x, int y){
+    public void removeItem(int x, int y){
         itemDeck.getDeck().add(gameBoard.get(x, y).getPlacedItem());
-        gameBoard.set(x, y, null);
+        gameBoard.get(x,y).brutePlaceItem(null);
+    }
+
+    public void removeAllItems() {
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                removeItem(i, j);
+            }
+        }
     }
 
     /**
@@ -103,20 +111,20 @@ public class Board implements Serializable {
     public boolean toRefresh(){
         int rows = gameBoard.getColumnDimension();
         int columns = gameBoard.getRowDimension();
+        int temp = 0;
         for(int i = 0; i<rows; i++) {
             for(int j = 0; j<columns; j++) {
 
                 BoardTile curr = gameBoard.get(i,j);
-                if(curr != null &&
-                        !isFreeNorth(i,j) ||
-                        !isFreeSouth(i,j) ||
-                        !isFreeEast(i,j) ||
-                        !isFreeWest(i,j)) {
-                    return false;
+                if(curr.getNumberOfPlayersSign() != 5 && curr.getPlacedItem() != null) {
+                    temp++;
+                    if(!isFreeNorth(i,j) || !isFreeSouth(i,j) || !isFreeEast(i,j) || !isFreeWest(i,j)) {
+                        return false;
+                    }
                 }
             }
         }
-        return true;
+        return temp != 0;
     }
 
     /**
@@ -130,18 +138,19 @@ public class Board implements Serializable {
         // empty the board
         for(int i = 0; i<rows; i++) {
             for(int j = 0; j<columns; j++) {
-                BoardTile curr = gameBoard.get(i,j);
+                Item curr = gameBoard.get(i,j).getPlacedItem();
                 if(curr != null) {
                     removeItem(i,j);
                 }
             }
         }
 
+        int max = game.getMaxPlayers();
         // refill the board
         for(int i = 0; i < rows; i++) {
             for(int j = 0; j < columns; j++) {
-                BoardTile curr = gameBoard.get(i, j);
-                if(curr.getNumberOfPlayersSign() <= game.getMaxPlayers()) {
+                int curr = gameBoard.get(i, j).getNumberOfPlayersSign();
+                if(curr <= max) {
                     gameBoard.get(i, j).placeItem(game.getItemDeck().draw());
                 }
             }
@@ -149,7 +158,7 @@ public class Board implements Serializable {
     }
 
     /**
-     * This method initializes the game Board by drawing an Item for each valid Boardtile
+     * This method initializes the game Board by drawing an Item for each valid Board tile
      * @param game the reference to the current Game
      */
     public void initializeBoard(Game game) {
@@ -162,47 +171,20 @@ public class Board implements Serializable {
         }
     }
 
-    /**
-     * This method returns whether the northern BoardTile is empty or not
-     * @param i row index
-     * @param j column index
-     * @return true if it's empty, false otherwise
-     */
     public boolean isFreeNorth(int i, int j) {
-        return i == 0 ? true : gameBoard.get(i-1,j) == null;
+        return i != 0 && gameBoard.get(i - 1, j).getPlacedItem() == null;
     }
 
-    /**
-     * This method returns whether the southern BoardTile is empty or not
-     * @param i row index
-     * @param j column index
-     *
-     * @return true if it's empty, false otherwise
-     */
     public boolean isFreeSouth(int i,int j) {
-        return i == 8 ? true : gameBoard.get(i+1,j) == null;
+        return i != 8 && gameBoard.get(i + 1, j).getPlacedItem() == null;
     }
 
-    /**
-     * This method returns whether the eastern BoardTile is empty or not
-     * @param i row index
-     * @param j column index
-     *
-     * @return true if it's empty, false otherwise
-     */
     public boolean isFreeEast(int i,int j) {
-        return j == 8 ? true : gameBoard.get(i,j+1) == null;
+        return j != 8 && gameBoard.get(i, j + 1).getPlacedItem() == null;
     }
 
-    /**
-     * This method returns whether the western BoardTile is empty or not
-     * @param i row index
-     * @param j column index
-     *
-     * @return true if it's empty, false otherwise
-     */
     public boolean isFreeWest(int i,int j) {
-        return j == 0 ? true : gameBoard.get(i,j-1) == null;
+        return j != 0 && gameBoard.get(i, j - 1).getPlacedItem() == null;
     }
 
     /* ************************************************************************************************************
@@ -214,6 +196,9 @@ public class Board implements Serializable {
         return gameBoard;
     }
 
+    public ItemDeck getItemDeck() {
+        return itemDeck;
+    }
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
      ************************************************************************************************************ */

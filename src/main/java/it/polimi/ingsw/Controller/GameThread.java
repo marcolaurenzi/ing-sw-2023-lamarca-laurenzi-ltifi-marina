@@ -3,7 +3,7 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState.GameStateLastTurn;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
-import it.polimi.ingsw.Model.PlayerStates.PlayerStateSelecting;
+import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 
 public class GameThread extends Thread{
     Game game;

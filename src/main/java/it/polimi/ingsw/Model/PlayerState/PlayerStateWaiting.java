@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Model.PlayerStates;
+package it.polimi.ingsw.Model.PlayerState;
 
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
