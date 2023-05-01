@@ -47,7 +47,6 @@ public class Board implements Serializable {
 
     /**
      * This method is used to call the BoardTile class' method to place an item on the single tile
-     *
      * @param itemToPlace reference to the Item to place
      * @param x is the first axis of the board representing the row of the tile
      * @param y is the second axis of the board representing the column of the tile
@@ -56,11 +55,21 @@ public class Board implements Serializable {
         this.gameBoard.get(x, y).placeItem(itemToPlace);
     }
 
+    /**
+     * This method is used to remove an item from the BoardTile and re-insert it in the ItemDeck
+     * @param x is the first axis of the board representing the row of the tile
+     * @param y is the second axis of the board representing the column of the tile
+     */
     public void removeItem(int x, int y){
-        itemDeck.getDeck().add(gameBoard.get(x, y).getPlacedItem());
-        gameBoard.get(x,y).brutePlaceItem(null);
+        if(!gameBoard.get(x,y).isEmpty()) {
+            itemDeck.getDeck().add(gameBoard.get(x, y).getPlacedItem());
+            gameBoard.get(x,y).brutePlaceItem(null);
+        }
     }
 
+    /**
+     * This method is used to remove all the left items from the BoardTile and re-insert them in the ItemDeck
+     */
     public void removeAllItems() {
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
@@ -71,7 +80,6 @@ public class Board implements Serializable {
 
     /**
      * This method is used to call the BoardTile class' method to draw the item from the single tile
-     *
      * @param x is the first axis of the board representing the row of the tile
      * @param y is the second axis of the board representing the column of the tile
      * @return returns the tile if it is present, returns null otherwise
@@ -171,18 +179,46 @@ public class Board implements Serializable {
         }
     }
 
+    /**
+     * This method checks whether the selected board tile is free on the north or not
+     * Note that this method returns true even if the tile doesn't have an item on it
+     * @param i is the first axis of the board representing the row of the tile
+     * @param j is the second axis of the board representing the column of the tile
+     * @return true if the north tile is free, false otherwise
+     */
     public boolean isFreeNorth(int i, int j) {
         return i != 0 && gameBoard.get(i - 1, j).getPlacedItem() == null;
     }
 
+    /**
+     * This method checks whether the selected board tile is free on the south or not
+     * Note that this method returns true even if the tile doesn't have an item on it
+     * @param i is the first axis of the board representing the row of the tile
+     * @param j is the second axis of the board representing the column of the tile
+     * @return true if the south tile is free, false otherwise
+     */
     public boolean isFreeSouth(int i,int j) {
         return i != 8 && gameBoard.get(i + 1, j).getPlacedItem() == null;
     }
 
+    /**
+     * This method checks whether the selected board tile is free on the east or not
+     * Note that this method returns true even if the tile doesn't have an item on it
+     * @param i is the first axis of the board representing the row of the tile
+     * @param j is the second axis of the board representing the column of the tile
+     * @return true if the east tile is free, false otherwise
+     */
     public boolean isFreeEast(int i,int j) {
         return j != 8 && gameBoard.get(i, j + 1).getPlacedItem() == null;
     }
 
+    /**
+     * This method checks whether the selected board tile is free on the west or not
+     * Note that this method returns true even if the tile doesn't have an item on it
+     * @param i is the first axis of the board representing the row of the tile
+     * @param j is the second axis of the board representing the column of the tile
+     * @return true if the west tile is free, false otherwise
+     */
     public boolean isFreeWest(int i,int j) {
         return j != 0 && gameBoard.get(i, j - 1).getPlacedItem() == null;
     }
@@ -201,9 +237,14 @@ public class Board implements Serializable {
     }
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
+     *                          START OF SETTER METHODS
      ************************************************************************************************************ */
 
     public void setItemDeck(ItemDeck deck) {
         this.itemDeck = deck;
     }
+
+    /* ************************************************************************************************************
+     *                          END OF SETTER METHODS
+     ************************************************************************************************************ */
 }

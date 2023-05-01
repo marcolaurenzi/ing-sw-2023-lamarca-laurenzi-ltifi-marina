@@ -49,6 +49,15 @@ public class Bookshelf implements Serializable {
     public boolean isEmpty() {return freeTiles == 30; }
 
     /**
+     * This method checks whether the Matrix has elements in the specified position
+     * @param i row index
+     * @param j column index
+     * @return true if the element is null, false otherwise
+     */
+    public boolean isEmpty(int i, int j) {
+        return items.get(i,j) == null;
+    }
+    /**
      *
      * Insert the array of items picks in column, the first element of the array is the first inserted
      * @param column in which you put pick

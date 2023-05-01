@@ -39,7 +39,7 @@ public class BoardTile implements Serializable {
 
 
     /**
-     * this method tells whether the tile is empty or not
+     * This method tells whether the tile is empty or not
      *
      * @return true if it's empty, false otherwise
      */
@@ -48,7 +48,7 @@ public class BoardTile implements Serializable {
     }
 
     /**
-     * this method is used to place an item on the tile if it's empty
+     * This method is used to place an item on the tile if it's empty
      * @param itemToPlace the reference to item that must be placed
      */
     public void placeItem(Item itemToPlace){
@@ -61,7 +61,7 @@ public class BoardTile implements Serializable {
 
     /**
      * This method is used to place an item on the tile without checking if it's empty
-     * @param itemToPlace
+     * @param itemToPlace the reference to item that must be placed
      */
     public void brutePlaceItem(Item itemToPlace){
         this.placedItem = itemToPlace;
@@ -69,7 +69,6 @@ public class BoardTile implements Serializable {
 
     /**
      * This method is used to draw the item from the tale if it's present
-     *
      * @return returns null if it's empty, returns the item otherwise
      */
     protected Item drawItem(){
@@ -84,7 +83,7 @@ public class BoardTile implements Serializable {
     }
 
     /**
-     * this method is used to check which item is placed one the tile
+     * This method is used to check which item is placed one the tile
      * It is useful in case the game runs in the mode without the GUI
      * Hence this allows the player to check the item without drawing
      *
@@ -105,12 +104,10 @@ public class BoardTile implements Serializable {
      *                          START OF GETTER METHODS
      ************************************************************************************************************ */
 
-
     public int getNumberOfPlayersSign() {
         return numberOfPlayersSign;
     }
     public Item getPlacedItem() {return placedItem; }
-
 
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
