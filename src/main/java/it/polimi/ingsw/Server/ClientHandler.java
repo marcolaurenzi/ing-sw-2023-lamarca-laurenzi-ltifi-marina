@@ -76,7 +76,7 @@ public class ClientHandler extends Thread {
             socketDataOutput.writeUTF(gson.toJson(toSend));
         }
     }
-    private void addObserver(Observer observer, String playerId) throws IOException {
+    private void addObserver(String playerId, Observer observer) throws IOException {
         Message toSend;
 
         Server.controller.addObserver(observer, playerId);
@@ -93,7 +93,7 @@ public class ClientHandler extends Thread {
                     case addPlayerToCreatedGame -> addPlayerToCreatedGame((String)received.getParameters().get(0));
                     //IMPORTANT gson sees all numbers as Double, so I have to cast it to Double and then use intValue()
                     case createNewGameAndAddPlayer -> createNewGameAndAddPlayer((String)received.getParameters().get(0), ((Double)received.getParameters().get(1)).intValue());
-                    case addObserver -> addObserver((Observer)received.getParameters().get(0), ((String)received.getParameters().get(1)));
+                    case addObserver -> addObserver((String)received.getParameters().get(0), ((Observer)received.getParameters().get(1)));
                 }
 
             } catch (IOException e) {

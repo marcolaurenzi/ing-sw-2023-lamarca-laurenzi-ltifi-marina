@@ -156,7 +156,14 @@ public class TUI implements RemoteUI, UI {
         return input.matches(regex);
     }
     protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+        return isSelectionWithinBounds(tilesSelection) && !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+    }
+    private boolean isSelectionWithinBounds(ArrayList<Coordinates> tilesSelection){
+        for(Coordinates coordinates : tilesSelection){
+            if(coordinates.getX() < 0 || coordinates.getX() > 9 || coordinates.getY() < 0 || coordinates.getY() > 9)
+                return false;
+        }
+        return true;
     }
     private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
         boolean ret = false;
@@ -194,6 +201,14 @@ public class TUI implements RemoteUI, UI {
         while (!acceptedInsertion) {
             do {
                 input = scanner.nextLine();
+
+                if(input.isEmpty()) {  //this is the case in which the player wants to insert the tiles in the order they were selected
+                    input = "0";
+                    for(int i = 1; i < tilesSelection.size(); i++) {
+                        input += " " + i;
+                    }
+                    break;
+                }
 
                 if (!isOrderValid(input, tilesSelection.size()) || !isIndexInRange(input, tilesSelection.size()))
                     System.out.println("Invalid input, please try again");
