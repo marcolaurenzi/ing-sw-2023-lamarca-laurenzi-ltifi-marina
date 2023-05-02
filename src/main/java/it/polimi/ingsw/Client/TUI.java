@@ -6,24 +6,24 @@ import it.polimi.ingsw.Utils.GameStatus;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
-public class CLI extends UnicastRemoteObject implements RemoteObserver {
-    static Scanner scanner;
-    static int gameId;
-    static Client client;
-    static String playerId;
-    static boolean isEnded;
-    static GameStatus gameStatus;
-    protected CLI() throws RemoteException {
+public class TUI implements RemoteUI, UI {
+    Scanner scanner;
+    int gameId;
+    Client client;
+    String playerId;
+    boolean isEnded;
+    GameStatus gameStatus;
+    protected TUI() throws RemoteException {
     }
 
-    public static void connectToServer() throws IOException {
+    public void connectToServer() {
         String userInput;
         System.out.print("Choose the connection mode (socket, RMI): ");
         userInput = scanner.nextLine();
@@ -35,8 +35,9 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         }
 
         try {
-            if (userInput.equals("RMI"))
-                client = new ClientRMI();
+            if (userInput.equals("RMI")) {
+                client = new ClientRMI(this);
+            }
             else if (userInput.equals("socket"))
                 client = new ClientSocket();
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
      * Asks the player the username and tells the controller to add it to the set of used playerIds
      * @throws IOException if there is an input/output error while reading the user's input.
      */
-    public static void askForUsername() throws IOException {
+    public void askForUsername() throws IOException {
         boolean isUsernameAlreadyInUse = true;
         String userInput;
 
@@ -76,8 +77,8 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
      * @throws AlreadyStartedGameException //TODO.
      * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
      */
-    public static void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException {
-        int maxPlayers = -1; // why do we need initialization?
+    public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException {
+        int maxPlayers = -1; // why do we need initialization? good domanda
         boolean success = false;
 
         while(!success) {
@@ -150,7 +151,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
             scanner.notifyAll();
         }
     }
-    private static boolean isCoordinateValid(String input) {
+    private boolean isCoordinateValid(String input) {
         String regex = "\\(\\s*\\d+\\s*;\\s*\\d+\\s*\\)";
         return input.matches(regex);
     }
@@ -326,7 +327,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         }
     }
 
-    private static void printBoard() {
+    private void printBoard() {
         Matrix<BoardTile> board = gameStatus.getBoard().getGameBoard();
         System.out.println("-----------");
         for(int i = 0; i < board.getColumnDimension(); i++) {
@@ -360,7 +361,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         }
         System.out.println("-----------");
     }
-    private static void printCommonGoals(){
+    private void printCommonGoals(){
         CommonGoalPointStack[] commonGoals = gameStatus.getCommonGoalPointStacks();
         for(int i = 0; i < commonGoals.length; i++) {
             System.out.printf("%d) %s: %d points, %s\n", i, commonGoals[i].getCommonGoal().printGoal(), commonGoals[i].getTopPoints(), gameStatus.getIsCommonGoalAlreadyAchieved()[i] ? "Achieved" : "Not achieved");
@@ -377,17 +378,17 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
             //TODO print stack
         }
     }
-    private static void listOfPlayers() {
+    private void listOfPlayers() {
         List<String> players = gameStatus.getPlayers();
         for(int i = 0; i < players.size(); i++) {
             System.out.printf("%d) %s\n", i, players.get(i));
         }
     }
-    private static void printPersonalGoal(){
+    private void printPersonalGoal(){
         System.out.printf("Your personal goal is: \n");
         printBookshelf(gameStatus.getPersonalGoal().getPersonalGoalBookshelf());
     }
-    private static void bookshelfToPrint() throws IOException {
+    private void bookshelfToPrint() throws IOException {
         List<Bookshelf> bookshelfList = gameStatus.getBookshelves();
         System.out.printf("This is the list of players: \n");
         listOfPlayers();
@@ -411,14 +412,14 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         System.out.printf("This is the bookshelf of %s: \n", gameStatus.getPlayers().get(userInput));
         printBookshelf(bookshelfList.get(userInput));
     }
-    private static void addObserver() throws IOException {
-        client.addObserver(new CLI(), playerId);
+    private void addObserver() throws IOException, NotBoundException {
+        client.addObserver(playerId);
     }
-    public void update(GameStatus gameStatus) throws RemoteException{
+    public void update(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
 
-    private static void executePlayerCommand(String command) throws IOException {
+    private void executePlayerCommand(String command) throws IOException {
         switch (command) {
             case "board" -> {
                 printBoard();
@@ -429,7 +430,7 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
             default -> System.out.println("Command not recognized");
         }
     }
-    private static void printBookshelf(Bookshelf bookshelf) {
+    private void printBookshelf(Bookshelf bookshelf) {
         System.out.println("--------");
         for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
             System.out.print("|");
@@ -462,10 +463,10 @@ public class CLI extends UnicastRemoteObject implements RemoteObserver {
         }
         System.out.println("--------");
     }
-    public static void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+    public void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         client.riempiTutto();
     }
-    public static void main(String[] args) throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+    public void run() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, NotBoundException {
         scanner = new Scanner(new InputStreamReader(System.in));
         System.out.println("Welcome to MyShelfie!");
 

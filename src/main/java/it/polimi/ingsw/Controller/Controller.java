@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Client.RemoteObserver;
+import it.polimi.ingsw.Client.RemoteClient;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatus;
@@ -12,13 +12,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static it.polimi.ingsw.Server.Server.controller;
+
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
     static List<Game> games = new ArrayList<>();
     static Game currentGame = null;
     static Integer currentGameId = 0;
     static String currentGameFirstPlayerId = null;
     static HashMap<String, Game> alreadyUsedPlayerIds = new HashMap<>();
-    static HashMap<String, RemoteObserver> listObserver = new HashMap<>();
+    static HashMap<String, Observer> listObserver = new HashMap<>();
+    static RemoteClient controllerConnection;
     public Controller() throws RemoteException {
         //thread.start();
     }
@@ -59,13 +62,13 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
 
         return currentGame.getId();
     }
-    public void addObserver(RemoteObserver observer, String playerId) throws RemoteException{
+    public void addObserver(Observer observer, String playerId) throws RemoteException{
         listObserver.put(playerId, observer);
     }
     public static void update(int gameID) throws RemoteException, MissingPlayerException {
         try {
             for (Player player : games.get(gameID).getPlayers()) {
-                listObserver.get(player.getPlayerID()).update(retrieveGameStatus(games.get(gameID), player.getPlayerID()));
+                controller.listObserver.get(player.getPlayerID()).update(controller.retrieveGameStatus(games.get(gameID), player.getPlayerID()));
             }
         } catch (MissingPlayerException e) {
             System.out.println("Missing player in game " + gameID);
@@ -73,10 +76,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             System.exit(-1);
         }
     }
-    public static void assignTurn(int game) throws RemoteException, MissingPlayerException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+    public static void assignTurn(int game) throws Exception {
         listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
     }
-    private static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
+    protected static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
         GameStatus gameStatus = new GameStatus(
                 game.getId(),
                 game.getCommonGoalPointStacks(),
@@ -88,7 +91,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getBoard());
         return gameStatus;
     }
-    public static void sendWinnerInfo(int gameId){
+    public static void sendWinnerInfo(int gameId) throws RemoteException {
         String winnerPlayer = null;
         int tempMaxPoints = 0;
         for(Player player : games.get(gameId).getPlayers()){
@@ -97,14 +100,8 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 winnerPlayer = player.getPlayerID();
             }
         }
-        try {
-            for (Player player : games.get(gameId).getPlayers()) {
-                listObserver.get(player.getPlayerID()).endGame(winnerPlayer);
-            }
-        } catch (RemoteException e) {
-            System.out.println("Missing player in game " + gameId);
-            e.printStackTrace();
-            System.exit(-1);
+        for (Player player : games.get(gameId).getPlayers()) {
+            listObserver.get(player.getPlayerID()).endGame(winnerPlayer);
         }
     }
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws RemoteException, PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException {

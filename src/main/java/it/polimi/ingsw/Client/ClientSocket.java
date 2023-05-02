@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.Controller.ObserverSocket;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.Message;
@@ -16,7 +17,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientSocket implements Client{
+public class ClientSocket implements Client {
     Socket socket;
     DataInputStream socketDataInput;
     DataOutputStream socketDataOutput;
@@ -82,10 +83,10 @@ public class ClientSocket implements Client{
         //return
         return  ((Double)response.getReturnValue()).intValue();
     }
-    public void addObserver(RemoteObserver observer, String playerId) throws IOException {
+    public void addObserver(String playerId) throws IOException {
         List<Object> parameters = new ArrayList<>();
-        parameters.add(observer);
         parameters.add(playerId);
+        parameters.add(new ObserverSocket());
         socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters)));
     }
 

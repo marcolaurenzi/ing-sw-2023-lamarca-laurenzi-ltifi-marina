@@ -5,6 +5,8 @@ import it.polimi.ingsw.Model.GameState.GameStateLastTurn;
 import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 
+import java.rmi.RemoteException;
+
 public class GameThread extends Thread{
     Game game;
     public GameThread(Game game){
@@ -29,6 +31,10 @@ public class GameThread extends Thread{
                 System.exit(-1);
             }
         }
-        Controller.sendWinnerInfo(game.getId());
+        try {
+            Controller.sendWinnerInfo(game.getId());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
