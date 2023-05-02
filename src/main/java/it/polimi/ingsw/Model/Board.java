@@ -28,7 +28,7 @@ public class Board implements Serializable {
      * @return returns the number of free sides in the range (0 to 4)
      */
     public int hasFree(int x, int y) throws VoidBoardTileException {
-        if(gameBoard.get(x,y).isEmpty() || gameBoard.get(x,y).getNumberOfPlayersSign() == 5) {
+        if(gameBoard.get(x,y).isEmpty()) {
             throw new VoidBoardTileException();
         }
         int freeSides = 0;

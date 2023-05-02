@@ -189,15 +189,6 @@ public class Player {
         totalPoints = getRewardPersonalGoal() + getRewardGeneralGoal() + getRewardCommonGoals();
     }
 
-    /**
-     *
-     * @param comando
-     */
-    public void applyCommand(String comando) {
-        switch (comando) {
-        }
-    }
-
     /* ************************************************************************************************************
      *                          END OF CUSTOM METHODS
      *                          START OF GETTER METHODS

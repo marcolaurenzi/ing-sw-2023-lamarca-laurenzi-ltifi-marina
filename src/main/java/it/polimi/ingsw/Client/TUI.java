@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatus;
+import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -156,7 +157,7 @@ public class TUI implements RemoteUI, UI {
         return input.matches(regex);
     }
     protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return isSelectionWithinBounds(tilesSelection) && !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+        return isSelectionWithinBounds(tilesSelection) && !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacent(tilesSelection) || areAllSameRowAndAdjacent(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
     }
     private boolean isSelectionWithinBounds(ArrayList<Coordinates> tilesSelection){
         for(Coordinates coordinates : tilesSelection){
@@ -176,8 +177,8 @@ public class TUI implements RemoteUI, UI {
         }
         return ret;
     }
-    private Boolean areAllSameColumnAndAdjacents(ArrayList<Coordinates> tilesSelection) {
-        Boolean ret = true;
+    private boolean areAllSameColumnAndAdjacent(ArrayList<Coordinates> tilesSelection) {
+        boolean ret = true;
 
         int x = tilesSelection.get(0).getX();
         int y = tilesSelection.get(0).getY();
@@ -308,8 +309,8 @@ public class TUI implements RemoteUI, UI {
         }
         System.out.printf("\n");
     }
-    private Boolean areAllSameRowAndAdjacents(ArrayList<Coordinates> tilesSelection) {
-        Boolean ret = true;
+    private Boolean areAllSameRowAndAdjacent(ArrayList<Coordinates> tilesSelection) {
+        boolean ret = true;
 
         int x = tilesSelection.get(0).getX();
         int y = tilesSelection.get(0).getY();
@@ -324,7 +325,7 @@ public class TUI implements RemoteUI, UI {
         return ret;
     }
     private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        Boolean ret = true;
+        boolean ret = true;
 
         for(int i = 0; i < tilesSelection.size(); i++) {
             if (board.hasFree(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()) == 0) {
@@ -343,38 +344,9 @@ public class TUI implements RemoteUI, UI {
     }
 
     private void printBoard() {
-        Matrix<BoardTile> board = gameStatus.getBoard().getGameBoard();
-        System.out.println("-----------");
-        for(int i = 0; i < board.getColumnDimension(); i++) {
-            System.out.print("|");
-            for (int j = 0; j < board.getRowDimension(); j++)
-                if (board.get(i, j).getPlacedItem() != null) {
-                    switch (board.get(i, j).getPlacedItem().getType()) {
-                        case CATS:
-                            System.out.print('0');
-                            break;
-                        case BOOKS:
-                            System.out.print('1');
-                            break;
-                        case GAMES:
-                            System.out.print('2');
-                            break;
-                        case FRAMES:
-                            System.out.print('3');
-                            break;
-                        case TROPHIES:
-                            System.out.print('4');
-                            break;
-                        case PLANTS:
-                            System.out.print('5');
-                            break;
-                    }
-                } else
-                    System.out.print('#');
-            System.out.print("| ");
-            System.out.print('\n');
-        }
-        System.out.println("-----------");
+        Board board = gameStatus.getBoard();
+        Utils.printBoard(board);
+
     }
     private void printCommonGoals(){
         CommonGoalPointStack[] commonGoals = gameStatus.getCommonGoalPointStacks();
@@ -447,36 +419,7 @@ public class TUI implements RemoteUI, UI {
     }
     private void printBookshelf(Bookshelf bookshelf) {
         System.out.println("--------");
-        for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
-            System.out.print("|");
-            for (int j = 0; j < bookshelf.getRowDimension(); j++)
-                if (bookshelf.get(i, j) != null) {
-                    switch (bookshelf.get(i, j).getType()) {
-                        case CATS:
-                            System.out.print('0');
-                            break;
-                        case BOOKS:
-                            System.out.print('1');
-                            break;
-                        case GAMES:
-                            System.out.print('2');
-                            break;
-                        case FRAMES:
-                            System.out.print('3');
-                            break;
-                        case TROPHIES:
-                            System.out.print('4');
-                            break;
-                        case PLANTS:
-                            System.out.print('5');
-                            break;
-                    }
-                } else
-                    System.out.print('#');
-            System.out.print("| ");
-            System.out.print('\n');
-        }
-        System.out.println("--------");
+        Utils.printBookshelf(bookshelf);
     }
     public void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         client.riempiTutto();

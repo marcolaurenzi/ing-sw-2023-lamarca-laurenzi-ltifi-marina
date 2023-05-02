@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Utils.Utils;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,10 @@ public class Item implements Serializable {
 
     public TypeEnum getType() {
         return type;
+    }
+
+    public String toString() {
+        return Utils.setColor("#", type.toString());
     }
 
 }

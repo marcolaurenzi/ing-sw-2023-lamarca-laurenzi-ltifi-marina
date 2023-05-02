@@ -31,7 +31,8 @@ public class BoardTest {
 
         for(int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
             for(int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
-                board.getGameBoard().get(i,j).placeItem(board.getItemDeck().draw());
+                if(board.getGameBoard().get(i,j).getNumberOfPlayersSign() != 5)
+                    board.getGameBoard().get(i,j).placeItem(board.getItemDeck().draw());
             }
         }
 
@@ -70,7 +71,7 @@ public class BoardTest {
         // looking for border tiles
         for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
             for (int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
-                if (board.isFreeNorth(i,j) || board.isFreeSouth(i,j) || board.isFreeEast(i,j) || board.isFreeWest(i,j)) {
+                if (!board.getGameBoard().get(i,j).isEmpty() && (board.isFreeNorth(i,j) || board.isFreeSouth(i,j) || board.isFreeEast(i,j) || board.isFreeWest(i,j))) {
                     unavailableTiles.add(new Coordinates(i,j));
                 }
             }

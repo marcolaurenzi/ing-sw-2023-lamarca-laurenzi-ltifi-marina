@@ -50,9 +50,8 @@ public class CommonGoal01 extends CommonGoal {
     }
 
     /**
-     *
+     * This method checks if the goal is achieved
      * @param bookshelf bookShelf
-     *
      * @return the return is true is the goal is achieved is false otherwise
      */
     @Override
@@ -115,6 +114,10 @@ public class CommonGoal01 extends CommonGoal {
         return groupCounter >= numberOfGroups;
     }
 
+    /**
+     * This method prints the goal
+     * @return the string to be printed
+     */
     @Override
     public String printGoal() {
         if(dim == 2){
