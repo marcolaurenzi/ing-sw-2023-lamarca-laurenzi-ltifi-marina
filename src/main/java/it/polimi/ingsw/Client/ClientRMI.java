@@ -50,7 +50,7 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
         remoteUI.update(game);
     }
     @Override
-    public void playTurn() throws RemoteException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, WrongConfigurationException, PickedColumnOutOfBoundsException, RemoteException, PickDoesntFitColumnException {
+    public void playTurn() throws IOException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         remoteUI.playTurn();
     }
     @Override

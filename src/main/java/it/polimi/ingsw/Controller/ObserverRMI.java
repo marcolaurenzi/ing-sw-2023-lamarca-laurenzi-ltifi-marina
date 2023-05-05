@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.RemoteClient;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatus;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class ObserverRMI implements Observer {
@@ -15,7 +16,7 @@ public class ObserverRMI implements Observer {
         client.update(game);
     }
     @Override
-    public void playTurn() throws RemoteException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+    public void playTurn() throws IOException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         client.playTurn();
     }
 

@@ -43,7 +43,7 @@ public class BoardTile implements Serializable {
      *
      * @return true if it's empty, false otherwise
      */
-    protected boolean isEmpty(){
+    public boolean isEmpty(){
         return placedItem == null;
     }
 

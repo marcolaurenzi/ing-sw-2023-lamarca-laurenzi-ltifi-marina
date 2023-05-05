@@ -115,11 +115,19 @@ public class TUI implements RemoteUI, UI {
             }
         }
     }
+    private char readNextChar() throws IOException {
+        byte[] buffer = new byte[1];
+        int res = System.in.read(buffer, 0, 1);
+        if(res == 0) {
+            throw new IOException();
+        }
 
-    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, RemoteException, PickDoesntFitColumnException {
+        else return (char)buffer[0];
+    }
+    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException {
         System.out.println("write playturn to play");
         synchronized (scanner) {
-            System.out.println("It's your turn!");
+/*            System.out.println("It's your turn!");
             ArrayList<Coordinates> coordinates = new ArrayList<>();
             do {
                 coordinates.clear();
@@ -144,13 +152,42 @@ public class TUI implements RemoteUI, UI {
                     coordinates.add(new Coordinates(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
                 }
                 if (!isSelectionValid(coordinates, gameStatus.getBoard())) {
+
                     System.out.println("Invalid selection, all the tiles must be next to each other and must have at least one side free, please try again");
                 }
             } while (!isSelectionValid(coordinates, gameStatus.getBoard()));
             insertTiles(coordinates);
+            */
+            BoardNavigator boardNavigator = new BoardNavigator(gameStatus.getBoard());
+            String input = "";
+            while(boardNavigator.getSelection().size() == 0) {
+                while (!input.equals("x")) {
+                    boardNavigator.print();
+                    System.out.println("Navigate into the board. (w, a, s, d to move; space to select; c to deselect; x to submit selection) : ");
+                    input = scanner.nextLine();
 
+                    if (input.length() != 1) {
+                        System.out.print("Input must be a single character: ");
+                        continue;
+                    }
+                    switch (input) {
+                        case "w" -> boardNavigator.moveUp();
+                        case "d" -> boardNavigator.moveRight();
+                        case "s" -> boardNavigator.moveDown();
+                        case "a" -> boardNavigator.moveLeft();
+                        case " " -> boardNavigator.select();
+                        case "c" -> boardNavigator.deselect();
+                        case "x" -> {
+                        } //do nothing
+                        default -> input = "";
+                    }
+                }
+            }
+            insertTiles(boardNavigator.getSelection());
             scanner.notifyAll();
         }
+
+
     }
     private boolean isCoordinateValid(String input) {
         String regex = "\\(\\s*\\d+\\s*;\\s*\\d+\\s*\\)";
@@ -232,7 +269,7 @@ public class TUI implements RemoteUI, UI {
         }
         printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
         System.out.print("Choose the column in which the tiles has to be inserted: ");
-        int column = -1;
+        /*int column = -1;
         boolean validInput = false;
         while(!validInput) {
             try {
@@ -246,8 +283,29 @@ public class TUI implements RemoteUI, UI {
             } catch (NumberFormatException f) {
                 System.out.print("Input must be a number (0 - 5) , try again: ");
             }
+        }*/
+
+        BookshelfNavigator bookshelfNavigator = new BookshelfNavigator(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
+        input = "";
+
+        while(!input.equals(" ")) {
+            bookshelfNavigator.print();
+            System.out.println("Navigate into the bookshelf. (a, d to move; space to select and submit): ");
+            input =  scanner.nextLine();
+
+            if(input.length() != 1) {
+                System.out.print("Input must be a single character: ");
+                continue;
+            }
+            switch (input) {
+                case "d" -> bookshelfNavigator.moveRight();
+                case "a" -> bookshelfNavigator.moveLeft();
+                case " " -> {}// do nothing
+                default -> input = "";
+            }
         }
-        client.pickAndInsertInBookshelf(tilesSelection, column, order, playerId);
+
+        client.pickAndInsertInBookshelf(tilesSelection, bookshelfNavigator.getColumn(), order, playerId);
     }
     private boolean isOrderValid(String input, int numberOfTiles) {
         String regex = "\\s*\\d+";
@@ -284,7 +342,7 @@ public class TUI implements RemoteUI, UI {
     private void printSelection(ArrayList<Coordinates> tilesSelection) {
         System.out.print("You selected the following tiles: ");
         for(int i = 0; i < tilesSelection.size(); i++) {
-            switch (gameStatus.getBoard().getGameBoard().get(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()).getPlacedItem().getType()) {
+            switch (gameStatus.getBoard().getGameBoard().get(tilesSelection.get(i).getY(), tilesSelection.get(i).getX()).getPlacedItem().getType()) {
 
                 case CATS:
                     System.out.print('0');

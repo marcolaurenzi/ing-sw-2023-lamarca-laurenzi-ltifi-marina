@@ -39,7 +39,6 @@ public class ClientSocket implements Client {
         if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.PlayerIdAlreadyInUseException))
             throw new PlayerIdAlreadyInUseException();
     }
-
     @Override
     public int addPlayerToCreatedGame(String playerId) throws AlreadyStartedGameException, CreateNewGameException, IOException {
         //sending message to server
@@ -60,7 +59,6 @@ public class ClientSocket implements Client {
         // todo migliorare il cast
         return ((Double)response.getReturnValue()).intValue();
     }
-
     @Override
     public int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, GameAlreadyCreatedException, AlreadyStartedGameException, IOException {
         //sending message to server
@@ -89,7 +87,6 @@ public class ClientSocket implements Client {
         parameters.add(new ObserverSocket());
         socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters)));
     }
-
     @Override
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException {
         //TODO no one uses socket

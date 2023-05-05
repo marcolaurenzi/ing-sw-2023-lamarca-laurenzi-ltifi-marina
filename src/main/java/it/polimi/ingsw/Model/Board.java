@@ -27,10 +27,7 @@ public class Board implements Serializable {
      * @param y is the second axis of the board representing the column of the tile
      * @return returns the number of free sides in the range (0 to 4)
      */
-    public int hasFree(int x, int y) throws VoidBoardTileException {
-        if(gameBoard.get(x,y).isEmpty()) {
-            throw new VoidBoardTileException();
-        }
+    public int hasFree(int x, int y) {
         int freeSides = 0;
         for(int i = x - 1; i < x + 2;i += 2){
             if(i < 0) continue;

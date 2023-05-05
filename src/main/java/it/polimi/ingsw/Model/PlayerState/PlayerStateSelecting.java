@@ -42,7 +42,7 @@ public class PlayerStateSelecting extends PlayerState{
 
         else {
             for (Coordinates coordinates : tilesSelection)
-                itemsToInsert.add(board.drawItem(coordinates.getX(), coordinates.getY()));
+                itemsToInsert.add(board.drawItem(coordinates.getY(), coordinates.getX()));
 
             insertPickInBookShelf(itemsToInsert, bookshelf, column, order);
         }

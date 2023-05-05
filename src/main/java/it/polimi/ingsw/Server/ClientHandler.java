@@ -49,7 +49,6 @@ public class ClientHandler extends Thread {
             socketDataOutput.writeUTF(gson.toJson(toSend));
 
         } catch (CreateNewGameException e) {
-
             toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.CreateNewGameException, null, null, null);
             socketDataOutput.writeUTF(gson.toJson(toSend));
         } catch (AlreadyStartedGameException e) {

@@ -186,7 +186,6 @@ public class Utils {
     }
 
     public static void printBookshelf(Bookshelf bookshelf) {
-        System.out.println("-----------");
         System.out.println("  0 1 2 3 4 ");
         for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
             System.out.print(i + "|");
@@ -196,8 +195,7 @@ public class Utils {
                 } else
                     System.out.print("# ");
             }
-            System.out.println("| \n");
+            System.out.print("| \n");
         }
-        System.out.println("-----------");
     }
 }

@@ -47,7 +47,7 @@ public abstract class PlayerState {
         boolean ret = false;
 
         for(int i = 0; i < tilesSelection.size(); i++) {
-            if (board.getGameBoard().get(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()).getPlacedItem() == null) {
+            if (board.getGameBoard().get(tilesSelection.get(i).getY(), tilesSelection.get(i).getX()).getPlacedItem() == null) {
                 ret = true;
                 break;
             }

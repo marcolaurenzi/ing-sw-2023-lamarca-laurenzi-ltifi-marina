@@ -16,4 +16,9 @@ public class Coordinates implements Serializable {
     public int getY() {
         return y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Coordinates && ((Coordinates) obj).getX() == this.getX() && (((Coordinates) obj).getY()) == this.getY();
+    }
 }
