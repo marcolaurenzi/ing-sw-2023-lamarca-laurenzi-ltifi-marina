@@ -400,7 +400,7 @@ public class TUI implements RemoteUI, UI {
         }
     }
 
-    private void printBoard() {
+    private void printBoard() throws IOException {
         Board board = gameStatus.getBoard();
         Utils.printBoard(board);
 
@@ -475,7 +475,6 @@ public class TUI implements RemoteUI, UI {
         }
     }
     private void printBookshelf(Bookshelf bookshelf) throws IOException {
-        System.out.println("--------");
         Utils.printBookshelf(bookshelf);
     }
     public void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {

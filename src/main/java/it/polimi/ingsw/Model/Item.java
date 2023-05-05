@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Utils.Utils;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -18,8 +19,22 @@ public class Item implements Serializable {
         return type;
     }
 
+    /**
+     * This method returns a string representing the item in the matrix (a string of # with the color of the item),
+     * the dimension of the string is defined in the configuration file
+     * @return a string representing the item in the matrix
+     */
     public String toString() {
-        return Utils.setColor("#####", type.toString());
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            for (int i = 0; i < Utils.getItemDimension(); i++) {
+                stringBuilder.append("#");
+            }
+        }
+        catch (IOException e) {
+            System.err.println("Error while reading the configuration file");
+        }
+        return Utils.setColor(stringBuilder.toString(), type.toString());
     }
 
 }

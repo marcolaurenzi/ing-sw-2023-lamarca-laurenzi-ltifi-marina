@@ -16,7 +16,7 @@ public class Utils {
 
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION
-         ************************************************************************************************************ */
+     ************************************************************************************************************ */
 
     private final static String configurationPath = "src/main/resources/configurations/";
     private final static String testFilesPath = "src/test/testFiles/";
@@ -154,27 +154,31 @@ public class Utils {
      *                         START OF COLOR FUNCTIONS
      ************************************************************************************************************ */
 
+    /**
+     * This function returns a string with the specified color
+     * @param string the string to color
+     * @param color the color
+     * @return the colored string
+     */
     public static String setColor(String string, String color) {
-        switch (color) {
-            case "PLANTS":
-                return ("\u001B[31m" + string + "\u001B[0m");
-            case "CATS":
-                return("\u001B[32m" + string + "\u001B[0m");
-            case "GAMES":
-                return("\u001B[33m" + string + "\u001B[0m");
-            case "FRAMES":
-                return("\u001B[34m" + string + "\u001B[0m");
-            case "TROPHIES":
-                return("\u001B[36m" + string + "\u001B[0m");
-            case "BOOKS":
-                return("\u001B[37m" + string + "\u001B[0m");
-            default:
-                return(string);
-        }
+        return switch (color) {
+            case "PLANTS" -> ("\u001B[31m" + string + "\u001B[0m");
+            case "CATS" -> ("\u001B[32m" + string + "\u001B[0m");
+            case "GAMES" -> ("\u001B[33m" + string + "\u001B[0m");
+            case "FRAMES" -> ("\u001B[34m" + string + "\u001B[0m");
+            case "TROPHIES" -> ("\u001B[36m" + string + "\u001B[0m");
+            case "BOOKS" -> ("\u001B[37m" + string + "\u001B[0m");
+            default -> (string);
+        };
 
     }
 
-    public static void printBoard(Board board) {
+    /**
+     * This function is used to print the board
+     * @param board the board to print
+     * @throws IOException if the file is not found
+     */
+    public static void printBoard(Board board) throws IOException {
         System.out.println("-----------------------------------------------------------------");
         System.out.println("  |  0  ||  1  ||  2  ||  3  ||  4  ||  5  ||  6  ||  7  ||  8  |");
         for(int i = 0; i < board.getGameBoard().getColumnDimension(); i++) {
@@ -193,32 +197,36 @@ public class Utils {
         System.out.println("-----------------------------------------------------------------");
     }
 
+    /**
+     * This function is used to print the bookshelf
+     * @param bookshelf the bookshelf to print
+     * @throws IOException if the file is not found
+     */
     public static void printBookshelf(Bookshelf bookshelf) throws IOException {
-        // todo
-        System.out.println("-----------");
 
-        System.out.println("  0 1 2 3 4 ");
+        System.out.println("-------------------------------------");
+        System.out.println("  |  0  ||  1  ||  2  ||  3  ||  4  |");
+
         for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
-            System.out.print(i + "|");
+            System.out.println("-------------------------------------");
+            System.out.print(i + " ");
             for (int j = 0; j < bookshelf.getRowDimension(); j++) {
                 if (bookshelf.get(i, j) != null) {
-                    StringBuilder item = new StringBuilder();
-                    for(int k = 0; k < Utils.getItemDimension(); k++) {
-                        item.append(bookshelf.get(i, j).toString());
-                    }
-                    System.out.print(item + " ");
+                    System.out.println("|" + bookshelf.get(i, j).toString() + "|");
                 } else {
-                    StringBuilder item = new StringBuilder();
-                    for(int k = 0; k < Utils.getItemDimension(); k++) {
-                        item.append("# ");
-                    }
-                    System.out.print(item + "c");
+                    // void item is made of 5 spaces
+                    System.out.print("|     |");
                 }
             }
-            System.out.print("| \n");
+            System.out.print("\n");
         }
+        System.out.println("-------------------------------------");
+
     }
 
+    /**
+     * This function is used to print the game's logo
+     */
     public static void printLogo() {
         try {
             File file = new File(Utils.getConfigurationPath() + "logo.txt");
