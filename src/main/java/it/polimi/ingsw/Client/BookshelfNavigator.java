@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Utils.Utils;
 
+import java.io.IOException;
 import java.sql.SQLOutput;
 
 public class BookshelfNavigator {
@@ -22,7 +23,7 @@ public class BookshelfNavigator {
             column--;
     }
 
-    public void print() {
+    public void print() throws IOException {
         Utils.printBookshelf(bookshelf);
         System.out.print("  ");
         for(int i = 0; i < bookshelf.getRowDimension(); i++) {

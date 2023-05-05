@@ -19,7 +19,7 @@ public class Item implements Serializable {
     }
 
     public String toString() {
-        return Utils.setColor("#", type.toString());
+        return Utils.setColor("#####", type.toString());
     }
 
 }

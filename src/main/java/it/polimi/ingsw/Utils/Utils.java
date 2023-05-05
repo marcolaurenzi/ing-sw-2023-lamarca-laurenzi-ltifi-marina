@@ -7,11 +7,10 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Item;
 import it.polimi.ingsw.Model.TypeEnum;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Utils {
 
@@ -115,6 +114,12 @@ public class Utils {
         writer.close();
     }
 
+    public static int getItemDimension() throws IOException {
+        Gson gson = new Gson();
+        String json = new String(Files.readAllBytes(Paths.get(Utils.getConfigurationPath() + "TUIConfig.json")));
+        return gson.fromJson(json, Configuration.class).getItemDimension();
+    }
+
     /* ************************************************************************************************************
      *                          END OF JSON FUNCTIONS
      *                         START OF CUSTOM FUNCTIONS
@@ -170,32 +175,60 @@ public class Utils {
     }
 
     public static void printBoard(Board board) {
-        System.out.println("-----------");
-        System.out.println("  0 1 2 3 4 5 6 7 8");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("  |  0  ||  1  ||  2  ||  3  ||  4  ||  5  ||  6  ||  7  ||  8  |");
         for(int i = 0; i < board.getGameBoard().getColumnDimension(); i++) {
-            System.out.print(i + "|");
+            System.out.println("-----------------------------------------------------------------");
+            System.out.print(i + " ");
             for (int j = 0; j < board.getGameBoard().getColumnDimension(); j++) {
                 if (board.getGameBoard().get(i, j).getPlacedItem() != null) {
-                    System.out.print(board.getGameBoard().get(i, j).getPlacedItem().toString() + " ");
-                } else
-                    System.out.print("# ");
+                    System.out.print("|" + board.getGameBoard().get(i, j).getPlacedItem().toString() + "|");
+                } else {
+                    // void item is made of 5 spaces
+                    System.out.print("|     |");
+                }
             }
-            System.out.println("| \n");
+            System.out.print("\n");
         }
-        System.out.println("-----------");
+        System.out.println("-----------------------------------------------------------------");
     }
 
-    public static void printBookshelf(Bookshelf bookshelf) {
+    public static void printBookshelf(Bookshelf bookshelf) throws IOException {
+        // todo
+        System.out.println("-----------");
+
         System.out.println("  0 1 2 3 4 ");
         for(int i = 0; i < bookshelf.getColumnDimension(); i++) {
             System.out.print(i + "|");
             for (int j = 0; j < bookshelf.getRowDimension(); j++) {
                 if (bookshelf.get(i, j) != null) {
-                    System.out.print(bookshelf.get(i, j).toString() + " ");
-                } else
-                    System.out.print("# ");
+                    StringBuilder item = new StringBuilder();
+                    for(int k = 0; k < Utils.getItemDimension(); k++) {
+                        item.append(bookshelf.get(i, j).toString());
+                    }
+                    System.out.print(item + " ");
+                } else {
+                    StringBuilder item = new StringBuilder();
+                    for(int k = 0; k < Utils.getItemDimension(); k++) {
+                        item.append("# ");
+                    }
+                    System.out.print(item + "c");
+                }
             }
             System.out.print("| \n");
+        }
+    }
+
+    public static void printLogo() {
+        try {
+            File file = new File(Utils.getConfigurationPath() + "logo.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                System.out.println(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

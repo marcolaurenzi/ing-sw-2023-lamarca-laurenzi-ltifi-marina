@@ -23,7 +23,6 @@ public class TUI implements RemoteUI, UI {
     GameStatus gameStatus;
     protected TUI() throws RemoteException {
     }
-
     public void connectToServer() {
         String userInput;
         System.out.print("Choose the connection mode (socket, RMI): ");
@@ -121,9 +120,9 @@ public class TUI implements RemoteUI, UI {
         if(res == 0) {
             throw new IOException();
         }
-
         else return (char)buffer[0];
     }
+
     public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException {
         System.out.println("write playturn to play");
         synchronized (scanner) {
@@ -229,7 +228,7 @@ public class TUI implements RemoteUI, UI {
 
         return ret;
     }
-    private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, RemoteException, PickDoesntFitColumnException, VoidBoardTileException {
+    private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException, VoidBoardTileException {
         String input = null;
         boolean acceptedInsertion = false;
         printSelection(tilesSelection);
@@ -429,7 +428,7 @@ public class TUI implements RemoteUI, UI {
             System.out.printf("%d) %s\n", i, players.get(i));
         }
     }
-    private void printPersonalGoal(){
+    private void printPersonalGoal() throws IOException {
         System.out.printf("Your personal goal is: \n");
         printBookshelf(gameStatus.getPersonalGoal().getPersonalGoalBookshelf());
     }
@@ -475,7 +474,7 @@ public class TUI implements RemoteUI, UI {
             default -> System.out.println("Command not recognized");
         }
     }
-    private void printBookshelf(Bookshelf bookshelf) {
+    private void printBookshelf(Bookshelf bookshelf) throws IOException {
         System.out.println("--------");
         Utils.printBookshelf(bookshelf);
     }
@@ -484,6 +483,7 @@ public class TUI implements RemoteUI, UI {
     }
     public void run() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, NotBoundException {
         scanner = new Scanner(new InputStreamReader(System.in));
+        Utils.printLogo();
         System.out.println("Welcome to MyShelfie!");
 
         connectToServer();

@@ -4,7 +4,13 @@ import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.PlayerState.*;
 import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 import org.junit.jupiter.api.Test;
+import org.objenesis.Objenesis;
+import org.objenesis.ObjenesisStd;
 
+import java.awt.print.Book;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,18 +35,24 @@ class PlayerTest {
         assertEquals(TypeEnum.CATS, bookshelf.get(3, 0).getType());
     }
 
+    /*
     @Test
-    void changeState() {
-        //TODO
-    }
+    public void testPrivateMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, MaxNumberOfPlayersException, IOException {
+        // Create an instance of the class
+        Player player = new Player("test", new Game(1, 4));
 
-    @Test
-    void getRewardCommonGoals() {
-        //TODO
-    }
+        // Use reflection to access the private method
+        Method privateMethod = Player.class.getDeclaredMethod("getRewardGeneralGoal");
+        privateMethod.setAccessible(true);
 
-    @Test
-    void getRewardFinalGoals() {
-        //TODO
+        // Invoke the private method
+        Objenesis objenesis = new ObjenesisStd();
+        Object instance = objenesis.newInstance(Player.class);
+        Object result = privateMethod.invoke(instance);
+
+        // Verify the result
+        assertEquals("Expected result", result);
     }
+     */
+
 }
