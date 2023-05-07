@@ -221,6 +221,14 @@ public class Game {
         return playersIds;
     }
 
+    public ArrayList<Integer> getPoints() {
+        ArrayList<Integer> playerPoints = new ArrayList<>();
+        for(Player player : players) {
+            playerPoints.add(player.getTotalPoints());
+        }
+        return playerPoints;
+    }
+
     public void setCurrentPlayerIndex(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }

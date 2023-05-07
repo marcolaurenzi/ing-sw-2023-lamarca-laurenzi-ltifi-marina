@@ -88,7 +88,7 @@ public abstract class PlayerState {
         Boolean ret = true;
 
         for(int i = 0; i < tilesSelection.size(); i++) {
-            if (board.hasFree(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()) == 0) {
+            if (board.hasFree(tilesSelection.get(i).getY(), tilesSelection.get(i).getX()) == 0) {
                 ret = false;
                 break;
             }

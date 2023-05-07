@@ -28,9 +28,9 @@ public class BookshelfNavigator {
         System.out.print("  ");
         for(int i = 0; i < bookshelf.getRowDimension(); i++) {
             if(i == column)
-                System.out.print("O ");
+                System.out.print("|^^^^^|");
             else
-                System.out.print("  ");
+                System.out.print("       ");
         }
         System.out.print("\n");
     }

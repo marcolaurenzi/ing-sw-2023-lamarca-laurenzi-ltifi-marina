@@ -183,6 +183,7 @@ public class TUI implements RemoteUI, UI {
                 }
             }
             insertTiles(boardNavigator.getSelection());
+            System.out.println("Turn ended");
             scanner.notifyAll();
         }
 
@@ -395,8 +396,8 @@ public class TUI implements RemoteUI, UI {
     }
 
     private void printPoints() {
-        for(Integer i : gameStatus.getPoints()) {
-            //TODO print points
+        for(int i = 0; i < gameStatus.getPlayers().size(); i++) {
+            System.out.printf("%d) %s: %d points \n", i, gameStatus.getPlayers().get(i), gameStatus.getPoints().get(i));
         }
     }
 
@@ -471,9 +472,12 @@ public class TUI implements RemoteUI, UI {
             }
             case "bookshelf" -> bookshelfToPrint();
             case "personal" -> printPersonalGoal();
+            case "common" -> printCommonGoals();
+            case "points" -> printPoints();
             default -> System.out.println("Command not recognized");
         }
     }
+
     private void printBookshelf(Bookshelf bookshelf) throws IOException {
         Utils.printBookshelf(bookshelf);
     }

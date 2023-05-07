@@ -125,4 +125,5 @@ public class CommonGoal01 extends CommonGoal {
         }
         return "CommonGoal1";
     }
+
 }

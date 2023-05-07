@@ -212,7 +212,7 @@ public class Utils {
             System.out.print(i + " ");
             for (int j = 0; j < bookshelf.getRowDimension(); j++) {
                 if (bookshelf.get(i, j) != null) {
-                    System.out.println("|" + bookshelf.get(i, j).toString() + "|");
+                    System.out.print("|" + bookshelf.get(i, j).toString() + "|");
                 } else {
                     // void item is made of 5 spaces
                     System.out.print("|     |");

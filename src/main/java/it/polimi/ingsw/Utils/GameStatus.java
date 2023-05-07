@@ -19,13 +19,14 @@ public class GameStatus implements Serializable {
     private ArrayList<Bookshelf> bookshelves;
     private final Board board;
     public GameStatus(int gameID, CommonGoalPointStack[] commonGoalPointStacks, boolean[] isCommonGoalAlreadyAchieved,PersonalGoal personalGoal,
-                      String currentPlayer, ArrayList<String> players, ArrayList<Bookshelf> bookshelves, Board board) {
+                      String currentPlayer, ArrayList<String> players, ArrayList<Integer> points, ArrayList<Bookshelf> bookshelves, Board board) {
         this.gameID = gameID;
         this.commonGoalPointStacks = commonGoalPointStacks;
         this.isCommonGoalAlreadyAchieved = isCommonGoalAlreadyAchieved;
         this.personalGoal = personalGoal;
         this.currentPlayer = currentPlayer;
         this.players = players;
+        this.points = points;
         this.bookshelves = bookshelves;
         this.board = board;
     }

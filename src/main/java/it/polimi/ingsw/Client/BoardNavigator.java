@@ -19,7 +19,7 @@ public class  BoardNavigator {
         this.cursor = new Coordinates(0, 0);
     }
     private boolean hasTileOneSideFree()  {
-        return board.hasFree(cursor.getX(), cursor.getY()) >= 1;
+        return board.hasFree(cursor.getY(), cursor.getX()) >= 1;
     }
     private boolean isTileEmpty() {
         return board.getGameBoard().get(cursor.getY(), cursor.getX()).isEmpty();
@@ -79,23 +79,29 @@ public class  BoardNavigator {
             cursor = new Coordinates(cursor.getX() + 1, cursor.getY());
     }
     public void print() {
-        System.out.println("-----------");
-        System.out.println("  0 1 2 3 4 5 6 7 8");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("  |  0  ||  1  ||  2  ||  3  ||  4  ||  5  ||  6  ||  7  ||  8  |");
         for(int i = 0; i < board.getGameBoard().getColumnDimension(); i++) {
-            System.out.print(i + "|");
-            for (int j = 0; j < board.getGameBoard().getRowDimension(); j++) {
+            System.out.println("-----------------------------------------------------------------");
+            System.out.print(i + " ");
+            for (int j = 0; j < board.getGameBoard().getColumnDimension(); j++) {
                 if(j == cursor.getX() && i == cursor.getY()) {
-                    System.out.print("O ");
-                } else if (selection.contains(new Coordinates(j, i))) {
-                    System.out.print("X ");
-                } else if (board.getGameBoard().get(i, j).getPlacedItem() != null) {
-                    System.out.print(board.getGameBoard().get(i, j).getPlacedItem().toString() + " ");
-                } else
-                    System.out.print("# ");
+                    System.out.print("{" + (board.getGameBoard().get(i, j).getPlacedItem() != null ? board.getGameBoard().get(i, j).getPlacedItem().toString() :  "     ") + "}");
+                }
+                else if(selection.contains(new Coordinates(j, i))){
+                    System.out.print("[" + (board.getGameBoard().get(i, j).getPlacedItem() != null ? board.getGameBoard().get(i, j).getPlacedItem().toString() :  "     ") + "]");
+                }
+
+                else if (board.getGameBoard().get(i, j).getPlacedItem() != null) {
+                    System.out.print("|" + board.getGameBoard().get(i, j).getPlacedItem().toString() + "|");
+                } else {
+                    // void item is made of 5 spaces
+                    System.out.print("|     |");
+                }
             }
-            System.out.println("| \n");
+            System.out.print("\n");
         }
-        System.out.println("-----------");
+        System.out.println("-----------------------------------------------------------------");
     }
 
     public ArrayList<Coordinates> getSelection() {

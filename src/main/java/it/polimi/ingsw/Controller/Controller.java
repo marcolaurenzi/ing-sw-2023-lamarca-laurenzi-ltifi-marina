@@ -87,6 +87,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getPersonalGoal(playerId),
                 game.getCurrentPlayer().getPlayerID(),
                 game.getPlayersId(),
+                game.getPoints(),
                 game.getBookshelves(),
                 game.getBoard());
         return gameStatus;
