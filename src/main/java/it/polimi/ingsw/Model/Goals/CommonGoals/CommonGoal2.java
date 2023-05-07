@@ -34,7 +34,12 @@ public class CommonGoal2 extends CommonGoal{
         }
         return true;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal2";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Fill all the 4 corners of your Bookshelf with Tiles of the same color");
     }
 }

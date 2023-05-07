@@ -2,9 +2,7 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Coordinates;
-import it.polimi.ingsw.Model.Exceptions.VoidBoardTileException;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class  BoardNavigator {
@@ -75,7 +73,7 @@ public class  BoardNavigator {
             cursor = new Coordinates(cursor.getX() - 1, cursor.getY());
     }
     public void moveRight() {
-        if(cursor.getY() < board.getGameBoard().getRowDimension() - 1)
+        if(cursor.getX() < board.getGameBoard().getRowDimension() - 1)
             cursor = new Coordinates(cursor.getX() + 1, cursor.getY());
     }
     public void print() {

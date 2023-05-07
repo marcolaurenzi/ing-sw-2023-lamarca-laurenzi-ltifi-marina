@@ -52,7 +52,12 @@ public class CommonGoal4 extends CommonGoal {
         }
         return counter >= 3;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal4";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Fill 3 columns of your Bookshelf with 6 consecutive Tiles with no more than 3 different colours in it");
     }
 }

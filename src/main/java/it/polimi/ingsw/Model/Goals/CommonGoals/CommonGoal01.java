@@ -119,11 +119,16 @@ public class CommonGoal01 extends CommonGoal {
      * @return the string to be printed
      */
     @Override
-    public String printGoal() {
+    public String getGoalName() {
         if(dim == 2){
             return "CommonGoal0";
         }
         return "CommonGoal1";
     }
 
+    @Override
+    public void printGoalDescription() {
+        System.out.printf("%d groups each containing at least %d tiles of the same type.\n", this.numberOfGroups, this.dim);
+        System.out.println("the tiles of one group can be different from those of another group");
+    }
 }

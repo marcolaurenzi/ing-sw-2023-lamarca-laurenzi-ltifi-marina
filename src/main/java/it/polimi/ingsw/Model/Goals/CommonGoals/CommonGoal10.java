@@ -84,7 +84,12 @@ public class CommonGoal10 extends CommonGoal{
         }
         return false;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal10";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Five tiles of the same color forming an x in the Bookshelf");
     }
 }

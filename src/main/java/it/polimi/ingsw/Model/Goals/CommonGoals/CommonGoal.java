@@ -25,5 +25,6 @@ public abstract class CommonGoal implements Serializable {
      * This method is used to print the name of the goal
      * @return
      */
-    public abstract String printGoal();
+    public abstract String getGoalName();
+    public abstract void printGoalDescription();
 }

@@ -86,7 +86,12 @@ public class CommonGoal3 extends CommonGoal{
         }
         return count >= 2;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal3";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Fill your Bookshelf with at least 2 perfect squares each composed by 4 tiles of the same color");
     }
 }

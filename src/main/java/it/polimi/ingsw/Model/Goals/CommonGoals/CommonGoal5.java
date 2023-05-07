@@ -41,7 +41,12 @@ public class CommonGoal5 extends CommonGoal{
         }
         return result;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal5";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Fill your Bookshelf with 8 Tiles of the same color");
     }
 }

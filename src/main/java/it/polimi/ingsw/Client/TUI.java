@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Model.Board;
+import it.polimi.ingsw.Model.Bookshelf;
+import it.polimi.ingsw.Model.CommonGoalPointStack;
+import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatus;
 import it.polimi.ingsw.Utils.Utils;
@@ -124,7 +127,10 @@ public class TUI implements RemoteUI, UI {
     }
 
     public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException {
-        System.out.println("write playturn to play");
+        if(gameStatus.isLastTurn()) {
+            System.out.println("This is the last turn!");
+        }
+        System.out.println("It is your turn write playturn to play");
         synchronized (scanner) {
 /*            System.out.println("It's your turn!");
             ArrayList<Coordinates> coordinates = new ArrayList<>();
@@ -231,11 +237,11 @@ public class TUI implements RemoteUI, UI {
     }
     private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException, VoidBoardTileException {
         String input = null;
-        boolean acceptedInsertion = false;
-        printSelection(tilesSelection);
-        System.out.println("This is your bookshelf: ");
-        printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
-        System.out.println("Please provide the indexes in order corresponding to your tiles selection: ");
+        /*boolean acceptedInsertion = false;
+        printSelection(tilesSelection);*/
+        //System.out.println("This is your bookshelf: ");
+        //printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
+        /*System.out.println("Please provide the indexes in order corresponding to your tiles selection: ");
         while (!acceptedInsertion) {
             do {
                 input = scanner.nextLine();
@@ -266,9 +272,9 @@ public class TUI implements RemoteUI, UI {
         int[] order = new int[stringNumbers.length];
         for (int i = 0; i < stringNumbers.length; i++) {
             order[i] = Integer.parseInt(stringNumbers[i]);
-        }
-        printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
-        System.out.print("Choose the column in which the tiles has to be inserted: ");
+        }*/
+        //printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
+        //System.out.print("Choose the column in which the tiles has to be inserted: ");
         /*int column = -1;
         boolean validInput = false;
         while(!validInput) {
@@ -304,7 +310,10 @@ public class TUI implements RemoteUI, UI {
                 default -> input = "";
             }
         }
-
+        int[] order = new int[tilesSelection.size()];
+        for (int i = 0; i < tilesSelection.size(); i++) {
+            order[i] = i;
+        }
         client.pickAndInsertInBookshelf(tilesSelection, bookshelfNavigator.getColumn(), order, playerId);
     }
     private boolean isOrderValid(String input, int numberOfTiles) {
@@ -409,7 +418,7 @@ public class TUI implements RemoteUI, UI {
     private void printCommonGoals(){
         CommonGoalPointStack[] commonGoals = gameStatus.getCommonGoalPointStacks();
         for(int i = 0; i < commonGoals.length; i++) {
-            System.out.printf("%d) %s: %d points, %s\n", i, commonGoals[i].getCommonGoal().printGoal(), commonGoals[i].getTopPoints(), gameStatus.getIsCommonGoalAlreadyAchieved()[i] ? "Achieved" : "Not achieved");
+            System.out.printf("%d) %s: %d points, %s\n", i, commonGoals[i].getCommonGoal().getGoalName(), commonGoals[i].getTopPoints(), gameStatus.getIsCommonGoalAlreadyAchieved()[i] ? "Achieved" : "Not achieved");
         }
     }
     public void endGame(String winnerPlayer){
@@ -472,9 +481,18 @@ public class TUI implements RemoteUI, UI {
             }
             case "bookshelf" -> bookshelfToPrint();
             case "personal" -> printPersonalGoal();
-            case "common" -> printCommonGoals();
+            case "common" -> {
+                printCommonGoals();
+                printCommonGoalsDescription();
+            }
             case "points" -> printPoints();
             default -> System.out.println("Command not recognized");
+        }
+    }
+    private void printCommonGoalsDescription() {
+        for(CommonGoalPointStack commonGoalPointStack : gameStatus.getCommonGoalPointStacks()) {
+            System.out.printf("%s\n", commonGoalPointStack.getCommonGoal().getGoalName());
+            commonGoalPointStack.getCommonGoal().printGoalDescription();
         }
     }
 

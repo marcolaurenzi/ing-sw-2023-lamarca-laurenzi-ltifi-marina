@@ -18,8 +18,9 @@ public class GameStatus implements Serializable {
     private ArrayList<Integer> points;
     private ArrayList<Bookshelf> bookshelves;
     private final Board board;
+    private boolean isLastTurn;
     public GameStatus(int gameID, CommonGoalPointStack[] commonGoalPointStacks, boolean[] isCommonGoalAlreadyAchieved,PersonalGoal personalGoal,
-                      String currentPlayer, ArrayList<String> players, ArrayList<Integer> points, ArrayList<Bookshelf> bookshelves, Board board) {
+                      String currentPlayer, ArrayList<String> players, ArrayList<Integer> points, ArrayList<Bookshelf> bookshelves, Board board, boolean isLastTurn) {
         this.gameID = gameID;
         this.commonGoalPointStacks = commonGoalPointStacks;
         this.isCommonGoalAlreadyAchieved = isCommonGoalAlreadyAchieved;
@@ -29,6 +30,10 @@ public class GameStatus implements Serializable {
         this.points = points;
         this.bookshelves = bookshelves;
         this.board = board;
+        this.isLastTurn = isLastTurn;
+    }
+    public boolean isLastTurn() {
+        return isLastTurn;
     }
 
     public int getGameID() {

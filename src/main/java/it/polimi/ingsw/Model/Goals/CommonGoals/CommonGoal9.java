@@ -48,7 +48,12 @@ public class CommonGoal9 extends CommonGoal {
 
         return validLines >= 2;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal9";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Two rows each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.");
     }
 }

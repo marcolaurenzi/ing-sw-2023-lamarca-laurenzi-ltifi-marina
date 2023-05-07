@@ -47,7 +47,12 @@ public class CommonGoal8 extends CommonGoal {
 
         return validColumns >= 2;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal8";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Two columns each formed by 6 different types of tiles");
     }
 }

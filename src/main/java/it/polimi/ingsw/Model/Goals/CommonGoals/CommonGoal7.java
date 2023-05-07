@@ -9,7 +9,7 @@ import java.util.Set;
  * This class represents the CommonGoal number 7
  * (based on the official Rulebook file starting with number 0 from the top left corner and finishing with number 11 in the bottom right corner)
  * saying that a player must have, to achieve the goal, 4 different rows
- * of 6 consecutive Tiles with no more than 3 different colours in it
+ * of 5 consecutive Tiles with no more than 3 different colours in it
  */
 public class CommonGoal7 extends CommonGoal {
 
@@ -54,7 +54,12 @@ public class CommonGoal7 extends CommonGoal {
 
         return counter >= 4;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal7";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("you must have 4 different rows of 5 consecutive Tiles with no more than 3 different colours in it");
     }
 }

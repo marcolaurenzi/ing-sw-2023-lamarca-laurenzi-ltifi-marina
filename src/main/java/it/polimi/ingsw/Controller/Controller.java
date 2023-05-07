@@ -3,6 +3,7 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Client.RemoteClient;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.*;
+import it.polimi.ingsw.Model.GameState.GameStateLastTurn;
 import it.polimi.ingsw.Utils.GameStatus;
 
 import java.io.IOException;
@@ -89,7 +90,9 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getPlayersId(),
                 game.getPoints(),
                 game.getBookshelves(),
-                game.getBoard());
+                game.getBoard(),
+                game.getGameState() instanceof GameStateLastTurn ? true : false
+        );
         return gameStatus;
     }
     public static void sendWinnerInfo(int gameId) throws RemoteException {

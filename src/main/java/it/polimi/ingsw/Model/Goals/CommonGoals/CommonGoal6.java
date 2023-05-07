@@ -83,7 +83,12 @@ public class CommonGoal6 extends CommonGoal{
 
         return count == 5;
     }
-    public String printGoal() {
+    public String getGoalName() {
         return "CommonGoal6";
+    }
+
+    @Override
+    public void printGoalDescription() {
+        System.out.println("Fill one of the 4 diagonals with 5 tiles of the same color");
     }
 }
