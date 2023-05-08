@@ -18,8 +18,8 @@ public class Utils {
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
 
-    private final static String configurationPath = "src/main/resources/configurations/";
-    private final static String testFilesPath = "src/test/testFiles/";
+    private final static String configurationPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "configurations" + File.separator;
+    private final static String testFilesPath = "src" + File.separator + "test" + File.separator + "testFiles" + File.separator;
 
     /* ************************************************************************************************************
      *                          END OF ATTRIBUTES DECLARATION
@@ -99,7 +99,7 @@ public class Utils {
         Bookshelf[] bookshelves = gson.fromJson(jsonString.toString(), Bookshelf[].class);
 
         return bookshelves[index];
-        // todo try making it work
+        // todo farla funzionale
     }
 
     /**
@@ -185,8 +185,7 @@ public class Utils {
                 if (board.getGameBoard().get(i, j).getPlacedItem() != null) {
                     System.out.print("|" + board.getGameBoard().get(i, j).getPlacedItem().toString() + "|");
                 } else {
-                    // void item is made of 5 spaces
-                    System.out.print("|     |");
+                    System.out.print("|" + Item.voidToString() + "|");
                 }
             }
             System.out.print("\n");
@@ -199,7 +198,7 @@ public class Utils {
      * @param bookshelf the bookshelf to print
      * @throws IOException if the file is not found
      */
-    public static void printBookshelf(Bookshelf bookshelf) throws IOException {
+    public static void printBookshelf(Bookshelf bookshelf) {
 
         System.out.println("-------------------------------------");
         System.out.println("  |  0  ||  1  ||  2  ||  3  ||  4  |");
@@ -211,8 +210,7 @@ public class Utils {
                 if (bookshelf.get(i, j) != null) {
                     System.out.print("|" + bookshelf.get(i, j).toString() + "|");
                 } else {
-                    // void item is made of 5 spaces
-                    System.out.print("|     |");
+                    System.out.print("|" + Item.voidToString() + "|");
                 }
             }
             System.out.print("\n");

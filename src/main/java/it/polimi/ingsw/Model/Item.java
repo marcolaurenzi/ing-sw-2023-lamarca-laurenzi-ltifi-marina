@@ -35,4 +35,21 @@ public class Item implements Serializable {
         return Utils.setColor(stringBuilder.toString(), type.toString());
     }
 
+    /**
+     * This method returns a string representing a void item in the matrix (a string of spaces),
+     * the dimension of the string is defined in the configuration file
+     * This method is static because it is used to print the matrix when the item is null
+     * @return a string representing a void item in the matrix
+     */
+    public static String voidToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            stringBuilder.append(" ".repeat(Math.max(0, Utils.getItemDimension())));
+        }
+        catch (IOException e) {
+            System.err.println("Error while reading the configuration file");
+        }
+        return stringBuilder.toString();
+    }
+
 }
