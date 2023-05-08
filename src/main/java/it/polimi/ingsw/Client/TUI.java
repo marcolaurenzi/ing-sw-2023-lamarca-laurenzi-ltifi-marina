@@ -13,17 +13,16 @@ import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
 public class TUI implements RemoteUI, UI {
-    Scanner scanner;
-    int gameId;
-    Client client;
-    String playerId;
-    boolean isEnded;
-    GameStatus gameStatus;
+    private Scanner scanner;
+    private int gameId;
+    private Client client;
+    private String playerId;
+    private boolean isEnded;
+    private GameStatus gameStatus;
     protected TUI() throws RemoteException {
     }
     public void connectToServer() {
@@ -81,7 +80,7 @@ public class TUI implements RemoteUI, UI {
      * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
      */
     public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException {
-        int maxPlayers = -1; // why do we need initialization? good domanda
+        int maxPlayers = -1; // why do we need initialization?
         boolean success = false;
 
         while(!success) {
@@ -117,52 +116,12 @@ public class TUI implements RemoteUI, UI {
             }
         }
     }
-    private char readNextChar() throws IOException {
-        byte[] buffer = new byte[1];
-        int res = System.in.read(buffer, 0, 1);
-        if(res == 0) {
-            throw new IOException();
-        }
-        else return (char)buffer[0];
-    }
-
     public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException {
         if(gameStatus.isLastTurn()) {
             System.out.println("This is the last turn!");
         }
         System.out.println("It is your turn write playturn to play");
         synchronized (scanner) {
-/*            System.out.println("It's your turn!");
-            ArrayList<Coordinates> coordinates = new ArrayList<>();
-            do {
-                coordinates.clear();
-                List<String> coordinateString = new ArrayList<>();
-                while (coordinateString.size() < 3) {
-                    System.out.print("Enter a coordinate in the format (a;b) (or press Enter to finish): ");
-                    String input = scanner.nextLine();
-
-                    if (input.isEmpty()) {
-                        break;
-                    }
-
-                    if (!isCoordinateValid(input)) {
-                        System.out.println("Invalid coordinate format. Make sure to follow the correct format.");
-                        continue;
-                    }
-
-                    coordinateString.add(input);
-                }
-                for (String coordinate : coordinateString) {
-                    String[] values = coordinate.replaceAll("[()\\s]", "").split(";");
-                    coordinates.add(new Coordinates(Integer.parseInt(values[0]), Integer.parseInt(values[1])));
-                }
-                if (!isSelectionValid(coordinates, gameStatus.getBoard())) {
-
-                    System.out.println("Invalid selection, all the tiles must be next to each other and must have at least one side free, please try again");
-                }
-            } while (!isSelectionValid(coordinates, gameStatus.getBoard()));
-            insertTiles(coordinates);
-            */
             BoardNavigator boardNavigator = new BoardNavigator(gameStatus.getBoard());
             String input = "";
             while(boardNavigator.getSelection().size() == 0) {
@@ -183,6 +142,8 @@ public class TUI implements RemoteUI, UI {
                         case " " -> boardNavigator.select();
                         case "c" -> boardNavigator.deselect();
                         case "x" -> {
+                            if(boardNavigator.getSelection().size() == 0)
+                                input = "";
                         } //do nothing
                         default -> input = "";
                     }
@@ -195,108 +156,14 @@ public class TUI implements RemoteUI, UI {
 
 
     }
-    private boolean isCoordinateValid(String input) {
-        String regex = "\\(\\s*\\d+\\s*;\\s*\\d+\\s*\\)";
-        return input.matches(regex);
-    }
-    protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return isSelectionWithinBounds(tilesSelection) && !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacent(tilesSelection) || areAllSameRowAndAdjacent(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
-    }
-    private boolean isSelectionWithinBounds(ArrayList<Coordinates> tilesSelection){
-        for(Coordinates coordinates : tilesSelection){
-            if(coordinates.getX() < 0 || coordinates.getX() > 9 || coordinates.getY() < 0 || coordinates.getY() > 9)
-                return false;
-        }
-        return true;
-    }
-    private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
-        boolean ret = false;
 
-        for(int i = 0; i < tilesSelection.size(); i++) {
-            if (board.getGameBoard().get(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()).getPlacedItem() == null) {
-                ret = true;
-                break;
-            }
-        }
-        return ret;
-    }
-    private boolean areAllSameColumnAndAdjacent(ArrayList<Coordinates> tilesSelection) {
-        boolean ret = true;
-
-        int x = tilesSelection.get(0).getX();
-        int y = tilesSelection.get(0).getY();
-
-        for(int i = 0; i < tilesSelection.size(); i++) {
-            if (tilesSelection.get(i).getY() != y || tilesSelection.get(i).getX() != x + i) {
-                ret = false;
-                break;
-            }
-        }
-
-        return ret;
-    }
     private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException, VoidBoardTileException {
-        String input = null;
-        /*boolean acceptedInsertion = false;
-        printSelection(tilesSelection);*/
-        //System.out.println("This is your bookshelf: ");
-        //printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
-        /*System.out.println("Please provide the indexes in order corresponding to your tiles selection: ");
-        while (!acceptedInsertion) {
-            do {
-                input = scanner.nextLine();
+        String input = "";
+        BookshelfNavigator bookshelfNavigator = new BookshelfNavigator(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)), tilesSelection.size());
 
-                if(input.isEmpty()) {  //this is the case in which the player wants to insert the tiles in the order they were selected
-                    input = "0";
-                    for(int i = 1; i < tilesSelection.size(); i++) {
-                        input += " " + i;
-                    }
-                    break;
-                }
-
-                if (!isOrderValid(input, tilesSelection.size()) || !isIndexInRange(input, tilesSelection.size()))
-                    System.out.println("Invalid input, please try again");
-
-            } while (!isOrderValid(input, tilesSelection.size()) || !isIndexInRange(input, tilesSelection.size()));
-            System.out.print("This is the order in which the tiles will be inserted: ");
-            printItemsInOrder(tilesSelection, input);
-            System.out.println("Are you sure you want to proceed? y to accept");
-            String answer = scanner.nextLine();
-            if (answer.equals("y") || answer.equals("Y")){
-                acceptedInsertion = true;
-            } else {
-                System.out.println("Please provide the indexes in order corresponding to your tiles selection: ");
-            }
-        }
-        String[] stringNumbers = input.split(" ");
-        int[] order = new int[stringNumbers.length];
-        for (int i = 0; i < stringNumbers.length; i++) {
-            order[i] = Integer.parseInt(stringNumbers[i]);
-        }*/
-        //printBookshelf(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
-        //System.out.print("Choose the column in which the tiles has to be inserted: ");
-        /*int column = -1;
-        boolean validInput = false;
-        while(!validInput) {
-            try {
-                column = Integer.parseInt(scanner.nextLine());
-
-                if (column >= 0 && column < 5)
-                    validInput = true;
-                else
-                    System.out.print("Input must be a number (0 - 5) , try again: ");
-
-            } catch (NumberFormatException f) {
-                System.out.print("Input must be a number (0 - 5) , try again: ");
-            }
-        }*/
-
-        BookshelfNavigator bookshelfNavigator = new BookshelfNavigator(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)));
-        input = "";
-
-        while(!input.equals(" ")) {
+        while(!input.equals("x")) {
             bookshelfNavigator.print();
-            System.out.println("Navigate into the bookshelf. (a, d to move; space to select and submit): ");
+            System.out.println("Navigate into the bookshelf. (a, d to move; space to select and x to submit): ");
             input =  scanner.nextLine();
 
             if(input.length() != 1) {
@@ -306,7 +173,11 @@ public class TUI implements RemoteUI, UI {
             switch (input) {
                 case "d" -> bookshelfNavigator.moveRight();
                 case "a" -> bookshelfNavigator.moveLeft();
-                case " " -> {}// do nothing
+                case " " -> bookshelfNavigator.select();
+                case "x" -> {
+                    if (bookshelfNavigator.getColumn() == -1)
+                        input = "";
+                }
                 default -> input = "";
             }
         }
@@ -315,93 +186,6 @@ public class TUI implements RemoteUI, UI {
             order[i] = i;
         }
         client.pickAndInsertInBookshelf(tilesSelection, bookshelfNavigator.getColumn(), order, playerId);
-    }
-    private boolean isOrderValid(String input, int numberOfTiles) {
-        String regex = "\\s*\\d+";
-        for (int i = 1; i < numberOfTiles; i++) {
-            regex += "\\s+\\d+";                 //regex is being built to match the input format
-        }
-        regex += "\\s*";
-        return input.matches(regex);
-    }
-    private void printItemsInOrder(ArrayList<Coordinates> tilesSelection, String input) {
-        String[] stringNumbers = input.split(" "); //----->>> gucci cane sas     |||| 2 0 1
-        int[] order = new int[stringNumbers.length];
-        for (int i = 0; i < stringNumbers.length; i++) {
-            order[i] = Integer.parseInt(stringNumbers[i]);
-        }
-        ArrayList<Coordinates> orderedPickedItems = new ArrayList<>();
-        for(int i = 0; i < tilesSelection.size(); i++)
-            orderedPickedItems.add(null);
-        int i = 0;
-        for (int n : order) {
-            orderedPickedItems.set(i, tilesSelection.get(n));
-            i++;
-        }
-        printSelection(orderedPickedItems);
-    }
-    private boolean isIndexInRange(String input, int numberOfTiles) {
-        String[] stringNumbers = input.split(" ");
-        HashSet<Integer> numbers = new HashSet<>();
-        for (int i = 0; i < stringNumbers.length; i++) {
-            numbers.add(Integer.parseInt(stringNumbers[i]));
-        }
-        return numbers.size() == numberOfTiles && numbers.stream().allMatch(n -> n >= 0 && n < numberOfTiles );
-    }
-    private void printSelection(ArrayList<Coordinates> tilesSelection) {
-        System.out.print("You selected the following tiles: ");
-        for(int i = 0; i < tilesSelection.size(); i++) {
-            switch (gameStatus.getBoard().getGameBoard().get(tilesSelection.get(i).getY(), tilesSelection.get(i).getX()).getPlacedItem().getType()) {
-
-                case CATS:
-                    System.out.print('0');
-                    break;
-                case BOOKS:
-                    System.out.print('1');
-                    break;
-                case GAMES:
-                    System.out.print('2');
-                    break;
-                case FRAMES:
-                    System.out.print('3');
-                    break;
-                case TROPHIES:
-                    System.out.print('4');
-                    break;
-                case PLANTS:
-                    System.out.print('5');
-                    break;
-            }
-            System.out.printf(" ");
-        }
-        System.out.printf("\n");
-    }
-    private Boolean areAllSameRowAndAdjacent(ArrayList<Coordinates> tilesSelection) {
-        boolean ret = true;
-
-        int x = tilesSelection.get(0).getX();
-        int y = tilesSelection.get(0).getY();
-
-        for(int i = 1; i < tilesSelection.size(); i++) {
-            if (tilesSelection.get(i).getX() != x || tilesSelection.get(i).getY() != y + i ) {
-                ret = false;
-                break;
-            }
-        }
-
-        return ret;
-    }
-    private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        boolean ret = true;
-
-        for(int i = 0; i < tilesSelection.size(); i++) {
-            if (board.hasFree(tilesSelection.get(i).getX(), tilesSelection.get(i).getY()) == 0) {
-                ret = false;
-                break;
-            }
-        }
-
-        return ret;
     }
 
     private void printPoints() {
@@ -426,12 +210,7 @@ public class TUI implements RemoteUI, UI {
         isEnded = true;
         System.out.println("The winner is player: " + winnerPlayer);
     }
-    private void printStack() {
-        CommonGoalPointStack[] stack = gameStatus.getCommonGoalPointStacks();
-        for(int i = 0; i < stack.length; i++) {
-            //TODO print stack
-        }
-    }
+
     private void listOfPlayers() {
         List<String> players = gameStatus.getPlayers();
         for(int i = 0; i < players.size(); i++) {
@@ -439,12 +218,12 @@ public class TUI implements RemoteUI, UI {
         }
     }
     private void printPersonalGoal() throws IOException {
-        System.out.printf("Your personal goal is: \n");
+        System.out.print("Your personal goal is: \n");
         printBookshelf(gameStatus.getPersonalGoal().getPersonalGoalBookshelf());
     }
     private void bookshelfToPrint() throws IOException {
         List<Bookshelf> bookshelfList = gameStatus.getBookshelves();
-        System.out.printf("This is the list of players: \n");
+        System.out.print("This is the list of players: \n");
         listOfPlayers();
         System.out.printf("Which player books do you want to see? (0-%d): \n", bookshelfList.size() - 1);
 
@@ -499,10 +278,7 @@ public class TUI implements RemoteUI, UI {
     private void printBookshelf(Bookshelf bookshelf) throws IOException {
         Utils.printBookshelf(bookshelf);
     }
-    public void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
-        client.riempiTutto();
-    }
-    public void run() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, NotBoundException {
+    public void run() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException,  NotBoundException {
         scanner = new Scanner(new InputStreamReader(System.in));
         Utils.printLogo();
         System.out.println("Welcome to MyShelfie!");
@@ -514,10 +290,8 @@ public class TUI implements RemoteUI, UI {
 
         while(!isEnded) {
             synchronized (scanner){
+                System.out.println("Write one of the commands (board, bookshelf, personal, common, points): ");
                 String command = scanner.nextLine();
-                if(command.equals("truccomagico")) {
-                    riempiTutto();
-                }
                 if(!command.equals("playturn")) {
                     executePlayerCommand(command);
                 } else if(gameStatus.getCurrentPlayer().equals(playerId)) {

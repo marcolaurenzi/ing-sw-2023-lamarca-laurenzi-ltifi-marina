@@ -63,7 +63,9 @@ public class Utils {
     /**
      * This function loads a bookshelf from a json file containing only one bookshelf
      * @param filePath the path of the file
-     * @return the bookshelf
+     * @return the bookshelf        Gson gson = new Gson();
+        String json = new String(Files.readAllBytes(Paths.get(Utils.getConfigurationPath() + "TUIConfig.json")));
+        return gson.fromJson(json, Configuration.class).getItemDimension();
      * @throws IOException if the file is not found
      */
     public static Bookshelf loadBookshelfFromFile(String filePath) throws IOException {
@@ -115,9 +117,11 @@ public class Utils {
     }
 
     public static int getItemDimension() throws IOException {
-        Gson gson = new Gson();
+        /* Gson gson = new Gson();
         String json = new String(Files.readAllBytes(Paths.get(Utils.getConfigurationPath() + "TUIConfig.json")));
-        return gson.fromJson(json, Configuration.class).getItemDimension();
+        return gson.fromJson(json, Configuration.class).getItemDimension(); */
+
+        return 5;
     }
 
     /* ************************************************************************************************************
