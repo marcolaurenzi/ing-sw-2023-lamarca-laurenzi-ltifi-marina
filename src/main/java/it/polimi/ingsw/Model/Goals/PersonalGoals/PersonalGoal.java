@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * This class is an abstract class representing all the
- * Personal Goals the game has, and implements the Goal interface
- * that gives it the isAchieved() method to check whether the
- * goal is achieved or not
+ * This abstract class represents all the
+ * Personal Goals in the game and implements the Goal interface
+ * which provides the isAchieved() method.
  */
 public class PersonalGoal implements Serializable {
     private Bookshelf personalGoal;

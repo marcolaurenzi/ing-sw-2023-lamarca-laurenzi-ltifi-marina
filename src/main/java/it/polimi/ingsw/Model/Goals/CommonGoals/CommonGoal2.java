@@ -4,16 +4,15 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 
 /**
- * This class represents the CommonGoal number 2
+ * This class represents the CommonGoal 2
  * This goal is achieved when there are 4 tiles of the same ElementType placed in the 4 corners of the player's Bookshelf
  */
 public class CommonGoal2 extends CommonGoal{
 
     /**
-     * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     *
-     * @return the method returns true weather the Goals is Achieved and false otherwise
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {

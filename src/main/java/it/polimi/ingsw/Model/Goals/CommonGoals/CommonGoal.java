@@ -5,9 +5,9 @@ import it.polimi.ingsw.Model.Bookshelf;
 import java.io.Serializable;
 
 /**
- * This class is an abstract class representing all the
- * CommonGoals the game has, and implements the Goal interface
- * that gives it the isAchieved() method to check whether the
+ * This abstract class represents all the
+ * CommonGoals in the game and implements the Goal interface
+ * with the isAchieved() method to check whether the
  * goal is achieved or not.
  * (based on the official ENG Rulebook file starting with number 0 from the top left corner
  * and finishing with number 11 in the bottom right corner)
@@ -15,15 +15,15 @@ import java.io.Serializable;
 public abstract class CommonGoal implements Serializable {
 
     /**
-     * This method is used to check whether the goal is achieved or not
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     * @return the method returns true whether the Goal is Achieved and false otherwise
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     public abstract boolean isAchieved(Bookshelf bookshelf);
 
     /**
-     * This method is used to print the name of the goal
-     * @return
+     *
+     * @return the name of the goal
      */
     public abstract String getGoalName();
     public abstract void printGoalDescription();

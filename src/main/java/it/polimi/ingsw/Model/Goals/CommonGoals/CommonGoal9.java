@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class represents the CommonGoal number 9 in the UML model.
+ * This class represents the CommonGoal 9 in the UML model.
  * Common Goal description: Two lines each formed by 5 different types of tiles.
  * One line can show the same or a different combination of the other line.
  */
@@ -15,10 +15,9 @@ public class CommonGoal9 extends CommonGoal {
     private static final int NUM_TYPES_REQUIRED = 5;
 
     /**
-     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     *
-     * @return the method returns true weather the Goals is Achieved and false otherwise
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {

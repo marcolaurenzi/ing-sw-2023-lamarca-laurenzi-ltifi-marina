@@ -19,7 +19,7 @@ public class Server {
         Registry registry = LocateRegistry.createRegistry(1099);
         registry.bind("controller", controller);
 
-        ServerSocket serverSocket = null;
+        ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(59090);
         } catch (IOException e) {

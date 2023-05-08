@@ -7,21 +7,14 @@ public enum TypeEnum {
     CATS, BOOKS, GAMES, FRAMES, TROPHIES, PLANTS;
 
     public String toString() {
-    	switch(this) {
-    	case CATS:
-    		return "CATS";
-    	case BOOKS:
-    		return "BOOKS";
-    	case GAMES:
-    		return "GAMES";
-    	case FRAMES:
-    		return "FRAMES";
-    	case TROPHIES:
-    		return "TROPHIES";
-    	case PLANTS:
-    		return "PLANTS";
-    	default:
-    		return null;
-    	}
+		return switch (this) {
+			case CATS -> "CATS";
+			case BOOKS -> "BOOKS";
+			case GAMES -> "GAMES";
+			case FRAMES -> "FRAMES";
+			case TROPHIES -> "TROPHIES";
+			case PLANTS -> "PLANTS";
+			default -> null;
+		};
     }
 }

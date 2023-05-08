@@ -6,16 +6,15 @@ import it.polimi.ingsw.Model.TypeEnum;
 import java.util.HashMap;
 
 /**
- * This class represents the CommonGoal number 5
+ * This class represents the CommonGoal 5
  * This goal is achieved when there are 8 elements of the same type in the whole Bookshelf
  */
 public class CommonGoal5 extends CommonGoal{
 
     /**
-     * isAchieved() method checks weather the CommonGoal is achieved or not in the given BookShelf
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     *
-     * @return the method returns true weather the Goals is Achieved and false otherwise
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {

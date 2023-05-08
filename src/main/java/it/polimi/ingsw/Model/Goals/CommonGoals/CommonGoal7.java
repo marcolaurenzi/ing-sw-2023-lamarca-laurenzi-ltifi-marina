@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class represents the CommonGoal number 7
+ * This class represents the CommonGoal 7
  * (based on the official Rulebook file starting with number 0 from the top left corner and finishing with number 11 in the bottom right corner)
  * saying that a player must have, to achieve the goal, 4 different rows
  * of 5 consecutive Tiles with no more than 3 different colours in it
@@ -14,10 +14,9 @@ import java.util.Set;
 public class CommonGoal7 extends CommonGoal {
 
     /**
-     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     *
-     * @return the method returns true whether the Goals is Achieved and false otherwise
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {

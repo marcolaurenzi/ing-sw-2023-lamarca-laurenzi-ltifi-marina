@@ -137,8 +137,7 @@ public class Player {
     /**
      * This method take in input an ArrayList of coordinates from the controller indicating the tiles that the player
      * want to pick and inserts the items in those tiles in the bookshelf in the order specified from the player. It
-     * also controls if it is possible to pick the selection according to the game's rules
-     *
+     * also controls if it is possible to pick the selection according to the game's rules*
      *
      * @throws PlayerIsWaitingException if the player state is waiting
      * @throws SelectionNotValidException if the selection is not valid AKA not all the selected tiles have at least one
@@ -183,7 +182,8 @@ public class Player {
     }
 
     /**
-     * This method is called at the end of every turn. Updates the points counting personalGoal points, commonGoal ponts  and the
+     * This method is called at the end of every turn.
+     * It updates the points counting personalGoal points, commonGoal points  and the
      * generalGoal points
      */
     public void getRewardGoals() throws WrongConfigurationException {
@@ -221,12 +221,12 @@ public class Player {
 
 
     public void setBookshelf() throws PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
-        ArrayList<Item> riempi = new ArrayList<>();
+        ArrayList<Item> fill = new ArrayList<>();
         for(int j = 0; j < 6; j++){
-            riempi.add(new Item(BOOKS));
+            fill.add(new Item(BOOKS));
         }
         for(int i = 0; i < 5; i++){
-            bookshelf.insert(i, riempi);
+            bookshelf.insert(i, fill);
         }
 
 

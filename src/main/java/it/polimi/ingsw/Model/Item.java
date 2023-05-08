@@ -27,9 +27,7 @@ public class Item implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            for (int i = 0; i < Utils.getItemDimension(); i++) {
-                stringBuilder.append("#");
-            }
+            stringBuilder.append("#".repeat(Math.max(0, Utils.getItemDimension())));
         }
         catch (IOException e) {
             System.err.println("Error while reading the configuration file");

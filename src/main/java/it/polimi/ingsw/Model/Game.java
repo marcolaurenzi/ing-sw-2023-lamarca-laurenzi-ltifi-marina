@@ -162,8 +162,7 @@ public class Game {
     }
 
     public Player getCurrentPlayer() {
-        Player temp = players.get(currentPlayer);
-        return temp;
+        return players.get(currentPlayer);
     }
     public int getCurrentPlayerIndex() {
         return currentPlayer;

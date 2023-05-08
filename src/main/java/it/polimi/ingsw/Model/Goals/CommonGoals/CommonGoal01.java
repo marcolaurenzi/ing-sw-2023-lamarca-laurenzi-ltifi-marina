@@ -5,8 +5,8 @@ import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Matrix;
 
 /**
- * This class represents the CommonGoal number 0 and 1
- * Common Goal description: numberOfGroups groups each containing at least dim tiles of the same type.
+ * This class represents the CommonGoals number 0 and 1
+ * CommonGoal description: numberOfGroups groups each containing at least dim tiles of the same type.
  * the tiles of one group can be different from those of another group
  */
 public class CommonGoal01 extends CommonGoal {
@@ -52,7 +52,7 @@ public class CommonGoal01 extends CommonGoal {
     /**
      * This method checks if the goal is achieved
      * @param bookshelf bookShelf
-     * @return the return is true is the goal is achieved is false otherwise
+     * @return true if the goal is achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
@@ -115,8 +115,8 @@ public class CommonGoal01 extends CommonGoal {
     }
 
     /**
-     * This method prints the goal
-     * @return the string to be printed
+     *
+     * @return name of the goal
      */
     @Override
     public String getGoalName() {
@@ -125,6 +125,7 @@ public class CommonGoal01 extends CommonGoal {
         }
         return "CommonGoal1";
     }
+
 
     @Override
     public void printGoalDescription() {

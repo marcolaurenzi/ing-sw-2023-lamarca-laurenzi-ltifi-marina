@@ -56,7 +56,7 @@ public class ClientSocket implements Client {
             }
         }
 
-        // todo migliorare il cast
+        // todo avoid casting
         return ((Double)response.getReturnValue()).intValue();
     }
     @Override

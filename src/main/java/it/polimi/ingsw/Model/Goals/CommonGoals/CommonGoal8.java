@@ -13,10 +13,9 @@ import java.util.Set;
 public class CommonGoal8 extends CommonGoal {
 
     /**
-     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     *
-     * @return the method returns true if the Goal is achieved and false otherwise
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {

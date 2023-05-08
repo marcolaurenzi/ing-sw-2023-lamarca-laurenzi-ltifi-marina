@@ -43,7 +43,7 @@ public class Utils {
     }
 
     /* ************************************************************************************************************
-     *                          END OF PATH PUNCTIONS
+     *                          END OF PATH FUNCTIONS
      *                          START OF JSON FUNCTIONS
      ************************************************************************************************************ */
 
@@ -84,11 +84,11 @@ public class Utils {
      */
     public static Bookshelf loadBookshelfFromFile(String filePath, int index) throws IOException {
 
-        String jsonString = "";
+        StringBuilder jsonString = new StringBuilder();
         try (FileReader reader = new FileReader(filePath)) {
             int character;
             while ((character = reader.read()) != -1) {
-                jsonString += (char) character;
+                jsonString.append((char) character);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,10 +96,10 @@ public class Utils {
 
         // Parse the JSON string into an array of Person objects
         Gson gson = new Gson();
-        Bookshelf[] bookshelves = gson.fromJson(jsonString, Bookshelf[].class);
+        Bookshelf[] bookshelves = gson.fromJson(jsonString.toString(), Bookshelf[].class);
 
         return bookshelves[index];
-        // todo è possibile farla funzionale?
+        // todo try making it work
     }
 
     /**
@@ -135,22 +135,15 @@ public class Utils {
      */
     public static Item getRandomItem() {
         int random = (int) (Math.random() * 6);
-        switch (random) {
-            case 0:
-                return new Item(TypeEnum.CATS);
-            case 1:
-                return new Item(TypeEnum.BOOKS);
-            case 2:
-                return new Item(TypeEnum.TROPHIES);
-            case 3:
-                return new Item(TypeEnum.PLANTS);
-            case 4:
-                return new Item(TypeEnum.GAMES);
-            case 5:
-                return new Item(TypeEnum.FRAMES);
-            default:
-                return null;
-        }
+        return switch (random) {
+            case 0 -> new Item(TypeEnum.CATS);
+            case 1 -> new Item(TypeEnum.BOOKS);
+            case 2 -> new Item(TypeEnum.TROPHIES);
+            case 3 -> new Item(TypeEnum.PLANTS);
+            case 4 -> new Item(TypeEnum.GAMES);
+            case 5 -> new Item(TypeEnum.FRAMES);
+            default -> null;
+        };
     }
 
     /* ************************************************************************************************************

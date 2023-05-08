@@ -9,7 +9,7 @@ Professor: Pierluigi San Pietro
 
 ## My Shelfie Board Game
 
-A game by Phil Walker-Harding and Matthew Dunstan. You've just brought your new **shelf** home and it's time to fill it with your favourite objects: collect books, plants, board games, portraits, prizes... and don't forget to leave some space for your cats! Who will manage yo have the best organized **shelf**?
+A game by Phil Walker-Harding and Matthew Dunstan. You've just brought your new **shelf** home, and it's time to fill it with your favourite objects: collect books, plants, board games, portraits, prizes... and don't forget to leave some space for your cats! Who will manage to have the best organized **shelf**?
 
 The game is a _Cranio Creations s.r.l._'s property
 

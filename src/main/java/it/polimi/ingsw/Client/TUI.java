@@ -27,12 +27,12 @@ public class TUI implements RemoteUI, UI {
     }
     public void connectToServer() {
         String userInput;
-        System.out.print("Choose the connection mode (socket, RMI): ");
+        System.out.print("Choose a connection mode (socket, RMI): ");
         userInput = scanner.nextLine();
 
         while(!(userInput.equals("RMI") || userInput.equals("socket"))) {
-            System.out.println("Wrong connection mode");
-            System.out.print("Choose the connection mode (socket, RMI): ");
+            System.out.println("Wrong input for connection mode");
+            System.out.print("Choose a connection mode (socket, RMI): ");
             userInput = scanner.nextLine();
         }
 
@@ -47,7 +47,7 @@ public class TUI implements RemoteUI, UI {
             System.exit(-1);
         }
 
-        System.out.println("Connection with server successful");
+        System.out.println("Connection to server: SUCCESSFUL");
 
     }
     /**
@@ -60,7 +60,7 @@ public class TUI implements RemoteUI, UI {
 
         while(isUsernameAlreadyInUse) {
             try {
-                System.out.print("Insert your username: ");
+                System.out.print("Type your username: ");
                 userInput = scanner.nextLine();
                 client.choosePlayerId(userInput);
 
@@ -87,9 +87,9 @@ public class TUI implements RemoteUI, UI {
             try {
                 gameId = client.addPlayerToCreatedGame(playerId);
                 success = true;
-                System.out.println("You were assigned to game with gameId = " + gameId);
+                System.out.println("You've been added to an existing game (gameId = " + gameId + ")");
             } catch (CreateNewGameException e) {
-                System.out.print("Need to create a new game, insert the maximum number of player you want in this game (2, 3 or 4): ");
+                System.out.print("Creating a new game. Choose the number of players in this game (2, 3 or 4): ");
 
                 boolean validInput = false;
                 while(!validInput) {
@@ -109,25 +109,25 @@ public class TUI implements RemoteUI, UI {
                 try {
                     gameId = client.createNewGameAndAddPlayer(playerId, maxPlayers);
                     success = true;
-                    System.out.println("You created the game with gameId = " + gameId);
+                    System.out.println("New game created (gameId = " + gameId + ")");
                 } catch (GameAlreadyCreatedException f) {
-                    System.out.println("Too slow, a player already created a new game, trying to connect to a created game");
+                    System.out.println("Too slow, another player has already created a new game. Trying to connect to an existing game");
                 }
             }
         }
     }
     public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException {
         if(gameStatus.isLastTurn()) {
-            System.out.println("This is the last turn!");
+            System.out.println("LAST TURN!");
         }
-        System.out.println("It is your turn write playturn to play");
+        System.out.println("It is your turn, type 'playturn' to play");
         synchronized (scanner) {
             BoardNavigator boardNavigator = new BoardNavigator(gameStatus.getBoard());
             String input = "";
             while(boardNavigator.getSelection().size() == 0) {
                 while (!input.equals("x")) {
                     boardNavigator.print();
-                    System.out.println("Navigate into the board. (w, a, s, d to move; space to select; c to deselect; x to submit selection) : ");
+                    System.out.println("Move into the board. ('w', 'a', 's', 'd' to MOVE; 'space' to SELECT; 'c' to DESELECT; 'x' to SUBMIT SELECTION) : ");
                     input = scanner.nextLine();
 
                     if (input.length() != 1) {
@@ -163,7 +163,7 @@ public class TUI implements RemoteUI, UI {
 
         while(!input.equals("x")) {
             bookshelfNavigator.print();
-            System.out.println("Navigate into the bookshelf. (a, d to move; space to select and x to submit): ");
+            System.out.println("Move into the bookshelf. ('a', 'd' to MOVE; 'space' to SELECT, 'x' to SUBMIT SELECTION): ");
             input =  scanner.nextLine();
 
             if(input.length() != 1) {
@@ -206,9 +206,9 @@ public class TUI implements RemoteUI, UI {
         }
     }
     public void endGame(String winnerPlayer){
-        System.out.println("The game is over!");
+        System.out.println("THE GAME IS OVER!");
         isEnded = true;
-        System.out.println("The winner is player: " + winnerPlayer);
+        System.out.println("The WINNER is: " + winnerPlayer);
     }
 
     private void listOfPlayers() {
@@ -265,7 +265,7 @@ public class TUI implements RemoteUI, UI {
                 printCommonGoalsDescription();
             }
             case "points" -> printPoints();
-            default -> System.out.println("Command not recognized");
+            default -> System.out.println("Invalid command");
         }
     }
     private void printCommonGoalsDescription() {
@@ -290,14 +290,14 @@ public class TUI implements RemoteUI, UI {
 
         while(!isEnded) {
             synchronized (scanner){
-                System.out.println("Write one of the commands (board, bookshelf, personal, common, points): ");
+                System.out.println("Type a command (board, bookshelf, personal, common, points): ");
                 String command = scanner.nextLine();
                 if(!command.equals("playturn")) {
                     executePlayerCommand(command);
                 } else if(gameStatus.getCurrentPlayer().equals(playerId)) {
                     scanner.wait();
                 } else {
-                    System.out.println("It's not your turn, please use another command");
+                    System.out.println("It's not your turn, please choose another command");
                 }
                 scanner.notifyAll();
             }

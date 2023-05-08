@@ -8,17 +8,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class represents the CommonGoal number 3
+ * This class represents the CommonGoal 3
  * This goal is achieved if the board contains at least 2 of the following group of tiles.
  * Four tiles of the same Type representing a perfect square (boarding tiles MUST be of different Types)
  */
 public class CommonGoal3 extends CommonGoal{
 
     /**
-     * isAchieved() method checks whether the CommonGoal is achieved or not in the given BookShelf
-     * @param bookshelf is the reference to the actual BookShelf Object where the Algorithm works on
-     *
-     * @return the method returns true whether the Goals is Achieved and false otherwise
+     /**
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
@@ -71,13 +71,13 @@ public class CommonGoal3 extends CommonGoal{
                         }
                         if(!badTypes.containsAll(goodTypes)) {
                             count++;
-                            copy.set(i+1, j+0, false);
-                            copy.set(i+0, j+1, false);
+                            copy.set(i+1, j, false);
+                            copy.set(i, j+1, false);
                             copy.set(i+1, j+1, false);
                         }
                     }
 
-                    copy.set(i+0, j+0, false);
+                    copy.set(i, j, false);
 
                     goodTypes.clear();
                     badTypes.clear();

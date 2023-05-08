@@ -8,6 +8,6 @@ import it.polimi.ingsw.Model.Player;
 import java.util.ArrayList;
 
 public interface GameState {
-    public void nextPlayer(Game game, ArrayList<Player> players) throws FinishedGameException, GameNotStartedException;
+    void nextPlayer(Game game, ArrayList<Player> players) throws FinishedGameException, GameNotStartedException;
 
 }

@@ -7,15 +7,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * This class represents the CommonGoal 10
+ * This goal is achieved when there are 5 tiles of the same color forming an x in the Bookshelf
  */
 public class CommonGoal10 extends CommonGoal{
 
     /**
-     *
-     * @param bookshelf
-     *
-     * @return
+     * Checks whether the goal is achieved or not
+     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
+     * @return returns true if the Goal is Achieved, false otherwise
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
