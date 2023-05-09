@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import static it.polimi.ingsw.Model.TypeEnum.BOOKS;
 
 /**
- *
+ * This class represents a player. It contains all the information about the player, such as the bookshelf, the
+ * personal goal, the points, the state and so on.
  */
 public class Player {
 

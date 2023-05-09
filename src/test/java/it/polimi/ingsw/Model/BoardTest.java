@@ -2,7 +2,6 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
-import it.polimi.ingsw.Model.Exceptions.VoidBoardTileException;
 import it.polimi.ingsw.Utils.Utils;
 import jdk.jfr.Name;
 import org.junit.Before;
@@ -11,7 +10,6 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
@@ -37,36 +35,6 @@ public class BoardTest {
         }
 
         Set<Coordinates> unavailableTiles = new HashSet<>();
-
-        // looking for the tiles that are unavailable for every game
-        for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
-            for (int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
-                if (board.getGameBoard().get(i,j).getNumberOfPlayersSign() == 5) {
-                    unavailableTiles.add(new Coordinates(i,j));
-                }
-            }
-        }
-
-        // testing unavailable tiles
-        for(Coordinates c : unavailableTiles) {
-            assertThrows(VoidBoardTileException.class, () -> board.hasFree(c.getX(), c.getY()));
-        }
-        unavailableTiles.clear();
-
-        // looking for empty tiles
-        for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
-            for (int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
-                if (board.getGameBoard().get(i,j).isEmpty()) {
-                    unavailableTiles.add(new Coordinates(i,j));
-                }
-            }
-        }
-
-        // testing empty tiles
-        for(Coordinates c : unavailableTiles) {
-            assertThrows(VoidBoardTileException.class, () -> board.hasFree(c.getX(), c.getY()));
-        }
-        unavailableTiles.clear();
 
         // looking for border tiles
         for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {

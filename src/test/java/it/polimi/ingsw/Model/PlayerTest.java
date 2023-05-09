@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 
-import java.awt.print.Book;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -35,24 +33,48 @@ class PlayerTest {
         assertEquals(TypeEnum.CATS, bookshelf.get(3, 0).getType());
     }
 
-    /*
+
     @Test
-    public void testPrivateMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, MaxNumberOfPlayersException, IOException {
+    public void numberOfAdjacentSameTypeAndSpreadFalseTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
         // Create an instance of the class
-        Player player = new Player("test", new Game(1, 4));
+        Bookshelf bookshelf = new Bookshelf();
+        Matrix<Boolean> matrix = new Matrix<>(6,5);
+        matrix.setAll(true);
 
-        // Use reflection to access the private method
-        Method privateMethod = Player.class.getDeclaredMethod("getRewardGeneralGoal");
+        Method privateMethod = Player.class.getDeclaredMethod("numberOfAdjacentSameTypeAndSpreadFalse", int.class, int.class, Bookshelf.class, Matrix.class, TypeEnum.class);
         privateMethod.setAccessible(true);
-
-        // Invoke the private method
         Objenesis objenesis = new ObjenesisStd();
         Object instance = objenesis.newInstance(Player.class);
-        Object result = privateMethod.invoke(instance);
 
-        // Verify the result
-        assertEquals("Expected result", result);
+        // Testing void bookshelf
+        Object result = privateMethod.invoke(instance, 0, 0, bookshelf, matrix, TypeEnum.CATS);
+        assertEquals(1, result);
+
+        // Testing full bookshelf
+        bookshelf = new Bookshelf();
+        for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            for (int j = 0; j < bookshelf.getRowDimension(); j++) {
+                bookshelf.set(i, j, new Item(TypeEnum.CATS));
+            }
+        }
+        matrix = new Matrix<>(6,5);
+        matrix.setAll(true);
+        result = privateMethod.invoke(instance, 0, 0, bookshelf, matrix, TypeEnum.CATS);
+        assertEquals(30, result);
+
+        // Testing bookshelf with some items from different coordinates
+        matrix = new Matrix<>(6,5);
+        matrix.setAll(true);
+        bookshelf = new Bookshelf();
+        for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
+            for (int j = 0; j < bookshelf.getRowDimension(); j++) {
+                bookshelf.set(i, j, new Item(TypeEnum.CATS));
+            }
+        }
+        result = privateMethod.invoke(instance, 0, 0, bookshelf, matrix, TypeEnum.CATS);
+        assertEquals(30, result);
+
     }
-     */
 
 }

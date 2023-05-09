@@ -78,4 +78,17 @@ public class Matrix<T> implements Serializable {
         matrix[row][col] = elem;
     }
 
+    /**
+     * This method sets all the values of the matrix to elem. It is used to reset the matrix
+     * in testing phase
+     * @param elem the value the matrix gets initialized with
+     */
+    public void setAll(T elem) {
+        for(int i = 0; i < this.getColumnDimension(); i++) {
+            for(int j = 0; j < this.getRowDimension(); j++) {
+                this.set(i, j, elem);
+            }
+        }
+    }
+
 }
