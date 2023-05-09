@@ -27,7 +27,7 @@ public class BoardTest {
     }
 
     @Test
-    public void hasFreeTest() throws VoidBoardTileException {
+    public void hasFreeTest() {
 
         for(int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
             for(int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
@@ -89,7 +89,7 @@ public class BoardTest {
     public void toRefreshTest() {
 
         // void board
-        assert !board.toRefresh();
+        assert board.toRefresh();
 
         // board with one item
         board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
