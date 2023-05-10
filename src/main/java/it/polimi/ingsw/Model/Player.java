@@ -179,7 +179,8 @@ public class Player {
                 temp += game.getCommonGoalPointStacks()[1].draw();
             }
         }
-        return commonGoalPoints += temp;
+        commonGoalPoints += temp;
+        return commonGoalPoints;
     }
 
     /**
@@ -187,7 +188,7 @@ public class Player {
      * It updates the points counting personalGoal points, commonGoal points  and the
      * generalGoal points
      */
-    public void getRewardGoals() throws WrongConfigurationException {
+    public void computeRewardGoals() throws WrongConfigurationException {
         totalPoints = getRewardPersonalGoal() + getRewardGeneralGoal() + getRewardCommonGoals();
     }
 
@@ -205,7 +206,7 @@ public class Player {
     }
 
     public void endTurn() throws WrongConfigurationException {
-        getRewardGoals();
+        computeRewardGoals();
     }
     public PersonalGoal getPersonalGoal() {
         return personalGoal;

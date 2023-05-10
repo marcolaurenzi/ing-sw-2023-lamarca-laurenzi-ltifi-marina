@@ -2,11 +2,13 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
+import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Utils.Utils;
 import jdk.jfr.Name;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,6 +80,21 @@ public class BoardTest {
         // 2 contiguous items
         board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
         board.getGameBoard().get(4,5).placeItem(board.getItemDeck().draw());
+        assert !board.toRefresh();
+    }
+
+    @Test
+    public void refreshTest() throws MaxNumberOfPlayersException, IOException {
+
+        // void board
+        assert board.toRefresh();
+
+        // one item board
+        board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
+        assert board.toRefresh();
+
+        // just refreshed board
+        board.refreshBoard(new Game(1, 4));
         assert !board.toRefresh();
     }
 }

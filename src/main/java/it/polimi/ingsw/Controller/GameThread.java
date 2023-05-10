@@ -24,6 +24,7 @@ public class GameThread extends Thread{
             }
             try {
                 Controller.assignTurn(game.getId());
+                game.refreshBoard();
                 game.nextTurn();
             } catch (Exception s) {
                 System.out.println("Exception: " + s);

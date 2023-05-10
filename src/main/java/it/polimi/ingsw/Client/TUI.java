@@ -253,6 +253,9 @@ public class TUI implements RemoteUI, UI {
     }
 
     private void executePlayerCommand(String command) throws IOException {
+        if(gameStatus == null) {
+            return;
+        }
         switch (command) {
             case "board" -> {
                 printBoard();
@@ -290,7 +293,10 @@ public class TUI implements RemoteUI, UI {
 
         while(!isEnded) {
             synchronized (scanner){
-                System.out.println("Type a command (board, bookshelf, personal, common, points): ");
+                // todo aggiustare
+                if(gameStatus != null) {
+                    System.out.println("Type a command (board, bookshelf, personal, common, points): ");
+                }
                 String command = scanner.nextLine();
                 if(!command.equals("playturn")) {
                     executePlayerCommand(command);

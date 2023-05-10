@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -75,6 +76,70 @@ class PlayerTest {
         result = privateMethod.invoke(instance, 0, 0, bookshelf, matrix, TypeEnum.CATS);
         assertEquals(30, result);
 
+    }
+
+    @Test
+    public void getRewardGoalsTest() throws MaxNumberOfPlayersException, IOException, WrongConfigurationException {
+
+        // just created player
+        Player player = new Player("test", new Game(0, 2));
+        player.computeRewardGoals();
+        assertEquals(player.getTotalPoints(), 0);
+
+        // player completes general goal tasks
+        player.getBookshelf().set(5, 0, new Item(TypeEnum.CATS));
+        player.getBookshelf().set(4, 0, new Item(TypeEnum.CATS));
+        player.getBookshelf().set(3, 0, new Item(TypeEnum.CATS));
+        player.computeRewardGoals();
+        assert(player.getTotalPoints() >= 2);
+
+        player.getBookshelf().set(2, 0, new Item(TypeEnum.CATS));
+        player.computeRewardGoals();
+        assert(player.getTotalPoints() >= 3);
+
+        player.getBookshelf().set(1, 0, new Item(TypeEnum.CATS));
+        player.computeRewardGoals();
+        assert(player.getTotalPoints() >= 5);
+
+        player.getBookshelf().set(0, 0, new Item(TypeEnum.CATS));
+        player.computeRewardGoals();
+        assert(player.getTotalPoints() >= 8);
+
+        player.getBookshelf().set(5, 1, new Item(TypeEnum.CATS));
+        player.computeRewardGoals();
+        assert(player.getTotalPoints() >= 8);
+
+        int k = 0;
+        //player completes private goal tasks
+        for (int i = 0; i < player.getBookshelf().getColumnDimension(); i++) {
+            for (int j = 0; j < player.getBookshelf().getRowDimension(); j++) {
+                if(player.getPersonalGoal().get(i,j) != null) {
+                    k++;
+                    player.getBookshelf().set(i, j, new Item(player.getPersonalGoal().get(i, j).getType()));
+                    player.computeRewardGoals();
+                    assert(player.getTotalPoints() >= 8 + getCurrentPoints(k));
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Testing method to get the points of the private goal
+     */
+    private int getCurrentPoints(int i) throws WrongConfigurationException {
+        int result;
+        switch (i) {
+            case 0 -> result = 0;
+            case 1 -> result = 1;
+            case 2 -> result = 2;
+            case 3 -> result = 4;
+            case 4 -> result = 6;
+            case 5 -> result = 9;
+            case 6 -> result = 12;
+            default -> throw new WrongConfigurationException();
+        }
+        return result;
     }
 
 }
