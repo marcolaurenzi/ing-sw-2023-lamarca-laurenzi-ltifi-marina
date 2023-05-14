@@ -28,7 +28,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
 
     public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
-        if(alreadyUsedPlayerIds.keySet().contains(playerId))
+        if(alreadyUsedPlayerIds.containsKey(playerId))
             throw new PlayerIdAlreadyInUseException();
 
         else alreadyUsedPlayerIds.put(playerId, null);
@@ -81,7 +81,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
     }
     protected static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
-        GameStatus gameStatus = new GameStatus(
+        return new GameStatus(
                 game.getId(),
                 game.getCommonGoalPointStacks(),
                 game.getIsCommonGoalAchieved(playerId),
@@ -93,7 +93,6 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getBoard(),
                 game.getGameState() instanceof GameStateLastTurn ? true : false
         );
-        return gameStatus;
     }
     public static void sendWinnerInfo(int gameId) throws RemoteException {
         String winnerPlayer = null;
@@ -118,5 +117,8 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
     public void riempiTutto() throws PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         currentGame.getCurrentPlayer().setBookshelf();
+    }
+    public int getNumCurrentPlayers(int gameId){
+        return games.get(gameId).getPlayers().size();
     }
 }

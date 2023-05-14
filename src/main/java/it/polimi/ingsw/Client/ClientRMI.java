@@ -57,4 +57,7 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
     public void endGame(String winnerPlayer) throws RemoteException {
         remoteUI.endGame(winnerPlayer);
     }
+    public int getNumCurrentPlayers(int gameId) throws RemoteException {
+        return controller.getNumCurrentPlayers(gameId);
+    }
 }

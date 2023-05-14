@@ -29,7 +29,7 @@ public class ItemDeck implements Deck<Item> {
     /**
      *
      *
-     * @return
+     * @return the item of the deck on the top
      */
     @Override
     public Item draw() {

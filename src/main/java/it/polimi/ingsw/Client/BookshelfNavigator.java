@@ -71,4 +71,35 @@ public class BookshelfNavigator {
     public int getColumn() {
         return cursor;
     }
+
+
+    // Returns the number of empty spaces in the given column of the bookshelf
+    public int getEmptySpaces(int column){
+        int emptySpaces = 0;
+        for(int j = 0; j < 6; j++) {
+            if(bookshelf.get(j, column) == null)
+                emptySpaces++;
+        }
+        return emptySpaces;
+    }
+
+    // Returns the number of empty spaces in the most empty column of all the bookshelf
+    public int getMaxEmptySpaces() {
+        int maxEmptySpaces = 0;
+        int emptySpaces;
+        for (int i = 0; i < 5; i++) {
+            emptySpaces = 0;
+            for (int j = 0; j < 6; j++) {
+                if(bookshelf.get(j, i) == null)
+                    emptySpaces++;
+                }
+                if(emptySpaces > maxEmptySpaces)
+                    maxEmptySpaces = emptySpaces;
+            }
+        return maxEmptySpaces;
+    }
+
+    public void deselect() {
+        //todo
+    }
 }

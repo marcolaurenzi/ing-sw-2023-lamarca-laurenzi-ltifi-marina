@@ -94,4 +94,8 @@ public class ClientSocket implements Client {
     public void riempiTutto() {
         //TODO no one uses socket
     }
+    public int getNumCurrentPlayers(int gameId) {
+        //TODO no one uses socket
+        return 0;
+    }
 }

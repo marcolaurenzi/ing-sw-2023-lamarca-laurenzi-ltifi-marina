@@ -15,4 +15,6 @@ public interface ControllerRemoteInterface extends Remote {
         void addObserver(Observer observer, String playerId) throws RemoteException;
         void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException;
         void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException;
+
+        int getNumCurrentPlayers(int gameId)throws RemoteException;
 }
