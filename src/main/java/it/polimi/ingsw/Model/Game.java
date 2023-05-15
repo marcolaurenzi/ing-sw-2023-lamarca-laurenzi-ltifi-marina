@@ -55,18 +55,6 @@ public class Game {
 
     /**
      * This method is called when a player joins the game and adds him to the list of players
-     * but does not create a new Player object
-     * @param player the player to be added
-     */
-    public void addPlayer(Player player) throws AlreadyStartedGameException {
-        if(players.size() == maxPlayers) {
-            throw new AlreadyStartedGameException();
-        }
-        players.add(player);
-    }
-
-    /**
-     * This method is called when a player joins the game and adds him to the list of players
      * after creating a new Player object
      * @param playerID the ID of the player to be added
      */
@@ -227,6 +215,7 @@ public class Game {
         }
         return playerPoints;
     }
+
 
     public void setCurrentPlayerIndex(int currentPlayer) {
         this.currentPlayer = currentPlayer;

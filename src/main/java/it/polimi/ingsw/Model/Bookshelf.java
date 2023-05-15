@@ -122,6 +122,32 @@ public class Bookshelf implements Serializable {
         freeTiles--;
     }
 
+
+    public int getEmptySpaces(int column){
+        int emptySpaces = 0;
+        for(int j = 0; j < 6; j++) {
+            if(get(j, column) == null)
+                emptySpaces++;
+        }
+        return emptySpaces;
+    }
+
+    // Returns the number of empty spaces in the most empty column of all the bookshelf
+    public int getMaxEmptySpaces() {
+        int maxEmptySpaces = 0;
+        int emptySpaces;
+        for (int i = 0; i < 5; i++) {
+            emptySpaces = 0;
+            for (int j = 0; j < 6; j++) {
+                if(get(j, i) == null)
+                    emptySpaces++;
+            }
+            if(emptySpaces > maxEmptySpaces)
+                maxEmptySpaces = emptySpaces;
+        }
+        return maxEmptySpaces;
+    }
+
     /* ************************************************************************************************************
      *                          END OF CUSTOM METHODS
      ************************************************************************************************************ */

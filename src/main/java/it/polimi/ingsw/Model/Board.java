@@ -116,20 +116,21 @@ public class Board implements Serializable {
     public boolean toRefresh(){
         int rows = gameBoard.getColumnDimension();
         int columns = gameBoard.getRowDimension();
-        int temp = 0;
         for(int i = 0; i<rows; i++) {
             for(int j = 0; j<columns; j++) {
 
                 BoardTile curr = gameBoard.get(i,j);
+
+                // if the Board tile is valid and there is an Item on it
                 if(curr.getNumberOfPlayersSign() != 5 && curr.getPlacedItem() != null) {
-                    temp++;
+                    // if the Item has a free side the board must not be refreshed
                     if(!isFreeNorth(i,j) || !isFreeSouth(i,j) || !isFreeEast(i,j) || !isFreeWest(i,j)) {
                         return false;
                     }
                 }
             }
         }
-        return temp != 0;
+        return true;
     }
 
     /**

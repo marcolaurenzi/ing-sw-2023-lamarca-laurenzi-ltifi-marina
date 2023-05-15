@@ -130,4 +130,8 @@ public class ClientSocket implements Client, RemoteClient {
     public void endGame(String winnerPlayer) throws RemoteException {
         remoteUI.endGame(winnerPlayer);
     }
+    public int getNumCurrentPlayers(int gameId) {
+        //TODO no one uses socket
+        return 0;
+    }
 }

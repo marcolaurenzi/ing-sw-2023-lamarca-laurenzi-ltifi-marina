@@ -82,5 +82,8 @@ public class GameStatus implements Serializable {
     public boolean[] getIsCommonGoalAlreadyAchieved() {
         return isCommonGoalAlreadyAchieved;
     }
+    public Bookshelf getBookshelf(int index) {
+        return bookshelves.get(index);
+    }
 
 }

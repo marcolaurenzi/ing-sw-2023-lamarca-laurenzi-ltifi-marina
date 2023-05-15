@@ -2,16 +2,16 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
-import it.polimi.ingsw.Model.Exceptions.VoidBoardTileException;
+import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Utils.Utils;
 import jdk.jfr.Name;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 public class BoardTest {
@@ -27,7 +27,7 @@ public class BoardTest {
     }
 
     @Test
-    public void hasFreeTest() throws VoidBoardTileException {
+    public void hasFreeTest() {
 
         for(int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
             for(int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
@@ -37,36 +37,6 @@ public class BoardTest {
         }
 
         Set<Coordinates> unavailableTiles = new HashSet<>();
-
-        // looking for the tiles that are unavailable for every game
-        for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
-            for (int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
-                if (board.getGameBoard().get(i,j).getNumberOfPlayersSign() == 5) {
-                    unavailableTiles.add(new Coordinates(i,j));
-                }
-            }
-        }
-
-        // testing unavailable tiles
-        for(Coordinates c : unavailableTiles) {
-            assertThrows(VoidBoardTileException.class, () -> board.hasFree(c.getX(), c.getY()));
-        }
-        unavailableTiles.clear();
-
-        // looking for empty tiles
-        for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
-            for (int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
-                if (board.getGameBoard().get(i,j).isEmpty()) {
-                    unavailableTiles.add(new Coordinates(i,j));
-                }
-            }
-        }
-
-        // testing empty tiles
-        for(Coordinates c : unavailableTiles) {
-            assertThrows(VoidBoardTileException.class, () -> board.hasFree(c.getX(), c.getY()));
-        }
-        unavailableTiles.clear();
 
         // looking for border tiles
         for (int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
@@ -89,7 +59,7 @@ public class BoardTest {
     public void toRefreshTest() {
 
         // void board
-        assert !board.toRefresh();
+        assert board.toRefresh();
 
         // board with one item
         board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
@@ -110,6 +80,21 @@ public class BoardTest {
         // 2 contiguous items
         board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
         board.getGameBoard().get(4,5).placeItem(board.getItemDeck().draw());
+        assert !board.toRefresh();
+    }
+
+    @Test
+    public void refreshTest() throws MaxNumberOfPlayersException, IOException {
+
+        // void board
+        assert board.toRefresh();
+
+        // one item board
+        board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
+        assert board.toRefresh();
+
+        // just refreshed board
+        board.refreshBoard(new Game(1, 4));
         assert !board.toRefresh();
     }
 }

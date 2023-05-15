@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class TUI implements RemoteUI, UI {
     private Scanner scanner;
     private int gameId;
+    //private int bookshelfIndex;
     private Client client;
     private String playerId;
     private boolean isEnded;
@@ -87,6 +88,7 @@ public class TUI implements RemoteUI, UI {
             try {
                 gameId = client.addPlayerToCreatedGame(playerId);
                 success = true;
+                //bookshelfIndex = client.getNumCurrentPlayers(gameId) - 1;
                 System.out.println("You've been added to an existing game (gameId = " + gameId + ")");
             } catch (CreateNewGameException e) {
                 System.out.print("Creating a new game. Choose the number of players in this game (2, 3 or 4): ");
@@ -109,6 +111,7 @@ public class TUI implements RemoteUI, UI {
                 try {
                     gameId = client.createNewGameAndAddPlayer(playerId, maxPlayers);
                     success = true;
+                    //bookshelfIndex = 0;
                     System.out.println("New game created (gameId = " + gameId + ")");
                 } catch (GameAlreadyCreatedException f) {
                     System.out.println("Too slow, another player has already created a new game. Trying to connect to an existing game");
@@ -120,14 +123,17 @@ public class TUI implements RemoteUI, UI {
         if(gameStatus.isLastTurn()) {
             System.out.println("LAST TURN!");
         }
-        System.out.println("It is your turn, type 'playturn' to play");
+        System.out.println("It is your turn, type 'p' to play");
         synchronized (scanner) {
             BoardNavigator boardNavigator = new BoardNavigator(gameStatus.getBoard());
+            BookshelfNavigator bookshelfNavigator = new BookshelfNavigator(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)), boardNavigator.getSelection().size());
+
             String input = "";
             while(boardNavigator.getSelection().size() == 0) {
                 while (!input.equals("x")) {
                     boardNavigator.print();
                     System.out.println("Move into the board. ('w', 'a', 's', 'd' to MOVE; 'space' to SELECT; 'c' to DESELECT; 'x' to SUBMIT SELECTION) : ");
+                    System.out.println("You can select up to " + Math.min(3,bookshelfNavigator.getMaxEmptySpaces()) + " tiles during this turn");
                     input = scanner.nextLine();
 
                     if (input.length() != 1) {
@@ -139,7 +145,8 @@ public class TUI implements RemoteUI, UI {
                         case "d" -> boardNavigator.moveRight();
                         case "s" -> boardNavigator.moveDown();
                         case "a" -> boardNavigator.moveLeft();
-                        case " " -> boardNavigator.select();
+                        case " " -> {if (boardNavigator.getSelection().size()< bookshelfNavigator.getMaxEmptySpaces()) {boardNavigator.select();}
+                                    else {System.out.println("You can't select any more tiles");}}
                         case "c" -> boardNavigator.deselect();
                         case "x" -> {
                             if(boardNavigator.getSelection().size() == 0)
@@ -161,9 +168,9 @@ public class TUI implements RemoteUI, UI {
         String input = "";
         BookshelfNavigator bookshelfNavigator = new BookshelfNavigator(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)), tilesSelection.size());
 
-        while(!input.equals("x")) {
+        while(!input.equals("y")) {
             bookshelfNavigator.print();
-            System.out.println("Move into the bookshelf. ('a', 'd' to MOVE; 'space' to SELECT, 'x' to SUBMIT SELECTION): ");
+            System.out.println("Move into the bookshelf. ('a', 'd' to MOVE; 'space' to SELECT): ");
             input =  scanner.nextLine();
 
             if(input.length() != 1) {
@@ -173,11 +180,36 @@ public class TUI implements RemoteUI, UI {
             switch (input) {
                 case "d" -> bookshelfNavigator.moveRight();
                 case "a" -> bookshelfNavigator.moveLeft();
-                case " " -> bookshelfNavigator.select();
-                case "x" -> {
+                case " " -> {if (tilesSelection.size()< bookshelfNavigator.getEmptySpaces(bookshelfNavigator.getColumn())) {
+                                    bookshelfNavigator.select();
+                                    bookshelfNavigator.print();
+                                    System.out.println("Column selected: " + bookshelfNavigator.getColumn() + "\nAre you sure? (y/n)");
+
+                                    input =  scanner.nextLine();
+                                    while(input.length() != 1 || (!input.equals("y") && !input.equals("n"))) { //until input is valid
+                                        System.out.print("Input must be a single character (y/n)! \nTry again: ");
+                                        input =  scanner.nextLine();
+                                    }
+
+                                    if(input.equals("y")) {
+                                        if (bookshelfNavigator.getColumn() == -1)
+                                            input = ""; //do nothing in case column is wrong
+                                    }
+
+                                    else if(input.equals("n")) {
+                                        //bookshelfNavigator.deselect();
+                                        //bookshelfNavigator.print();
+                                        System.out.print("Just move and select another column\n");
+                                    }
+
+
+
+                                }
+                            else {System.out.println("There's not enough space in this column, try another one.");}}
+                /*case "x" -> {                    //moved this into the "select" case to avoid submitting without a selection
                     if (bookshelfNavigator.getColumn() == -1)
                         input = "";
-                }
+                }*/
                 default -> input = "";
             }
         }
@@ -252,6 +284,9 @@ public class TUI implements RemoteUI, UI {
     }
 
     private void executePlayerCommand(String command) throws IOException {
+        if(gameStatus == null) {
+            return;
+        }
         switch (command) {
             case "board" -> {
                 printBoard();
@@ -288,9 +323,12 @@ public class TUI implements RemoteUI, UI {
 
         while(!isEnded) {
             synchronized (scanner){
-                System.out.println("Type a command (board, bookshelf, personal, common, points): ");
+                // todo fix this
+                if(gameStatus != null) {
+                    System.out.println("Type a command (board, bookshelf, personal, common, points): ");
+                }
                 String command = scanner.nextLine();
-                if(!command.equals("playturn")) {
+                if(!command.equals("p")) {
                     executePlayerCommand(command);
                 } else if(gameStatus.getCurrentPlayer().equals(playerId)) {
                     scanner.wait();

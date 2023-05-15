@@ -34,8 +34,8 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
 
         deck = new ArrayList<>();
 
-        deck.add(new CommonGoal01(1,1));
-        deck.add(new CommonGoal01(1,1));
+        deck.add(new CommonGoal01(2,6));
+        deck.add(new CommonGoal01(4,4));
         deck.add(new CommonGoal2());
         deck.add(new CommonGoal3());
         deck.add(new CommonGoal4());
