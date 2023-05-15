@@ -128,8 +128,7 @@ public class CommonGoal01 extends CommonGoal {
 
 
     @Override
-    public void printGoalDescription() {
-        System.out.printf("%d groups each containing at least %d tiles of the same type.\n", this.numberOfGroups, this.dim);
-        System.out.println("the tiles of one group can be different from those of another group");
+    public String getGoalDescription() {
+        return this.numberOfGroups + " groups each containing at least" + this.numberOfGroups+ "tiles of the same type.\n the tiles of one group can be different from those of another group";
     }
 }

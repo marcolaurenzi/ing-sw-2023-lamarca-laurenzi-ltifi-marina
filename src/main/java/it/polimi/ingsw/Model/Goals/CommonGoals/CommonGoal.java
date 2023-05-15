@@ -13,6 +13,8 @@ import java.io.Serializable;
  * and finishing with number 11 in the bottom right corner)
  */
 public abstract class CommonGoal implements Serializable {
+    private String goalName;
+    private String goalDescription;
 
     /**
      * Checks whether the goal is achieved or not
@@ -20,11 +22,6 @@ public abstract class CommonGoal implements Serializable {
      * @return returns true if the Goal is Achieved, false otherwise
      */
     public abstract boolean isAchieved(Bookshelf bookshelf);
-
-    /**
-     *
-     * @return the name of the goal
-     */
     public abstract String getGoalName();
-    public abstract void printGoalDescription();
+    public abstract String getGoalDescription();
 }

@@ -5,5 +5,9 @@ public enum MethodNameEnum {
     addPlayerToCreatedGame,
     createNewGameAndAddPlayer,
     addObserver,
+    update,
+    playTurn,
+    endGame,
+    pickAndInsertInBookshelf
 
 }

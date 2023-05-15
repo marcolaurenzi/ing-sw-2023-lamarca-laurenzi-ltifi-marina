@@ -78,7 +78,7 @@ public class CommonGoal11 extends CommonGoal{
     }
 
     @Override
-    public void printGoalDescription() {
-        System.out.println("This goal is achieved when there are 5 columns that progressively have one tile more than the previous one");
+    public String getGoalDescription() {
+        return "This goal is achieved when there are 5 columns that progressively have one tile more than the previous one";
     }
 }

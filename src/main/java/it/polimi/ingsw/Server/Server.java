@@ -1,12 +1,12 @@
 package it.polimi.ingsw.Server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.net.Socket;
 import java.rmi.*;
 import java.rmi.registry.*;
 
 import it.polimi.ingsw.Controller.Controller;
+import it.polimi.ingsw.Utils.MessageDispatcher;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -30,13 +30,11 @@ public class Server {
             Socket s = null;
             try {
                 s = serverSocket.accept();
-                DataInputStream dis = new DataInputStream(s.getInputStream());
-                DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                 System.out.println("New client connected");
                 System.out.println("Assign new thread for this client");
 
                 //call a new thread whenever a new client connects
-                Thread t = new ClientHandler(s, dis, dos);
+                ClientMethodCallHandler t = new ClientMethodCallHandler(new MessageDispatcher(s));
                 t.start();
             } catch (IOException e) {
                 throw new RuntimeException(e);

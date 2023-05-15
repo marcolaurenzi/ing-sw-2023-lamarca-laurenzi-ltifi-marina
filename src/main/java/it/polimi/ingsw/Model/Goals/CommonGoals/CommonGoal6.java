@@ -87,7 +87,7 @@ public class CommonGoal6 extends CommonGoal{
     }
 
     @Override
-    public void printGoalDescription() {
-        System.out.println("Fill one of the 4 diagonals with 5 tiles of the same color");
+    public String getGoalDescription() {
+        return "Fill one of the 4 diagonals with 5 tiles of the same color";
     }
 }

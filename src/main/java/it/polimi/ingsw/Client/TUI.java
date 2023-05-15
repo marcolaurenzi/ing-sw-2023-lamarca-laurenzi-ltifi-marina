@@ -2,7 +2,6 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
-import it.polimi.ingsw.Model.CommonGoalPointStack;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatus;
@@ -41,7 +40,7 @@ public class TUI implements RemoteUI, UI {
                 client = new ClientRMI(this);
             }
             else if (userInput.equals("socket"))
-                client = new ClientSocket();
+                client = new ClientSocket(this);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-1);
@@ -50,11 +49,8 @@ public class TUI implements RemoteUI, UI {
         System.out.println("Connection to server: SUCCESSFUL");
 
     }
-    /**
-     * Asks the player the username and tells the controller to add it to the set of used playerIds
-     * @throws IOException if there is an input/output error while reading the user's input.
-     */
-    public void askForUsername() throws IOException {
+
+    public void askForUsername() {
         boolean isUsernameAlreadyInUse = true;
         String userInput;
 
@@ -69,6 +65,10 @@ public class TUI implements RemoteUI, UI {
                 playerId = userInput;
             } catch (PlayerIdAlreadyInUseException e) {
                 System.out.println("Username already in use!");
+            } catch (Exception e) {
+                System.out.println("Exception in TUI ask for username " + e);
+                e.printStackTrace();
+                System.exit(-1);
             }
         }
     }
@@ -79,7 +79,7 @@ public class TUI implements RemoteUI, UI {
      * @throws AlreadyStartedGameException //TODO.
      * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
      */
-    public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException {
+    public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, WrongMessageClassEnumException, InterruptedException {
         int maxPlayers = -1; // why do we need initialization?
         boolean success = false;
 
@@ -116,7 +116,7 @@ public class TUI implements RemoteUI, UI {
             }
         }
     }
-    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException {
+    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException, WrongMessageClassEnumException, InterruptedException {
         if(gameStatus.isLastTurn()) {
             System.out.println("LAST TURN!");
         }
@@ -157,7 +157,7 @@ public class TUI implements RemoteUI, UI {
 
     }
 
-    private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException, VoidBoardTileException {
+    private void insertTiles(ArrayList<Coordinates> tilesSelection) throws SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, IOException, PickDoesntFitColumnException, VoidBoardTileException, WrongMessageClassEnumException, InterruptedException {
         String input = "";
         BookshelfNavigator bookshelfNavigator = new BookshelfNavigator(gameStatus.getBookshelves().get(gameStatus.getPlayers().indexOf(playerId)), tilesSelection.size());
 
@@ -200,9 +200,8 @@ public class TUI implements RemoteUI, UI {
 
     }
     private void printCommonGoals(){
-        CommonGoalPointStack[] commonGoals = gameStatus.getCommonGoalPointStacks();
-        for(int i = 0; i < commonGoals.length; i++) {
-            System.out.printf("%d) %s: %d points, %s\n", i, commonGoals[i].getCommonGoal().getGoalName(), commonGoals[i].getTopPoints(), gameStatus.getIsCommonGoalAlreadyAchieved()[i] ? "Achieved" : "Not achieved");
+        for(int i = 0; i < gameStatus.getCommonGoalPointStacksNames().length; i++) {
+            System.out.printf("%d) %s: %d points, %s\n", i, gameStatus.getCommonGoalPointStacksNames()[i], gameStatus.getCommonGoalPointStacksTops()[i], gameStatus.getIsCommonGoalAlreadyAchieved()[i] ? "Achieved" : "Not achieved");
         }
     }
     public void endGame(String winnerPlayer){
@@ -217,11 +216,11 @@ public class TUI implements RemoteUI, UI {
             System.out.printf("%d) %s\n", i, players.get(i));
         }
     }
-    private void printPersonalGoal() throws IOException {
+    private void printPersonalGoal() {
         System.out.print("Your personal goal is: \n");
         printBookshelf(gameStatus.getPersonalGoal().getPersonalGoalBookshelf());
     }
-    private void bookshelfToPrint() throws IOException {
+    private void bookshelfToPrint() {
         List<Bookshelf> bookshelfList = gameStatus.getBookshelves();
         System.out.print("This is the list of players: \n");
         listOfPlayers();
@@ -269,16 +268,15 @@ public class TUI implements RemoteUI, UI {
         }
     }
     private void printCommonGoalsDescription() {
-        for(CommonGoalPointStack commonGoalPointStack : gameStatus.getCommonGoalPointStacks()) {
-            System.out.printf("%s\n", commonGoalPointStack.getCommonGoal().getGoalName());
-            commonGoalPointStack.getCommonGoal().printGoalDescription();
+        for(int i = 0; i < gameStatus.getCommonGoalPointStacksNames().length; i++) {
+            System.out.printf("%s\n%s\n", gameStatus.getCommonGoalPointStacksNames()[i], gameStatus.getCommonGoalPointStacksDescriptions()[i]);
         }
     }
 
-    private void printBookshelf(Bookshelf bookshelf) throws IOException {
+    private void printBookshelf(Bookshelf bookshelf)  {
         Utils.printBookshelf(bookshelf);
     }
-    public void run() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException,  NotBoundException {
+    public void run() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, InterruptedException, NotBoundException, WrongMessageClassEnumException {
         scanner = new Scanner(new InputStreamReader(System.in));
         Utils.printLogo();
         System.out.println("Welcome to MyShelfie!");

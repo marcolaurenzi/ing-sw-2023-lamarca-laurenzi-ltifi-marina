@@ -5,6 +5,15 @@ public enum ExceptionEnum {
     PlayerIdAlreadyInUseException,
     CreateNewGameException,
     MaxNumberOfPlayersException,
-    GameAlreadyCreatedException
+    GameAlreadyCreatedException,
+    VoidBoardTileException,
+    SelectionNotValidException,
+    PlayerIsWaitingException,
+    TilesSelectionSizeDifferentFromOrderLengthException,
+    ColumnNotValidException,
+    SelectionIsEmptyException,
+    WrongConfigurationException,
+    PickedColumnOutOfBoundsException,
+    PickDoesntFitColumnException
 
 }

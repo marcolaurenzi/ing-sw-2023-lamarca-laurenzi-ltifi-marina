@@ -2,27 +2,31 @@ package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
-import it.polimi.ingsw.Model.CommonGoalPointStack;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class GameStatus implements Serializable {
-    final int gameID;
-    private CommonGoalPointStack[] commonGoalPointStacks;
-    private boolean[] isCommonGoalAlreadyAchieved;
-    private PersonalGoal personalGoal;
-    private String currentPlayer;
-    private ArrayList<String> players;
-    private ArrayList<Integer> points;
-    private ArrayList<Bookshelf> bookshelves;
+    private final int gameID;
+    private final int[] commonGoalPointStacksTops;
+
+    private final String[] commonGoalPointStacksNames;
+    private final String[] commonGoalPointStacksDescriptions;
+    private final boolean[] isCommonGoalAlreadyAchieved;
+    private final PersonalGoal personalGoal;
+    private final String currentPlayer;
+    private final ArrayList<String> players;
+    private final ArrayList<Integer> points;
+    private final ArrayList<Bookshelf> bookshelves;
     private final Board board;
-    private boolean isLastTurn;
-    public GameStatus(int gameID, CommonGoalPointStack[] commonGoalPointStacks, boolean[] isCommonGoalAlreadyAchieved,PersonalGoal personalGoal,
+    private final boolean isLastTurn;
+    public GameStatus(int gameID, int[] commonGoalPointStacksTops, String[] commonGoalPointStacksNames, String[] commonGoalPointStacksDescriptions, boolean[] isCommonGoalAlreadyAchieved,PersonalGoal personalGoal,
                       String currentPlayer, ArrayList<String> players, ArrayList<Integer> points, ArrayList<Bookshelf> bookshelves, Board board, boolean isLastTurn) {
         this.gameID = gameID;
-        this.commonGoalPointStacks = commonGoalPointStacks;
+        this.commonGoalPointStacksTops = commonGoalPointStacksTops;
+        this.commonGoalPointStacksNames = commonGoalPointStacksNames;
+        this.commonGoalPointStacksDescriptions = commonGoalPointStacksDescriptions;
         this.isCommonGoalAlreadyAchieved = isCommonGoalAlreadyAchieved;
         this.personalGoal = personalGoal;
         this.currentPlayer = currentPlayer;
@@ -35,13 +39,21 @@ public class GameStatus implements Serializable {
     public boolean isLastTurn() {
         return isLastTurn;
     }
+    public int[] getCommonGoalPointStacksTops() {
+        return commonGoalPointStacksTops;
+    }
+
+    public String[] getCommonGoalPointStacksNames() {
+        return commonGoalPointStacksNames;
+    }
+
+    public String[] getCommonGoalPointStacksDescriptions() {
+        return commonGoalPointStacksDescriptions;
+    }
+
 
     public int getGameID() {
         return gameID;
-    }
-
-    public CommonGoalPointStack[] getCommonGoalPointStacks() {
-        return commonGoalPointStacks;
     }
 
     public PersonalGoal getPersonalGoal() {

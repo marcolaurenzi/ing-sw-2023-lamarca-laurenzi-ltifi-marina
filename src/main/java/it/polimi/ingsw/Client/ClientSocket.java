@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.Controller.ObserverSocket;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Utils.Message;
+import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MethodNameEnum;
@@ -17,35 +17,44 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientSocket implements Client {
-    Socket socket;
-    DataInputStream socketDataInput;
-    DataOutputStream socketDataOutput;
-    Gson gson;
-    public ClientSocket() throws IOException {
+public class ClientSocket implements Client, RemoteClient {
+    private final Socket socket;
+    private final MessageDispatcher messageDispatcher;
+    private ServerMethodCallHandler serverMethodCallHandler;
+
+    private RemoteUI remoteUI;
+
+    private ProxyDataInputStream dataInput;
+    private ProxyDataOutputStream dataOutput;
+    Gson gson = new Gson();;
+    public ClientSocket(RemoteUI remoteUI) throws IOException {
+        this.remoteUI = remoteUI;
         socket = new Socket("localhost", 59090);
-        socketDataInput = new DataInputStream(socket.getInputStream());
-        socketDataOutput = new DataOutputStream(socket.getOutputStream());
-        gson = new Gson();
+        messageDispatcher = new MessageDispatcher(socket);
+        dataInput = new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response);
+        dataOutput = new ProxyDataOutputStream(messageDispatcher);
+        serverMethodCallHandler = new ServerMethodCallHandler(messageDispatcher, this);
+        serverMethodCallHandler.start();
+        messageDispatcher.start();
     }
     @Override
-    public void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException, IOException {
+    public void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException, IOException, InterruptedException, WrongMessageClassEnumException {
         List<Object> parameters = new ArrayList<>();
         parameters.add(playerId);
 
-        socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.choosePlayerId, parameters)));
-        Message response = gson.fromJson(socketDataInput.readUTF(), Message.class);
+        dataOutput.writeUTF(gson.toJson(new Message (MessageTypeEnum.methodCall, null, null, MethodNameEnum.choosePlayerId, parameters, null, null)));
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
         
         if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.PlayerIdAlreadyInUseException))
             throw new PlayerIdAlreadyInUseException();
     }
     @Override
-    public int addPlayerToCreatedGame(String playerId) throws AlreadyStartedGameException, CreateNewGameException, IOException {
+    public int addPlayerToCreatedGame(String playerId) throws AlreadyStartedGameException, CreateNewGameException, IOException, InterruptedException, WrongMessageClassEnumException {
         //sending message to server
         List<Object> parameters = new ArrayList<>();
         parameters.add(playerId);
-        socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addPlayerToCreatedGame, parameters)));
-        Message response = gson.fromJson(socketDataInput.readUTF(), Message.class);
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addPlayerToCreatedGame, parameters, null, null)));
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
 
         //reading server response
         //sending exceptions
@@ -60,13 +69,13 @@ public class ClientSocket implements Client {
         return ((Double)response.getReturnValue()).intValue();
     }
     @Override
-    public int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, GameAlreadyCreatedException, AlreadyStartedGameException, IOException {
+    public int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, GameAlreadyCreatedException, AlreadyStartedGameException, IOException, InterruptedException, WrongMessageClassEnumException {
         //sending message to server
         List<Object> parameters = new ArrayList<>();
         parameters.add(playerId);
         parameters.add(maxPlayers);
-        socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.createNewGameAndAddPlayer, parameters)));
-        Message response = gson.fromJson(socketDataInput.readUTF(), Message.class);
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.createNewGameAndAddPlayer, parameters, null, null)));
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
 
         //reading server response
         //sending exceptions
@@ -84,14 +93,41 @@ public class ClientSocket implements Client {
     public void addObserver(String playerId) throws IOException {
         List<Object> parameters = new ArrayList<>();
         parameters.add(playerId);
-        parameters.add(new ObserverSocket());
-        socketDataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters)));
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters, null, null)));
     }
     @Override
-    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException {
-        //TODO no one uses socket
+    public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, IOException, WrongMessageClassEnumException, InterruptedException {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(column);
+        parameters.add(playerId);
+
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.pickAndInsertInBookshelf, parameters, null, tilesSelection)));
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
+        if(response.getType().equals(MessageTypeEnum.exception)) {
+            switch (response.getException()) {
+                case PlayerIsWaitingException -> throw new PlayerIsWaitingException();
+                case SelectionIsEmptyException -> throw new SelectionIsEmptyException();
+                case SelectionNotValidException -> throw new SelectionNotValidException();
+                case ColumnNotValidException -> throw new ColumnNotValidException();
+                case PickedColumnOutOfBoundsException -> throw new PickedColumnOutOfBoundsException();
+                case PickDoesntFitColumnException -> throw new PickDoesntFitColumnException();
+                case TilesSelectionSizeDifferentFromOrderLengthException -> throw new TilesSelectionSizeDifferentFromOrderLengthException();
+                case VoidBoardTileException -> throw new VoidBoardTileException();
+                case WrongConfigurationException -> throw new WrongConfigurationException();
+            }
+        }
     }
-    public void riempiTutto() {
-        //TODO no one uses socket
+
+    @Override
+    public void update(GameStatus game) throws RemoteException {
+        remoteUI.update(game);
+    }
+    @Override
+    public void playTurn() throws IOException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, WrongMessageClassEnumException, InterruptedException {
+        remoteUI.playTurn();
+    }
+    @Override
+    public void endGame(String winnerPlayer) throws RemoteException {
+        remoteUI.endGame(winnerPlayer);
     }
 }

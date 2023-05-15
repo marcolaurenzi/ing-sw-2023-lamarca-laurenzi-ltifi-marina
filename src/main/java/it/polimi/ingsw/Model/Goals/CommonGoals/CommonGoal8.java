@@ -51,7 +51,7 @@ public class CommonGoal8 extends CommonGoal {
     }
 
     @Override
-    public void printGoalDescription() {
-        System.out.println("Two columns each formed by 6 different types of tiles");
+    public String getGoalDescription() {
+        return "Two columns each formed by 6 different types of tiles";
     }
 }

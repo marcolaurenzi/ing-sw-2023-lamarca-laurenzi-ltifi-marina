@@ -89,7 +89,7 @@ public class CommonGoal10 extends CommonGoal{
     }
 
     @Override
-    public void printGoalDescription() {
-        System.out.println("Five tiles of the same color forming an x in the Bookshelf");
+    public String getGoalDescription() {
+        return "Five tiles of the same color forming an x in the Bookshelf";
     }
 }

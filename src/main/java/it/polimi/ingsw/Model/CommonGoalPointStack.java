@@ -34,9 +34,7 @@ public class CommonGoalPointStack implements Serializable {
         }
         top = 8;
     }
-    public Integer getTopPoints() {
-        return top;
-    }
+
     public Integer draw() {
         if (pointStack.isEmpty()) {
             return null;
@@ -52,6 +50,9 @@ public class CommonGoalPointStack implements Serializable {
         return pointStack.pop();
     }
 
+    public Integer getTopPoints() {
+        return top;
+    }
     public CommonGoal getCommonGoal() {
         return commonGoal;
     }

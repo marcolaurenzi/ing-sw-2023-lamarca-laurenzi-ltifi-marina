@@ -33,7 +33,7 @@ public class GameThread extends Thread{
         }
         try {
             Controller.sendWinnerInfo(game.getId());
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

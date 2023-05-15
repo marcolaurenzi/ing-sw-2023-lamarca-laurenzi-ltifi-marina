@@ -52,7 +52,7 @@ public class CommonGoal9 extends CommonGoal {
     }
 
     @Override
-    public void printGoalDescription() {
-        System.out.println("Two rows each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.");
+    public String getGoalDescription() {
+        return "Two rows each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.";
     }
 }

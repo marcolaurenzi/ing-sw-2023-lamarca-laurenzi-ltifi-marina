@@ -28,7 +28,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
 
     public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
-        if(alreadyUsedPlayerIds.keySet().contains(playerId))
+        if(alreadyUsedPlayerIds.containsKey(playerId))
             throw new PlayerIdAlreadyInUseException();
 
         else alreadyUsedPlayerIds.put(playerId, null);
@@ -69,10 +69,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     public static void update(int gameID) throws RemoteException, MissingPlayerException {
         try {
             for (Player player : games.get(gameID).getPlayers()) {
-                controller.listObserver.get(player.getPlayerID()).update(controller.retrieveGameStatus(games.get(gameID), player.getPlayerID()));
+                listObserver.get(player.getPlayerID()).update(retrieveGameStatus(games.get(gameID), player.getPlayerID()));
             }
-        } catch (MissingPlayerException e) {
-            System.out.println("Missing player in game " + gameID);
+        } catch (Exception e) {
+            System.out.println("Exception in controller: update  " + e);
             e.printStackTrace();
             System.exit(-1);
         }
@@ -81,9 +81,22 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
     }
     protected static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
-        GameStatus gameStatus = new GameStatus(
+        int[]commonGoalPointStacksTops = new int[2];
+        String[] commonGoalPointStacksNames = new String[2];
+        String[] commonGoalPointStacksDescription = new String[2];
+
+        commonGoalPointStacksTops[0] = game.getCommonGoalPointStacks()[0].getTopPoints();
+        commonGoalPointStacksTops[1] = game.getCommonGoalPointStacks()[1].getTopPoints();
+        commonGoalPointStacksNames[0] = game.getCommonGoalPointStacks()[0].getCommonGoal().getGoalName();
+        commonGoalPointStacksNames[1] = game.getCommonGoalPointStacks()[1].getCommonGoal().getGoalName();
+        commonGoalPointStacksDescription[0] = game.getCommonGoalPointStacks()[0].getCommonGoal().getGoalName();
+        commonGoalPointStacksDescription[1] = game.getCommonGoalPointStacks()[1].getCommonGoal().getGoalName();
+
+        return new GameStatus(
                 game.getId(),
-                game.getCommonGoalPointStacks(),
+                commonGoalPointStacksTops,
+                commonGoalPointStacksNames,
+                commonGoalPointStacksDescription,
                 game.getIsCommonGoalAchieved(playerId),
                 game.getPersonalGoal(playerId),
                 game.getCurrentPlayer().getPlayerID(),
@@ -91,11 +104,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 game.getPoints(),
                 game.getBookshelves(),
                 game.getBoard(),
-                game.getGameState() instanceof GameStateLastTurn ? true : false
+                game.getGameState() instanceof GameStateLastTurn
         );
-        return gameStatus;
     }
-    public static void sendWinnerInfo(int gameId) throws RemoteException {
+    public static void sendWinnerInfo(int gameId) throws IOException {
         String winnerPlayer = null;
         int tempMaxPoints = 0;
         for(Player player : games.get(gameId).getPlayers()){
