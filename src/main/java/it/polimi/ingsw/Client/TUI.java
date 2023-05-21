@@ -52,25 +52,57 @@ public class TUI implements RemoteUI, UI {
     }
 
     public void askForUsername() {
-        boolean isUsernameAlreadyInUse = true;
-        String userInput;
+        boolean isUsernameAlreadyInUse = false;
+        boolean isPasswordCorrect = false;
+        boolean chooseUsername = true;
+        String userInput = null;
 
-        while(isUsernameAlreadyInUse) {
+        while(chooseUsername) {
             try {
                 System.out.print("Type your username: ");
                 userInput = scanner.nextLine();
                 client.choosePlayerId(userInput);
-
-                //executed only if exception not thrown
-                isUsernameAlreadyInUse = false;
                 playerId = userInput;
+                chooseUsername = false;
             } catch (PlayerIdAlreadyInUseException e) {
                 System.out.println("Username already in use!");
+                System.out.println("Do you want to have to access it? (y/n)");
+                if(scanner.nextLine().equals("y")) {
+                    playerId = userInput;
+                    chooseUsername = false;
+                }
+                isUsernameAlreadyInUse = true;
             } catch (Exception e) {
                 System.out.println("Exception in TUI ask for username " + e);
                 e.printStackTrace();
                 System.exit(-1);
             }
+        }
+        while(!isPasswordCorrect){
+            System.out.println("Please provide the password linked to this username: ");
+            userInput = scanner.nextLine();
+            if(isUsernameAlreadyInUse){
+                try {
+                    client.checkPassword(playerId, userInput);
+                    isPasswordCorrect = true;
+                } catch (WrongPasswordException e) {
+                    System.out.println("Wrong password!");
+                } catch (Exception e) {
+                    System.out.println("Exception in TUI ask for password " + e);
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
+            } else {
+                try {
+                    client.choosePassword(playerId, userInput);
+                    isPasswordCorrect = true;
+                } catch (Exception e) {
+                    System.out.println("Exception in TUI ask for password " + e);
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
+            }
+
         }
     }
     //TODO understand why the compiler tells "Variable 'maxPlayers' might not have been initialized" if not initialized at the start of the code. May lead to a bug

@@ -134,4 +134,27 @@ public class ClientSocket implements Client, RemoteClient {
         //TODO no one uses socket
         return 0;
     }
+    public void choosePassword(String playerId, String password) throws RemoteException, IOException, WrongMessageClassEnumException, InterruptedException, PlayerIdAlreadyInUseException {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(playerId);
+        parameters.add(password);
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.choosePassword, parameters, null, null)));
+
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
+        if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.PlayerIdAlreadyInUseException))
+            throw new PlayerIdAlreadyInUseException();
+
+    }
+    public void checkPassword(String playerId, String password) throws WrongPasswordException, RemoteException, IOException, AlreadyStartedGameException, WrongMessageClassEnumException, InterruptedException {
+        List<Object> parameters = new ArrayList<>();
+        parameters.add(playerId);
+        parameters.add(password);
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.checkPassword, parameters, null, null)));
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
+        if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.WrongPasswordException))
+            throw new WrongPasswordException();
+        else if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.AlreadyStartedGameException))
+            throw new AlreadyStartedGameException();
+    }
+
 }

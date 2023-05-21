@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum.DisconnectedPlayerException;
+
 public class ObserverSocket implements Observer, Serializable {
     private final ProxyDataOutputStream dataOutput;
     private final ProxyDataInputStream dataInput;
@@ -27,14 +29,22 @@ public class ObserverSocket implements Observer, Serializable {
     }
 
     @Override
-    public void update(GameStatus gameStatus) throws IOException, InterruptedException {
+    public void update(GameStatus gameStatus) throws IOException, InterruptedException, DisconnectedPlayerException, WrongMessageClassEnumException {
         List<Object> parameters = new ArrayList<>();
         parameters.add(gameStatus);
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.update, null, gameStatus, null)));
+
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
+
+        if(response.getType().equals(MessageTypeEnum.exception)) {
+            switch (response.getException()) {
+                case DisconnectedPlayerException -> throw new DisconnectedPlayerException();
+            }
+        }
     }
 
     @Override
-    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, IOException, InterruptedException, WrongMessageClassEnumException {
+    public void playTurn() throws VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, IOException, InterruptedException, WrongMessageClassEnumException, DisconnectedPlayerException {
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.playTurn, null, null, null)));
 
         Message response = gson.fromJson(dataInput.readUTF(), Message.class);
@@ -50,15 +60,24 @@ public class ObserverSocket implements Observer, Serializable {
                 case WrongConfigurationException -> throw new WrongConfigurationException();
                 case PickedColumnOutOfBoundsException -> throw new PickedColumnOutOfBoundsException();
                 case PickDoesntFitColumnException -> throw new PickDoesntFitColumnException();
+                case DisconnectedPlayerException -> throw new DisconnectedPlayerException();
+
             }
         }
     }
 
     @Override
-    public void endGame(String winnerPlayer) throws IOException {
+    public void endGame(String winnerPlayer) throws IOException, DisconnectedPlayerException, WrongMessageClassEnumException, InterruptedException {
         List<Object> parameters = new ArrayList<>();
         parameters.add(winnerPlayer);
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.endGame, parameters, null, null)));
+        Message response = gson.fromJson(dataInput.readUTF(), Message.class);
+
+        if(response.getType().equals(MessageTypeEnum.exception)) {
+            switch (response.getException()) {
+                case DisconnectedPlayerException -> throw new DisconnectedPlayerException();
+            }
+        }
 
     }
 

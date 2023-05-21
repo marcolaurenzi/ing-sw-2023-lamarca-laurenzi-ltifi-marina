@@ -18,7 +18,6 @@ public class ClientMethodCallHandler extends Thread {
     private final ProxyDataInputStream dataInput;
     private final ProxyDataOutputStream dataOutput;
     private final Gson gson = new Gson();;
-
     public ClientMethodCallHandler(MessageDispatcher messageDispatcher){
         this.messageDispatcher = messageDispatcher;
         this.dataInput = new ProxyDataInputStream(messageDispatcher, MessageClassEnum.methodCall);
@@ -29,7 +28,7 @@ public class ClientMethodCallHandler extends Thread {
     private void choosePlayerId(String playerId) throws IOException {
         Message toSend;
         try {
-
+            messageDispatcher.setPlayerId(playerId);
             Server.controller.choosePlayerId(playerId);
             toSend = new Message(MessageTypeEnum.success, null, null, null, null, null, null);
             dataOutput.writeUTF(gson.toJson(toSend));
@@ -37,6 +36,28 @@ public class ClientMethodCallHandler extends Thread {
         } catch (PlayerIdAlreadyInUseException e) {
 
             toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.PlayerIdAlreadyInUseException, null, null, null, null, null);
+            dataOutput.writeUTF(gson.toJson(toSend));
+        }
+    }
+    private void choosePassword(String playerId, String password) throws IOException {
+        Message toSend;
+        try {
+            Server.controller.choosePassword(playerId, password);
+            toSend = new Message(MessageTypeEnum.success, null, null, null, null, null, null);
+            dataOutput.writeUTF(gson.toJson(toSend));
+
+        } catch (PlayerIdAlreadyInUseException e) {
+            toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.PlayerIdAlreadyInUseException, null, null, null, null, null);
+        }
+    }
+    private void checkPassword(String playerId, String password) throws IOException, AlreadyStartedGameException {
+        Message toSend;
+        try {
+            Server.controller.checkPassword(playerId, password);
+            toSend = new Message(MessageTypeEnum.success, null, null, null, null, null, null);
+            dataOutput.writeUTF(gson.toJson(toSend));
+        } catch (WrongPasswordException e) {
+            toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.WrongPasswordException, null, null, null, null, null);
             dataOutput.writeUTF(gson.toJson(toSend));
         }
     }
@@ -143,6 +164,8 @@ public class ClientMethodCallHandler extends Thread {
 
                         pickAndInsertInBookshelf(received.getSelectionParam(), ((Double)received.getParameters().get(0)).intValue(), order, (String)received.getParameters().get(1));
                     }
+                    case choosePassword -> choosePassword((String)received.getParameters().get(0), (String)received.getParameters().get(1));
+                    case checkPassword -> checkPassword((String)received.getParameters().get(0), (String)received.getParameters().get(1));
                 }
 
             } catch (Exception e) {

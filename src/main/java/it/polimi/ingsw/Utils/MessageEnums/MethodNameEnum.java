@@ -8,6 +8,6 @@ public enum MethodNameEnum {
     update,
     playTurn,
     endGame,
-    pickAndInsertInBookshelf
+    choosePassword, checkPassword, pickAndInsertInBookshelf
 
 }

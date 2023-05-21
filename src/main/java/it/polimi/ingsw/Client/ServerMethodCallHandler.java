@@ -21,9 +21,9 @@ public class ServerMethodCallHandler extends Thread {
         dataOutput = new ProxyDataOutputStream(messageDispatcher);
     }
 
-    private void update(GameStatus gameStatus) throws RemoteException {
-
+    private void update(GameStatus gameStatus) throws IOException {
         clientSocket.update(gameStatus);
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.success, null, null, null, null,null, null)));
     }
     private void playTurn() throws IOException, WrongMessageClassEnumException, InterruptedException {
         try {
@@ -56,8 +56,9 @@ public class ServerMethodCallHandler extends Thread {
             dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.exception, ExceptionEnum.PickDoesntFitColumnException, null, null, null, null, null)));
         }
     }
-    private void endGame(String winnerPlayer) throws RemoteException {
+    private void endGame(String winnerPlayer) throws IOException {
         clientSocket.endGame(winnerPlayer);
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.success, null, null, null, null,null, null)));
     }
     public void run() {
 

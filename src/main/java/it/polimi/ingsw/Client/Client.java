@@ -19,5 +19,6 @@ public interface Client {
     void addObserver(String playerId) throws IOException, NotBoundException;
 
     void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, IOException, WrongMessageClassEnumException, InterruptedException;
-
+    void checkPassword(String playerId, String password) throws WrongPasswordException, IOException, InterruptedException, WrongMessageClassEnumException, AlreadyStartedGameException;
+    void choosePassword(String platerId, String password) throws IOException, InterruptedException, WrongMessageClassEnumException, PlayerIdAlreadyInUseException;
 }

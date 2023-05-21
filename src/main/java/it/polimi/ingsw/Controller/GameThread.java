@@ -26,6 +26,16 @@ public class GameThread extends Thread{
                 Controller.assignTurn(game.getId());
                 game.refreshBoard();
                 game.nextTurn();
+                for(int i = 0;i < game.getPlayers().size(); i++){
+                    if(!Controller.listConnected.get(game.getCurrentPlayer().getPlayerID())) {
+                        game.nextTurn();
+                        if(i == game.getMaxPlayers()-1){
+                            Thread.sleep(1000);
+                        }
+                    } else {
+                        break;
+                    }
+                }
             } catch (Exception s) {
                 System.out.println("Exception: " + s);
                 s.printStackTrace();
