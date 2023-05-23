@@ -11,6 +11,10 @@ import it.polimi.ingsw.Utils.GameStatusToFile;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.PlayerStatusToFile;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 import java.io.*;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -18,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -172,9 +177,17 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
     public void addObserver(Observer observer, String playerId) throws RemoteException{
         listObserver.put(playerId, observer);
-        if(games.get(alreadyUsedPlayerIds.get(playerId)).getGameState() instanceof GameStateLastTurn || games.get(alreadyUsedPlayerIds.get(playerId)).getGameState() instanceof GameStateRunning) {
+
+        Game tempGame = null;
+        for (Game game : games) {
+            if (game.getPlayers().contains(playerId)) {
+                tempGame = game;
+                break;
+            }
+        }
+        if (tempGame != null && (tempGame.getGameState() instanceof GameStateLastTurn || tempGame.getGameState() instanceof GameStateRunning)) {
             try {
-                if(listConnected.get(playerId)) {
+                if (listConnected.get(playerId)) {
                     listObserver.get(playerId).update(retrieveGameStatus(games.get(alreadyUsedPlayerIds.get(playerId)), playerId));
                 }
             } catch (DisconnectedPlayerException e) {
@@ -186,6 +199,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 System.exit(-1);
             }
         }
+
 
     }
     public static void update(int gameID) throws RemoteException, MissingPlayerException {
@@ -282,8 +296,27 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     public void riempiTutto() throws PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         currentGame.getCurrentPlayer().setBookshelf();
     }
+    private String calcDigest(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes(StandardCharsets.UTF_8));
+            byte[] digest = md.digest();
+            String hex = String.format("%064x", new BigInteger(1, digest));
+            return hex;
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Exception in controller: retrieveDigest  " + e);
+            e.printStackTrace();
+            System.exit(-1);
+        } catch (Exception e) {
+            System.out.println("Exception in controller: retrieveDigest  " + e);
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        return password;
+    }
     public void checkPassword(String playerId, String password) throws WrongPasswordException, RemoteException {
-        if(!listCredentials.get(playerId).equals(password)) {
+        String temp = calcDigest(password);
+        if(!listCredentials.get(playerId).equals(temp)) {
             throw new WrongPasswordException();
         } else {
             try {
@@ -296,7 +329,9 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         if(listCredentials.containsKey(playerId)) {
             throw new PlayerIdAlreadyInUseException();
         } else {
-            listCredentials.put(playerId, password);
+            String temp = calcDigest(password);
+            System.out.println("Password: " + temp);
+            listCredentials.put(playerId, temp);
         }
     }
 
