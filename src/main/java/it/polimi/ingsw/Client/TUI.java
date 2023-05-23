@@ -70,8 +70,12 @@ public class TUI implements RemoteUI, UI {
                 if(scanner.nextLine().equals("y")) {
                     playerId = userInput;
                     chooseUsername = false;
+                    isUsernameAlreadyInUse = true;
+                } else {
+                    chooseUsername = true;
+                    isUsernameAlreadyInUse = false;
                 }
-                isUsernameAlreadyInUse = true;
+
             } catch (Exception e) {
                 System.out.println("Exception in TUI ask for username " + e);
                 e.printStackTrace();

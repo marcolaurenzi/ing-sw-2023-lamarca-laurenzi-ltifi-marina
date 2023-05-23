@@ -5,6 +5,7 @@ import it.polimi.ingsw.Client.RemoteClient;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.GameState.GameStateLastTurn;
+import it.polimi.ingsw.Model.GameState.GameStateRunning;
 import it.polimi.ingsw.Utils.ControllerStatusToFile;
 import it.polimi.ingsw.Utils.GameStatusToFile;
 import it.polimi.ingsw.Utils.GameStatusToSend;
@@ -171,6 +172,21 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
     public void addObserver(Observer observer, String playerId) throws RemoteException{
         listObserver.put(playerId, observer);
+        if(games.get(alreadyUsedPlayerIds.get(playerId)).getGameState() instanceof GameStateLastTurn || games.get(alreadyUsedPlayerIds.get(playerId)).getGameState() instanceof GameStateRunning) {
+            try {
+                if(listConnected.get(playerId)) {
+                    listObserver.get(playerId).update(retrieveGameStatus(games.get(alreadyUsedPlayerIds.get(playerId)), playerId));
+                }
+            } catch (DisconnectedPlayerException e) {
+                System.out.println("Player " + playerId + " disconnected");
+                disconnectClient(playerId);
+            } catch (Exception e) {
+                System.out.println("Exception in controller: update  " + e);
+                e.printStackTrace();
+                System.exit(-1);
+            }
+        }
+
     }
     public static void update(int gameID) throws RemoteException, MissingPlayerException {
         String playerId = null;
