@@ -1,34 +1,120 @@
 package it.polimi.ingsw.Controller;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.Client.RemoteClient;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.GameState.GameStateLastTurn;
-import it.polimi.ingsw.Utils.GameStatus;
+import it.polimi.ingsw.Utils.ControllerStatusToFile;
+import it.polimi.ingsw.Utils.GameStatusToFile;
+import it.polimi.ingsw.Utils.GameStatusToSend;
+import it.polimi.ingsw.Utils.PlayerStatusToFile;
 
-import java.io.IOException;
-import java.rmi.ConnectException;
+import java.io.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
-import static it.polimi.ingsw.Server.Server.controller;
-
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
-    static List<Game> games = new ArrayList<>();
-    static Game currentGame = null;
-    static Integer currentGameId = 0;
-    static String currentGameFirstPlayerId = null;
-    static HashMap<String, Game> alreadyUsedPlayerIds = new HashMap<>();
-    static HashMap<String, Observer> listObserver = new HashMap<>();
-    static HashMap<String, Boolean> listConnected = new HashMap<>(); //if connected cant choose that user id
-    static HashMap<String, String> listCredentials = new HashMap<>();
-    static RemoteClient controllerConnection;
-    public Controller() throws RemoteException {
-        //thread.start();
+
+    //TODO why is everything static?
+    private static final Gson gson = new Gson();
+    private static List<Game> games;
+    private static Game currentGame;
+    private static Integer currentGameId;
+    private static String currentGameFirstPlayerId = null;
+    private static HashMap<String, Integer> alreadyUsedPlayerIds;
+    private static  HashMap<String, Observer> listObserver;
+    private static  HashMap<String, Boolean> listConnected; //if connected cant choose that user id
+    private static  HashMap<String, String> listCredentials;
+    private static RemoteClient controllerConnection;
+
+    public Controller() throws IOException {
+        games = new ArrayList<>();
+        listObserver = new HashMap<>();
+        listConnected = new HashMap<>();
+        currentGame = null;
+
+        //if SavedGames contain any file, the server crashed
+        try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get("SavedGames"))) {
+            Iterator<Path> it = dirStream.iterator();
+            if(it.hasNext()) {
+
+                try(BufferedReader reader = Files.newBufferedReader(it.next())) {
+                    ControllerStatusToFile controllerStatus = gson.fromJson(reader.readLine(), ControllerStatusToFile.class);
+
+                    currentGameId = controllerStatus.getCurrentGameId();
+                    alreadyUsedPlayerIds = controllerStatus.getAlreadyUsedPlayerIds();
+                    listCredentials = controllerStatus.getListCredentials();
+
+                } catch (Exception e) {
+                    System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
+
+
+                while(it.hasNext()) {
+                    try(BufferedReader reader = Files.newBufferedReader(it.next())) {
+                        ArrayList<PlayerStatusToFile> playerStatus = new ArrayList<>();
+                        GameStatusToFile gameStatus = gson.fromJson(reader.readLine(), GameStatusToFile.class);
+
+                        for(int i = 0; i < gameStatus.getMaxPlayers(); i++) {
+                            playerStatus.add(gson.fromJson(reader.readLine(), PlayerStatusToFile.class));
+                        }
+
+                        Game game = new Game(gameStatus, playerStatus);
+                        games.add(game);
+                        GameThread gameThread = new GameThread(game);
+                        gameThread.start();
+
+
+                        for(PlayerStatusToFile p: playerStatus) {
+                            listConnected.put(p.getPlayerID(), false);
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
+                        e.printStackTrace();
+                        System.exit(-1);
+                    }
+                }
+            }
+
+            else {
+                currentGameId = 0;
+                alreadyUsedPlayerIds = new HashMap<>();
+                listCredentials = new HashMap<>();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
     }
+    //the controller status is saved when a new game is started
+    public void saveControllerStatus() {
+        try {
+            File file = new File(System.getProperty("user.dir"), "/SavedGames/saved_status_controller");
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+            String temp = gson.toJson(new ControllerStatusToFile(currentGameId, alreadyUsedPlayerIds, listCredentials));
+            writer.write(temp);
+            writer.flush();
+        } catch (Exception e) {
+            System.out.println("Unable to save controller status");
+        }
+    }
+
 
     public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
         if(alreadyUsedPlayerIds.containsKey(playerId))
@@ -47,9 +133,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 int currentGameId = currentGame.getId();
                 currentGame.addPlayer(playerId);
                 listConnected.put(playerId, true);
-                alreadyUsedPlayerIds.replace(playerId, currentGame);
+                alreadyUsedPlayerIds.replace(playerId, currentGame.getId());
                 if (currentGame.getPlayers().size() == currentGame.getMaxPlayers()) {
                     currentGame.startGame();
+                    saveControllerStatus();
                     GameThread gameThread = new GameThread(currentGame);
                     gameThread.start();
                     currentGame = null;
@@ -57,7 +144,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 return currentGameId;
             }
         }
-        return alreadyUsedPlayerIds.get(playerId).getId();
+        return alreadyUsedPlayerIds.get(playerId);
     }
     public static void disconnectClient(String playerId) {
         listConnected.replace(playerId, false);
@@ -67,7 +154,6 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
     private static void reconnectClient(String playerId) throws AlreadyStartedGameException {
         listConnected.replace(playerId, true);
-        alreadyUsedPlayerIds.get(playerId).addPlayer(playerId);
     }
     public synchronized int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException, GameAlreadyCreatedException {
         if(currentGame != null)
@@ -76,9 +162,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         game.addPlayer(playerId);
         listConnected.put(playerId, true);
         currentGame = game;
-        alreadyUsedPlayerIds.replace(playerId, currentGame);
+        alreadyUsedPlayerIds.replace(playerId, currentGame.getId());
         currentGameId++;
         games.add(game);
+
 
         return currentGame.getId();
     }
@@ -112,7 +199,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             }
         }
     }
-    protected static GameStatus retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
+    protected static GameStatusToSend retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
         int[]commonGoalPointStacksTops = new int[2];
         String[] commonGoalPointStacksNames = new String[2];
         String[] commonGoalPointStacksDescription = new String[2];
@@ -124,7 +211,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         commonGoalPointStacksDescription[0] = game.getCommonGoalPointStacks()[0].getCommonGoal().getGoalName();
         commonGoalPointStacksDescription[1] = game.getCommonGoalPointStacks()[1].getCommonGoal().getGoalName();
 
-        return new GameStatus(
+        return new GameStatusToSend(
                 game.getId(),
                 commonGoalPointStacksTops,
                 commonGoalPointStacksNames,
@@ -161,7 +248,15 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         }
     }
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws RemoteException, PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException {
-        for(Player player : alreadyUsedPlayerIds.get(playerId).getPlayers()) {
+        int gameId = alreadyUsedPlayerIds.get(playerId);
+        Game game = null;
+
+        for(Game g: games) {
+            if(g.getId() == (gameId))
+                game = g;
+        }
+
+        for(Player player : game.getPlayers()) {
             if(player.getPlayerID().equals(playerId)){
                 player.pickAndInsertInBookshelf(tilesSelection, column, order);
                 break;
@@ -187,5 +282,29 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         } else {
             listCredentials.put(playerId, password);
         }
+    }
+
+    public static List<Game> getGames() {
+        return games;
+    }
+
+    public static String getCurrentGameFirstPlayerId() {
+        return currentGameFirstPlayerId;
+    }
+
+    public static HashMap<String, Integer> getAlreadyUsedPlayerIds() {
+        return alreadyUsedPlayerIds;
+    }
+
+    public static HashMap<String, Observer> getListObserver() {
+        return listObserver;
+    }
+
+    public static HashMap<String, Boolean> getListConnected() {
+        return listConnected;
+    }
+
+    public static HashMap<String, String> getListCredentials() {
+        return listCredentials;
     }
 }

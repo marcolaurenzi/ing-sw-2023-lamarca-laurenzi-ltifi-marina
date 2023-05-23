@@ -16,7 +16,7 @@ public class Message {
     private final Object returnValue;
     private final MethodNameEnum method;
     private final List<Object> parameters;
-    private final GameStatus gameStatusParam;
+    private final GameStatusToSend gameStatusParam;
 
     private final ArrayList<Coordinates> selectionParam;
 
@@ -26,7 +26,7 @@ public class Message {
             Object returnValue,
             MethodNameEnum method,
             List<Object> parameters,
-            GameStatus gameStatusParam,
+            GameStatusToSend gameStatusParam,
             ArrayList<Coordinates> selectionParam) {
         this.type = type;
         this.exception = exception;
@@ -46,7 +46,7 @@ public class Message {
     }
     public Object getReturnValue() { return returnValue; }
     public List<Object> getParameters() { return parameters; }
-    public GameStatus getGameStatusParam() { return gameStatusParam;}
+    public GameStatusToSend getGameStatusParam() { return gameStatusParam;}
     public ArrayList<Coordinates> getSelectionParam() { return selectionParam; }
 
 }

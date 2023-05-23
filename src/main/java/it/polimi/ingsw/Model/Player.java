@@ -3,7 +3,9 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 import it.polimi.ingsw.Model.PlayerState.PlayerState;
+import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 import it.polimi.ingsw.Model.PlayerState.PlayerStateWaiting;
+import it.polimi.ingsw.Utils.PlayerStatusToFile;
 
 import java.util.ArrayList;
 
@@ -21,8 +23,6 @@ public class Player {
     private final String playerID;
     private int totalPoints;
     private int commonGoalPoints;
-    private ArrayList<Coordinates> tilesSelection;
-    private ArrayList<Item> pickedItems;
     private PlayerState state;
     private final Bookshelf bookshelf;
     private final PersonalGoal personalGoal;
@@ -33,6 +33,21 @@ public class Player {
      *                          START OF CONSTRUCTORS
      ************************************************************************************************************ */
 
+    //in case of retrieved status
+    public Player(PlayerStatusToFile playerStatus, Game game) {
+        this.playerID = playerStatus.getPlayerID();
+        this.totalPoints = playerStatus.getTotalPoints();
+        this.commonGoalPoints = playerStatus.getCommonGoalPoints();
+        switch(playerStatus.getState()) {
+            case 0 -> this.state = new PlayerStateSelecting();
+            case 1 -> this.state = new PlayerStateWaiting();
+        }
+
+        this.bookshelf = playerStatus.getBookshelf();
+        this.personalGoal = playerStatus.getPersonalGoal();
+        this.isCommonGoalAlreadyAchieved = playerStatus.getIsCommonGoalAlreadyAchieved();
+        this.game = game;
+    }
     /**
      * This is the player's constructor. It initializes some variables and initialize the state
      * of the player to PlayerStateWaiting
@@ -232,5 +247,17 @@ public class Player {
         }
 
 
+    }
+
+    public PlayerStatusToFile getPlayerStatusToFile() {
+        return new PlayerStatusToFile(
+                this.playerID,
+                this.totalPoints,
+                this.commonGoalPoints,
+                state.getStateNumber(),
+                getBookshelf(),
+                getPersonalGoal(),
+                getIsCommonGoalAlreadyAchieved()
+        );
     }
 }

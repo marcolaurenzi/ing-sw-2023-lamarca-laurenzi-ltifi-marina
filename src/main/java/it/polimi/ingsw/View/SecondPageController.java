@@ -1,4 +1,4 @@
-package it.polimi.ingsw.View;
+/* package it.polimi.ingsw.View;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -13,4 +13,4 @@ public class SecondPageController extends Application {
     public void start(Stage primaryStage) {
 
     }
-}
+} */

@@ -23,4 +23,8 @@ public class GameStateRunning implements GameState {
         game.setCurrentPlayerIndex((game.getCurrentPlayerIndex() + 1)%players.size());
         players.get(game.getCurrentPlayerIndex()).changeState(new PlayerStateSelecting());
     }
+
+    public int getStateNumber() {
+        return 2;
+    };
 }

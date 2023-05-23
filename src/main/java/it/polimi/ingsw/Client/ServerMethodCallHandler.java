@@ -1,14 +1,12 @@
 package it.polimi.ingsw.Client;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 
 import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class ServerMethodCallHandler extends Thread {
     private final ClientSocket clientSocket;
@@ -21,7 +19,7 @@ public class ServerMethodCallHandler extends Thread {
         dataOutput = new ProxyDataOutputStream(messageDispatcher);
     }
 
-    private void update(GameStatus gameStatus) throws IOException {
+    private void update(GameStatusToSend gameStatus) throws IOException {
         clientSocket.update(gameStatus);
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.success, null, null, null, null,null, null)));
     }

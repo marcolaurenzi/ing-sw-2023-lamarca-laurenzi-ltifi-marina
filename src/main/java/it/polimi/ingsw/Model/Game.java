@@ -4,14 +4,17 @@ import it.polimi.ingsw.Model.Decks.CommonGoalDeck;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Model.GameState.GameState;
-import it.polimi.ingsw.Model.GameState.GameStateRunning;
-import it.polimi.ingsw.Model.GameState.GameStateStarting;
+import it.polimi.ingsw.Model.GameState.*;
+import it.polimi.ingsw.Model.Goals.CommonGoals.*;
+
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
+import it.polimi.ingsw.Utils.GameStatusToFile;
+import it.polimi.ingsw.Utils.PlayerStatusToFile;
 import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Game {
 
@@ -22,10 +25,9 @@ public class Game {
     private GameState gameState;
     final int gameID;
     private ItemDeck itemDeck;
-    private CommonGoalDeck commonGoalDeck;
     private PersonalGoalDeck personalGoalDeck;
     private CommonGoalPointStack[] commonGoalPointStacks;
-    final int maxPlayers;
+    private final int maxPlayers;
     private int currentPlayer;
     private final ArrayList<Player> players;
     private final Board board;
@@ -46,6 +48,58 @@ public class Game {
         board = Utils.loadBoardFromFile("src/main/resources/configurations/BoardConfiguration.JSON");
         board.setItemDeck(itemDeck);
         this.initializeGame();
+    }
+
+    //in case of retrieved status
+    public Game(GameStatusToFile gameStatus, ArrayList<PlayerStatusToFile> playerStatus) {
+        switch(gameStatus.getGameState()) {
+            case 0 -> this.gameState = new GameStateFinished();
+            case 1 -> this.gameState = new GameStateLastTurn();
+            case 2 -> this.gameState = new GameStateRunning();
+            case 3 -> this.gameState = new GameStateStarting();
+        }
+
+        this.gameID = gameStatus.getGameID();
+        this.itemDeck = gameStatus.getItemDeck();
+        this.personalGoalDeck = gameStatus.getPersonalGoalDeck();
+        this.commonGoalPointStacks = new CommonGoalPointStack[2];
+
+        switch (gameStatus.getCommonGoalPointStacksNames()[0]) {
+            case "CommonGoal0" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal01(2, 6), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal1" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal01(4, 4), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal2" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal2(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal4" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal4(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal5" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal5(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal6" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal6(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal7" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal7(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal8" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal8(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal9" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal9(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal10" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal10(), gameStatus.getCommonGoalPointStacks().get(0));
+            case "CommonGoal11" -> this.commonGoalPointStacks[0] = new CommonGoalPointStack(new CommonGoal11(), gameStatus.getCommonGoalPointStacks().get(0));
+        }
+
+        switch (gameStatus.getCommonGoalPointStacksNames()[1]) {
+            case "CommonGoal0" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal01(2, 6), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal1" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal01(4, 4), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal2" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal2(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal4" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal4(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal5" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal5(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal6" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal6(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal7" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal7(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal8" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal8(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal9" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal9(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal10" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal10(), gameStatus.getCommonGoalPointStacks().get(1));
+            case "CommonGoal11" -> this.commonGoalPointStacks[1] = new CommonGoalPointStack(new CommonGoal11(), gameStatus.getCommonGoalPointStacks().get(1));
+        }
+
+        this.maxPlayers = gameStatus.getMaxPlayers();
+        this.currentPlayer = gameStatus.getCurrentPlayerIndex();
+        this.board = gameStatus.getBoard();
+
+        this.players = new ArrayList<>();
+        for(PlayerStatusToFile p: playerStatus) {
+            this.players.add(new Player(p, this));
+        }
     }
 
     /* ************************************************************************************************************
@@ -89,6 +143,7 @@ public class Game {
     public void initializeDeck() throws IOException {
 
         (itemDeck = new ItemDeck()).initializeDeck();
+        CommonGoalDeck commonGoalDeck;
         (commonGoalDeck = new CommonGoalDeck()).initializeDeck();
         (personalGoalDeck = new PersonalGoalDeck()).initializeDeck();
 
@@ -225,6 +280,26 @@ public class Game {
         return playerPoints;
     }
 
+    public GameStatusToFile getGameStatusToFile() {
+        ArrayList<Stack<Integer>> pointStacks = new ArrayList<>();
+        pointStacks.add(this.commonGoalPointStacks[0].getPointStack());
+        pointStacks.add(this.commonGoalPointStacks[1].getPointStack());
+        String[] commonGoalPointStackNames = new String[2];
+        commonGoalPointStackNames[0] = this.commonGoalPointStacks[0].getCommonGoal().getGoalName();
+        commonGoalPointStackNames[1] = this.commonGoalPointStacks[0].getCommonGoal().getGoalName();
+
+        return new GameStatusToFile(
+                this.gameID,
+                pointStacks,
+                commonGoalPointStackNames,
+                currentPlayer,
+                this.getBoard(),
+                this.gameState.getStateNumber(),
+                getItemDeck(),
+                getPersonalGoalDeck(),
+                getMaxPlayers()
+        );
+    }
 
     public void setCurrentPlayerIndex(int currentPlayer) {
         this.currentPlayer = currentPlayer;

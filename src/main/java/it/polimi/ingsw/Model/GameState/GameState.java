@@ -9,5 +9,5 @@ import java.util.ArrayList;
 
 public interface GameState {
     void nextPlayer(Game game, ArrayList<Player> players) throws FinishedGameException, GameNotStartedException;
-
+    int getStateNumber();
 }

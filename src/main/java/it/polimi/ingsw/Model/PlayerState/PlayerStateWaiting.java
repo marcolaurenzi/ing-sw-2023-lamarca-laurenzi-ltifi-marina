@@ -31,5 +31,7 @@ public class PlayerStateWaiting extends PlayerState{
         throw new PlayerIsWaitingException();
     }
 
-
+    public int getStateNumber() {
+        return 1;
+    }
 }

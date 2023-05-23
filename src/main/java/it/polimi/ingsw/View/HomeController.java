@@ -1,4 +1,4 @@
-package it.polimi.ingsw.View;
+/* package it.polimi.ingsw.View;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class HomeController extends Application {
 
-    @FXML
+
     private TextField usernameTextField;
 
     Parent root;
@@ -24,10 +24,10 @@ public class HomeController extends Application {
         launch(args);
     }
 
-    @Override
+
     public void start(Stage primaryStage) throws IOException {
         root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/Home.fxml"));
-        // Set scene with the FXML
+        Set scene with the FXML
         Scene scene = new Scene(root);
         primaryStage.setTitle("My Shelfie");
         primaryStage.setScene(scene);
@@ -38,10 +38,10 @@ public class HomeController extends Application {
 
     public void loginOnClick() throws IOException {
 
-        // Loads the scene from the node
+        Loads the scene from the node
         Scene scene = usernameTextField.getScene();
 
-        // Gets the username from the text field
+        Gets the username from the text field
         TextField usernameTextField = (TextField) scene.lookup("#usernameTextField");
         String username = usernameTextField.getText();
 
@@ -61,3 +61,4 @@ public class HomeController extends Application {
 
     }
 }
+*/

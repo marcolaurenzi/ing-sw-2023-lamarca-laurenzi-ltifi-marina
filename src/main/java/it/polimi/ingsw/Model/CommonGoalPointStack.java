@@ -11,6 +11,13 @@ public class CommonGoalPointStack implements Serializable {
     private Integer top;
     private final CommonGoal commonGoal;
 
+    //in case of retrieved status
+    public CommonGoalPointStack(CommonGoal commonGoal, Stack<Integer> pointStack) {
+        this.pointStack = pointStack;
+        this.commonGoal = commonGoal;
+        this.top = pointStack.get(pointStack.size() - 2);
+    }
+
     public CommonGoalPointStack(CommonGoal commonGoal, int numberOfPlayers) {
         this.commonGoal = commonGoal;
         pointStack = new Stack<>();

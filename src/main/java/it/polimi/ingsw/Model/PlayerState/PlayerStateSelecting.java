@@ -76,4 +76,8 @@ public class PlayerStateSelecting extends PlayerState{
         bookshelf.insert(column, orderedPickedItems);
     }
 
+    public int getStateNumber() {
+        return 0;
+    }
+
 }

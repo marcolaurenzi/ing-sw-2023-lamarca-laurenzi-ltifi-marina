@@ -2,7 +2,7 @@ package it.polimi.ingsw.Controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Utils.GameStatus;
+import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.Message;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MethodNameEnum;
@@ -11,11 +11,8 @@ import it.polimi.ingsw.Utils.ProxyDataOutputStream;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum.DisconnectedPlayerException;
 
 public class ObserverSocket implements Observer, Serializable {
     private final ProxyDataOutputStream dataOutput;
@@ -29,7 +26,7 @@ public class ObserverSocket implements Observer, Serializable {
     }
 
     @Override
-    public void update(GameStatus gameStatus) throws IOException, InterruptedException, DisconnectedPlayerException, WrongMessageClassEnumException {
+    public void update(GameStatusToSend gameStatus) throws IOException, InterruptedException, DisconnectedPlayerException, WrongMessageClassEnumException {
         List<Object> parameters = new ArrayList<>();
         parameters.add(gameStatus);
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.update, null, gameStatus, null)));

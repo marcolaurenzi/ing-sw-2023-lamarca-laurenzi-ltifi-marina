@@ -4,7 +4,7 @@ import it.polimi.ingsw.Controller.ControllerRemoteInterface;
 import it.polimi.ingsw.Controller.ObserverRMI;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Utils.GameStatus;
+import it.polimi.ingsw.Utils.GameStatusToSend;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -46,7 +46,7 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
         controller.riempiTutto();
     }
     @Override
-    public void update(GameStatus game) throws RemoteException {
+    public void update(GameStatusToSend game) throws RemoteException {
         remoteUI.update(game);
     }
     @Override

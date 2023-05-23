@@ -18,5 +18,7 @@ public class GameStateLastTurn implements GameState{
             game.setGameState(new GameStateFinished());
         }
     }
-
+    public int getStateNumber() {
+        return 1;
+    };
 }

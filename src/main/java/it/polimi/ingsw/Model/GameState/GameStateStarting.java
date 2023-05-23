@@ -13,4 +13,7 @@ public class  GameStateStarting implements GameState{
         throw new GameNotStartedException();
     }
 
+    public int getStateNumber() {
+        return 3;
+    };
 }

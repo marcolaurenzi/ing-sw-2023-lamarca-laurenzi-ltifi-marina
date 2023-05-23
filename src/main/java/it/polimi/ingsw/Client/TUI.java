@@ -4,7 +4,7 @@ import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Utils.GameStatus;
+import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.Utils;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class TUI implements RemoteUI, UI {
     private Client client;
     private String playerId;
     private boolean isEnded;
-    private GameStatus gameStatus;
+    private GameStatusToSend gameStatus;
     protected TUI() throws RemoteException {
     }
     public void connectToServer() {
@@ -311,7 +311,7 @@ public class TUI implements RemoteUI, UI {
     private void addObserver() throws IOException, NotBoundException {
         client.addObserver(playerId);
     }
-    public void update(GameStatus gameStatus) {
+    public void update(GameStatusToSend gameStatus) {
         this.gameStatus = gameStatus;
     }
 

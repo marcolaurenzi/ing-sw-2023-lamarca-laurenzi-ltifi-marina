@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Client;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Controller.ObserverSocket;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.*;
@@ -9,8 +8,6 @@ import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MethodNameEnum;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.rmi.RemoteException;
@@ -119,7 +116,7 @@ public class ClientSocket implements Client, RemoteClient {
     }
 
     @Override
-    public void update(GameStatus game) throws RemoteException {
+    public void update(GameStatusToSend game) throws RemoteException {
         remoteUI.update(game);
     }
     @Override
