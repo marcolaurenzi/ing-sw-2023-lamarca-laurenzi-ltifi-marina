@@ -226,8 +226,10 @@ public class Utils {
         try {
             File file = new File(Utils.getConfigurationPath() + "logo.txt");
             Scanner scanner = new Scanner(file);
+            String  ANSI_RESET = "\u001B[0m";
+            String ANSI_WHITE = "\u001B[43m";
             while (scanner.hasNextLine()) {
-                System.out.println(scanner.nextLine());
+                System.out.println("                        " + ANSI_WHITE + scanner.nextLine() + ANSI_RESET);
             }
             scanner.close();
         } catch (FileNotFoundException e) {
