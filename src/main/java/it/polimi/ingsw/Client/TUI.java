@@ -117,7 +117,7 @@ public class TUI implements RemoteUI, UI {
      * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
      */
     public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, WrongMessageClassEnumException, InterruptedException {
-        int maxPlayers = -1; // why do we need initialization?
+        int maxPlayers = -1;
         boolean success = false;
 
         while(!success) {

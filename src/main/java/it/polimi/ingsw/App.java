@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState.GameStateFinished;
 import it.polimi.ingsw.Model.Item;
 import it.polimi.ingsw.Model.TypeEnum;
+import it.polimi.ingsw.View.LoginController;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -16,6 +17,5 @@ import java.io.IOException;
 public class App 
 {
     public static void main( String[] args ) {
-
     }
 }
