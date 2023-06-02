@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client;
 
 import com.google.gson.Gson;
+import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.*;

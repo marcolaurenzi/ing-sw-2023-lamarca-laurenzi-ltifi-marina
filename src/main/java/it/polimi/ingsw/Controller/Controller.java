@@ -30,7 +30,7 @@ import java.util.List;
 
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
 
-    //TODO why is everything static?
+    //TODO why is everything static? GUCCI
     private static final Gson gson = new Gson();
     private static List<Game> games;
     private static Game currentGame;
@@ -130,13 +130,15 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         }
     }
 
-    public synchronized int addPlayerToCreatedGame(String playerId) throws CreateNewGameException, AlreadyStartedGameException {
+    public synchronized int addPlayerToCreatedGame(Observer observer, String playerId) throws CreateNewGameException, AlreadyStartedGameException {
         if(!listConnected.containsKey(playerId)) { //gestire meglio questo metodo
+            if(!listObserver.containsKey(playerId)) {
+                addObserver(observer, playerId);
+            }
             if (currentGame == null)
                 throw new CreateNewGameException();
 
             else {
-                int currentGameId = currentGame.getId();
                 currentGame.addPlayer(playerId);
                 listConnected.put(playerId, true);
                 alreadyUsedPlayerIds.replace(playerId, currentGame.getId());
@@ -147,9 +149,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                     gameThread.start();
                     currentGame = null;
                 }
-                return currentGameId;
+                return currentGameId++;
             }
         }
+
         return alreadyUsedPlayerIds.get(playerId);
     }
     public static void disconnectClient(String playerId) {
@@ -169,13 +172,11 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         listConnected.put(playerId, true);
         currentGame = game;
         alreadyUsedPlayerIds.replace(playerId, currentGame.getId());
-        currentGameId++;
         games.add(game);
-
 
         return currentGame.getId();
     }
-    public void addObserver(Observer observer, String playerId) throws RemoteException{
+    private void addObserver(Observer observer, String playerId) {
         listObserver.put(playerId, observer);
 
         Game tempGame = null;

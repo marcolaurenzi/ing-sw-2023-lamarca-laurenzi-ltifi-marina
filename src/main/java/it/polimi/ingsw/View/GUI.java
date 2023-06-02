@@ -6,14 +6,10 @@ import it.polimi.ingsw.Client.ClientSocket;
 import it.polimi.ingsw.Client.RemoteUI;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatusToSend;
-import javafx.application.Application;
 
-import javax.swing.text.View;
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static it.polimi.ingsw.View.LoginController.connectionMode;
 
@@ -45,6 +41,8 @@ public class GUI implements RemoteUI {
         boolean isUsernameAlreadyInUse = false;
         try {
             client.choosePlayerId(LoginController.getUsername());
+
+            playerId = LoginController.getUsername();
         } catch (PlayerIdAlreadyInUseException e) {
             isUsernameAlreadyInUse = true;
         } catch (Exception e) {
@@ -91,7 +89,7 @@ public class GUI implements RemoteUI {
 
     }
 
-    public static void addPlayer() throws CreateNewGameException{
+    public static void addPlayer() throws CreateNewGameException, NotBoundException {
         try {
             gameId = client.addPlayerToCreatedGame(playerId);
         } catch (AlreadyStartedGameException | IOException | InterruptedException | WrongMessageClassEnumException e) {

@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 public interface ControllerRemoteInterface extends Remote {
         void choosePlayerId(String playerId) throws RemoteException, PlayerIdAlreadyInUseException;
-        int addPlayerToCreatedGame(String playerID) throws RemoteException, CreateNewGameException, AlreadyStartedGameException;
+        int addPlayerToCreatedGame(Observer observer, String playerID) throws RemoteException, CreateNewGameException, AlreadyStartedGameException;
         int createNewGameAndAddPlayer(String playerID, int maxPlayers) throws RemoteException, MaxNumberOfPlayersException, IOException, AlreadyStartedGameException, GameAlreadyCreatedException;
-        void addObserver(Observer observer, String playerId) throws RemoteException;
         void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException;
         void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException;
         void checkPassword(String playerId, String password) throws WrongPasswordException, RemoteException, AlreadyStartedGameException;

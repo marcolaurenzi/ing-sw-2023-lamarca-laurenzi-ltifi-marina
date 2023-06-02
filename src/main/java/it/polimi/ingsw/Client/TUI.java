@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client;
 
+import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
@@ -116,7 +117,7 @@ public class TUI implements RemoteUI, UI {
      * @throws AlreadyStartedGameException //TODO.
      * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
      */
-    public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, WrongMessageClassEnumException, InterruptedException {
+    public void addPlayer() throws IOException, AlreadyStartedGameException, MaxNumberOfPlayersException, WrongMessageClassEnumException, InterruptedException, NotBoundException {
         int maxPlayers = -1;
         boolean success = false;
 
@@ -173,7 +174,7 @@ public class TUI implements RemoteUI, UI {
                     input = scanner.nextLine();
 
                     if (input.length() != 1) {
-                        System.out.print("Input must be a single character: ");
+                        System.out.print("Input must be a single character: \n");
                         continue;
                     }
                     switch (input) {
@@ -312,9 +313,6 @@ public class TUI implements RemoteUI, UI {
         System.out.printf("This is the bookshelf of %s: \n", gameStatus.getPlayers().get(userInput));
         printBookshelf(bookshelfList.get(userInput));
     }
-    private void addObserver() throws IOException, NotBoundException {
-        client.addObserver(playerId);
-    }
     public void update(GameStatusToSend gameStatus) {
         this.gameStatus = gameStatus;
     }
@@ -355,7 +353,6 @@ public class TUI implements RemoteUI, UI {
         connectToServer();
         askForUsername();
         addPlayer();
-        addObserver();
 
         while(!isEnded) {
             synchronized (scanner){

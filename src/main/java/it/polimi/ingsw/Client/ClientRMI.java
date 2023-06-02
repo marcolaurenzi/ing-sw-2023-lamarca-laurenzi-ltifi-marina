@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Controller.ControllerRemoteInterface;
+import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Controller.ObserverRMI;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
@@ -27,16 +28,13 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
         controller.choosePlayerId(playerId);
     }
     @Override
-    public int addPlayerToCreatedGame(String playerId) throws AlreadyStartedGameException, CreateNewGameException, RemoteException {
-        return controller.addPlayerToCreatedGame(playerId);
+    public int addPlayerToCreatedGame(String playerId) throws AlreadyStartedGameException, CreateNewGameException, RemoteException, MalformedURLException, NotBoundException {
+        return controller.addPlayerToCreatedGame(new ObserverRMI(new ClientRMI(remoteUI)), playerId);
     }
 
     @Override
     public int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, GameAlreadyCreatedException, AlreadyStartedGameException, IOException {
         return controller.createNewGameAndAddPlayer(playerId, maxPlayers);
-    }
-    public void addObserver(String playerId) throws IOException, NotBoundException {
-        controller.addObserver(new ObserverRMI(new ClientRMI(remoteUI)), playerId);
     }
     @Override
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException {

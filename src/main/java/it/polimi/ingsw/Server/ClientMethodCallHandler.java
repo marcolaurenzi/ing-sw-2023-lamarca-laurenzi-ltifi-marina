@@ -65,7 +65,7 @@ public class ClientMethodCallHandler extends Thread {
         Message toSend;
         try {
 
-            int ret = Server.controller.addPlayerToCreatedGame(playerId);
+            int ret = Server.controller.addPlayerToCreatedGame(new ObserverSocket(new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response), new ProxyDataOutputStream(messageDispatcher)), playerId);
             toSend = new Message(MessageTypeEnum.returnValue, null, ret, null, null, null, null);
             dataOutput.writeUTF(gson.toJson(toSend));
 
@@ -95,13 +95,6 @@ public class ClientMethodCallHandler extends Thread {
             toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.GameAlreadyCreatedException, null, null, null, null, null);
             dataOutput.writeUTF(gson.toJson(toSend));
         }
-    }
-    private void addObserver(String playerId) throws IOException {
-        Message toSend;
-
-        Server.controller.addObserver(new ObserverSocket(new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response), new ProxyDataOutputStream(messageDispatcher)), playerId);
-        toSend = new Message(MessageTypeEnum.success, null, null, null, null, null, null);
-        dataOutput.writeUTF(gson.toJson(toSend));
     }
 
     private void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws IOException {
@@ -152,7 +145,6 @@ public class ClientMethodCallHandler extends Thread {
                     case addPlayerToCreatedGame -> addPlayerToCreatedGame((String)received.getParameters().get(0));
                     //IMPORTANT gson sees all numbers as Double, so I have to cast it to Double and then use intValue()
                     case createNewGameAndAddPlayer -> createNewGameAndAddPlayer((String)received.getParameters().get(0), ((Double)received.getParameters().get(1)).intValue());
-                    case addObserver -> addObserver((String)received.getParameters().get(0));
                     case pickAndInsertInBookshelf -> {
 
                         //TODO change the order thing

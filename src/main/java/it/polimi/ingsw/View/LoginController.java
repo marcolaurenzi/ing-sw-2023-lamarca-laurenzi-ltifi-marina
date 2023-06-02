@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
 
 public class LoginController extends Application implements ViewController{
 
@@ -52,7 +53,7 @@ public static void main(String[] args) {
 
     }
 
-    public void login() throws IOException {
+    public void login() throws IOException, NotBoundException {
 
         Scene scene = usernameTextField.getScene();
         TextField username = (TextField) scene.lookup("#usernameTextField");
@@ -70,7 +71,7 @@ public static void main(String[] args) {
             connectToServer();
             askForUsername();
             addPlayer();
-            //addObserver();
+
             
             root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/GamePage.fxml"));
             scene = new Scene(root);
@@ -96,14 +97,9 @@ public static void main(String[] args) {
 
     }
 
-    private void addPlayer() throws CreateNewGameException {
+    private void addPlayer() throws CreateNewGameException, NotBoundException {
         GUI.addPlayer();
     }
-
-    /*
-    private void addObserver() {
-        gui.addObserver();
-    }*/
 
     private void askForUsername() throws WrongPasswordException {
         GUI.askForUsername();
