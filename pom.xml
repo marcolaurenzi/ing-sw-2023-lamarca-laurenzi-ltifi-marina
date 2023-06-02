@@ -49,6 +49,17 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>16</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>16</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -93,6 +104,7 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.4.2</version>
         </plugin>
+
       </plugins>
     </pluginManagement>
   </build>
