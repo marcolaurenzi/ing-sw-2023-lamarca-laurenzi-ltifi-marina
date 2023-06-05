@@ -11,14 +11,20 @@ import java.io.Serializable;
 public class Item implements Serializable {
     private final TypeEnum type;
 
+    private final int num;
+
     public Item(TypeEnum type) {
         this.type = type;
+        num = (int) (Math.random() * 3) + 1;
     }
 
     public TypeEnum getType() {
         return type;
     }
 
+    public int getNum() {
+        return num;
+    }
     /**
      * This method returns a string representing the item in the matrix (a string of # with the color of the item),
      * the dimension of the string is defined in the configuration file

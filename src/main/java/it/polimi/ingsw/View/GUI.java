@@ -14,12 +14,12 @@ import java.rmi.RemoteException;
 import static it.polimi.ingsw.View.LoginController.connectionMode;
 
 public class GUI implements RemoteUI {
-    private static ViewController controller;
+    private static GamePageController controller;
     private static String playerId;
     private static int gameId;
     private static Client client;
     private static boolean isEnded;
-    private static GameStatusToSend gameStatus;
+    protected static GameStatusToSend gameStatus;
 
     public static void connectToServer() throws ConnectionException {
         try {
@@ -76,12 +76,13 @@ public class GUI implements RemoteUI {
 
     @Override
     public void update(GameStatusToSend game) throws RemoteException {
-
+        gameStatus = game;
+        controller.uiUpdate(gameStatus);
     }
 
     @Override
     public void playTurn() throws IOException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, SelectionIsEmptyException, WrongMessageClassEnumException, InterruptedException {
-
+        Thread.sleep(1000 * 500);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class GUI implements RemoteUI {
         client.createNewGameAndAddPlayer(playerId, i);
     }
 
-    public static void setController(ViewController controller) {
+    public static void setController(GamePageController controller) {
         GUI.controller = controller;
     }
 }

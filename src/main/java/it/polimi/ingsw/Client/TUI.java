@@ -24,7 +24,7 @@ public class TUI implements RemoteUI, UI {
     private String playerId;
     private boolean isEnded;
     private GameStatusToSend gameStatus;
-    protected TUI() throws RemoteException {
+    public TUI() throws RemoteException {
     }
     public void connectToServer() {
         String userInput;

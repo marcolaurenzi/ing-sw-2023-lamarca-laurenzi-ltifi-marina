@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.Client.TUI;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState.GameStateFinished;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.View.LoginController;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.rmi.NotBoundException;
 
 /**
  * Hello world!
@@ -16,6 +18,12 @@ import java.io.IOException;
  */
 public class App 
 {
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws WrongMessageClassEnumException, NotBoundException, MaxNumberOfPlayersException, AlreadyStartedGameException, IOException, InterruptedException {
+        // GUI
+        LoginController.main(args);
+
+        // TUI
+        // TUI tui = new TUI();
+        // tui.run();
     }
 }

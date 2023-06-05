@@ -6,6 +6,7 @@ import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Model.Exceptions.WrongMessageClassEnumException;
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,6 +22,10 @@ public class CreateNewGameController implements ViewController {
 
     @FXML
     private AnchorPane anchorPane;
+
+    private static Stage stage = null;
+    static Parent root;
+
 
     public void initialize() {
 
@@ -50,6 +55,13 @@ public class CreateNewGameController implements ViewController {
 
     public void onClick(String text) {
         try {
+            root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/GamePage.fxml"));
+        }catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading GamePage.fxml");
+            System.exit(-1);
+        }
+        try {
             GUI.createNewGameAndAddPlayer(Integer.parseInt(text));
             System.out.println("Game created");
         } catch (WrongMessageClassEnumException | MaxNumberOfPlayersException | IOException | InterruptedException | GameAlreadyCreatedException e) {
@@ -61,6 +73,13 @@ public class CreateNewGameController implements ViewController {
             } catch (InterruptedException ex) {
                 throw new RuntimeException(ex);
             }
+        }
+        finally {
+            Scene scene = new Scene(root);
+            stage = LoginController.getStage();
+            stage.setScene(scene);
+            stage.setResizable(true);
+            stage.show();
         }
     }
 

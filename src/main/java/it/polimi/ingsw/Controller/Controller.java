@@ -228,6 +228,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             try {
                 listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
             } catch (DisconnectedPlayerException e) {
+                System.out.println("Player " + games.get(game).getCurrentPlayer().getPlayerID() + " disconnected");
                 disconnectClient(games.get(game).getCurrentPlayer().getPlayerID());
             }
         }

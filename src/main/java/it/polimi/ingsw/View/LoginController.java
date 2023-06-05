@@ -54,7 +54,7 @@ public static void main(String[] args) {
     }
 
     public void login() throws IOException, NotBoundException {
-
+        root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/GamePage.fxml"));
         Scene scene = usernameTextField.getScene();
         TextField username = (TextField) scene.lookup("#usernameTextField");
         TextField password = (TextField) scene.lookup("#passwordTextField");
@@ -71,12 +71,9 @@ public static void main(String[] args) {
             connectToServer();
             askForUsername();
             addPlayer();
-
-            
-            root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/GamePage.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.show();
 
         }
@@ -120,5 +117,9 @@ public static void main(String[] args) {
     public void printError(String string) {
         TextField error = (TextField) root.lookup("#errorTextField");
         error.setText(string);
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }

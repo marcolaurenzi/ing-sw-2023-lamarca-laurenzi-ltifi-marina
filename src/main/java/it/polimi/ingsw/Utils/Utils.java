@@ -21,6 +21,8 @@ public class Utils {
     private final static String configurationPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "configurations" + File.separator;
     private final static String testFilesPath = "src" + File.separator + "test" + File.separator + "testFiles" + File.separator;
 
+    private final static String assetsPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator;
+
     /* ************************************************************************************************************
      *                          END OF ATTRIBUTES DECLARATION
      *                          START OF PATH FUNCTIONS
@@ -40,6 +42,14 @@ public class Utils {
      */
     public static String getTestFilesPath() {
         return testFilesPath;
+    }
+
+    /**
+     * This function returns the path of the assets
+     * @return the path of the assets
+     */
+    public static String getAssetsPath() {
+        return assetsPath;
     }
 
     /* ************************************************************************************************************
