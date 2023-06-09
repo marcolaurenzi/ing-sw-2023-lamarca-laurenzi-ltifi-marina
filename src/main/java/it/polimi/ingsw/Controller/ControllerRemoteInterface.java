@@ -14,6 +14,6 @@ public interface ControllerRemoteInterface extends Remote {
         int createNewGameAndAddPlayer(String playerID, int maxPlayers) throws RemoteException, MaxNumberOfPlayersException, IOException, AlreadyStartedGameException, GameAlreadyCreatedException;
         void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException;
         void riempiTutto() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException;
-        void checkPassword(String playerId, String password) throws WrongPasswordException, RemoteException, AlreadyStartedGameException;
+        void checkPassword(String playerId, String password, Observer observer) throws WrongPasswordException, RemoteException, AlreadyStartedGameException;
         void choosePassword(String playerId, String password) throws RemoteException, PlayerIdAlreadyInUseException;
 }

@@ -22,12 +22,15 @@ public class Server {
     private static void exit_routine() {
         Path directoryPath = Paths.get("SavedGames");
 
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(directoryPath)) {
-            for (Path path : directoryStream) {
-                Files.delete(path);
+        if(Files.exists(directoryPath)) {
+            try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(directoryPath)) {
+                for (Path path : directoryStream) {
+                    Files.delete(path);
+                }
+                Files.delete(directoryPath);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         System.exit(0);

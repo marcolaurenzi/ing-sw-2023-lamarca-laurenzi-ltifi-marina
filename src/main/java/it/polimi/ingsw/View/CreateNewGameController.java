@@ -78,7 +78,8 @@ public class CreateNewGameController implements ViewController {
             Scene scene = new Scene(root);
             stage = LoginController.getStage();
             stage.setScene(scene);
-            stage.setResizable(true);
+            stage.setMaximized(true);
+            stage.setFullScreen(true);
             stage.show();
         }
     }

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-
+import java.nio.file.*;
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
 
     //TODO why is everything static? GUCCI
@@ -48,53 +48,55 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         listConnected = new HashMap<>();
         currentGame = null;
 
-        //if SavedGames contain any file, the server crashed
-        try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get("SavedGames"))) {
-            Iterator<Path> it = dirStream.iterator();
-            if(it.hasNext()) {
+        try {
+            Path path = Paths.get("SavedGames");
+            if (Files.exists(path)) {
+                DirectoryStream<Path> dirStream = Files.newDirectoryStream(path);
+                Iterator<Path> it = dirStream.iterator();
+                if (it.hasNext()) {
 
-                try(BufferedReader reader = Files.newBufferedReader(it.next())) {
-                    ControllerStatusToFile controllerStatus = gson.fromJson(reader.readLine(), ControllerStatusToFile.class);
+                    try (BufferedReader reader = Files.newBufferedReader(it.next())) {
+                        ControllerStatusToFile controllerStatus = gson.fromJson(reader.readLine(), ControllerStatusToFile.class);
 
-                    currentGameId = controllerStatus.getCurrentGameId();
-                    alreadyUsedPlayerIds = controllerStatus.getAlreadyUsedPlayerIds();
-                    listCredentials = controllerStatus.getListCredentials();
-
-                } catch (Exception e) {
-                    System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
-                    e.printStackTrace();
-                    System.exit(-1);
-                }
-
-
-                while(it.hasNext()) {
-                    try(BufferedReader reader = Files.newBufferedReader(it.next())) {
-                        ArrayList<PlayerStatusToFile> playerStatus = new ArrayList<>();
-                        GameStatusToFile gameStatus = gson.fromJson(reader.readLine(), GameStatusToFile.class);
-
-                        for(int i = 0; i < gameStatus.getMaxPlayers(); i++) {
-                            playerStatus.add(gson.fromJson(reader.readLine(), PlayerStatusToFile.class));
-                        }
-
-                        Game game = new Game(gameStatus, playerStatus);
-                        games.add(game);
-                        GameThread gameThread = new GameThread(game);
-                        gameThread.start();
-
-
-                        for(PlayerStatusToFile p: playerStatus) {
-                            listConnected.put(p.getPlayerID(), false);
-                        }
+                        currentGameId = controllerStatus.getCurrentGameId();
+                        alreadyUsedPlayerIds = controllerStatus.getAlreadyUsedPlayerIds();
+                        listCredentials = controllerStatus.getListCredentials();
 
                     } catch (Exception e) {
                         System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
                         e.printStackTrace();
                         System.exit(-1);
                     }
-                }
-            }
 
-            else {
+
+                    while (it.hasNext()) {
+                        try (BufferedReader reader = Files.newBufferedReader(it.next())) {
+                            ArrayList<PlayerStatusToFile> playerStatus = new ArrayList<>();
+                            GameStatusToFile gameStatus = gson.fromJson(reader.readLine(), GameStatusToFile.class);
+
+                            for (int i = 0; i < gameStatus.getMaxPlayers(); i++) {
+                                playerStatus.add(gson.fromJson(reader.readLine(), PlayerStatusToFile.class));
+                            }
+
+                            Game game = new Game(gameStatus, playerStatus);
+                            games.add(game);
+                            GameThread gameThread = new GameThread(game);
+                            gameThread.start();
+
+
+                            for (PlayerStatusToFile p : playerStatus) {
+                                listConnected.put(p.getPlayerID(), false);
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
+                            e.printStackTrace();
+                            System.exit(-1);
+                        }
+                    }
+                }
+
+            } else {
                 currentGameId = 0;
                 alreadyUsedPlayerIds = new HashMap<>();
                 listCredentials = new HashMap<>();
@@ -109,6 +111,17 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
     //the controller status is saved when a new game is started
     public void saveControllerStatus() {
+        Path path = Paths.get("SavedGames");
+        //if directory SavedGames doesn't exist create it:
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                System.out.println("Failed to create SavedGames directory");
+            }
+
+        }
+
         try {
             File file = new File(System.getProperty("user.dir"), "/SavedGames/saved_status_controller");
             FileWriter fileWriter = new FileWriter(file);
@@ -161,7 +174,8 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             listObserver.remove(playerId);
         }
     }
-    private static void reconnectClient(String playerId) throws AlreadyStartedGameException {
+    private static void reconnectClient(String playerId, Observer observer) throws AlreadyStartedGameException {
+        listObserver.put(playerId, observer);
         listConnected.replace(playerId, true);
     }
     public synchronized int createNewGameAndAddPlayer(String playerId, int maxPlayers) throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException, GameAlreadyCreatedException {
@@ -318,13 +332,13 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         }
         return password;
     }
-    public void checkPassword(String playerId, String password) throws WrongPasswordException, RemoteException {
+    public void checkPassword(String playerId, String password, Observer observer) throws WrongPasswordException, RemoteException {
         String temp = calcDigest(password);
         if(!listCredentials.get(playerId).equals(temp)) {
             throw new WrongPasswordException();
         } else {
             try {
-                reconnectClient(playerId);
+                reconnectClient(playerId, observer);
             } catch (AlreadyStartedGameException e) {
             }
         }
@@ -337,6 +351,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             System.out.println("Password: " + temp);
             listCredentials.put(playerId, temp);
         }
+    }
+
+    public static boolean isPlayerConnected(String playerId) {
+        return listObserver.get(playerId) != null;
     }
 
     public static List<Game> getGames() {

@@ -53,7 +53,7 @@ public class ClientMethodCallHandler extends Thread {
     private void checkPassword(String playerId, String password) throws IOException, AlreadyStartedGameException {
         Message toSend;
         try {
-            Server.controller.checkPassword(playerId, password);
+            Server.controller.checkPassword(playerId, password, new ObserverSocket(new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response), new ProxyDataOutputStream(messageDispatcher)));
             toSend = new Message(MessageTypeEnum.success, null, null, null, null, null, null);
             dataOutput.writeUTF(gson.toJson(toSend));
         } catch (WrongPasswordException e) {

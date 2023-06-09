@@ -63,13 +63,14 @@ public class GUI implements RemoteUI {
                 System.exit(-1);
             }
         }
-        try {
-            client.choosePassword(LoginController.getUsername(), LoginController.getPassword());
-        }
-        catch (Exception e) {
-            System.out.println("Exception in GUI ask for password " + e);
-            e.printStackTrace();
-            System.exit(-1);
+        else {
+            try {
+                client.choosePassword(LoginController.getUsername(), LoginController.getPassword());
+            } catch (Exception e) {
+                System.out.println("Exception in GUI ask for password " + e);
+                e.printStackTrace();
+                System.exit(-1);
+            }
         }
     }
 

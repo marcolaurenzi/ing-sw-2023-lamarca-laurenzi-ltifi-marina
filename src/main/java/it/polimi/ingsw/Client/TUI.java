@@ -254,7 +254,12 @@ public class TUI implements RemoteUI, UI {
         for (int i = 0; i < tilesSelection.size(); i++) {
             order[i] = i;
         }
-        client.pickAndInsertInBookshelf(tilesSelection, bookshelfNavigator.getColumn(), order, playerId);
+        try {
+            client.pickAndInsertInBookshelf(tilesSelection, bookshelfNavigator.getColumn(), order, playerId);
+        } catch (IOException e) {
+            System.out.println("Server crashed!");
+            System.exit(-1);
+        }
     }
 
     private void printPoints() {

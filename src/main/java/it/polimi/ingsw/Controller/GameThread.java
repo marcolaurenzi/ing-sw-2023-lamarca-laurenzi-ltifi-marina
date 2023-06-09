@@ -45,12 +45,15 @@ public class GameThread extends Thread{
         game.getCurrentPlayer().changeState(new PlayerStateSelecting());
         while (game.getGameState() instanceof GameStateRunning || game.getGameState() instanceof GameStateLastTurn) {
             try {
-                Controller.update(game.getId());
-                Controller.assignTurn(game.getId());
-                game.refreshBoard();
-                game.nextTurn();
-                for(int i = 0;i < game.getPlayers().size(); i++){
-                    if(!Controller.getListConnected().get(game.getCurrentPlayer().getPlayerID())) {
+                if(Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
+                    Controller.update(game.getId());
+                    Controller.assignTurn(game.getId());
+                    game.refreshBoard();
+                }
+                    game.nextTurn();
+
+                for(int i = 0; i < game.getPlayers().size(); i++){
+                    if(!Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
                         game.nextTurn();
                         if(i == game.getMaxPlayers()-1){
                             Thread.sleep(1000);
