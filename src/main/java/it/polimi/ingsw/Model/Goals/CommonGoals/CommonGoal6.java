@@ -90,4 +90,8 @@ public class CommonGoal6 extends CommonGoal{
     public String getGoalDescription() {
         return "Fill one of the 4 diagonals with 5 tiles of the same color";
     }
+
+    @Override
+    public String getGoalFileNumber() { return "7";}
 }
+

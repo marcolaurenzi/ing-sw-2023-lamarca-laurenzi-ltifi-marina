@@ -61,4 +61,7 @@ public class CommonGoal7 extends CommonGoal {
     public String getGoalDescription() {
         return "you must have 4 different rows of 5 consecutive Tiles with no more than 3 different colours in it";
     }
+
+    @Override
+    public String getGoalFileNumber() { return "8";}
 }

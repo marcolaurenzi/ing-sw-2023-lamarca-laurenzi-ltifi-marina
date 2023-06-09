@@ -183,35 +183,6 @@
           "numberOfPlayersSign":5
         },
         {
-          "numberOfPlayersSign":2
-        },
-        {
-          "numberOfPlayersSign":2
-        },
-        {
-          "numberOfPlayersSign":2
-        },
-        {
-          "numberOfPlayersSign":2
-        },
-        {
-          "numberOfPlayersSign":3
-        },
-        {
-          "numberOfPlayersSign":5
-        },
-        {
-          "numberOfPlayersSign":5
-        }
-      ],
-      [
-        {
-          "numberOfPlayersSign":5
-        },
-        {
-          "numberOfPlayersSign":5
-        },
-        {
           "numberOfPlayersSign":3
         },
         {
@@ -224,7 +195,7 @@
           "numberOfPlayersSign":2
         },
         {
-          "numberOfPlayersSign":5
+          "numberOfPlayersSign":3
         },
         {
           "numberOfPlayersSign":5
@@ -245,6 +216,35 @@
         },
         {
           "numberOfPlayersSign":4
+        },
+        {
+          "numberOfPlayersSign":2
+        },
+        {
+          "numberOfPlayersSign":2
+        },
+        {
+          "numberOfPlayersSign":5
+        },
+        {
+          "numberOfPlayersSign":5
+        },
+        {
+          "numberOfPlayersSign":5
+        }
+      ],
+      [
+        {
+          "numberOfPlayersSign":5
+        },
+        {
+          "numberOfPlayersSign":5
+        },
+        {
+          "numberOfPlayersSign":5
+        },
+        {
+          "numberOfPlayersSign":5
         },
         {
           "numberOfPlayersSign":4

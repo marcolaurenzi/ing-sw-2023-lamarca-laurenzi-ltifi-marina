@@ -24,4 +24,6 @@ public abstract class CommonGoal implements Serializable {
     public abstract boolean isAchieved(Bookshelf bookshelf);
     public abstract String getGoalName();
     public abstract String getGoalDescription();
+
+    public abstract String getGoalFileNumber();
 }

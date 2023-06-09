@@ -55,4 +55,7 @@ public class CommonGoal9 extends CommonGoal {
     public String getGoalDescription() {
         return "Two rows each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.";
     }
+
+    @Override
+    public String getGoalFileNumber() { return "10";}
 }

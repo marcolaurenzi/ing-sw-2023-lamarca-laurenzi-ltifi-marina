@@ -14,8 +14,10 @@ import java.io.Serializable;
  */
 public class PersonalGoal implements Serializable {
     private Bookshelf personalGoal;
+    private int number;
 
     public PersonalGoal(int i) throws IOException {
+        this.number = i + 1;
         personalGoal = Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.JSON", i);
     }
 
@@ -61,4 +63,6 @@ public class PersonalGoal implements Serializable {
     public Bookshelf getPersonalGoalBookshelf() {
         return personalGoal;
     }
+
+    public String getPersonalGoalName() { return "Personal_Goals" + number; }
 }

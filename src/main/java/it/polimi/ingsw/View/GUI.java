@@ -4,12 +4,15 @@ import it.polimi.ingsw.Client.Client;
 import it.polimi.ingsw.Client.ClientRMI;
 import it.polimi.ingsw.Client.ClientSocket;
 import it.polimi.ingsw.Client.RemoteUI;
+import it.polimi.ingsw.Controller.Controller;
+import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import static it.polimi.ingsw.View.LoginController.connectionMode;
 
@@ -20,6 +23,11 @@ public class GUI implements RemoteUI {
     private static Client client;
     private static boolean isEnded;
     protected static GameStatusToSend gameStatus;
+    private static GUITurnSelectionHandler turnSelectionHandler;
+
+
+
+    private static SharedObject sharedObject;
 
     public static void connectToServer() throws ConnectionException {
         try {
@@ -78,12 +86,23 @@ public class GUI implements RemoteUI {
     @Override
     public void update(GameStatusToSend game) throws RemoteException {
         gameStatus = game;
+        sharedObject = new SharedObject();
         controller.uiUpdate(gameStatus);
     }
 
     @Override
     public void playTurn() throws IOException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, SelectionIsEmptyException, WrongMessageClassEnumException, InterruptedException {
-        Thread.sleep(1000 * 500);
+        sharedObject.waitForVariable();
+        controller.disableBookshelfButtons();
+
+        GUITurnSelectionHandler turnSelectionHandler = controller.getTurnSelectionHandler();
+
+        ArrayList<Coordinates> tilesSelection = turnSelectionHandler.getSelection();
+        int[] order = new int[tilesSelection.size()];
+        for (int i = 0; i < tilesSelection.size(); i++) {
+            order[i] = i;
+        }
+        client.pickAndInsertInBookshelf(tilesSelection, turnSelectionHandler.getColumn(), order, playerId);
     }
 
     @Override
@@ -107,5 +126,12 @@ public class GUI implements RemoteUI {
 
     public static void setController(GamePageController controller) {
         GUI.controller = controller;
+    }
+    public static String getPlayerId() {
+        return GUI.playerId;
+    }
+
+    public static SharedObject getSharedObject() {
+        return sharedObject;
     }
 }

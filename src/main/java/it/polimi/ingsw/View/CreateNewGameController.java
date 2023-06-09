@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -78,8 +79,9 @@ public class CreateNewGameController implements ViewController {
             Scene scene = new Scene(root);
             stage = LoginController.getStage();
             stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.setFullScreen(true);
+            stage.setResizable(true);
+            //stage.setMaximized(true);
+            //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             stage.show();
         }
     }

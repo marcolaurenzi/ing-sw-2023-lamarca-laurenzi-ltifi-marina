@@ -22,8 +22,23 @@ public class  BoardNavigator {
     private boolean isTileEmpty() {
         return board.getGameBoard().get(cursor.getY(), cursor.getX()).isEmpty();
     }
+
+    private boolean isNextToOthers() {
+        if(selection.size() == 0)
+            return true;
+        boolean ret = false;
+
+
+        for (Coordinates c: selection) {
+            if(Math.abs(c.getX() - cursor.getX()) == 1 && Math.abs(c.getY() - cursor.getY()) == 0 || Math.abs(c.getX() - cursor.getX()) == 0 && Math.abs(c.getY() - cursor.getY()) == 1) {
+                ret = true;
+            }
+        }
+
+        return ret;
+    }
     private boolean isAdjacentToOthers() {
-        return isSameRow() || isSameColumn();
+        return (isSameRow() || isSameColumn()) && isNextToOthers();
     }
     private boolean isSameColumn() {
         for (Coordinates coordinates : selection)

@@ -48,4 +48,7 @@ public class CommonGoal5 extends CommonGoal{
     public String getGoalDescription() {
         return "Fill your Bookshelf with 8 Tiles of the same color";
     }
+
+    @Override
+    public String getGoalFileNumber() { return "6";}
 }

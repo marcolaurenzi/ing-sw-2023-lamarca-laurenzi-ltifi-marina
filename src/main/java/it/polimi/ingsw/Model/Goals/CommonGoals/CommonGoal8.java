@@ -54,4 +54,7 @@ public class CommonGoal8 extends CommonGoal {
     public String getGoalDescription() {
         return "Two columns each formed by 6 different types of tiles";
     }
+
+    @Override
+    public String getGoalFileNumber() { return "9";}
 }

@@ -1,38 +1,404 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.GamePageController">
+<HBox fx:id="mainHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="844.0" prefWidth="1404.0" style="-fx-background-image: url(&quot;file:src/main/resources/assets/misc/sfondo_parquet.jpg&quot;);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.GamePageController">
    <children>
-      <ImageView fx:id="boardImage" fitHeight="200.0" fitWidth="200.0" layoutX="197.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
-         <image>
-            <Image url="@../assets/boards/livingroom.png" />
-         </image>
-      </ImageView>
-      <GridPane fx:id="bookshelfGrid" layoutX="208.0" layoutY="109.0" prefHeight="182.0" prefWidth="183.0" AnchorPane.bottomAnchor="109.0" AnchorPane.leftAnchor="208.0" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="109.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
+      <VBox prefHeight="650.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox layoutX="10.0" layoutY="256.0" prefHeight="233.0" prefWidth="362.0">
+               <children>
+                  <VBox prefHeight="278.0" prefWidth="233.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="278.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="50.0" prefWidth="0.0" />
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="253.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" />
+                                    <HBox prefHeight="18.0" prefWidth="104.0">
+                                       <children>
+                                          <VBox prefHeight="20.0" prefWidth="0.0" />
+                                          <Label fx:id="playerId1" prefHeight="20.0" prefWidth="88.0">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="20.0" prefWidth="87.0" />
+                                          <Label fx:id="points1" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="80.0" textAlignment="RIGHT">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="20.0" prefWidth="42.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="86.0" prefWidth="151.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="50.0" prefWidth="1.0" />
+                           </children>
+                        </HBox>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0">
+                           <children>
+                              <GridPane fx:id="bookshelfGridPane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <ImageView fx:id="bookshelfImageView1" fitHeight="211.0" fitWidth="189.0" pickOnBounds="true" StackPane.alignment="CENTER">
+                                 <image>
+                                    <Image url="@../assets/boards/bookshelf_orth.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets top="18.0" />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <HBox prefHeight="61.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="278.0" prefWidth="234.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="648.0" prefHeight="305.0" prefWidth="362.0">
+               <children>
+                  <VBox prefHeight="278.0" prefWidth="233.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="278.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="50.0" prefWidth="0.0" />
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="253.0">
+                                 <children>
+                                    <HBox prefHeight="53.0" prefWidth="151.0" />
+                                    <HBox prefHeight="18.0" prefWidth="104.0">
+                                       <children>
+                                          <VBox prefHeight="20.0" prefWidth="0.0" />
+                                          <Label fx:id="playerId2" prefHeight="20.0" prefWidth="88.0">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="20.0" prefWidth="87.0" />
+                                          <Label fx:id="points2" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="80.0" textAlignment="RIGHT">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox prefHeight="20.0" prefWidth="42.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="11.0" prefWidth="151.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="50.0" prefWidth="1.0" />
+                           </children>
+                        </HBox>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0">
+                           <children>
+                              <GridPane fx:id="bookshelfGridPane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <ImageView fx:id="bookshelfImageView2" fitHeight="211.0" fitWidth="189.0" pickOnBounds="true" StackPane.alignment="CENTER">
+                                 <image>
+                                    <Image url="@../assets/boards/bookshelf_orth.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets top="18.0" />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <HBox prefHeight="61.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="278.0" prefWidth="234.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox prefHeight="206.0" prefWidth="256.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="278.0" prefWidth="233.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="278.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="50.0" prefWidth="0.0" />
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="253.0">
+                                 <children>
+                                    <HBox prefHeight="82.0" prefWidth="151.0" />
+                                    <HBox prefHeight="18.0" prefWidth="104.0">
+                                       <children>
+                                          <VBox prefHeight="20.0" prefWidth="0.0" />
+                                          <Label fx:id="playerId3" prefHeight="20.0" prefWidth="88.0">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font></Label>
+                                          <VBox prefHeight="20.0" prefWidth="87.0" />
+                                          <Label fx:id="points3" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="80.0" textAlignment="RIGHT">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font></Label>
+                                          <VBox prefHeight="20.0" prefWidth="42.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="53.0" prefWidth="151.0" />
+                                 </children></VBox>
+                              <VBox prefHeight="50.0" prefWidth="1.0" />
+                           </children>
+                        </HBox>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0">
+                           <children>
+                              <GridPane fx:id="bookshelfGridPane3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="150.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <ImageView fx:id="bookshelfImageView3" fitHeight="211.0" fitWidth="189.0" pickOnBounds="true" StackPane.alignment="CENTER">
+                                 <image>
+                                    <Image url="@../assets/boards/bookshelf_orth.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets top="18.0" />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="278.0" prefWidth="234.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children></VBox>
+      <VBox prefHeight="400.0" prefWidth="242.0" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox prefHeight="76.0" prefWidth="472.0">
+               <children>
+                  <VBox prefHeight="150.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <StackPane prefHeight="150.0" prefWidth="240.0">
+                           <children>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="320.0" textAlignment="CENTER" textFill="#ef2804">
+                                 <font>
+                                    <Font name="System Bold Italic" size="48.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="174.0" prefHeight="290.0" prefWidth="235.0">
+               <children>
+                  <VBox prefHeight="375.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="420.0">
+                           <children>
+                              <ImageView fitHeight="411.0" fitWidth="417.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../assets/boards/livingroom.png" />
+                                 </image>
+                              </ImageView>
+                              <GridPane fx:id="boardGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="369.0" prefWidth="369.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="41.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="41.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <padding>
+                                    <Insets left="20.0" right="20.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </StackPane>
+                        <HBox prefHeight="139.0" prefWidth="370.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="24.0" prefHeight="354.0" prefWidth="472.0">
+               <children>
+                  <VBox prefHeight="130.0" prefWidth="12.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="57.0" prefWidth="138.0" />
+                        <GridPane fx:id="commonGoalsGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="267.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="166.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="104.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="104.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="104.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                        <HBox prefHeight="13.0" prefWidth="138.0" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="130.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </children></VBox>
+      <VBox prefHeight="415.0" prefWidth="141.0" HBox.hgrow="ALWAYS">
+         <children>
+            <HBox prefHeight="105.0" prefWidth="302.0" />
+            <HBox prefHeight="387.0" prefWidth="302.0">
+               <children>
+                  <VBox prefHeight="387.0" prefWidth="125.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="73.0" prefWidth="64.0" />
+                              <VBox layoutX="10.0" layoutY="10.0" prefHeight="73.0" prefWidth="342.0">
+                                 <children>
+                                    <HBox prefHeight="156.0" prefWidth="215.0" />
+                                    <HBox prefHeight="84.0" prefWidth="249.0">
+                                       <children>
+                                          <VBox prefHeight="18.0" prefWidth="20.0" />
+                                          <Label fx:id="playerId0" prefHeight="18.0" prefWidth="100.0">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font></Label>
+                                          <VBox prefHeight="18.0" prefWidth="133.0" />
+                                          <Label fx:id="points0" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="89.0">
+                                             <font>
+                                                <Font name="System Bold Italic" size="14.0" />
+                                             </font></Label>
+                                          <VBox prefHeight="18.0" prefWidth="0.0" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" />
+                                 </children></VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
+                           </children>
+                        </HBox>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="277.0" prefWidth="255.0">
+                           <children>
+                              <GridPane fx:id="bookshelfGridPane0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="200.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <ImageView fitHeight="277.0" fitWidth="255.0" pickOnBounds="true" StackPane.alignment="CENTER">
+                                 <image>
+                                    <Image url="@../assets/boards/bookshelf_orth.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets top="20.0" />
+                                 </StackPane.margin></ImageView>
+                           </children>
+                        </StackPane>
+                        <HBox prefHeight="101.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" />
+                              <Button fx:id="column0Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" />
+                              <Button fx:id="column1Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" />
+                              <Button fx:id="column2Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" />
+                              <Button fx:id="column3Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" />
+                              <Button fx:id="column4Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" />
+                              <VBox prefHeight="200.0" prefWidth="100.0" />
+                           </children></HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="387.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox prefHeight="218.0" prefWidth="326.0">
+               <children>
+                  <VBox prefHeight="230.0" prefWidth="151.0" HBox.hgrow="ALWAYS" />
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                        <ImageView fx:id="personalGoalImageView" fitHeight="230.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true" />
+                        <HBox prefHeight="44.0" prefWidth="138.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="218.0" prefWidth="138.0" HBox.hgrow="ALWAYS" />
+               </children></HBox>
+         </children></VBox>
    </children>
-</AnchorPane>
+</HBox>

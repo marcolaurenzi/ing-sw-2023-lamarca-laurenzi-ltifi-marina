@@ -41,7 +41,7 @@ public abstract class PlayerState {
      * @return
      */
     protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumnAndAdjacents(tilesSelection) || areAllSameRowAndAdjacents(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
+        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumn(tilesSelection) || areAllSameRow(tilesSelection)) && areAllAdjacents(tilesSelection) && haveAllOneSidesFree(tilesSelection, board);
     }
     private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
         boolean ret = false;
@@ -54,14 +54,14 @@ public abstract class PlayerState {
         }
         return ret;
     }
-    private Boolean areAllSameRowAndAdjacents(ArrayList<Coordinates> tilesSelection) {
+    private Boolean areAllSameRow(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
 
         int x = tilesSelection.get(0).getX();
         int y = tilesSelection.get(0).getY();
 
         for(int i = 1; i < tilesSelection.size(); i++) {
-            if (tilesSelection.get(i).getX() != x || tilesSelection.get(i).getY() != y + i ) {
+            if (tilesSelection.get(i).getX() != x) {
                 ret = false;
                 break;
             }
@@ -69,18 +69,34 @@ public abstract class PlayerState {
 
         return ret;
     }
-    private Boolean areAllSameColumnAndAdjacents(ArrayList<Coordinates> tilesSelection) {
+
+    public Boolean areAllAdjacents(ArrayList<Coordinates> tilesSelection) {
+        Boolean ret = true;
+        for(int i = 0; i < tilesSelection.size() - 1; i ++ ) {
+            Coordinates curr = tilesSelection.get(i);
+            Coordinates next = tilesSelection.get(i + 1);
+            if(!(Math.abs(curr.getX() - next.getX()) == 1 && Math.abs(curr.getY() - next.getY()) == 0 || Math.abs(curr.getX() - next.getX()) == 0 && Math.abs(curr.getY() - next.getY()) == 1)) {
+                ret = false;
+                break;
+            }
+        }
+
+        return ret;
+    }
+    private Boolean areAllSameColumn(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
 
         int x = tilesSelection.get(0).getX();
         int y = tilesSelection.get(0).getY();
 
+        //same column
         for(int i = 0; i < tilesSelection.size(); i++) {
-            if (tilesSelection.get(i).getY() != y || tilesSelection.get(i).getX() != x + i) {
+            if (tilesSelection.get(i).getY() != y) {
                 ret = false;
                 break;
             }
         }
+
 
         return ret;
     }

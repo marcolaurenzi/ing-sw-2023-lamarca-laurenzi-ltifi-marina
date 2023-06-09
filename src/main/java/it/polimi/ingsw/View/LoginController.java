@@ -6,12 +6,11 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Screen;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -75,8 +74,10 @@ public static void main(String[] args) {
             addPlayer();
             scene = new Scene(root);
             stage.setScene(scene);
-            stage.setMaximized(true);
-            stage.setFullScreen(true);
+            stage.setResizable(true);
+            //stage.setMaximized(true);
+            //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+            stage.show();
 
         }
         catch (ConnectionException e) {

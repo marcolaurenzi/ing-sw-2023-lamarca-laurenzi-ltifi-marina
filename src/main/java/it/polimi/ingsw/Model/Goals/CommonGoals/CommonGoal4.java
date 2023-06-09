@@ -59,4 +59,7 @@ public class CommonGoal4 extends CommonGoal {
     public String getGoalDescription() {
         return "Fill 3 columns of your Bookshelf with 6 consecutive Tiles with no more than 3 different colours in it";
     }
+
+    @Override
+    public String getGoalFileNumber() { return "5";}
 }

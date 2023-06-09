@@ -131,4 +131,13 @@ public class CommonGoal01 extends CommonGoal {
     public String getGoalDescription() {
         return this.numberOfGroups + " groups each containing at least" + this.numberOfGroups+ "tiles of the same type.\n the tiles of one group can be different from those of another group";
     }
+
+    @Override
+    public  String getGoalFileNumber() {
+        if(dim == 4 )  {
+            return "1";
+        } else {
+            return "2";
+        }
+    }
 }
