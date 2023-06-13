@@ -7,6 +7,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.LoginController">
    <children>
@@ -18,10 +20,35 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <Button layoutX="676.0" layoutY="583.0" mnemonicParsing="false" onAction="#login" prefHeight="87.0" prefWidth="110.0" text="Login" AnchorPane.leftAnchor="676.0" AnchorPane.rightAnchor="214.0" />
+      <Button layoutX="675.0" layoutY="580.0" mnemonicParsing="false" onAction="#login" prefHeight="87.0" prefWidth="110.0" text="Login" AnchorPane.leftAnchor="675.0" AnchorPane.rightAnchor="215.0" />
       <TextField fx:id="usernameTextField" layoutX="310.0" layoutY="519.0" />
       <TextField fx:id="passwordTextField" layoutX="310.0" layoutY="610.0" />
       <ChoiceBox fx:id="connectionMenu" layoutX="315.0" layoutY="730.0" prefWidth="150.0" />
       <TextField fx:id="errorTextField" layoutX="420.0" layoutY="841.0" />
+      <Text layoutX="141.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="123.06787109375">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="141.0" layoutY="631.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="123.06787109375">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="104.0" layoutY="751.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Mode:" wrappingWidth="196.5">
+         <font>
+            <Font name="Arial Bold" size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="268.0" fitWidth="634.0" layoutX="263.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Publisher%20material/Title%202000x618px.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Publisher%20material/Publisher.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

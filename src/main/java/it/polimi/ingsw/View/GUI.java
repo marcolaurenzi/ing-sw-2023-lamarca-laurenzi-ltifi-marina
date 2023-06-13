@@ -34,7 +34,7 @@ public class GUI implements RemoteUI {
             if (connectionMode.equals("RMI")) {
                 client = new ClientRMI(new GUI());
             }
-            else if (connectionMode.equals("socket"))
+            else if (connectionMode.equals("Socket"))
                 client = new ClientSocket(new GUI());
         } catch (Exception e) {
             e.printStackTrace();
