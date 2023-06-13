@@ -35,7 +35,12 @@ public class CommonGoal3 extends CommonGoal{
 
         for(int i = 0; i < numberOfRows-1; i++) {
             for(int j = 0; j < numberOfColumns-1; j++) {
-                if(bookshelf.get(i, j) != null && copy.get(i, j)) {
+                if(bookshelf.get(i, j) != null &&
+                        bookshelf.get(i+1, j) != null &&
+                        bookshelf.get(i, j+1) != null &&
+                        bookshelf.get(i+1, j+1) != null &&
+                        copy.get(i, j)) {
+
                     goodTypes.add(bookshelf.get(i, j).getType());
                     goodTypes.add(bookshelf.get(i+1, j).getType());
                     goodTypes.add(bookshelf.get(i, j+1).getType());
@@ -43,29 +48,29 @@ public class CommonGoal3 extends CommonGoal{
 
                     if(goodTypes.size() == 1) {
                         // if not in the right border
-                        if(j < numberOfColumns - 2) {
+                        if(j < numberOfColumns - 2 && bookshelf.get(i, j+2) != null) {
                             badTypes.add(bookshelf.get(i, j+2).getType());
-                            if(i < bookshelf.getColumnDimension() - 1) {
+                            if(i < bookshelf.getColumnDimension() - 1 && bookshelf.get(i+1, j+2) != null) {
                                 badTypes.add(bookshelf.get(i+1, j+2).getType());
                             }
                         }
                         // if not in the left border
-                        if(j != 0) {
+                        if(j != 0 && bookshelf.get(i, j-1) != null) {
                             badTypes.add(bookshelf.get(i, j-1).getType());
-                            if(i < numberOfRows - 1) {
+                            if(i < numberOfRows - 1 && bookshelf.get(i+1, j-1) != null) {
                                 badTypes.add(bookshelf.get(i+1, j-1).getType());
                             }
                         }
                         // if not in the down border
-                        if(i < numberOfRows - 2) {
+                        if(i < numberOfRows - 2 && bookshelf.get(i+2, j) != null) {
                             badTypes.add(bookshelf.get(i+2, j).getType());
-                            if(j < numberOfColumns - 1)
+                            if(j < numberOfColumns - 1 && bookshelf.get(i+2, j+1) != null)
                                 badTypes.add(bookshelf.get(i+2, j+1).getType());
                         }
                         // if not in the upper border
-                        if(i != 0) {
+                        if(i != 0 && bookshelf.get(i-1, j) != null) {
                             badTypes.add(bookshelf.get(i-1, j).getType());
-                            if(j < numberOfColumns - 1) {
+                            if(j < numberOfColumns - 1 && bookshelf.get(i-1, j+1) != null) {
                                 badTypes.add(bookshelf.get(i-1, j+1).getType());
                             }
                         }
