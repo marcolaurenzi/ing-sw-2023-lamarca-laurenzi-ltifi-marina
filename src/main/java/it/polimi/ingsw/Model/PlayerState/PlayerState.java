@@ -41,7 +41,7 @@ public abstract class PlayerState {
      * @return
      */
     protected Boolean isSelectionValid(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
-        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumn(tilesSelection) || areAllSameRow(tilesSelection)) && areAllAdjacents(tilesSelection) && haveAllOneSidesFree(tilesSelection, board);
+        return !isAnyTileNull(tilesSelection, board) && (areAllSameColumn(tilesSelection) || areAllSameRow(tilesSelection)) && (areAllAdjacents(tilesSelection) || areAllAjdacentsNotOrdered(tilesSelection)) && haveAllOneSidesFree(tilesSelection, board);
     }
     private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
         boolean ret = false;
@@ -81,6 +81,23 @@ public abstract class PlayerState {
             }
         }
 
+        return ret;
+    }
+    public boolean areAllAjdacentsNotOrdered(ArrayList<Coordinates> tilesSelection) {
+        boolean ret = false;
+        if(tilesSelection.size() == 3) {
+            Coordinates first = tilesSelection.get(0);
+            Coordinates second = tilesSelection.get(1);
+            Coordinates third = tilesSelection.get(2);
+
+            if(Math.abs(first.getX() - second.getX()) == 2 && Math.abs(first.getY() - second.getY()) == 0) {
+                if(Math.abs(first.getX() + second.getX()) / 2 == third.getX() && first.getY() == third.getY())
+                    ret = true;
+            } else if(Math.abs(first.getX()) - second.getX() == 0 && Math.abs(first.getY() - second.getY()) == 2){
+                if(Math.abs(first.getY() + second.getY()) / 2 == third.getY() && first.getX() == third.getX())
+                    ret = true;
+            }
+        }
         return ret;
     }
     private Boolean areAllSameColumn(ArrayList<Coordinates> tilesSelection) {

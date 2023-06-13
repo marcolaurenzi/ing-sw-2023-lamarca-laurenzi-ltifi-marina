@@ -10,6 +10,7 @@ public class  BoardNavigator {
     private Board board;
     private ArrayList<Coordinates> selection;
     private Coordinates cursor;
+    private boolean middletile;
 
     public BoardNavigator(Board board) {
         this.board = board;
@@ -54,11 +55,32 @@ public class  BoardNavigator {
 
         return true;
     }
-    public void select() {
-        if(!selection.contains(cursor) && selection.size() < 3 && isAdjacentToOthers() && !isTileEmpty() && hasTileOneSideFree())
-            selection.add(new Coordinates(cursor.getX(), cursor.getY()));
+    private boolean selectionNotAdjacent() {
+        if (selection.size() == 1) {
+            if(Math.abs(selection.get(0).getX() - cursor.getX()) == 1 && Math.abs(selection.get(0).getY() - cursor.getY()) == 0 || Math.abs(selection.get(0).getX() - cursor.getX()) == 0 && Math.abs(selection.get(0).getY() - cursor.getY()) == 1) {
+                return false;
+            } else if(Math.abs(selection.get(0).getX() - cursor.getX()) == 2 && Math.abs(selection.get(0).getY() - cursor.getY()) == 0 || Math.abs(selection.get(0).getX() - cursor.getX()) == 0 && Math.abs(selection.get(0).getY() - cursor.getY()) == 2) {
+                middletile = true;
+                return true;
+            }
+        }
+        return false;
     }
-    public void deselect() {
+    public boolean select() {
+        if(!selection.contains(cursor) && selection.size() < 3 && (isAdjacentToOthers() || selectionNotAdjacent()) && !isTileEmpty() && hasTileOneSideFree())
+            if(middletile && selection.size() == 2){
+                if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - cursor.getX() * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - cursor.getY() * 2) == 0 || Math.abs(selection.get(0).getX() + selection.get(1).getX() - cursor.getX() * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - cursor.getY() * 2) == 0) {
+                    selection.add(new Coordinates(cursor.getX(), cursor.getY()));
+                    middletile = false;
+                    return middletile;
+                }
+                return middletile;
+            } else {
+                selection.add(new Coordinates(cursor.getX(), cursor.getY()));
+            }
+        return middletile;
+    }
+    public boolean deselect() {
 
         if(selection.size() >= 3) {
             boolean toRemove = false;
@@ -67,13 +89,19 @@ public class  BoardNavigator {
             for (Coordinates c : tempSelection) {
                 if (c.equals(cursor))
                     toRemove = true;
-                if (toRemove)
+                if (toRemove) {
                     selection.remove(cursor);
+                    middletile = false;
+                }
+
             }
         }
 
-        else
+        else {
             selection.remove(cursor);
+            middletile = false;
+        }
+        return middletile;
     }
     public void moveUp() {
         if(cursor.getY() > 0)

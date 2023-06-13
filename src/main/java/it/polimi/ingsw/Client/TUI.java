@@ -160,6 +160,7 @@ public class TUI implements RemoteUI, UI {
         if(gameStatus.isLastTurn()) {
             System.out.println("LAST TURN!");
         }
+        boolean middletileselection = false;
         System.out.println("It is your turn, type 'p' to play");
         synchronized (scanner) {
             BoardNavigator boardNavigator = new BoardNavigator(gameStatus.getBoard());
@@ -167,7 +168,7 @@ public class TUI implements RemoteUI, UI {
 
             String input = "";
             while(boardNavigator.getSelection().size() == 0) {
-                while (!input.equals("x")) {
+                while (!input.equals("x") || middletileselection) {
                     boardNavigator.print();
                     System.out.println("Move into the board. ('w', 'a', 's', 'd' to MOVE; 'space' to SELECT; 'c' to DESELECT; 'x' to SUBMIT SELECTION) : ");
                     System.out.println("You can select up to " + Math.min(3,bookshelfNavigator.getMaxEmptySpaces()) + " tiles during this turn");
@@ -182,12 +183,17 @@ public class TUI implements RemoteUI, UI {
                         case "d" -> boardNavigator.moveRight();
                         case "s" -> boardNavigator.moveDown();
                         case "a" -> boardNavigator.moveLeft();
-                        case " " -> {if (boardNavigator.getSelection().size()< bookshelfNavigator.getMaxEmptySpaces()) {boardNavigator.select();}
+                        case " " -> {if (boardNavigator.getSelection().size()< bookshelfNavigator.getMaxEmptySpaces()) {middletileselection = boardNavigator.select(); if(middletileselection){
+                            System.out.println("You must choose the tile in the middle of the selection");
+                        }}
                                     else {System.out.println("You can't select any more tiles");}}
-                        case "c" -> boardNavigator.deselect();
+                        case "c" -> middletileselection = boardNavigator.deselect();
                         case "x" -> {
-                            if(boardNavigator.getSelection().size() == 0)
+                            if(middletileselection){
+                                System.out.println("You must choose the tile in the middle of the selection");
+                            } else if (boardNavigator.getSelection().size() == 0) {
                                 input = "";
+                            }
                         } //do nothing
                         default -> input = "";
                     }
