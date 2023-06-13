@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.Decks;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * This abstract class represents the abstract concept of a generic Deck made of Objects
  */
-public interface Deck<T> {
+public interface Deck<T> extends Serializable {
 
     /**
      * This method uses the Collections class's method shuffle() to shuffle the Deck
