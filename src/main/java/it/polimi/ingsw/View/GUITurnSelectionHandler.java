@@ -14,6 +14,7 @@ public class GUITurnSelectionHandler {
     private final ArrayList<Coordinates> selection;
     private final GridPane boardGridPane;
     private final Bookshelf bookshelf;
+    private boolean middletile;
 
     public ArrayList<Coordinates> getSelection() {
         return selection;
@@ -57,14 +58,24 @@ public class GUITurnSelectionHandler {
         return board.getGameBoard().get(i, j).isEmpty();
     }
     private boolean isNextToOthers(int i, int j) {
+        int countAdjacent = 0;
         if(selection.size() == 0)
             return true;
 
         boolean ret = false;
 
-        for (Coordinates c: selection) {
-            if(Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
-                ret = true;
+        if (middletile) {
+            for (Coordinates c: selection) {
+                if(Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
+                    countAdjacent++;
+                }
+            }
+            ret = countAdjacent == selection.size();
+        } else {
+            for (Coordinates c: selection) {
+                if(Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
+                    ret = true;
+                }
             }
         }
 
@@ -87,45 +98,59 @@ public class GUITurnSelectionHandler {
 
         return true;
     }
-    public void select(int i, int j) {
-        if(!selection.contains(new Coordinates(j, i)) && selection.size() < 3 && isAdjacentToOthers(i , j) && !isTileEmpty(i , j) && hasTileOneSideFree(i , j)) {
-            selection.add(new Coordinates(j, i));
-
-            Platform.runLater(() -> {
-                Button button = (Button) boardGridPane.lookup("#button" + i + j);
-                button.setOpacity(0.5);
-                button.setOnAction(event -> {
-                    System.out.println("Button " + i + " " + j + " deselected!");
-                    deselect(i, j);
-                });
-            });
+    private boolean selectionNotAdjacent(int i, int j) {
+        if (selection.size() == 1) {
+            if(Math.abs(selection.get(0).getX() - j) == 1 && Math.abs(selection.get(0).getY() - i) == 0 || Math.abs(selection.get(0).getX() - j) == 0 && Math.abs(selection.get(0).getY() - i) == 1) {
+                return false;
+            } else if(Math.abs(selection.get(0).getX() - j) == 2 && Math.abs(selection.get(0).getY() - i) == 0 || Math.abs(selection.get(0).getX() - j) == 0 && Math.abs(selection.get(0).getY() - i) == 2) {
+                middletile = true;
+                return true;
+            }
         }
+        return false;
     }
-    public void deselect(int i, int j) {
+    public boolean select(int i, int j) {
+        if(!selection.contains(new Coordinates(j, i)) && selection.size() < 3 && (isAdjacentToOthers(i , j) || selectionNotAdjacent(i, j)) && !isTileEmpty(i , j) && hasTileOneSideFree(i , j)) {
+            if(middletile && selection.size() == 2) {
+                if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0 || Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
+                    selection.add(new Coordinates(j, i));
+                    Platform.runLater(() -> {
+                        Button button = (Button) boardGridPane.lookup("#button" + i + j);
+                        button.setOpacity(0.5);
+                        button.setOnAction(event -> {
+                            System.out.println("Button " + i + " " + j + " deselected!");
+                            deselect(i, j);
+                        });
+                    });
 
-        if(selection.size() >= 3) {
+                    middletile = false;
+                    return middletile;
+                }
+                return middletile;
+            } else {
+                selection.add(new Coordinates(j, i));
+                Platform.runLater(() -> {
+                    Button button = (Button) boardGridPane.lookup("#button" + i + j);
+                    button.setOpacity(0.5);
+                    button.setOnAction(event -> {
+                        System.out.println("Button " + i + " " + j + " deselected!");
+                        deselect(i, j);
+                    });
+                });
+            }
+        }
+        return middletile;
+    }
+    public boolean deselect(int i, int j) {
+
+        if (selection.size() >= 3) {
             boolean toRemove = false;
             ArrayList<Coordinates> tempSelection = new ArrayList<>(selection);
 
-            for (Coordinates c : tempSelection) {
-                if (c.equals(new Coordinates(j, i)))
-                    toRemove = true;
-                if (toRemove) {
-                    selection.remove(new Coordinates(j, i));
-                    Platform.runLater(() -> {
-                        Button button = (Button) boardGridPane.lookup("#button" + i + j);
-                        button.setOpacity(1);
-                        button.setOnAction(event -> {
-                            System.out.println("Button " + i + " " + j + " selected!");
-                            select(i, j);
-                        });
-                    });
-                }
-            }
-        }
-
-        else
             selection.remove(new Coordinates(j, i));
+            if((selection.get(0).getX() == selection.get(1).getX() && selection.get(0).getY() + selection.get(1).getY() - i * 2 == 0 || selection.get(0).getX() + selection.get(1).getX() - j * 2 == 0 && selection.get(0).getY() == selection.get(1).getY())) {
+                middletile = true;
+            }
             Platform.runLater(() -> {
                 Button button = (Button) boardGridPane.lookup("#button" + i + j);
                 button.setOpacity(1);
@@ -134,5 +159,20 @@ public class GUITurnSelectionHandler {
                     select(i, j);
                 });
             });
+
+
+        } else {
+            selection.remove(new Coordinates(j, i));
+            middletile = false;
+            Platform.runLater(() -> {
+                Button button = (Button) boardGridPane.lookup("#button" + i + j);
+                button.setOpacity(1);
+                button.setOnAction(event -> {
+                    System.out.println("Button " + i + " " + j + " selected!");
+                    select(i, j);
+                });
+            });
+        }
+        return middletile;
     }
 }
