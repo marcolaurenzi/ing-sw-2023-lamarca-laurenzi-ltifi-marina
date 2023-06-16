@@ -61,7 +61,6 @@ public static void main(String[] args) {
         TextField password = (TextField) scene.lookup("#passwordTextField");
         this.username = username.getText();
         this.password = password.getText();
-
         this.connectionMode = connectionMenu.getValue();
 
 

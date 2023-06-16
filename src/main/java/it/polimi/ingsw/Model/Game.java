@@ -46,6 +46,7 @@ public class Game {
         this.maxPlayers = maxPlayers;
         players = new ArrayList<>();
         board = Utils.loadBoardFromFile("src/main/resources/configurations/BoardConfiguration.JSON");
+        itemDeck = new ItemDeck();
         board.setItemDeck(itemDeck);
         this.initializeGame();
     }

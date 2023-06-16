@@ -89,3 +89,6 @@ fabric.properties
 
 # MacOS files
 .DS_Store
+
+# SavedGames files
+/SavedGames/
