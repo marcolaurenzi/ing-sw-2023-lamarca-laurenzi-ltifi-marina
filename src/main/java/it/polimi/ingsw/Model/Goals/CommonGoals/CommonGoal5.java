@@ -46,7 +46,7 @@ public class CommonGoal5 extends CommonGoal{
 
     @Override
     public String getGoalDescription() {
-        return "Fill your Bookshelf with 8 Tiles of the same color";
+        return "Eight tiles of the same type in the whole bookshelf.\nNo restrictions on the position of the tiles.";
     }
 
     @Override

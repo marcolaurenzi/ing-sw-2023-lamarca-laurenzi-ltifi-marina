@@ -129,7 +129,8 @@ public class CommonGoal01 extends CommonGoal {
 
     @Override
     public String getGoalDescription() {
-        return this.numberOfGroups + " groups each containing at least" + this.numberOfGroups+ "tiles of the same type.\n the tiles of one group can be different from those of another group";
+        return this.numberOfGroups + " groups each containing at least" + this.numberOfGroups+ "tiles of the same type.\n " +
+                "Different groups may have tiles of different types.";
     }
 
     @Override

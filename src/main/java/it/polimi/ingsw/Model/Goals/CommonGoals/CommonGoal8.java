@@ -52,7 +52,7 @@ public class CommonGoal8 extends CommonGoal {
 
     @Override
     public String getGoalDescription() {
-        return "Two columns each formed by 6 different types of tiles";
+        return "Two columns each having no duplicate types.\nThe two columns may have the same combination of tiles.";
     }
 
     @Override

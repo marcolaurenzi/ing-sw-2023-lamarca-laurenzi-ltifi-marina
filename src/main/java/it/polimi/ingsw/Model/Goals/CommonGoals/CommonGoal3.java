@@ -97,7 +97,7 @@ public class CommonGoal3 extends CommonGoal{
 
     @Override
     public String getGoalDescription() {
-        return "Fill your Bookshelf with at least 2 perfect squares each composed by 4 tiles of the same color";
+        return "At least two 2x2 squares of tiles of the same type.\nDifferent squares may have different types.";
     }
 
     @Override

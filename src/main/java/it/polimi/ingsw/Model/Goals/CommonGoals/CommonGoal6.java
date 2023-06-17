@@ -88,7 +88,7 @@ public class CommonGoal6 extends CommonGoal{
 
     @Override
     public String getGoalDescription() {
-        return "Fill one of the 4 diagonals with 5 tiles of the same color";
+        return "Five tiles of the same type forming a diagonal.\nThe diagonal formed may be in any of the two directions";
     }
 
     @Override

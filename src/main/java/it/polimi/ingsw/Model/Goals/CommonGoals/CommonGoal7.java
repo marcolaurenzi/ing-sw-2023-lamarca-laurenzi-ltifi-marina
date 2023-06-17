@@ -59,7 +59,7 @@ public class CommonGoal7 extends CommonGoal {
 
     @Override
     public String getGoalDescription() {
-        return "you must have 4 different rows of 5 consecutive Tiles with no more than 3 different colours in it";
+        return "Four full lines each containing tiles of three types at most.\nDifferent lines may have the same combination of tiles.";
     }
 
     @Override

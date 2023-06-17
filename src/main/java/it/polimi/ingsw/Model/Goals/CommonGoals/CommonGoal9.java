@@ -53,7 +53,7 @@ public class CommonGoal9 extends CommonGoal {
 
     @Override
     public String getGoalDescription() {
-        return "Two rows each formed by 5 different types of tiles. One line can show the same or a different combination of the other line.";
+        return "Two lines each having no duplicate types.\nThe two lines may have the same combination of tiles.";
     }
 
     @Override

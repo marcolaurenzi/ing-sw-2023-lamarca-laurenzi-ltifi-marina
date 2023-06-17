@@ -39,7 +39,7 @@ public class CommonGoal2 extends CommonGoal{
 
     @Override
     public String getGoalDescription() {
-        return "Fill all the 4 corners of your Bookshelf with Tiles of the same color";
+        return "Four tiles of the same type at the four corners of the bookshelf";
     }
 
     @Override

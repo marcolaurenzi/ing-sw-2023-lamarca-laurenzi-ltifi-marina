@@ -57,7 +57,7 @@ public class CommonGoal4 extends CommonGoal {
 
     @Override
     public String getGoalDescription() {
-        return "Fill 3 columns of your Bookshelf with 6 consecutive Tiles with no more than 3 different colours in it";
+        return "Three full columns each containing tiles of three types at most.\nDifferent columns may have the same combination of tiles.";
     }
 
     @Override

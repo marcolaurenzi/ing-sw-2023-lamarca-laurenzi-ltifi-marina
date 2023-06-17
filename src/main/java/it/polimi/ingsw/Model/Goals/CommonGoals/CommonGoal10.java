@@ -90,7 +90,7 @@ public class CommonGoal10 extends CommonGoal{
 
     @Override
     public String getGoalDescription() {
-        return "Five tiles of the same color forming an x in the Bookshelf";
+        return "Five tiles of the same color forming an X.";
     }
 
     @Override
