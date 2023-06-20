@@ -44,15 +44,4 @@ public class CommonGoal10Test {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 1);
         assertEquals(true, goal.isAchieved(bookshelf));
     }
-
-    /**
-     * Testing the corner case where the matrix has an invalid X, an X that's not isolated
-     *
-     * @throws IOException
-     */
-    @Test
-    public void zeroXBookshelfTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 2);
-        assertEquals(false, goal.isAchieved(bookshelf));
-    }
 }

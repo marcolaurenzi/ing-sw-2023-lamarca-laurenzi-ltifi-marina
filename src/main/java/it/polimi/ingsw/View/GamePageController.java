@@ -19,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import jdk.jshell.execution.Util;
 
@@ -161,11 +163,13 @@ public class GamePageController implements ViewController{
             for(int p = 0; p < gameStatus.getPlayers().size(); p ++) {
                 Bookshelf currentBookshelf = gameStatus.getBookshelf(p);
 
+                // Player's bookshelf
                 if(gameStatus.getPlayers().get(p).equals(GUI.getPlayerId())) {
                     //labels
                     playerId0.setText(GUI.getPlayerId());
+                    playerId0.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
                     points0.setText(gameStatus.getPoints().get(gameStatus.getPlayers().indexOf(GUI.getPlayerId())).toString());
-
+                    points0.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
                     //bookshelf
                     bookshelfGridPane0.getChildren().clear();
                     height = bookshelfGridPane0.getHeight() / currentBookshelf.getColumnDimension();
@@ -186,9 +190,12 @@ public class GamePageController implements ViewController{
                         }
                     }
                 }
+                // Others' bookshelf
                 else {
                     otherPlayersPlayerIdLabelList.get(bookshelfIndex).setText(gameStatus.getPlayers().get(p));
+                    otherPlayersPlayerIdLabelList.get(bookshelfIndex).setFont(Font.font("Verdana", FontWeight.BOLD, 20));
                     otherPlayersPointsLabelList.get(bookshelfIndex).setText(gameStatus.getPoints().get(p).toString());
+                    otherPlayersPointsLabelList.get(bookshelfIndex).setFont(Font.font("Verdana", FontWeight.BOLD, 20));
 
                     otherPlayersGridPaneList.get(bookshelfIndex).getChildren().clear();
                     height = bookshelfGridPane1.getHeight() / currentBookshelf.getColumnDimension();
@@ -213,19 +220,47 @@ public class GamePageController implements ViewController{
                 }
             }
 
-            //activate your bookshelf's buttons
-            if(isYourTurn()) {
+            if (isLastTurn() && isYourTurn()) {
+
+                // Upper Label set up
+                messageLabel.setText("Last Turn, make your last move!");
+
+                // Activate bookshelf buttons
                 for(int i = 0; i < 5; i++) {
                     Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
                     currButton.setDisable(false);
                 }
             }
+            else if(isLastTurn()) {
 
-            //set up upper label
-            if(isYourTurn()) {
+                // Upper Label set up
+                messageLabel.setText("Last Turn, wait for other players to finish!");
+
+                // Deactivate bookshelf buttons
+                for(int i = 0; i < 5; i++) {
+                    Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
+                    currButton.setDisable(true);
+                }
+            }
+            else if(isYourTurn()) {
+
+                // Upper Label set up
                 messageLabel.setText("Your turn!");
-            } else {
+
+                // Activate bookshelf buttons
+                for(int i = 0; i < 5; i++) {
+                    Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
+                    currButton.setDisable(false);
+                }
+            }
+            else {
                 messageLabel.setText("");
+
+                // Deactivate bookshelf buttons
+                for(int i = 0; i < 5; i++) {
+                    Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
+                    currButton.setDisable(true);
+                }
             }
 
             //set up personal goal
@@ -304,8 +339,12 @@ public class GamePageController implements ViewController{
             }
         });
     }
-    private boolean isYourTurn() { return GUI.gameStatus.getCurrentPlayer().equals(GUI.getPlayerId()); }
+    private boolean isYourTurn() {
+            return GUI.gameStatus.getCurrentPlayer().equals(GUI.getPlayerId());
+        }
 
+    private boolean isLastTurn() {
+            return GUI.gameStatus.isLastTurn(); }
     public GUITurnSelectionHandler getTurnSelectionHandler() {
         return turnSelectionHandler;
     }

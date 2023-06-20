@@ -29,10 +29,14 @@ public class CommonGoal10 extends CommonGoal{
 
         for(int i = 0; i < numberOfRows-2; i++) {
             for(int j = 0; j < numberOfColumns-2; j++) {
+
+                // check if an X is possible from the current tile
                 if(bookshelf.get(i,j) != null && bookshelf.get(i+2,j) != null &&
                         bookshelf.get(i+1,j+1) != null && bookshelf.get(i,j+2) != null &&
                         bookshelf.get(i+2,j+2) != null) {
                     currTypeEnum = bookshelf.get(i,j).getType();
+
+                    // if the X is possible, check if it is formed
                     if(bookshelf.get(i,j).getType() == currTypeEnum &&
                             bookshelf.get(i+2,j).getType() == currTypeEnum &&
                             bookshelf.get(i+2,j+2).getType() == currTypeEnum &&
@@ -51,7 +55,7 @@ public class CommonGoal10 extends CommonGoal{
                             count++;
                         }
                         else {
-                            if(bookshelf.get(i,j+2).getType() != currTypeEnum) {
+                            if(bookshelf.get(i,j+1).getType() != currTypeEnum) {
                                 temp.add(bookshelf.get(i,j+1).getType());
                             }
                         }

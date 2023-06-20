@@ -21,6 +21,7 @@ public class GameStatusToSend implements Serializable {
     private final ArrayList<Bookshelf> bookshelves;
     private final Board board;
     private final boolean isLastTurn;
+
     public GameStatusToSend(int gameID, int[] commonGoalPointStacksTops, String[] commonGoalPointStacksNames, String[] commonGoalPointStacksDescriptions, boolean[] isCommonGoalAlreadyAchieved, PersonalGoal personalGoal,
                             String currentPlayer, ArrayList<String> players, ArrayList<Integer> points, ArrayList<Bookshelf> bookshelves, Board board, boolean isLastTurn) {
         this.gameID = gameID;
