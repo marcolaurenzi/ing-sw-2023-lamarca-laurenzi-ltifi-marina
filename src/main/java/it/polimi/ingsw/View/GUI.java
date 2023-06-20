@@ -8,6 +8,7 @@ import it.polimi.ingsw.Controller.Controller;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatusToSend;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -44,7 +45,7 @@ public class GUI implements RemoteUI {
         System.out.println("Connection to server: SUCCESSFUL");
     }
 
-    public static void askForUsername() throws WrongPasswordException {
+    public static void askForUsername() throws WrongPasswordException, IOException {
 
         boolean isUsernameAlreadyInUse = false;
         try {
@@ -68,7 +69,7 @@ public class GUI implements RemoteUI {
                     playerId = LoginController.getUsername();
                     passwordok = true;
                 } catch (WrongPasswordException e) { // print password is wrong and start again
-                    throw e;
+                    throw new WrongPasswordException();
                 } catch (Exception e) {
                     System.out.println("Exception in GUI ask for password " + e);
                     e.printStackTrace();

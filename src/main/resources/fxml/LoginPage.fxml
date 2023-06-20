@@ -3,6 +3,7 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -24,7 +25,6 @@
       <TextField fx:id="usernameTextField" layoutX="310.0" layoutY="519.0" />
       <TextField fx:id="passwordTextField" layoutX="310.0" layoutY="610.0" />
       <ChoiceBox fx:id="connectionMenu" layoutX="315.0" layoutY="730.0" prefWidth="150.0" />
-      <TextField fx:id="errorTextField" layoutX="420.0" layoutY="841.0" />
       <Text layoutX="141.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="123.06787109375">
          <font>
             <Font name="Arial Bold" size="22.0" />
@@ -50,5 +50,6 @@
             <Image url="@../assets/Publisher%20material/Publisher.png" />
          </image>
       </ImageView>
+      <Label fx:id="errorLabel" layoutX="340.0" layoutY="833.0" prefHeight="17.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

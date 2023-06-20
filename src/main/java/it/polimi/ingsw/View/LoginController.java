@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
@@ -95,15 +97,13 @@ public static void main(String[] args) {
             stage.setResizable(false);
             stage.show();
         }
-
-
     }
 
     private void addPlayer() throws CreateNewGameException, NotBoundException, AlreadyStartedGameException {
         GUI.addPlayer(username);
     }
 
-    private void askForUsername() throws WrongPasswordException {
+    private void askForUsername() throws WrongPasswordException, IOException {
         GUI.askForUsername();
     }
 
@@ -119,9 +119,13 @@ public static void main(String[] args) {
         GUI.connectToServer();
     }
 
-    public void printError(String string) {
-        TextField error = (TextField) root.lookup("#errorTextField");
-        error.setText(string);
+    public static void printError(String string) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR");
+        alert.setHeaderText(null);
+        alert.initOwner(stage);
+        alert.setContentText(string);
+        alert.showAndWait();
     }
 
     public static Stage getStage() {
