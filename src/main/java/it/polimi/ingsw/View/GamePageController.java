@@ -24,6 +24,8 @@ import jdk.jshell.execution.Util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class GamePageController implements ViewController{
     private final LoginController loginController = new LoginController();
@@ -72,15 +74,17 @@ public class GamePageController implements ViewController{
     @FXML
     private GridPane bookshelfGridPane3;
 
-
     private GUITurnSelectionHandler turnSelectionHandler;
     private static GUI gui;
+
+    private static List<Button> buttons = new ArrayList<>();
 
     public void initialize() {
         GUI.setController(this);
         for(int i = 0; i < 5; i++) {
             Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
             final int finalI = i;
+            buttons.add(currButton);
             currButton.setOnAction(event -> {
                 System.out.println("bookShelf button " + finalI + " clicked");
                 turnSelectionHandler.selectColumn(finalI);
@@ -99,6 +103,7 @@ public class GamePageController implements ViewController{
             double height = boardGridPane.getHeight() / gameStatus.getBoard().getGameBoard().getColumnDimension();
             double width = boardGridPane.getWidth() / gameStatus.getBoard().getGameBoard().getRowDimension();
 
+            // Item tiles on the Board
             for(int i = 0; i< gameStatus.getBoard().getGameBoard().getColumnDimension(); i++) {
                 for (int j = 0; j <  gameStatus.getBoard().getGameBoard().getRowDimension(); j++) {
                     Item item = gameStatus.getBoard().getGameBoard().get(i, j).getPlacedItem();
@@ -119,7 +124,7 @@ public class GamePageController implements ViewController{
                         button.setGraphic(imageView);
                         button.setId("button" + i + j);
 
-
+                        // Disable button if selection not valid
 
                         final int finalI = i;
                         final int finalJ = j;
@@ -128,6 +133,8 @@ public class GamePageController implements ViewController{
                             button.setOnAction(event -> {
                                 turnSelectionHandler.select(finalI, finalJ);
                                 System.out.println("Button" + finalI +" "+  finalJ + " selected");
+                                Stream<Button> stream = buttons.stream();
+                                stream.forEach(b -> turnSelectionHandler.disableButtons(b));
                             });
                         }
                         boardGridPane.add(button, j, i);
@@ -207,11 +214,12 @@ public class GamePageController implements ViewController{
             }
 
             //activate your bookshelf's buttons
-            if(isYourTurn())
+            if(isYourTurn()) {
                 for(int i = 0; i < 5; i++) {
                     Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
                     currButton.setDisable(false);
                 }
+            }
 
             //set up upper label
             if(isYourTurn()) {

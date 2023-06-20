@@ -26,9 +26,14 @@ public class GUITurnSelectionHandler {
 
     private int column;
 
+    public void disableButtons(Button button) {
+        button.setDisable(middletile);
 
-
-
+        if(middletile)
+            System.out.println("Button disabled");
+        else
+            System.out.println("Button enabled");
+    }
 
     public GUITurnSelectionHandler(Board board, GridPane boardGridPane, Bookshelf bookshelf) {
         this.board = board;
