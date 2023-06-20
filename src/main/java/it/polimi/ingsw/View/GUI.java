@@ -61,15 +61,21 @@ public class GUI implements RemoteUI {
 
 
         if(isUsernameAlreadyInUse){
-            try {
-                client.checkPassword(LoginController.getUsername(), LoginController.getPassword());
-            } catch (WrongPasswordException e) {
-                throw e;
-            } catch (Exception e) {
-                System.out.println("Exception in GUI ask for password " + e);
-                e.printStackTrace();
-                System.exit(-1);
+            boolean passwordok = false;
+            while(!passwordok) {
+                try {
+                    client.checkPassword(LoginController.getUsername(), LoginController.getPassword());
+                    playerId = LoginController.getUsername();
+                    passwordok = true;
+                } catch (WrongPasswordException e) { // print password is wrong and start again
+                    throw e;
+                } catch (Exception e) {
+                    System.out.println("Exception in GUI ask for password " + e);
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
             }
+
         }
         else {
             try {
@@ -110,10 +116,10 @@ public class GUI implements RemoteUI {
 
     }
 
-    public static void addPlayer() throws CreateNewGameException, NotBoundException {
+    public static void addPlayer(String username) throws AlreadyStartedGameException, CreateNewGameException, NotBoundException {
         try {
-            gameId = client.addPlayerToCreatedGame(playerId);
-        } catch (AlreadyStartedGameException | IOException | InterruptedException | WrongMessageClassEnumException e) {
+            gameId = client.addPlayerToCreatedGame(username);
+        } catch (IOException | InterruptedException | WrongMessageClassEnumException e) {
             System.out.println("FATAL exception" + e);
             e.printStackTrace();
             System.exit(-1);

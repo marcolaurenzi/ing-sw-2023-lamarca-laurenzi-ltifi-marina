@@ -1,4 +1,5 @@
 package it.polimi.ingsw.View;
+import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
 import it.polimi.ingsw.Model.Exceptions.ConnectionException;
 import it.polimi.ingsw.Model.Exceptions.CreateNewGameException;
 import it.polimi.ingsw.Model.Exceptions.WrongPasswordException;
@@ -83,7 +84,9 @@ public static void main(String[] args) {
             printError("Connection to server: FAILED");
         } catch (WrongPasswordException e) {
             printError("Username already in use, Wrong password");
-        } catch (CreateNewGameException e) {
+        } catch (AlreadyStartedGameException e) {
+            System.out.println("sasasasas");
+        }catch (CreateNewGameException e) {
             FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/CreateNewGamePage.fxml"));
             Scene newScene = new Scene(loader.load());
             Stage stage = new Stage();
@@ -96,8 +99,8 @@ public static void main(String[] args) {
 
     }
 
-    private void addPlayer() throws CreateNewGameException, NotBoundException {
-        GUI.addPlayer();
+    private void addPlayer() throws CreateNewGameException, NotBoundException, AlreadyStartedGameException {
+        GUI.addPlayer(username);
     }
 
     private void askForUsername() throws WrongPasswordException {
