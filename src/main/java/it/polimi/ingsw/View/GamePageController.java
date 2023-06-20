@@ -74,10 +74,10 @@ public class GamePageController implements ViewController{
     @FXML
     private GridPane bookshelfGridPane3;
 
-    private GUITurnSelectionHandler turnSelectionHandler;
+    protected static GUITurnSelectionHandler turnSelectionHandler;
     private static GUI gui;
 
-    private static List<Button> buttons = new ArrayList<>();
+    protected static List<Button> buttons = new ArrayList<>();
 
     public void initialize() {
         GUI.setController(this);
@@ -133,8 +133,8 @@ public class GamePageController implements ViewController{
                             button.setOnAction(event -> {
                                 turnSelectionHandler.select(finalI, finalJ);
                                 System.out.println("Button" + finalI +" "+  finalJ + " selected");
-                                Stream<Button> stream = buttons.stream();
-                                stream.forEach(b -> turnSelectionHandler.disableButtons(b));
+                                Stream<Button> stream = GamePageController.buttons.stream();
+                                stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                             });
                         }
                         boardGridPane.add(button, j, i);

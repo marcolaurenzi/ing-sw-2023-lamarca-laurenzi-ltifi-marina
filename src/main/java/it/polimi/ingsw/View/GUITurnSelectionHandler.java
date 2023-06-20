@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class GUITurnSelectionHandler {
     private final Board board;
@@ -115,24 +116,29 @@ public class GUITurnSelectionHandler {
         return false;
     }
     public boolean select(int i, int j) {
+        // is selectable
         if(!selection.contains(new Coordinates(j, i)) && selection.size() < 3 && (isAdjacentToOthers(i , j) || selectionNotAdjacent(i, j)) && !isTileEmpty(i , j) && hasTileOneSideFree(i , j)) {
             if(middletile && selection.size() == 2) {
                 if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0 || Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
                     selection.add(new Coordinates(j, i));
+                    middletile = false;
                     Platform.runLater(() -> {
                         Button button = (Button) boardGridPane.lookup("#button" + i + j);
                         button.setOpacity(0.5);
                         button.setOnAction(event -> {
                             System.out.println("Button " + i + " " + j + " deselected!");
                             deselect(i, j);
+                            Stream<Button> stream = GamePageController.buttons.stream();
+                            stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                         });
                     });
-
-                    middletile = false;
                     return middletile;
                 }
                 return middletile;
             } else {
+                if(selectionNotAdjacent(i, j)) {
+                    middletile = true;
+                }
                 selection.add(new Coordinates(j, i));
                 Platform.runLater(() -> {
                     Button button = (Button) boardGridPane.lookup("#button" + i + j);
@@ -140,6 +146,8 @@ public class GUITurnSelectionHandler {
                     button.setOnAction(event -> {
                         System.out.println("Button " + i + " " + j + " deselected!");
                         deselect(i, j);
+                        Stream<Button> stream = GamePageController.buttons.stream();
+                        stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                     });
                 });
             }
@@ -162,6 +170,8 @@ public class GUITurnSelectionHandler {
                 button.setOnAction(event -> {
                     System.out.println("Button " + i + " " + j + " selected!");
                     select(i, j);
+                    Stream<Button> stream = GamePageController.buttons.stream();
+                    stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                 });
             });
 
@@ -175,6 +185,8 @@ public class GUITurnSelectionHandler {
                 button.setOnAction(event -> {
                     System.out.println("Button " + i + " " + j + " selected!");
                     select(i, j);
+                    Stream<Button> stream = GamePageController.buttons.stream();
+                    stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                 });
             });
         }
