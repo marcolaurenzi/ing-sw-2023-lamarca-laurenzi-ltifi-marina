@@ -50,16 +50,16 @@ public class GUI implements RemoteUI {
         boolean isUsernameAlreadyInUse = false;
         try {
             client.choosePlayerId(LoginController.getUsername());
-
             playerId = LoginController.getUsername();
         } catch (PlayerIdAlreadyInUseException e) {
             isUsernameAlreadyInUse = true;
+        } catch (PlayerOnlineException e) {
+            System.out.println("Player is already online");
         } catch (Exception e) {
             System.out.println("Exception in GUI ask for username " + e);
             e.printStackTrace();
             System.exit(-1);
         }
-
 
         if(isUsernameAlreadyInUse){
             boolean passwordok = false;

@@ -9,7 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface ControllerRemoteInterface extends Remote {
-        void choosePlayerId(String playerId) throws RemoteException, PlayerIdAlreadyInUseException;
+        void choosePlayerId(String playerId) throws RemoteException, PlayerIdAlreadyInUseException, PlayerOnlineException;
         int addPlayerToCreatedGame(Observer observer, String playerID) throws RemoteException, CreateNewGameException, AlreadyStartedGameException;
         int createNewGameAndAddPlayer(String playerID, int maxPlayers) throws RemoteException, MaxNumberOfPlayersException, IOException, AlreadyStartedGameException, GameAlreadyCreatedException;
         void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException;

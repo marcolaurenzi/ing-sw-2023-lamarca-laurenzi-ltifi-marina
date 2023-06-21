@@ -37,6 +37,9 @@ public class ClientMethodCallHandler extends Thread {
 
             toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.PlayerIdAlreadyInUseException, null, null, null, null, null);
             dataOutput.writeUTF(gson.toJson(toSend));
+        } catch (PlayerOnlineException e) {
+            toSend = new Message(MessageTypeEnum.exception, ExceptionEnum.PlayerOnlineException, null, null, null, null, null);
+            dataOutput.writeUTF(gson.toJson(toSend));
         }
     }
     private void choosePassword(String playerId, String password) throws IOException {

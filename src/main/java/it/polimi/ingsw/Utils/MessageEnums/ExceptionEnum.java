@@ -14,6 +14,6 @@ public enum ExceptionEnum {
     SelectionIsEmptyException,
     WrongConfigurationException,
     PickedColumnOutOfBoundsException,
-    WrongPasswordException, DisconnectedPlayerException, PickDoesntFitColumnException
+    WrongPasswordException, DisconnectedPlayerException, PlayerOnlineException, PickDoesntFitColumnException
 
 }

@@ -24,7 +24,7 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
         controller = (ControllerRemoteInterface ) Naming.lookup("rmi://localhost/controller");
     }
     @Override
-    public void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException, RemoteException {
+    public void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException, RemoteException, PlayerOnlineException {
         controller.choosePlayerId(playerId);
     }
     @Override

@@ -135,8 +135,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     }
 
 
-    public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException {
-        if(alreadyUsedPlayerIds.containsKey(playerId))
+    public synchronized void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException, PlayerOnlineException {
+        if(alreadyUsedPlayerIds.containsKey(playerId) && listConnected.get(playerId))
+            throw new PlayerOnlineException();
+        else if(alreadyUsedPlayerIds.containsKey(playerId))
             throw new PlayerIdAlreadyInUseException();
         else {
             alreadyUsedPlayerIds.put(playerId, null);
