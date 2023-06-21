@@ -18,100 +18,86 @@ public class CommonGoal01 extends CommonGoal {
         this.numberOfGroups = numberOfGroups;
     }
 
-    /**
-     * This is a utility recursive method that spreads the false value in supportMatrix starting from [i][j]
-     * the algorithm is trivial: the current cell is set to false and then the method is called to the adjacent
-     * cell if and only if:
-     * the adjacent cell is the same color of the current cell AND the adjacent cell is set to true
-     * @param i x coordinate
-     * @param j y coordinate
-     * @param bookshelf bookShelf
-     * @param supportMatrix supportMatrix
-     * @param color color
-     */
-    private void spreadFalse(int i, int j, Bookshelf bookshelf, Matrix<Boolean> supportMatrix, TypeEnum color) {
-        supportMatrix.set(i, j, false);
-
-        if(i + 1 < supportMatrix.getColumnDimension() && bookshelf.get(i + 1, j) != null)
-            if(bookshelf.get(i + 1, j).getType() == color && supportMatrix.get(i + 1, j))
-                spreadFalse(i +1, j, bookshelf, supportMatrix, color);
-
-        if(i - 1 >= 0 && bookshelf.get(i - 1, j) != null)
-            if(bookshelf.get(i - 1, j).getType() == color && supportMatrix.get(i - 1, j))
-                spreadFalse(i - 1, j, bookshelf, supportMatrix, color);
-
-        if(j + 1 < supportMatrix.getRowDimension() && bookshelf.get(i, j + 1)!= null)
-            if(bookshelf.get(i, j + 1).getType() == color && supportMatrix.get(i, j + 1))
-                spreadFalse(i, j + 1, bookshelf, supportMatrix, color);
-
-        if(j - 1 >= 0 && bookshelf.get(i, j - 1) != null)
-            if(bookshelf.get(i, j - 1).getType() == color && supportMatrix.get(i, j - 1))
-                spreadFalse(i, j - 1, bookshelf, supportMatrix, color);
+    public static int countElementsCluster(int[][] flagMatrix, int i, int j){
+        if(i<0 || j<0 || i>=flagMatrix.length || j>=flagMatrix[0].length || flagMatrix[i][j]==0){
+            return 0;
+        }else if (flagMatrix[i][j]==1){
+            flagMatrix[i][j]=2;
+            return 1+countElementsCluster(flagMatrix, i-1, j)
+                    +countElementsCluster(flagMatrix, i+1, j)
+                    +countElementsCluster(flagMatrix, i, j-1)
+                    +countElementsCluster(flagMatrix, i, j+1);
+        }else{
+            return 0;
+        }
     }
+
+    public static void deleteCluster(int[][] flagMatrix, int i, int j){
+        if(i<0 || j<0 || i>=flagMatrix.length || j>=flagMatrix[0].length || flagMatrix[i][j]==0||flagMatrix[i][j]==1){
+            return;
+        }
+        if(flagMatrix[i][j]==2) {
+            flagMatrix[i][j] = 0;
+            deleteCluster(flagMatrix, i-1, j);
+            deleteCluster(flagMatrix, i+1, j);
+            deleteCluster(flagMatrix, i, j-1);
+            deleteCluster(flagMatrix, i, j+1);
+        }
+    }
+
+    public static int countValidGroups(int[][] flagMatrix, int dim) {
+        int counter = 0;
+
+        for(int i = 0; i < flagMatrix.length; i++){
+            for(int j = 0; j < flagMatrix[0].length; j++){
+                if(flagMatrix[i][j] == 1){
+                    if (countElementsCluster(flagMatrix, i, j)>=dim){
+                        counter++;
+                    }
+                    deleteCluster(flagMatrix, i, j);
+                }
+            }
+        }
+       return counter;
+    }
+
+
+
+
+
 
     /**
      * This method checks if the goal is achieved
      * @param bookshelf bookShelf
      * @return true if the goal is achieved, false otherwise
      */
+    //private static int[][] recursionSupportMatrix = new int[6][5];
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
-        Matrix<Boolean> supportMatrix;
 
-        //initialize supportMatrix:
-        supportMatrix = new Matrix<>(6, 5);
-        for (int i = 0; i < supportMatrix.getColumnDimension(); i++)
-            for (int j = 0; j < supportMatrix.getRowDimension(); j++)
-                supportMatrix.set(i, j, true);
-
+        int[][] flagMatrix = new int[bookshelf.getColumnDimension()][bookshelf.getRowDimension()];
 
         int groupCounter = 0;
-        //algorithm
-        for (int i = 0; i < bookshelf.getColumnDimension(); i++)
-            for (int j = 0; j < bookshelf.getRowDimension(); j++) {
 
-                if(bookshelf.get(i, j) != null) {
-                    TypeEnum currentColor = bookshelf.get(i, j).getType();
-
-
-                    if (i < supportMatrix.getColumnDimension() - (dim - 1)) {
-                        int tempCounter = 0;
-                        for (int k = 0; k < dim; k++) {
-                            if (bookshelf.get(i+ k, j) == null)
-                                break;
-                            else if (supportMatrix.get(i + k, j) && bookshelf.get(i + k, j).getType() == currentColor) {
-                                tempCounter++;
-                            } else
-                                break;
-                        }
-
-                        if (tempCounter == dim) {
-                            groupCounter++;
-                            spreadFalse(i, j, bookshelf, supportMatrix, currentColor);
-                        }
+        for (TypeEnum type : TypeEnum.values()) {
+            //reset flagMatrix
+            for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
+                for (int j = 0; j < bookshelf.getRowDimension(); j++) {
+                    if (bookshelf.get(i,j) != null && bookshelf.get(i,j).getType() == type) {
+                        flagMatrix[i][j] = 1;
                     }
-
-                    if (j < supportMatrix.getRowDimension() - (dim - 1)) {
-                        int tempCounter = 0;
-                        for (int k = 0; k < dim; k++) {
-                            if (bookshelf.get(i, j + k) == null)
-                                break;
-                            if (supportMatrix.get(i, j + k) && bookshelf.get(i, j + k).getType() == currentColor) {
-                                tempCounter++;
-                            } else
-                                break;
-                        }
-                        if (tempCounter == dim) {
-                            groupCounter++;
-                            spreadFalse(i, j, bookshelf, supportMatrix, currentColor);
-                        }
+                    else {
+                        flagMatrix[i][j] = 0;
                     }
-
-                    supportMatrix.set(i, j, false);
                 }
             }
 
-        return groupCounter >= numberOfGroups;
+            groupCounter += countValidGroups(flagMatrix, dim);
+            if(groupCounter >= numberOfGroups){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
