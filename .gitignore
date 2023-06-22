@@ -91,4 +91,4 @@ fabric.properties
 .DS_Store
 
 # SavedGames files
-/SavedGames/
+SavedGames/

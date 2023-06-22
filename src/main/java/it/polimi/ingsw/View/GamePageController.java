@@ -292,6 +292,7 @@ public class GamePageController implements ViewController{
 
             commonGoalsGridPane.getChildren().clear();
 
+
             commonGoalsGridPane.add(goal0ImageView, 0, 0);
             commonGoalsGridPane.add(goal1ImageView, 0, 1);
             commonGoalsGridPane.add(pointsImage0View, 1, 0);

@@ -65,8 +65,14 @@ public class CreateNewGameController implements ViewController {
         try {
             GUI.createNewGameAndAddPlayer(Integer.parseInt(text));
             System.out.println("Game created");
-        } catch (WrongMessageClassEnumException | MaxNumberOfPlayersException | IOException | InterruptedException | GameAlreadyCreatedException e) {
+        } catch (WrongMessageClassEnumException | MaxNumberOfPlayersException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
+        } catch (GameAlreadyCreatedException e) {
+            try {
+                GUI.addPlayer(GUI.getPlayerId());
+            } catch (Exception f) {
+                throw new RuntimeException(f);
+            }
         } catch (AlreadyStartedGameException e) {
             printError("Game already created");
             try {
@@ -76,6 +82,9 @@ public class CreateNewGameController implements ViewController {
             }
         }
         finally {
+            Stage currentStage = (Stage) anchorPane.getScene().getWindow();
+            currentStage.close();
+
             Scene scene = new Scene(root);
             stage = LoginController.getStage();
             stage.setScene(scene);

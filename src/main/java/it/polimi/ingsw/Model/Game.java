@@ -96,6 +96,7 @@ public class Game {
         this.maxPlayers = gameStatus.getMaxPlayers();
         this.currentPlayer = gameStatus.getCurrentPlayerIndex();
         this.board = gameStatus.getBoard();
+        this.itemDeck = new ItemDeck();
 
         this.players = new ArrayList<>();
         for(PlayerStatusToFile p: playerStatus) {
