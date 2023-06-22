@@ -1,5 +1,6 @@
 package it.polimi.ingsw.View;
 
+import it.polimi.ingsw.Controller.Controller;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.GameState.GameState;
 import it.polimi.ingsw.Utils.GameStatusToSend;
@@ -11,7 +12,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -25,17 +29,18 @@ import javafx.stage.Stage;
 import jdk.jshell.execution.Util;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 public class GamePageController implements ViewController{
     private final LoginController loginController = new LoginController();
-
     private static String username;
     @FXML
     private Label messageLabel;
-
     @FXML
     private Label playerId0;
     @FXML
@@ -79,6 +84,10 @@ public class GamePageController implements ViewController{
     protected static GUITurnSelectionHandler turnSelectionHandler;
     private static GUI gui;
 
+    private static boolean isEnded = false;
+
+    private final static Object endGameLock = new Object();
+
     protected static List<Button> buttons = new ArrayList<>();
 
     public void initialize() {
@@ -96,7 +105,7 @@ public class GamePageController implements ViewController{
         }
     }
 
-    protected void uiUpdate(GameStatusToSend gameStatus) {
+    protected void uiUpdate(GameStatusToSend gameStatus){
         turnSelectionHandler = new GUITurnSelectionHandler(gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
 
         Platform.runLater(() -> {
@@ -348,6 +357,26 @@ public class GamePageController implements ViewController{
             return GUI.gameStatus.isLastTurn(); }
     public GUITurnSelectionHandler getTurnSelectionHandler() {
         return turnSelectionHandler;
+    }
+
+    public void endGame(String winner) {
+        Platform.runLater(() -> {
+            System.out.println("Last turn");
+            FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/EndGamePage.fxml"));
+            Scene newScene = null;
+            try {
+                newScene = new Scene(loader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            EndGameController endGameController = loader.getController();
+            Stage stage = new  Stage();
+            stage.setScene(newScene);
+            stage.setResizable(false);
+            endGameController.endGame(winner);
+            stage.show();
+        });
+
     }
 
 }

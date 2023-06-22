@@ -44,7 +44,7 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
         controller.riempiTutto();
     }
     @Override
-    public void update(GameStatusToSend game) throws RemoteException {
+    public void update(GameStatusToSend game) throws IOException {
         remoteUI.update(game);
     }
     @Override

@@ -20,6 +20,8 @@ public class ObserverRMI implements Observer {
             client.update(game);
         } catch(ConnectException e) {
             throw new DisconnectedPlayerException();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     @Override

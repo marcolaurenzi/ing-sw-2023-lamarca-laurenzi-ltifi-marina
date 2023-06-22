@@ -91,7 +91,7 @@ public class GUI implements RemoteUI {
 
 
     @Override
-    public void update(GameStatusToSend game) throws RemoteException {
+    public void update(GameStatusToSend game) throws IOException {
         gameStatus = game;
         sharedObject = new SharedObject();
         controller.uiUpdate(gameStatus);
@@ -114,7 +114,10 @@ public class GUI implements RemoteUI {
 
     @Override
     public void endGame(String winnerPlayer) throws RemoteException {
-
+        System.out.println("THE GAME IS OVER!");
+        isEnded = true;
+        System.out.println("The WINNER is: " + winnerPlayer);
+        controller.endGame(winnerPlayer);
     }
 
     public static void addPlayer(String username) throws AlreadyStartedGameException, CreateNewGameException, NotBoundException {

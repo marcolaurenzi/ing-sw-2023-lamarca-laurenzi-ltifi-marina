@@ -125,6 +125,9 @@ public class GUITurnSelectionHandler {
                 if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0 || Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
                     selection.add(new Coordinates(j, i));
                     middletile = false;
+                    /*if(last turn) {
+
+                    }*/
                     Platform.runLater(() -> {
                         Button button = (Button) boardGridPane.lookup("#button" + i + j);
                         button.setOpacity(0.5);

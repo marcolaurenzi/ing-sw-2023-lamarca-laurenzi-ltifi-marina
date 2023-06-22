@@ -117,7 +117,7 @@ public class ClientSocket implements Client, RemoteClient {
     }
 
     @Override
-    public void update(GameStatusToSend game) throws RemoteException {
+    public void update(GameStatusToSend game) throws IOException {
         remoteUI.update(game);
     }
     @Override
