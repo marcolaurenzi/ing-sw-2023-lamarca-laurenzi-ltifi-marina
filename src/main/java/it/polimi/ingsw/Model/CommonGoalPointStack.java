@@ -23,16 +23,16 @@ public class CommonGoalPointStack implements Serializable {
         pointStack = new Stack<>();
 
         switch (numberOfPlayers) {
-            case 2: {
+            case 2 -> {
                 pointStack.push(4);
                 pointStack.push(8);
             }
-            case 3: {
+            case 3 -> {
                 pointStack.push(4);
                 pointStack.push(6);
                 pointStack.push(8);
             }
-            case 4: {
+            case 4 -> {
                 pointStack.push(2);
                 pointStack.push(4);
                 pointStack.push(6);

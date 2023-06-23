@@ -1,44 +1,38 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Controller.Controller;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Model.GameState.GameState;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.Utils;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import jdk.jshell.execution.Util;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class GamePageController implements ViewController{
     private final LoginController loginController = new LoginController();
     private static String username;
+
+    private static double height;
+    private static double width;
     @FXML
     private Label messageLabel;
     @FXML
@@ -81,13 +75,10 @@ public class GamePageController implements ViewController{
     @FXML
     private GridPane bookshelfGridPane3;
 
+    private static int globalPickCounter = 0;
+
     protected static GUITurnSelectionHandler turnSelectionHandler;
     private static GUI gui;
-
-    private static boolean isEnded = false;
-
-    private final static Object endGameLock = new Object();
-
     protected static List<Button> buttons = new ArrayList<>();
 
     public void initialize() {
@@ -99,8 +90,11 @@ public class GamePageController implements ViewController{
             currButton.setOnAction(event -> {
                 System.out.println("bookShelf button " + finalI + " clicked");
                 turnSelectionHandler.selectColumn(finalI);
+                resetGlobalPickCounter();
             });
-
+            Label label = new Label(String.valueOf(i+1));
+            label.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+            currButton.setGraphic(label);
             currButton.setDisable(true);
         }
     }
@@ -111,8 +105,8 @@ public class GamePageController implements ViewController{
         Platform.runLater(() -> {
             // First, clear all previous children
             boardGridPane.getChildren().clear();
-            double height = boardGridPane.getHeight() / gameStatus.getBoard().getGameBoard().getColumnDimension();
-            double width = boardGridPane.getWidth() / gameStatus.getBoard().getGameBoard().getRowDimension();
+            height = boardGridPane.getHeight() / gameStatus.getBoard().getGameBoard().getColumnDimension();
+            width = boardGridPane.getWidth() / gameStatus.getBoard().getGameBoard().getRowDimension();
 
             // Item tiles on the Board
             for(int i = 0; i< gameStatus.getBoard().getGameBoard().getColumnDimension(); i++) {
@@ -142,8 +136,8 @@ public class GamePageController implements ViewController{
                         if (isYourTurn()) {
                             System.out.println("Setting on action: ");
                             button.setOnAction(event -> {
-                                turnSelectionHandler.select(finalI, finalJ);
-                                System.out.println("Button" + finalI +" "+  finalJ + " selected");
+                                turnSelectionHandler.select(finalI, finalJ, imageView, button);
+                                System.out.println("Button " + finalI + " " + finalJ + " selected");
                                 Stream<Button> stream = GamePageController.buttons.stream();
                                 stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                             });
@@ -233,6 +227,8 @@ public class GamePageController implements ViewController{
 
                 // Upper Label set up
                 messageLabel.setText("Last Turn, make your last move!");
+                messageLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+                messageLabel.setPrefWidth(300);
 
                 // Activate bookshelf buttons
                 for(int i = 0; i < 5; i++) {
@@ -288,19 +284,27 @@ public class GamePageController implements ViewController{
             goal0ImageView.setFitWidth(166);
             goal1ImageView.setFitWidth(166);
 
-            pointsImage0View.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "scoring_tokens" + File.separator + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[0]+ ".jpg") );
-            pointsImage1View.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "scoring_tokens" + File.separator + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[1]+ ".jpg") );
-            if(gameStatus.getIsCommonGoalAlreadyAchieved()[0])
-                pointsImage0View.setOpacity(0.5);
-            if(gameStatus.getIsCommonGoalAlreadyAchieved()[1])
-                pointsImage1View.setOpacity(0.5);
-            pointsImage0View.setFitHeight(104);
-            pointsImage1View.setFitHeight(104);
-            pointsImage0View.setFitWidth(104);
-            pointsImage1View.setFitWidth(104);
+            // If common goal 0 is not null -> still achievable
+            if(gameStatus.getCommonGoalPointStacksTops()[0] != null) {
+                pointsImage0View.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "scoring_tokens" + File.separator + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[0]+ ".jpg") );
+                if(gameStatus.getIsCommonGoalAlreadyAchieved()[0]) {
+                    pointsImage0View.setOpacity(0.5);
+                }
+                pointsImage0View.setFitHeight(104);
+                pointsImage0View.setFitWidth(104);
+            }
+
+            // If common goal 1 is not null -> still achievable
+            if(gameStatus.getCommonGoalPointStacksTops()[1] != null) {
+                pointsImage1View.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "scoring_tokens" + File.separator + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[1]+ ".jpg") );
+                if(gameStatus.getIsCommonGoalAlreadyAchieved()[1]) {
+                    pointsImage1View.setOpacity(0.5);
+                }
+                pointsImage1View.setFitHeight(104);
+                pointsImage1View.setFitWidth(104);
+            }
 
             commonGoalsGridPane.getChildren().clear();
-
 
             commonGoalsGridPane.add(goal0ImageView, 0, 0);
             commonGoalsGridPane.add(goal1ImageView, 0, 1);
@@ -379,4 +383,23 @@ public class GamePageController implements ViewController{
 
     }
 
+    public static int getGlobalPickCounter() {
+        return globalPickCounter;
+    }
+    public static void incrementGlobalPickCounter() {
+        globalPickCounter++;
+    }
+    public static void decrementGlobalPickCounter() {
+        globalPickCounter--;
+    }
+    public static void resetGlobalPickCounter() {
+        globalPickCounter = 0;
+    }
+
+    public static double getHeight() {
+        return height;
+    }
+    public static double getWidth() {
+        return width;
+    }
 }

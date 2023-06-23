@@ -250,7 +250,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         }
     }
     protected static GameStatusToSend retrieveGameStatus(Game game, String playerId) throws MissingPlayerException {
-        int[]commonGoalPointStacksTops = new int[2];
+        Integer[]commonGoalPointStacksTops = new Integer[2];
         String[] commonGoalPointStacksNames = new String[2];
         String[] commonGoalPointStacksDescription = new String[2];
 

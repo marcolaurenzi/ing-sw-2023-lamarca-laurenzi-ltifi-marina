@@ -5,10 +5,14 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -118,22 +122,20 @@ public class GUITurnSelectionHandler {
         }
         return false;
     }
-    public boolean select(int i, int j) {
+    public boolean select(int i, int j, ImageView imageView, Button button) {
         // is selectable
         if(!selection.contains(new Coordinates(j, i)) && selection.size() < 3 && (isAdjacentToOthers(i , j) || selectionNotAdjacent(i, j)) && !isTileEmpty(i , j) && hasTileOneSideFree(i , j)) {
+            GamePageController.incrementGlobalPickCounter();
+            pickLabelSetUp(button, imageView);
             if(middletile && selection.size() == 2) {
                 if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0 || Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
                     selection.add(new Coordinates(j, i));
                     middletile = false;
-                    /*if(last turn) {
-
-                    }*/
                     Platform.runLater(() -> {
-                        Button button = (Button) boardGridPane.lookup("#button" + i + j);
                         button.setOpacity(0.5);
                         button.setOnAction(event -> {
                             System.out.println("Button " + i + " " + j + " deselected!");
-                            deselect(i, j);
+                            deselect(i, j, imageView, button);
                             Stream<Button> stream = GamePageController.buttons.stream();
                             stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                         });
@@ -147,11 +149,10 @@ public class GUITurnSelectionHandler {
                 }
                 selection.add(new Coordinates(j, i));
                 Platform.runLater(() -> {
-                    Button button = (Button) boardGridPane.lookup("#button" + i + j);
                     button.setOpacity(0.5);
                     button.setOnAction(event -> {
                         System.out.println("Button " + i + " " + j + " deselected!");
-                        deselect(i, j);
+                        deselect(i, j, imageView, button);
                         Stream<Button> stream = GamePageController.buttons.stream();
                         stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                     });
@@ -160,8 +161,9 @@ public class GUITurnSelectionHandler {
         }
         return middletile;
     }
-    public boolean deselect(int i, int j) {
-
+    public boolean deselect(int i, int j, ImageView imageView, Button button) {
+        GamePageController.decrementGlobalPickCounter();
+        pickLabelClear(button);
         if (selection.size() >= 3) {
             boolean toRemove = false;
             ArrayList<Coordinates> tempSelection = new ArrayList<>(selection);
@@ -171,11 +173,10 @@ public class GUITurnSelectionHandler {
                 middletile = true;
             }
             Platform.runLater(() -> {
-                Button button = (Button) boardGridPane.lookup("#button" + i + j);
                 button.setOpacity(1);
                 button.setOnAction(event -> {
                     System.out.println("Button " + i + " " + j + " selected!");
-                    select(i, j);
+                    select(i, j, imageView, button);
                     Stream<Button> stream = GamePageController.buttons.stream();
                     stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                 });
@@ -186,16 +187,34 @@ public class GUITurnSelectionHandler {
             selection.remove(new Coordinates(j, i));
             middletile = false;
             Platform.runLater(() -> {
-                Button button = (Button) boardGridPane.lookup("#button" + i + j);
                 button.setOpacity(1);
                 button.setOnAction(event -> {
                     System.out.println("Button " + i + " " + j + " selected!");
-                    select(i, j);
+                    select(i, j, imageView, button);
                     Stream<Button> stream = GamePageController.buttons.stream();
                     stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                 });
             });
         }
         return middletile;
+    }
+
+    public void pickLabelSetUp(Button button, ImageView imageView) {
+        Label label = new Label(String.valueOf(GamePageController.getGlobalPickCounter()));
+        label.setStyle("-fx-text-fill: black; -fx-font-weight: bold;"); // Set the text color to white or any desired color
+        label.setAlignment(Pos.TOP_RIGHT);
+        label.setPrefSize(GamePageController.getWidth(), GamePageController.getHeight());
+        label.setMouseTransparent(true); // Ensure the label doesn't intercept mouse events
+        StackPane stackPane = new StackPane(imageView, label);
+        button.setGraphic(stackPane);
+    }
+
+    public void pickLabelClear(Button button) {
+        StackPane stackPane = (StackPane) button.getGraphic();
+        for(Node n : stackPane.getChildren()) {
+            if(n instanceof Label) {
+                ((Label) n).setText("");
+            }
+        }
     }
 }
