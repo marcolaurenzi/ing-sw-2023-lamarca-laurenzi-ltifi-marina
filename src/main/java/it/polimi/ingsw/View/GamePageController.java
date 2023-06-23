@@ -61,7 +61,7 @@ public class GamePageController implements ViewController{
     private HBox mainHBox;
 
     @FXML
-    private GridPane boardGridPane;
+    private  GridPane boardGridPane;
 
     @FXML
     private GridPane bookshelfGridPane0;
@@ -76,6 +76,8 @@ public class GamePageController implements ViewController{
     private GridPane bookshelfGridPane3;
 
     private static int globalPickCounter = 0;
+
+    private static int currentPickDimension = 0;
 
     protected static GUITurnSelectionHandler turnSelectionHandler;
     private static GUI gui;
@@ -100,7 +102,7 @@ public class GamePageController implements ViewController{
     }
 
     protected void uiUpdate(GameStatusToSend gameStatus){
-        turnSelectionHandler = new GUITurnSelectionHandler(gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
+        turnSelectionHandler = new GUITurnSelectionHandler(this, gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
 
         Platform.runLater(() -> {
             // First, clear all previous children
@@ -396,10 +398,26 @@ public class GamePageController implements ViewController{
         globalPickCounter = 0;
     }
 
+    public static void setGlobalPickCounter(int i) {
+        globalPickCounter = i;
+    }
+    public static int getCurrentPickDimension() {return currentPickDimension;}
+    public static void incrementCurrentPickDimension() {
+        currentPickDimension++;
+    }
+    public static void decrementCurrentPickDimension() {currentPickDimension--;}
+    public static void resetCurrentPickDimension() {
+        currentPickDimension = 0;
+    }
+
     public static double getHeight() {
         return height;
     }
     public static double getWidth() {
         return width;
+    }
+
+    public GridPane getBoardGridPane() {
+        return this.boardGridPane;
     }
 }
