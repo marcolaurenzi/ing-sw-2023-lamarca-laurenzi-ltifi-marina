@@ -83,8 +83,11 @@ public class GamePageController implements ViewController{
     private static GUI gui;
     protected static List<Button> buttons = new ArrayList<>();
 
+    private String endGamePlayer;
+
     public void initialize() {
         GUI.setController(this);
+        setEndGamePlayer(null);
         for(int i = 0; i < 5; i++) {
             Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
             final int finalI = i;
@@ -223,6 +226,68 @@ public class GamePageController implements ViewController{
 
                     bookshelfIndex++;
                 }
+            }
+
+            // Check if the endGamePLayer, the player that triggered the end of the game, is null. By doing this we can
+            // know if the game is ended or not and we are sure to enter this if only once as the player is set once entered, so it'll no longer be null
+            if(isLastTurn() && getEndGamePlayer() == null) {
+
+                // if the current player is the first player, the endGamePlayer is the last player
+                if(gameStatus.getCurrentPlayer().equals(0)) {
+                    setEndGamePlayer(gameStatus.getPlayers().get(gameStatus.getPlayers().size()-1));
+                }else {
+                    setEndGamePlayer(gameStatus.getPlayers().get(gameStatus.getPlayers().indexOf(gameStatus.getCurrentPlayer())-1));
+                }
+
+                Scene scene = messageLabel.getScene();
+
+                // if the endGamePlayer is the current player, the endGameToken label is the first one
+                if(getEndGamePlayer().equals(GUI.getPlayerId())) {
+                    System.out.println("Endgame1");
+                    ImageView imageView = (ImageView) scene.lookup("#endGame1");
+                    imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
+                }
+                else {
+                    // if the endGamePLayer is not the current player, then all the other players are stored in an arraylist so that
+                    // their indexes are used to set the right label
+                    ArrayList<String> players = gameStatus.getPlayers();
+                    players.remove(GUI.getPlayerId());
+                    int index = players.indexOf(getEndGamePlayer());
+                    switch (index) {
+                        case 0: {
+                            System.out.println("Endgame2");
+                            ImageView imageView = (ImageView) scene.lookup("#endGame2");
+                            imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
+                            break;
+                        }
+                        case 1: {
+                            System.out.println("Endgame3");
+                            ImageView imageView = (ImageView) scene.lookup("#endGame3");
+                            imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
+                            break;
+                        }
+                        case 2: {
+                            System.out.println("Endgame4");
+                            ImageView imageView = (ImageView) scene.lookup("#endGame4");
+                            imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // The first player is always starting first, so if the current player is the first player, the firstPlayerToken label is the first one
+            if(GUI.getPlayerId().equals(gameStatus.getPlayers().get(0))) {
+                Scene scene = messageLabel.getScene();
+                ImageView imageView = (ImageView) scene.lookup("#chair1");
+                imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "misc" + File.separator + "firstplayertoken.png"));
+            }
+            // if the current player is not the first player then the label is the second one
+            // as the first player in the list is always stored in the TOP-LEFT bookshelf
+            else {
+                Scene scene = messageLabel.getScene();
+                ImageView imageView = (ImageView) scene.lookup("#chair2");
+                imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "misc" + File.separator + "firstplayertoken.png"));
             }
 
             if (isLastTurn() && isYourTurn()) {
@@ -419,5 +484,13 @@ public class GamePageController implements ViewController{
 
     public GridPane getBoardGridPane() {
         return this.boardGridPane;
+    }
+
+    public String getEndGamePlayer() {
+        return endGamePlayer;
+    }
+
+    public void setEndGamePlayer(String endGamePlayer) {
+        this.endGamePlayer = endGamePlayer;
     }
 }

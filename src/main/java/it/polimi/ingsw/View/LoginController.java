@@ -77,8 +77,6 @@ public static void main(String[] args) {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.setResizable(true);
-            //stage.setMaximized(true);
-            //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             stage.show();
 
         }
@@ -89,6 +87,7 @@ public static void main(String[] args) {
         } catch (AlreadyStartedGameException e) {
             System.out.println("sasasasas");
         }catch (CreateNewGameException e) {
+            stage.close();
             FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/CreateNewGamePage.fxml"));
             Scene newScene = new Scene(loader.load());
             Stage stage = new Stage();
@@ -96,6 +95,7 @@ public static void main(String[] args) {
             stage.setScene(newScene);
             stage.setResizable(false);
             stage.show();
+            controller.setLayout(newScene);
         }
     }
 

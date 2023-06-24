@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCombination;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CreateNewGameController implements ViewController {
 
@@ -26,23 +28,18 @@ public class CreateNewGameController implements ViewController {
 
     private static Stage stage = null;
     static Parent root;
+    private int globalCounter;
 
 
     public void initialize() {
 
         Button button2 = new Button("2");
-        button2.setLayoutX(100);
-        button2.setLayoutY(97);
         anchorPane.getChildren().add(button2);
 
         Button button3 = new Button("3");
-        button3.setLayoutX(275);
-        button3.setLayoutY(97);
         anchorPane.getChildren().add(button3);
 
         Button button4 = new Button("4");
-        button4.setLayoutX(450);
-        button4.setLayoutY(97);
         anchorPane.getChildren().add(button4);
 
         anchorPane.getChildren().forEach(node -> {
@@ -89,14 +86,39 @@ public class CreateNewGameController implements ViewController {
             stage = LoginController.getStage();
             stage.setScene(scene);
             stage.setResizable(true);
-            //stage.setMaximized(true);
-            //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
             stage.show();
         }
     }
 
     private void printError(String string) {
-        TextField error = (TextField) anchorPane.lookup("#errorTextField");
-        error.setText(string);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Attention");
+        alert.setContentText(string);
     }
+
+    public void setLayout(Scene scene) {
+        double width = scene.lookup("#background").getLayoutBounds().getWidth();
+        double height = scene.lookup("#background").getLayoutBounds().getHeight();
+        System.out.println(width);
+        System.out.println(height);
+        anchorPane.getChildren().forEach(node -> {
+            if (node instanceof Button) {
+                switch (((Button) node).getText()) {
+                    case "2":
+                        node.setLayoutX(width/2 - width/3);
+                        node.setLayoutY(2*height/3);
+                        break;
+                    case "3":
+                        node.setLayoutX(width/2);
+                        node.setLayoutY(2*height/3);
+                        break;
+                    case "4":
+                        node.setLayoutX(width/2 + width/3);
+                        node.setLayoutY(2*height/3);
+                        break;
+                }
+            }
+        });
+    }
+
 }
