@@ -27,6 +27,9 @@ import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+/**
+ * Controller class for the game page view.
+ */
 public class GamePageController implements ViewController{
     private final LoginController loginController = new LoginController();
     private static String username;
@@ -85,6 +88,9 @@ public class GamePageController implements ViewController{
 
     private String endGamePlayer;
 
+    /**
+     * Initializes the game page view.
+     */
     public void initialize() {
         GUI.setController(this);
         setEndGamePlayer(null);
@@ -104,6 +110,11 @@ public class GamePageController implements ViewController{
         }
     }
 
+    /**
+     * Updates the UI with the given game status.
+     *
+     * @param gameStatus the game status to update the UI with
+     */
     protected void uiUpdate(GameStatusToSend gameStatus){
         turnSelectionHandler = new GUITurnSelectionHandler(this, gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
 
@@ -254,23 +265,20 @@ public class GamePageController implements ViewController{
                     players.remove(GUI.getPlayerId());
                     int index = players.indexOf(getEndGamePlayer());
                     switch (index) {
-                        case 0: {
+                        case 0 -> {
                             System.out.println("Endgame2");
                             ImageView imageView = (ImageView) scene.lookup("#endGame2");
                             imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
-                            break;
                         }
-                        case 1: {
+                        case 1 -> {
                             System.out.println("Endgame3");
                             ImageView imageView = (ImageView) scene.lookup("#endGame3");
                             imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
-                            break;
                         }
-                        case 2: {
+                        case 2 -> {
                             System.out.println("Endgame4");
                             ImageView imageView = (ImageView) scene.lookup("#endGame4");
                             imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
-                            break;
                         }
                     }
                 }
@@ -378,40 +386,27 @@ public class GamePageController implements ViewController{
             commonGoalsGridPane.add(pointsImage0View, 1, 0);
             commonGoalsGridPane.add(pointsImage1View, 1, 1);
 
-            /*
-            ChangeListener<Number> resizeListener = new ChangeListener<>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    double cellWidth = gridPane.getWidth() / gridPane.getColumnConstraints().size();
-                    double cellHeight = gridPane.getHeight() / gridPane.getRowConstraints().size();
-
-                    for (Node child : gridPane.getChildren()) {
-                        if (child instanceof ImageView imageView) {
-                            imageView.setFitWidth(cellWidth);
-                            imageView.setFitHeight(cellHeight);
-                        }
-                    }
-                }
-            };
-
-            gridPane.widthProperty().addListener(resizeListener);
-            };
-            gridPane.heightProperty().addListener(resizeListener);*/
-
             Stage stage = (Stage) boardGridPane.getScene().getWindow();
             stage.show();
         });
     }
 
+    /**
+     * Enables the bookshelf buttons.
+     */
     private void enableBookshelfButtons() {
         Platform.runLater(() -> {
-                for(int i = 0; i < 5; i++) {
+            for(int i = 0; i < 5; i++) {
                 Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");
                 currButton.setDisable(false);
             }
         });
 
     }
+
+    /**
+     * Disables the bookshelf buttons.
+     */
     public void disableBookshelfButtons() {
         Platform.runLater(() -> {
             for(int i = 0; i < 5; i++) {
@@ -420,16 +415,34 @@ public class GamePageController implements ViewController{
             }
         });
     }
-    private boolean isYourTurn() {
-            return GUI.gameStatus.getCurrentPlayer().equals(GUI.getPlayerId());
-        }
 
+    /**
+     * Checks if it's the player's turn.
+     * @return true if it's the player's turn, false otherwise.
+     */
+    private boolean isYourTurn() {
+        return GUI.gameStatus.getCurrentPlayer().equals(GUI.getPlayerId());
+    }
+
+    /**
+     * Checks if it's the last turn of the game.
+     * @return true if it's the last turn, false otherwise.
+     */
     private boolean isLastTurn() {
-            return GUI.gameStatus.isLastTurn(); }
+        return GUI.gameStatus.isLastTurn(); }
+
+    /**
+     * Returns the turn selection handler.
+     * @return the turn selection handler.
+     */
     public GUITurnSelectionHandler getTurnSelectionHandler() {
         return turnSelectionHandler;
     }
 
+    /**
+     * Displays the end game screen.
+     * @param winner the winner of the game.
+     */
     public void endGame(String winner) {
         Platform.runLater(() -> {
             System.out.println("Last turn");
@@ -450,46 +463,104 @@ public class GamePageController implements ViewController{
 
     }
 
+    /**
+     * Returns the global pick counter.
+     * @return the global pick counter.
+     */
     public static int getGlobalPickCounter() {
         return globalPickCounter;
     }
+
+    /**
+     * Increments the global pick counter by 1.
+     */
     public static void incrementGlobalPickCounter() {
         globalPickCounter++;
     }
+
+    /**
+     * Decrements the global pick counter by 1.
+     */
     public static void decrementGlobalPickCounter() {
         globalPickCounter--;
     }
+
+    /**
+     * Resets the global pick counter to 0.
+     */
     public static void resetGlobalPickCounter() {
         globalPickCounter = 0;
     }
 
+    /**
+     * Sets the global pick counter to the given value.
+     * @param i the value to set the global pick counter.
+     */
     public static void setGlobalPickCounter(int i) {
         globalPickCounter = i;
     }
+
+    /**
+     * Returns the current pick dimension.
+     * @return the current pick dimension.
+     */
     public static int getCurrentPickDimension() {return currentPickDimension;}
+
+    /**
+     * Increments the current pick dimension by 1.
+     */
     public static void incrementCurrentPickDimension() {
         currentPickDimension++;
     }
+
+    /**
+     * Decrements the current pick dimension by 1.
+     */
     public static void decrementCurrentPickDimension() {currentPickDimension--;}
+
+    /**
+     * Resets the current pick dimension to 0.
+     */
     public static void resetCurrentPickDimension() {
         currentPickDimension = 0;
     }
 
+    /**
+     * Returns the height of the game page.
+     * @return the height of the game page.
+     */
     public static double getHeight() {
         return height;
     }
+
+    /**
+     * Returns the width of the game page.
+     * @return the width of the game page.
+     */
     public static double getWidth() {
         return width;
     }
 
+    /**
+     * Returns the board grid pane.
+     * @return the board grid pane.
+     */
     public GridPane getBoardGridPane() {
         return this.boardGridPane;
     }
 
+    /**
+     * Returns the end game player.
+     * @return the end game player.
+     */
     public String getEndGamePlayer() {
         return endGamePlayer;
     }
 
+    /**
+     * Sets the end game player.
+     * @param endGamePlayer the end game player to set.
+     */
     public void setEndGamePlayer(String endGamePlayer) {
         this.endGamePlayer = endGamePlayer;
     }

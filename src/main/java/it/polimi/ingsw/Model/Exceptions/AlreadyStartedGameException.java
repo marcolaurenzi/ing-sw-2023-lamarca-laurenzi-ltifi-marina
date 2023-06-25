@@ -1,4 +1,7 @@
 package it.polimi.ingsw.Model.Exceptions;
 
-public class AlreadyStartedGameException extends Exception{
+/**
+ * Exception thrown when attempting to start a game that has already been started.
+ */
+public class AlreadyStartedGameException extends Exception {
 }

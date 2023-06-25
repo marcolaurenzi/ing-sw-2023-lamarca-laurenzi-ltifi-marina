@@ -104,10 +104,24 @@ public class BoardTile implements Serializable {
      *                          START OF GETTER METHODS
      ************************************************************************************************************ */
 
+    /**
+     * Returns the number of players who have placed their dice on the board tile.
+     *
+     * @return the number of players sign on the board tile
+     */
     public int getNumberOfPlayersSign() {
         return numberOfPlayersSign;
     }
-    public Item getPlacedItem() {return placedItem; }
+
+    /**
+     * Returns the item placed on the board tile.
+     *
+     * @return the item placed on the board tile, or null if no item is placed
+     */
+    public Item getPlacedItem() {
+        return placedItem;
+    }
+
 
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS

@@ -8,17 +8,26 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This class represents the concrete PersonalGoalDeck
+ * This class represents the concrete PersonalGoalDeck.
+ * It implements the Deck interface with PersonalGoal type.
  */
 public class PersonalGoalDeck implements Deck<PersonalGoal> {
 
     List<PersonalGoal> deck;
 
+    /**
+     * Shuffles the personal goal deck.
+     */
     @Override
     public void shuffle() {
         Collections.shuffle(deck);
     }
 
+    /**
+     * Draws a personal goal card from the deck.
+     *
+     * @return The drawn PersonalGoal card.
+     */
     @Override
     public PersonalGoal draw() {
         PersonalGoal personalGoal = deck.get(0);
@@ -27,13 +36,14 @@ public class PersonalGoalDeck implements Deck<PersonalGoal> {
     }
 
     /**
-     * This method is used to correctly initialize the concrete instance of the deck and to shuffle it
+     * Initializes the personal goal deck by creating and adding personal goal cards to the deck.
+     *
+     * @throws IOException if there is an error during initialization.
      */
     @Override
     public void initializeDeck() throws IOException {
-
         deck = new ArrayList<>();
-        for(int i = 0; i<12; i++) {
+        for (int i = 0; i < 12; i++) {
             deck.add(i, new PersonalGoal(i));
         }
     }

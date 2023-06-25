@@ -1,4 +1,7 @@
 package it.polimi.ingsw.Model.Exceptions;
 
-public class SelectionIsFullException extends Exception{
+/**
+ * Exception thrown when a selection is full.
+ */
+public class SelectionIsFullException extends Exception {
 }

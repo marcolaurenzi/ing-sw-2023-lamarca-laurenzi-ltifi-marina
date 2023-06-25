@@ -7,21 +7,28 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class represents the CommonGoal 9 in the UML model.
- * Common Goal description: Two lines each formed by 5 different types of tiles.
- * One line can show the same or a different combination of the other line.
+ * This class represents Common Goal number 9, which states that the goal is achieved when there are
+ * two lines, each formed by 5 different types of tiles, in the Bookshelf. One line can show the same
+ * or a different combination of the other line.
  */
 public class CommonGoal9 extends CommonGoal {
     private static final int NUM_TYPES_REQUIRED = 5;
 
     /**
-     * Checks whether the goal is achieved or not
-     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
-     * @return returns true if the Goal is Achieved, false otherwise
+     * Checks whether the goal is achieved or not.
+     *
+     * @param bookshelf The reference to the actual Bookshelf object on which the algorithm operates.
+     * @return True if the goal is achieved, false otherwise.
+     * @throws NullPointerException If the bookshelf reference is null.
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
-        // types stores how many types the algorithm already found
+
+        if (bookshelf == null) {
+            throw new NullPointerException();
+        }
+
+        // typesFound stores how many types the algorithm already found
         Set<TypeEnum> typesFound = new HashSet<>();
 
         // number of valid lines found
@@ -34,7 +41,7 @@ public class CommonGoal9 extends CommonGoal {
         for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
             for (int j = 0; j < bookshelf.getRowDimension(); j++) {
                 if (bookshelf.get(i, j) == null) {
-                    break; //no point in checking that line, a full line of different types needed
+                    break; // No point in checking that line, a full line of different types is needed
                 } else {
                     typesFound.add(bookshelf.get(i, j).getType());
                 }
@@ -47,15 +54,33 @@ public class CommonGoal9 extends CommonGoal {
 
         return validLines >= 2;
     }
+
+    /**
+     * Returns the name of the goal.
+     *
+     * @return The name of the goal.
+     */
     public String getGoalName() {
         return "CommonGoal9";
     }
 
+    /**
+     * Returns the description of the goal.
+     *
+     * @return The description of the goal.
+     */
     @Override
     public String getGoalDescription() {
         return "Two lines each having no duplicate types.\nThe two lines may have the same combination of tiles.";
     }
 
+    /**
+     * Returns the file number associated with the goal.
+     *
+     * @return The file number associated with the goal.
+     */
     @Override
-    public String getGoalFileNumber() { return "10";}
+    public String getGoalFileNumber() {
+        return "10";
+    }
 }

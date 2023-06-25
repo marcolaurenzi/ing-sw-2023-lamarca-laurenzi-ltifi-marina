@@ -9,6 +9,16 @@ import java.util.ArrayList;
 
 public class GameStateRunning implements GameState {
 
+    /**
+     * Moves the game to the next player's turn.
+     * If the current player's bookshelf is full:
+     * - If the current player is the last player in the list, the game state is set to GameStateFinished.
+     * - Otherwise, the game state is set to GameStateLastTurn.
+     * Changes the current player's state to PlayerStateWaiting and the next player's state to PlayerStateSelecting.
+     *
+     * @param game    the game object
+     * @param players the list of players in the game
+     */
     @Override
     public void nextPlayer(Game game, ArrayList<Player> players) {
         if(players.get(game.getCurrentPlayerIndex()).getBookshelf().isFull()) {
@@ -24,7 +34,12 @@ public class GameStateRunning implements GameState {
         players.get(game.getCurrentPlayerIndex()).changeState(new PlayerStateSelecting());
     }
 
+    /**
+     * Returns the number representing the state of the game.
+     *
+     * @return the state number
+     */
     public int getStateNumber() {
         return 2;
-    };
+    }
 }

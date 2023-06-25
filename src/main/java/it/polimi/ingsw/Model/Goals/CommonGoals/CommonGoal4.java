@@ -6,60 +6,77 @@ import it.polimi.ingsw.Model.TypeEnum;
 import java.util.*;
 
 /**
- * This class represents the CommonGoal number 4
- * saying that a player must have, to achieve the goal, 3 different columns
- * of 6 consecutive Tiles with no more than 3 different colours in it
+ * This class represents Common Goal number 4, which states that a player must have three different columns
+ * of six consecutive tiles with no more than three different colors in each column.
  */
 public class CommonGoal4 extends CommonGoal {
 
     /**
-     * Checks whether the goal is achieved or not
-     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
-     * @return returns true if the Goal is Achieved, false otherwise
+     * Checks whether there are at least three completely filled columns each containing tiles of three types at most.
+     *
+     * @param bookshelf The reference to the actual Bookshelf object on which the algorithm operates.
+     * @return True if the goal is achieved, false otherwise.
+     * @throws NullPointerException If the bookshelf reference is null.
      */
     @Override
-    public boolean isAchieved(Bookshelf bookshelf) throws NullPointerException{
+    public boolean isAchieved(Bookshelf bookshelf) throws NullPointerException {
+
+        if (bookshelf == null) {
+            throw new NullPointerException();
+        }
 
         int numberOfRows = bookshelf.getColumnDimension();
         int numberOfColumns = bookshelf.getRowDimension();
 
-        if(bookshelf == null) {
-            throw new NullPointerException();
-        }
-
         // times stores how many types the algorithm already found
         Set<TypeEnum> times = new HashSet<>();
 
-        // counters counts how many times the pattern is found
+        // counter counts how many times the pattern is found
         int counter = 0;
 
-        for(int i = 0; i < numberOfColumns; i++) {
-            for(int j = 0; j < numberOfRows; j++) {
-                // if the first tile is null, no 6 tiles columns can be there
-                if(bookshelf.get(j,i) == null) {
+        for (int i = 0; i < numberOfColumns; i++) {
+            for (int j = 0; j < numberOfRows; j++) {
+                // If the first tile is null, no 6-tile columns can exist
+                if (bookshelf.get(j, i) == null) {
                     break;
+                } else {
+                    times.add(bookshelf.get(j, i).getType());
                 }
-                else{
-                    times.add(bookshelf.get(j,i).getType());
-                }
-
             }
-            if(times.size() <= 3 && times.size() > 0) {
+            if (times.size() <= 3 && times.size() > 0) {
                 counter++;
             }
             times.clear();
         }
         return counter >= 3;
     }
+
+    /**
+     * Returns the name of the goal.
+     *
+     * @return The name of the goal.
+     */
     public String getGoalName() {
         return "CommonGoal4";
     }
 
+    /**
+     * Returns the description of the goal.
+     *
+     * @return The description of the goal.
+     */
     @Override
     public String getGoalDescription() {
         return "Three full columns each containing tiles of three types at most.\nDifferent columns may have the same combination of tiles.";
     }
 
+    /**
+     * Returns the file number associated with the goal.
+     *
+     * @return The file number associated with the goal.
+     */
     @Override
-    public String getGoalFileNumber() { return "5";}
+    public String getGoalFileNumber() {
+        return "5";
+    }
 }

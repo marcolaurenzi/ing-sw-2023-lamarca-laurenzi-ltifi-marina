@@ -15,14 +15,25 @@ import java.rmi.NotBoundException;
 import java.util.Scanner;
 
 /**
- * Hello world!
- *
+ * The main class that serves as the entry point for the application.
  */
-public class App 
-{
-    public static void main( String[] args ) throws WrongMessageClassEnumException, NotBoundException, MaxNumberOfPlayersException, AlreadyStartedGameException, IOException, InterruptedException {
+public class App {
 
-        System.out.println("Welcome to MyShelfie! PLease select the UI you want to use.");
+    /**
+     * The main method of the application.
+     *
+     * @param args the command-line arguments
+     * @throws WrongMessageClassEnumException if an incorrect message class enum is encountered
+     * @throws NotBoundException if the object is not bound to the registry
+     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded
+     * @throws AlreadyStartedGameException if the game has already been started
+     * @throws IOException if an I/O error occurs
+     * @throws InterruptedException if the thread is interrupted while waiting
+     */
+    public static void main(String[] args) throws WrongMessageClassEnumException, NotBoundException,
+            MaxNumberOfPlayersException, AlreadyStartedGameException, IOException, InterruptedException {
+
+        System.out.println("Welcome to MyShelfie! Please select the UI you want to use.");
         System.out.println("TUI - GUI");
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String ui = scanner.nextLine();

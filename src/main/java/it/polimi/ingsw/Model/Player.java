@@ -48,9 +48,11 @@ public class Player {
         this.isCommonGoalAlreadyAchieved = playerStatus.getIsCommonGoalAlreadyAchieved();
         this.game = game;
     }
+
     /**
      * This is the player's constructor. It initializes some variables and initialize the state
      * of the player to PlayerStateWaiting
+     *
      * @param playerID string indicating the ID of the player
      * @param game the game the player accessed
      */
@@ -72,15 +74,15 @@ public class Player {
     /**
      * This method is called at the end of the game
      *
-     * @return  the points earned by the player from the personal goal
+     * @return the points earned by the player from the personal goal
      */
     private int getRewardPersonalGoal() throws WrongConfigurationException {
         return personalGoal.getPoints(this.bookshelf);
     }
 
     /**
-     * this is a util method that is called on a pair of coordinates of a bookshelf. it returns the dimension of the
-     * chunk of adjacent items of the same type. It also updates the supportMatrix
+     * This is a utility method that is called on a pair of coordinates of a bookshelf. It returns the dimension of the
+     * chunk of adjacent items of the same type. It also updates the supportMatrix.
      *
      * @param i x coordinate
      * @param j y coordinate
@@ -111,19 +113,18 @@ public class Player {
             if(bookshelf.get(i, j - 1).getType() == type && supportMatrix.get(i, j - 1))
                 ret += numberOfAdjacentSameTypeAndSpreadFalse(i, j - 1, bookshelf, supportMatrix, type);
 
-
         return ret;
     }
 
     /**
-     * This method calculates the points earned by the player referring to the general goals and returns them
+     * This method calculates the points earned by the player referring to the general goals and returns them.
      *
      * @return the points that the player earned by the general goal
      */
     private int getRewardGeneralGoal() {
         int ret = 0;
         Matrix<Boolean> supportMatrix = new Matrix<>(6, 5);
-        //initialize supportMatrix
+        // Initialize supportMatrix
         for(int i = 0; i < supportMatrix.getColumnDimension(); i++)
             for(int j = 0; j < supportMatrix.getRowDimension(); j++)
                 supportMatrix.set(i, j, true);
@@ -151,14 +152,24 @@ public class Player {
     }
 
     /**
-     * This method take in input an ArrayList of coordinates from the controller indicating the tiles that the player
-     * want to pick and inserts the items in those tiles in the bookshelf in the order specified from the player. It
-     * also controls if it is possible to pick the selection according to the game's rules*
+     * This method takes in input an ArrayList of coordinates from the controller indicating the tiles that the player
+     * wants to pick and inserts the items in those tiles in the bookshelf in the order specified by the player. It
+     * also controls if it is possible to pick the selection according to the game's rules.
+     *
+     * @param tilesSelection the ArrayList of coordinates indicating the tiles to pick
+     * @param column the column where the player wants to place the picked tiles
+     * @param order the order in which the tiles should be placed in the bookshelf
      *
      * @throws PlayerIsWaitingException if the player state is waiting
-     * @throws SelectionNotValidException if the selection is not valid AKA not all the selected tiles have at least one
-     * side free or the selected tiles are not adjacent
+     * @throws SelectionNotValidException if the selection is not valid (e.g., not all the selected tiles have at least one
+     * side free or the selected tiles are not adjacent)
      * @throws SelectionIsEmptyException if the selection is empty
+     * @throws ColumnNotValidException if the selected column is not valid
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds
+     * @throws PickDoesntFitColumnException if the pick doesn't fit in the selected column
+     * @throws TilesSelectionSizeDifferentFromOrderLengthException if the size of the tiles selection is different from the length of the order array
+     * @throws WrongConfigurationException if the configuration is incorrect
+     * @throws VoidBoardTileException if the board tile is void
      */
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order) throws PlayerIsWaitingException, SelectionNotValidException, SelectionIsEmptyException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, WrongConfigurationException, VoidBoardTileException {
         state.pickAndInsertInBookshelf(tilesSelection, this.game.getBoard(), this.bookshelf, column, order);
@@ -166,17 +177,19 @@ public class Player {
     }
 
     /**
-     * this method changes the state of the player. It is called by the controller
-     * @param state next state
+     * This method changes the state of the player. It is called by the controller.
+     *
+     * @param state the next state to set
      */
     public void changeState (PlayerState state) {
         this.state = state;
     }
 
     /**
-     * This method is called at the end of every turn of a player and checks if one of the two common goal of the game
-     * and checks if any other CommonGoal is achieved, if this is the ase updates the commonGoalsPoints attribute, if it's not, it just sums 0
-     * @return common goals points already achieved plus those just achieved
+     * This method is called at the end of every turn of a player and checks if one of the two common goals of the game
+     * is achieved. It updates the commonGoalsPoints attribute accordingly.
+     *
+     * @return the common goals points already achieved plus those just achieved
      */
     private int getRewardCommonGoals() {
         int temp = 0;
@@ -184,7 +197,6 @@ public class Player {
             if(game.getCommonGoalPointStacks()[0].getCommonGoal().isAchieved(this.bookshelf)) {
                 this.isCommonGoalAlreadyAchieved[0] = true;
                 temp += game.getCommonGoalPointStacks()[0].draw();
-
             }
         }
 
@@ -200,8 +212,9 @@ public class Player {
 
     /**
      * This method is called at the end of every turn.
-     * It updates the points counting personalGoal points, commonGoal points  and the
-     * generalGoal points
+     * It updates the points by counting personal goal points, common goal points, and general goal points.
+     *
+     * @throws WrongConfigurationException if the configuration is incorrect
      */
     public void computeRewardGoals() throws WrongConfigurationException {
         totalPoints = getRewardPersonalGoal() + getRewardGeneralGoal() + getRewardCommonGoals();
@@ -212,31 +225,70 @@ public class Player {
      *                          START OF GETTER METHODS
      ************************************************************************************************************ */
 
+    /**
+     * Get the player ID.
+     *
+     * @return the player ID
+     */
     public String getPlayerID() {
         return playerID;
     }
 
+    /**
+     * Get the player's bookshelf.
+     *
+     * @return the bookshelf
+     */
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
 
+    /**
+     * End the player's turn and compute the rewards.
+     *
+     * @throws WrongConfigurationException if the configuration is incorrect
+     */
     public void endTurn() throws WrongConfigurationException {
         computeRewardGoals();
     }
+
+    /**
+     * Get the player's personal goal.
+     *
+     * @return the personal goal
+     */
     public PersonalGoal getPersonalGoal() {
         return personalGoal;
     }
+
+    /**
+     * Get the array indicating whether the common goals have already been achieved.
+     *
+     * @return the array indicating whether the common goals have already been achieved
+     */
     public boolean[] getIsCommonGoalAlreadyAchieved() {
         return isCommonGoalAlreadyAchieved;
     }
+
+    /**
+     * Get the player's total points.
+     *
+     * @return the total points
+     */
     public int getTotalPoints() {
         return totalPoints;
     }
+
     /* ************************************************************************************************************
      *                          END OF GETTER METHODS
      ************************************************************************************************************ */
 
-
+    /**
+     * Set the bookshelf of the player.
+     *
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds
+     * @throws PickDoesntFitColumnException if the pick doesn't fit in the selected column
+     */
     public void setBookshelf() throws PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         ArrayList<Item> fill = new ArrayList<>();
         for(int j = 0; j < 6; j++){
@@ -245,10 +297,13 @@ public class Player {
         for(int i = 0; i < 5; i++){
             bookshelf.insert(i, fill);
         }
-
-
     }
 
+    /**
+     * Get the player's status as an object to be saved to a file.
+     *
+     * @return the player's status as an object to be saved to a file
+     */
     public PlayerStatusToFile getPlayerStatusToFile() {
         return new PlayerStatusToFile(
                 this.playerID,

@@ -8,29 +8,42 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * This abstract class represents all the
- * Personal Goals in the game and implements the Goal interface
- * which provides the isAchieved() method.
+ * This class represents all the Personal Goals in the game and provides methods
+ * to initialize and evaluate personal goals for a player.
  */
 public class PersonalGoal implements Serializable {
     private Bookshelf personalGoal;
     private int number;
 
+    /**
+     * Constructs a personal goal object with the specified number.
+     *
+     * @param i The number of the personal goal.
+     * @throws IOException If there is an error loading the personal goal configuration file.
+     */
     public PersonalGoal(int i) throws IOException {
         this.number = i + 1;
         personalGoal = Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.JSON", i);
     }
 
+    /**
+     * Calculates the points earned for the given bookshelf based on the personal goal.
+     *
+     * @param bookshelf The bookshelf to evaluate.
+     * @return The points earned.
+     * @throws WrongConfigurationException If there is an invalid configuration.
+     * @throws NullPointerException        If the bookshelf is null.
+     */
     public int getPoints(Bookshelf bookshelf) throws WrongConfigurationException, NullPointerException {
-        if(bookshelf == null) {
-            throw  new NullPointerException();
+        if (bookshelf == null) {
+            throw new NullPointerException();
         }
         int numberOfRows = personalGoal.getColumnDimension();
         int numberOfColumns = personalGoal.getRowDimension();
         int counter = 0;
-        for(int i = 0; i < numberOfRows; i++) {
-            for(int j = 0; j < numberOfColumns; j++) {
-                if(personalGoal.get(i,j) != null && bookshelf.get(i,j) != null && personalGoal.get(i,j).getType() == bookshelf.get(i,j).getType()) {
+        for (int i = 0; i < numberOfRows; i++) {
+            for (int j = 0; j < numberOfColumns; j++) {
+                if (personalGoal.get(i, j) != null && bookshelf.get(i, j) != null && personalGoal.get(i, j).getType() == bookshelf.get(i, j).getType()) {
                     counter++;
                 }
             }
@@ -38,6 +51,13 @@ public class PersonalGoal implements Serializable {
         return points(counter);
     }
 
+    /**
+     * Calculates the points based on the number of matching tiles.
+     *
+     * @param i The number of matching tiles.
+     * @return The points earned.
+     * @throws WrongConfigurationException If there is an invalid configuration.
+     */
     private int points(int i) throws WrongConfigurationException {
         int result;
         switch (i) {
@@ -53,16 +73,41 @@ public class PersonalGoal implements Serializable {
         return result;
     }
 
+    /**
+     * Gets the item at the specified position in the personal goal.
+     *
+     * @param i The row index.
+     * @param j The column index.
+     * @return The item at the specified position.
+     */
     public Item get(int i, int j) {
-        return personalGoal.get(i,j);
+        return personalGoal.get(i, j);
     }
 
+    /**
+     * Sets the personal goal bookshelf.
+     *
+     * @param personalGoal The personal goal bookshelf.
+     */
     public void setPersonalGoal(Bookshelf personalGoal) {
         this.personalGoal = personalGoal;
     }
+
+    /**
+     * Returns the personal goal bookshelf.
+     *
+     * @return The personal goal bookshelf.
+     */
     public Bookshelf getPersonalGoalBookshelf() {
         return personalGoal;
     }
 
-    public String getPersonalGoalName() { return "Personal_Goals" + number; }
+    /**
+     * Returns the name of the personal goal.
+     *
+     * @return The name of the personal goal.
+     */
+    public String getPersonalGoalName() {
+        return "Personal_Goals" + number;
+    }
 }

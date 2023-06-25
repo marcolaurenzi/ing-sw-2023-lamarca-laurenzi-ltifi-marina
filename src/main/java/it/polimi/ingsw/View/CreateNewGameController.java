@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * This class represents the controller for creating a new game.
+ * It handles the user interface interactions and game creation logic.
+ */
 public class CreateNewGameController implements ViewController {
 
     @FXML
@@ -31,6 +35,9 @@ public class CreateNewGameController implements ViewController {
     private int globalCounter;
 
 
+    /**
+     * Initializes the controller and sets up the buttons for choosing the number of players.
+     */
     public void initialize() {
 
         Button button2 = new Button("2");
@@ -45,12 +52,18 @@ public class CreateNewGameController implements ViewController {
         anchorPane.getChildren().forEach(node -> {
             if (node instanceof Button) {
                 ((Button) node).setOnAction(event -> {
-                        onClick(((Button) node).getText());
+                    onClick(((Button) node).getText());
                 });
             }
         });
     }
 
+    /**
+     * Handles the click event when a number of players button is clicked.
+     * It creates a new game and adds the selected number of players.
+     *
+     * @param text the text of the button clicked
+     */
     public void onClick(String text) {
         try {
             root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/GamePage.fxml"));
@@ -90,12 +103,22 @@ public class CreateNewGameController implements ViewController {
         }
     }
 
+    /**
+     * Displays an error message in a dialog box.
+     *
+     * @param string the error message to display
+     */
     private void printError(String string) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Attention");
         alert.setContentText(string);
     }
 
+    /**
+     * Sets the layout of the buttons based on the size of the scene.
+     *
+     * @param scene the scene of the application
+     */
     public void setLayout(Scene scene) {
         double width = scene.lookup("#background").getLayoutBounds().getWidth();
         double height = scene.lookup("#background").getLayoutBounds().getHeight();
@@ -104,21 +127,20 @@ public class CreateNewGameController implements ViewController {
         anchorPane.getChildren().forEach(node -> {
             if (node instanceof Button) {
                 switch (((Button) node).getText()) {
-                    case "2":
-                        node.setLayoutX(width/2 - width/3);
-                        node.setLayoutY(2*height/3);
-                        break;
-                    case "3":
-                        node.setLayoutX(width/2);
-                        node.setLayoutY(2*height/3);
-                        break;
-                    case "4":
-                        node.setLayoutX(width/2 + width/3);
-                        node.setLayoutY(2*height/3);
-                        break;
+                    case "2" -> {
+                        node.setLayoutX(width / 2 - width / 3);
+                        node.setLayoutY(2 * height / 3);
+                    }
+                    case "3" -> {
+                        node.setLayoutX(width / 2);
+                        node.setLayoutY(2 * height / 3);
+                    }
+                    case "4" -> {
+                        node.setLayoutX(width / 2 + width / 3);
+                        node.setLayoutY(2 * height / 3);
+                    }
                 }
             }
         });
     }
-
 }

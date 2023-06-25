@@ -13,20 +13,22 @@ import java.util.List;
 public interface Deck<T> extends Serializable {
 
     /**
-     * This method uses the Collections class's method shuffle() to shuffle the Deck
+     * Shuffles the Deck using the Collections class's shuffle() method.
      */
     void shuffle();
 
     /**
-     * This method is used to draw an Object from an already shuffled Deck
+     * Draws an Object from the shuffled Deck.
      *
      * @return the first Object in the list
      */
     T draw();
 
     /**
-     * This abstract method is implemented form each concrete class and is used to
-     * initialize correctly the concrete instance of the deck
+     * Initializes the concrete instance of the deck.
+     * This method is implemented by each concrete class.
+     *
+     * @throws IOException if there is an I/O error during initialization
      */
     void initializeDeck() throws IOException;
 }

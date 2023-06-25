@@ -1,4 +1,7 @@
 package it.polimi.ingsw.Model.Exceptions;
 
-public class ColumnNotValidException extends Exception{
+/**
+ * This exception is thrown when a column is not valid in a certain context.
+ */
+public class ColumnNotValidException extends Exception {
 }

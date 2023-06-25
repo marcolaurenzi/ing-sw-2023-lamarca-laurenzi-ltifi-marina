@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Utils.MessageEnums;
 
+/**
+ * This enumeration represents the different types of exceptions that can occur in the game.
+ */
 public enum ExceptionEnum {
     AlreadyStartedGameException,
     PlayerIdAlreadyInUseException,
@@ -14,6 +17,8 @@ public enum ExceptionEnum {
     SelectionIsEmptyException,
     WrongConfigurationException,
     PickedColumnOutOfBoundsException,
-    WrongPasswordException, DisconnectedPlayerException, PlayerOnlineException, PickDoesntFitColumnException
-
+    WrongPasswordException,
+    DisconnectedPlayerException,
+    PlayerOnlineException,
+    PickDoesntFitColumnException
 }

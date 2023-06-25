@@ -17,6 +17,9 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.View.LoginController.connectionMode;
 
+/**
+ * This class represents the GUI interface for the game.
+ */
 public class GUI implements RemoteUI {
     private static GamePageController controller;
     private static String playerId;
@@ -25,28 +28,34 @@ public class GUI implements RemoteUI {
     private static boolean isEnded;
     protected static GameStatusToSend gameStatus;
     private static GUITurnSelectionHandler turnSelectionHandler;
-
-
-
     private static SharedObject sharedObject;
 
+    /**
+     * Connects to the server based on the selected connection mode.
+     *
+     * @throws ConnectionException if there is an error in the connection
+     */
     public static void connectToServer() throws ConnectionException {
         try {
             if (connectionMode.equals("RMI")) {
                 client = new ClientRMI(new GUI());
-            }
-            else if (connectionMode.equals("Socket"))
+            } else if (connectionMode.equals("Socket")) {
                 client = new ClientSocket(new GUI());
+            }
         } catch (Exception e) {
             e.printStackTrace();
             throw new ConnectionException();
         }
-
         System.out.println("Connection to server: SUCCESSFUL");
     }
 
+    /**
+     * Asks the player for their username and handles the username selection process.
+     *
+     * @throws WrongPasswordException if the entered password is wrong
+     * @throws IOException            if there is an I/O error during the process
+     */
     public static void askForUsername() throws WrongPasswordException, IOException {
-
         boolean isUsernameAlreadyInUse = false;
         try {
             client.choosePlayerId(LoginController.getUsername());
@@ -61,14 +70,14 @@ public class GUI implements RemoteUI {
             System.exit(-1);
         }
 
-        if(isUsernameAlreadyInUse){
+        if (isUsernameAlreadyInUse) {
             boolean passwordok = false;
-            while(!passwordok) {
+            while (!passwordok) {
                 try {
                     client.checkPassword(LoginController.getUsername(), LoginController.getPassword());
                     playerId = LoginController.getUsername();
                     passwordok = true;
-                } catch (WrongPasswordException e) { // print password is wrong and start again
+                } catch (WrongPasswordException e) {
                     throw new WrongPasswordException();
                 } catch (Exception e) {
                     System.out.println("Exception in GUI ask for password " + e);
@@ -76,9 +85,7 @@ public class GUI implements RemoteUI {
                     System.exit(-1);
                 }
             }
-
-        }
-        else {
+        } else {
             try {
                 client.choosePassword(LoginController.getUsername(), LoginController.getPassword());
             } catch (Exception e) {
@@ -89,7 +96,12 @@ public class GUI implements RemoteUI {
         }
     }
 
-
+    /**
+     * Updates the game status and triggers the UI update.
+     *
+     * @param game the updated game status
+     * @throws IOException if there is an I/O error during the process
+     */
     @Override
     public void update(GameStatusToSend game) throws IOException {
         gameStatus = game;
@@ -97,6 +109,22 @@ public class GUI implements RemoteUI {
         controller.uiUpdate(gameStatus);
     }
 
+    /**
+     * Initiates the player's turn and handles the turn selection process.
+     *
+     * @throws IOException                                   if there is an I/O error during the process
+     * @throws VoidBoardTileException                        if a board tile is void
+     * @throws SelectionNotValidException                    if the selection is not valid
+     * @throws PlayerIsWaitingException                      if the player is waiting
+     * @throws TilesSelectionSizeDifferentFromOrderLengthException if the size of the tiles selection is different from the order length
+     * @throws ColumnNotValidException                       if the column is not valid
+     * @throws WrongConfigurationException                   if the configuration is wrong
+     * @throws PickedColumnOutOfBoundsException              if the picked column is out of bounds
+     * @throws PickDoesntFitColumnException                  if the pick doesn't fit in the column
+     * @throws SelectionIsEmptyException                     if the selection is empty
+     * @throws WrongMessageClassEnumException                if the message class enumeration is wrong
+     * @throws InterruptedException                         if the process is interrupted
+     */
     @Override
     public void playTurn() throws IOException, VoidBoardTileException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, SelectionIsEmptyException, WrongMessageClassEnumException, InterruptedException {
         sharedObject.waitForVariable();
@@ -112,6 +140,12 @@ public class GUI implements RemoteUI {
         client.pickAndInsertInBookshelf(tilesSelection, turnSelectionHandler.getColumn(), order, playerId);
     }
 
+    /**
+     * Notifies the end of the game and displays the winner.
+     *
+     * @param winnerPlayer the username of the winner player
+     * @throws RemoteException if there is a remote exception during the process
+     */
     @Override
     public void endGame(String winnerPlayer) throws RemoteException {
         System.out.println("THE GAME IS OVER!");
@@ -120,6 +154,15 @@ public class GUI implements RemoteUI {
         controller.endGame(winnerPlayer);
     }
 
+
+    /**
+     * Adds a player to the game.
+     *
+     * @param username the username of the player to add
+     * @throws AlreadyStartedGameException if the game has already started
+     * @throws CreateNewGameException     if a new game cannot be created
+     * @throws NotBoundException          if the game is not bound
+     */
     public static void addPlayer(String username) throws AlreadyStartedGameException, CreateNewGameException, NotBoundException {
         try {
             gameId = client.addPlayerToCreatedGame(username);
@@ -130,17 +173,44 @@ public class GUI implements RemoteUI {
         }
     }
 
+    /**
+     * Creates a new game and adds a player to it.
+     *
+     * @param i the number of players
+     * @throws WrongMessageClassEnumException if the message class enumeration is wrong
+     * @throws MaxNumberOfPlayersException   if the maximum number of players is reached
+     * @throws GameAlreadyCreatedException   if the game has already been created
+     * @throws AlreadyStartedGameException   if the game has already started
+     * @throws IOException                   if there is an I/O error during the process
+     * @throws InterruptedException          if the process is interrupted
+     */
     public static void createNewGameAndAddPlayer(int i) throws WrongMessageClassEnumException, MaxNumberOfPlayersException, GameAlreadyCreatedException, AlreadyStartedGameException, IOException, InterruptedException {
         client.createNewGameAndAddPlayer(playerId, i);
     }
 
+    /**
+     * Sets the GamePageController.
+     *
+     * @param controller the GamePageController to set
+     */
     public static void setController(GamePageController controller) {
         GUI.controller = controller;
     }
+
+    /**
+     * Returns the player ID.
+     *
+     * @return the player ID
+     */
     public static String getPlayerId() {
         return GUI.playerId;
     }
 
+    /**
+     * Returns the shared object.
+     *
+     * @return the shared object
+     */
     public static SharedObject getSharedObject() {
         return sharedObject;
     }

@@ -1,4 +1,7 @@
 package it.polimi.ingsw.Model.Exceptions;
 
-public class FinishedGameException extends Exception{
+/**
+ * This exception is thrown when attempting to perform an action on a finished game.
+ */
+public class FinishedGameException extends Exception {
 }

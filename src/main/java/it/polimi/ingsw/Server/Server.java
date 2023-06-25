@@ -15,14 +15,23 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Scanner;
 
-
+/**
+ * The server class for the game.
+ */
 public class Server {
+
+    /**
+     * The controller instance for managing the game logic.
+     */
     public static Controller controller;
 
+    /**
+     * Handles the exit routine for the server, deleting saved games if they exist and exiting the program.
+     */
     private static void exit_routine() {
         Path directoryPath = Paths.get("SavedGames");
 
-        if(Files.exists(directoryPath)) {
+        if (Files.exists(directoryPath)) {
             try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(directoryPath)) {
                 for (Path path : directoryStream) {
                     Files.delete(path);
@@ -35,6 +44,14 @@ public class Server {
 
         System.exit(0);
     }
+
+    /**
+     * The main method for starting the server.
+     *
+     * @param args command line arguments
+     * @throws IOException          if an I/O error occurs when creating the ServerSocket
+     * @throws AlreadyBoundException if the registry is already bound to the specified name
+     */
     public static void main(String[] args) throws IOException, AlreadyBoundException {
         Scanner scanner = new Scanner(System.in);
 

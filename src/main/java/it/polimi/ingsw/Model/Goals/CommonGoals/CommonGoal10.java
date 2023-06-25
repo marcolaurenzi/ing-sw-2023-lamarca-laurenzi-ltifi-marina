@@ -7,18 +7,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class represents the CommonGoal 10
- * This goal is achieved when there are 5 tiles of the same color forming an x in the Bookshelf
+ * This class represents Common Goal number 10, which states that the goal is achieved when there are
+ * five tiles of the same color forming an X in the Bookshelf.
  */
-public class CommonGoal10 extends CommonGoal{
+public class CommonGoal10 extends CommonGoal {
 
     /**
-     * Checks whether the goal is achieved or not
-     * @param bookshelf is the reference to the actual BookShelf Object on which Algorithm operates
-     * @return returns true if the Goal is Achieved, false otherwise
+     * Checks whether the goal is achieved or not.
+     *
+     * @param bookshelf The reference to the actual Bookshelf object on which the algorithm operates.
+     * @return True if the goal is achieved, false otherwise.
+     * @throws NullPointerException If the bookshelf reference is null.
      */
     @Override
     public boolean isAchieved(Bookshelf bookshelf) {
+
+        if (bookshelf == null) {
+            throw new NullPointerException();
+        }
 
         int numberOfRows = bookshelf.getColumnDimension();
         int numberOfColumns = bookshelf.getRowDimension();
@@ -88,15 +94,33 @@ public class CommonGoal10 extends CommonGoal{
         }
         return false;
     }
+
+    /**
+     * Returns the name of the goal.
+     *
+     * @return The name of the goal.
+     */
     public String getGoalName() {
         return "CommonGoal10";
     }
 
+    /**
+     * Returns the description of the goal.
+     *
+     * @return The description of the goal.
+     */
     @Override
     public String getGoalDescription() {
         return "Five tiles of the same color forming an X.";
     }
 
+    /**
+     * Returns the file number associated with the goal.
+     *
+     * @return The file number associated with the goal.
+     */
     @Override
-    public String getGoalFileNumber() { return "11";}
+    public String getGoalFileNumber() {
+        return "11";
+    }
 }

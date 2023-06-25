@@ -6,14 +6,26 @@ import it.polimi.ingsw.Model.Player;
 
 import java.util.ArrayList;
 
-public class  GameStateStarting implements GameState{
+public class GameStateStarting implements GameState {
 
+    /**
+     * Throws a GameNotStartedException when attempting to move to the next player's turn.
+     *
+     * @param game    The game instance.
+     * @param players The list of players.
+     * @throws GameNotStartedException If the game has not started yet.
+     */
     @Override
     public void nextPlayer(Game game, ArrayList<Player> players) throws GameNotStartedException {
         throw new GameNotStartedException();
     }
 
+    /**
+     * Returns the number associated with this state.
+     *
+     * @return The state number.
+     */
     public int getStateNumber() {
         return 3;
-    };
+    }
 }

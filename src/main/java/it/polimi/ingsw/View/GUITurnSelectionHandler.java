@@ -23,19 +23,36 @@ public class GUITurnSelectionHandler {
     private final GridPane boardGridPane;
     private final Bookshelf bookshelf;
     private boolean middletile;
+    private int column;
+    private int row;
+
 
     private GamePageController controller;
 
+    /**
+     * Returns the current selection of coordinates.
+     *
+     * @return the current selection of coordinates
+     */
     public ArrayList<Coordinates> getSelection() {
         return selection;
     }
 
+    /**
+     * Returns the selected column.
+     *
+     * @return the selected column
+     */
     public int getColumn() {
         return column;
     }
 
-    private int column;
 
+    /**
+     * Disables the given button based on the value of `middletile`.
+     *
+     * @param button the button to disable
+     */
     public void disableButtons(Button button) {
         button.setDisable(middletile);
 
@@ -45,6 +62,14 @@ public class GUITurnSelectionHandler {
             System.out.println("Button enabled");
     }
 
+    /**
+     * Constructs a new GUITurnSelectionHandler with the given parameters.
+     *
+     * @param controller the GamePageController instance
+     * @param board the Board instance
+     * @param boardGridPane the GridPane representing the board
+     * @param bookshelf the Bookshelf instance
+     */
     public GUITurnSelectionHandler(GamePageController controller, Board board, GridPane boardGridPane, Bookshelf bookshelf) {
         this.controller = controller;
         this.board = board;
@@ -53,6 +78,11 @@ public class GUITurnSelectionHandler {
         this.selection = new ArrayList<>();
     }
 
+    /**
+     * Selects the specified column and updates the selection.
+     *
+     * @param j the index of the column to select
+     */
     public void selectColumn(int j) {
         int i = 0;
 
@@ -63,43 +93,89 @@ public class GUITurnSelectionHandler {
         if(selection.size() <= i && selection.size() > 0) {
             column = j;
             GUI.getSharedObject().setVariable();
-
         }
-
     }
-    private boolean hasTileOneSideFree(int i, int j)  {
+
+    /**
+     * Checks if the tile at the specified coordinates has at least one side free.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if the tile has at least one side free, false otherwise
+     */
+    /**
+     * Checks if the tile at the specified coordinates has at least one side free.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if the tile has at least one side free, false otherwise
+     */
+    private boolean hasTileOneSideFree(int i, int j) {
         return board.hasFree(i, j) >= 1;
     }
+
+    /**
+     * Checks if the tile at the specified coordinates is empty.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if the tile is empty, false otherwise
+     */
     private boolean isTileEmpty(int i, int j) {
         return board.getGameBoard().get(i, j).isEmpty();
     }
+
+    /**
+     * Checks if the tile at the specified coordinates is adjacent to the tiles in the current selection.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if the tile is adjacent to the tiles in the selection, false otherwise
+     */
     private boolean isNextToOthers(int i, int j) {
         int countAdjacent = 0;
-        if(selection.size() == 0)
+        if (selection.size() == 0)
             return true;
 
         boolean ret = false;
 
         if (middletile) {
-            for (Coordinates c: selection) {
-                if(Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
+            for (Coordinates c : selection) {
+                if (Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
                     countAdjacent++;
                 }
             }
             ret = countAdjacent == selection.size();
         } else {
-            for (Coordinates c: selection) {
-                if(Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
+            for (Coordinates c : selection) {
+                if (Math.abs(c.getX() - j) == 1 && Math.abs(c.getY() - i) == 0 || Math.abs(c.getX() - j) == 0 && Math.abs(c.getY() - i) == 1) {
                     ret = true;
+                    break;
                 }
             }
         }
 
         return ret;
     }
+
+    /**
+     * Checks if the tile at the specified coordinates is adjacent to the tiles in the current selection and shares the same row or column.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if the tile is adjacent to the tiles in the selection and shares the same row or column, false otherwise
+     */
     private boolean isAdjacentToOthers(int i, int j) {
-        return (isSameRow(i , j) || isSameColumn(i, j)) && isNextToOthers(i, j);
+        return (isSameRow(i, j) || isSameColumn(i, j)) && isNextToOthers(i, j);
     }
+
+    /**
+     * Checks if all the tiles in the current selection share the same column.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if all the tiles in the selection share the same column, false otherwise
+     */
     private boolean isSameColumn(int i, int j) {
         for (Coordinates coordinates : selection)
             if (j != coordinates.getX())
@@ -107,6 +183,14 @@ public class GUITurnSelectionHandler {
 
         return true;
     }
+
+    /**
+     * Checks if all the tiles in the current selection share the same row.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if all the tiles in the selection share the same row, false otherwise
+     */
     private boolean isSameRow(int i, int j) {
         for (Coordinates coordinates : selection)
             if (i != coordinates.getY())
@@ -114,9 +198,17 @@ public class GUITurnSelectionHandler {
 
         return true;
     }
+
+    /**
+     * Checks if the specified tile is not adjacent to the only tile in the current selection.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @return true if the tile is not adjacent to the only tile in the selection, false otherwise
+     */
     private boolean selectionNotAdjacent(int i, int j) {
         if (selection.size() == 1) {
-            if(Math.abs(selection.get(0).getX() - j) == 1 && Math.abs(selection.get(0).getY() - i) == 0 || Math.abs(selection.get(0).getX() - j) == 0 && Math.abs(selection.get(0).getY() - i) == 1) {
+            if (Math.abs(selection.get(0).getX() - j) == 1 && Math.abs(selection.get(0).getY() - i) == 0 || Math.abs(selection.get(0).getX() - j) == 0 && Math.abs(selection.get(0).getY() - i) == 1) {
                 return false;
             } else if(Math.abs(selection.get(0).getX() - j) == 2 && Math.abs(selection.get(0).getY() - i) == 0 || Math.abs(selection.get(0).getX() - j) == 0 && Math.abs(selection.get(0).getY() - i) == 2) {
                 middletile = true;
@@ -125,6 +217,17 @@ public class GUITurnSelectionHandler {
         }
         return false;
     }
+
+
+    /**
+     * Selects the specified tile and updates the selection.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @param imageView the ImageView associated with the tile
+     * @param button the Button associated with the tile
+     * @return true if the tile is a middletile, false otherwise
+     */
     public boolean select(int i, int j, ImageView imageView, Button button) {
         // is selectable
         if(!selection.contains(new Coordinates(j, i)) && selection.size() < 3 && (isAdjacentToOthers(i , j) || selectionNotAdjacent(i, j)) && !isTileEmpty(i , j) && hasTileOneSideFree(i , j)) {
@@ -165,6 +268,16 @@ public class GUITurnSelectionHandler {
         }
         return middletile;
     }
+
+    /**
+     * Deselects the specified tile and updates the selection.
+     *
+     * @param i the row index of the tile
+     * @param j the column index of the tile
+     * @param imageView the ImageView associated with the tile
+     * @param button the Button associated with the tile
+     * @return true if the tile is a middletile, false otherwise
+     */
     public boolean deselect(int i, int j, ImageView imageView, Button button) {
         GamePageController.decrementGlobalPickCounter();
         GamePageController.decrementCurrentPickDimension();
@@ -186,8 +299,6 @@ public class GUITurnSelectionHandler {
                     stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                 });
             });
-
-
         } else {
             selection.remove(new Coordinates(j, i));
             middletile = false;
@@ -204,20 +315,30 @@ public class GUITurnSelectionHandler {
         return middletile;
     }
 
+    /**
+     * Sets up the pick label on the specified button.
+     *
+     * @param button the button to set up the pick label on
+     * @param imageView the ImageView associated with the button
+     */
     public void pickLabelSetUp(Button button, ImageView imageView) {
         Label label = new Label(String.valueOf(GamePageController.getGlobalPickCounter()));
-        label.setStyle("-fx-text-fill: black; -fx-font-weight: bold;"); // Set the text color to white or any desired color
+        label.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
         label.setAlignment(Pos.TOP_RIGHT);
         label.setPrefSize(GamePageController.getWidth(), GamePageController.getHeight());
-        label.setMouseTransparent(true); // Ensure the label doesn't intercept mouse events
+        label.setMouseTransparent(true);
         StackPane stackPane = new StackPane(imageView, label);
         button.setGraphic(stackPane);
     }
 
+    /**
+     * Clears the pick label on the specified button.
+     *
+     * @param button the button to clear the pick label from
+     */
     public void pickLabelClear(Button button) {
         StackPane stackPane = (StackPane) button.getGraphic();
 
-        // reset the graphic of the deselected tile
         int x = 0;
         for(Node n : stackPane.getChildren()) {
             if(n instanceof Label) {
@@ -226,7 +347,6 @@ public class GUITurnSelectionHandler {
             }
         }
 
-        // If I just deselected the 1st or 2nd tile, I have to decrement the number of the tiles that I have still selected
         if(x <= GamePageController.getGlobalPickCounter()) {
             for(Node n : controller.getBoardGridPane().getChildren()) {
                 Button b = (Button) n;
@@ -246,6 +366,5 @@ public class GUITurnSelectionHandler {
                 }
             }
         }
-
     }
 }

@@ -13,25 +13,37 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-public class GameThread extends Thread{
+/**
+ * The GameThread class represents a thread that handles the execution of a game.
+ */
+public class GameThread extends Thread {
 
     private final Gson gson = new Gson();
     private final Game game;
 
-    public GameThread(Game game){
+    /**
+     * Constructs a GameThread object.
+     *
+     * @param game the game to be executed by the thread
+     */
+    public GameThread(Game game) {
         this.game = game;
     }
 
+    /**
+     * Saves the current state of the game to a file.
+     *
+     * @throws IOException if an I/O error occurs while writing to the file
+     */
     private void saveGameStateToFile() throws IOException {
         File file = new File(System.getProperty("user.dir"), "/SavedGames/saved_status_game_" + game.getId());
         FileWriter fileWriter = new FileWriter(file);
         BufferedWriter writer = new BufferedWriter(fileWriter);
 
-
-        //save game status
+        // save game status
         writer.write(gson.toJson(game.getGameStatusToFile()));
-        //save players status
-        for(Player p : game.getPlayers()) {
+        // save players status
+        for (Player p : game.getPlayers()) {
             writer.newLine();
             String temp = gson.toJson(p.getPlayerStatusToFile());
             writer.write(temp);
@@ -40,22 +52,24 @@ public class GameThread extends Thread{
         writer.flush();
     }
 
-
+    /**
+     * Starts the execution of the game thread.
+     */
     public void run() {
         game.getCurrentPlayer().changeState(new PlayerStateSelecting());
         while (game.getGameState() instanceof GameStateRunning || game.getGameState() instanceof GameStateLastTurn) {
             try {
-                if(Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
+                if (Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
                     Controller.update(game.getId());
                     Controller.assignTurn(game.getId());
                     game.refreshBoard();
                 }
-                    game.nextTurn();
+                game.nextTurn();
 
-                for(int i = 0; i < game.getPlayers().size(); i++){
-                    if(!Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
+                for (int i = 0; i < game.getPlayers().size(); i++) {
+                    if (!Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
                         game.nextTurn();
-                        if(i == game.getMaxPlayers()-1){
+                        if (i == game.getMaxPlayers() - 1) {
                             Thread.sleep(1000);
                         }
                     } else {

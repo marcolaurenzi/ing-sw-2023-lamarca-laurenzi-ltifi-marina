@@ -1,4 +1,7 @@
 package it.polimi.ingsw.Model.Exceptions;
 
-public class PlayerIsWaitingException extends Exception{
+/**
+ * This exception is thrown when a player is in a waiting state.
+ */
+public class PlayerIsWaitingException extends Exception {
 }

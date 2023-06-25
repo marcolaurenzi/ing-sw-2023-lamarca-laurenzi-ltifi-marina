@@ -7,149 +7,159 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * This class represents the BookSelf of the game, a 6x5 Matrix of int elements.
+ * This class represents the Bookshelf of the game, a 6x5 Matrix of Item elements.
  */
 public class Bookshelf implements Serializable {
 
-    /* ************************************************************************************************************
-     *                          START OF ATTRIBUTES DECLARATION
-     ************************************************************************************************************ */
     private final Matrix<Item> items;
     private int freeTiles;
 
-    /* ************************************************************************************************************
-     *                          END OF ATTRIBUTES DECLARATION
-     *                          START OF CONSTRUCTORS
-     ************************************************************************************************************ */
-
-
+    /**
+     * Constructs a Bookshelf object with default values.
+     */
     public Bookshelf() {
         items = new Matrix<>(6, 5);
         freeTiles = 30;
     }
 
-    /* ************************************************************************************************************
-     *                          END OF CONSTRUCTORS
-     *                          START OF CUSTOM METHODS
-     ************************************************************************************************************ */
-
-
     /**
-     * This method checks whether the Matrix has some free spaces left or it is full.
+     * Checks whether the Bookshelf is full or not.
      *
-     * @return true if freeTiles == 0, false otherwise
+     * @return true if the Bookshelf is full, false otherwise
      */
     public boolean isFull() {
         return freeTiles == 0;
     }
 
     /**
-     * This method checks whether the Matrix is empty of not
+     * Checks whether the Bookshelf is empty or not.
+     *
+     * @return true if the Bookshelf is empty, false otherwise
      */
-    public boolean isEmpty() {return freeTiles == 30; }
+    public boolean isEmpty() {
+        return freeTiles == 30;
+    }
 
     /**
-     * This method checks whether the Matrix has elements in the specified position
-     * @param i row index
-     * @param j column index
-     * @return true if the element is null, false otherwise
+     * Checks whether the specified position in the Bookshelf is empty or not.
+     *
+     * @param i the row index
+     * @param j the column index
+     * @return true if the position is empty, false otherwise
      */
     public boolean isEmpty(int i, int j) {
-        return items.get(i,j) == null;
+        return items.get(i, j) == null;
     }
+
     /**
+     * Inserts the array of items in the specified column of the Bookshelf.
      *
-     * Insert the array of items picks in column, the first element of the array is the first inserted
-     * @param column in which you put pick
-     * @param pick the pick you put in column
+     * @param column the column index
+     * @param pick   the array of items to insert
+     * @throws PickDoesntFitColumnException      if the pick doesn't fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
      */
     public void insert(int column, ArrayList<Item> pick) throws PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
-        if(column < 0 || column > getColumnDimension() - 1)
+        if (column < 0 || column > getColumnDimension() - 1)
             throw new PickedColumnOutOfBoundsException();
 
-        //checking if the pick fits in the column
+        // Checking if the pick fits in the column
         int freeTiles = 0;
-        for(int i = 0; i < this.getColumnDimension(); i++) {
-            if(this.get(i, column) != null)
+        for (int i = 0; i < this.getColumnDimension(); i++) {
+            if (this.get(i, column) != null)
                 break;
             else
                 freeTiles++;
         }
 
-        if(pick.size() > freeTiles)
+        if (pick.size() > freeTiles)
             throw new PickDoesntFitColumnException();
-        //end of check
+        // End of check
 
         int base = 0;
-        for(int i = this.getColumnDimension() - 1; i >= 0; i--)
-            if(this.get(i, column) == null) {
+        for (int i = this.getColumnDimension() - 1; i >= 0; i--)
+            if (this.get(i, column) == null) {
                 base = i;
                 break;
             }
 
-        for(int i = 0; i < pick.size(); i++)
+        for (int i = 0; i < pick.size(); i++)
             this.set(base - i, column, pick.get(i));
     }
 
     /**
-     * This method returns the specified Item
-     * @param i row index
-     * @param j column index
-     * @return the specified Item
+     * Returns the item at the specified position in the Bookshelf.
+     *
+     * @param i the row index
+     * @param j the column index
+     * @return the item at the specified position
      */
     public Item get(int i, int j) {
-        return this.items.get(i,j);
+        return this.items.get(i, j);
     }
 
     /**
+     * Returns the number of rows in the Bookshelf.
      *
-     * @return dimension of the row
+     * @return the number of rows
      */
     public int getRowDimension() {
         return items.getRowDimension();
     }
 
     /**
-     * @return dimension of the column
+     * Returns the number of columns in the Bookshelf.
+     *
+     * @return the number of columns
      */
     public int getColumnDimension() {
         return items.getColumnDimension();
     }
 
-    //public for debugging reasons
+    /**
+     * Sets the specified item at the given position in the Bookshelf.
+     *
+     * @param i    the row index
+     * @param j    the column index
+     * @param item the item to set
+     */
     public void set(int i, int j, Item item) {
         items.set(i, j, item);
         freeTiles--;
     }
 
-
-    public int getEmptySpaces(int column){
+    /**
+     * Returns the number of empty spaces in the specified column of the Bookshelf.
+     *
+     * @param column the column index
+     * @return the number of empty spaces in the column
+     */
+    public int getEmptySpaces(int column) {
         int emptySpaces = 0;
-        for(int j = 0; j < 6; j++) {
-            if(get(j, column) == null)
+        for (int j = 0; j < 6; j++) {
+            if (get(j, column) == null)
                 emptySpaces++;
         }
         return emptySpaces;
     }
 
-    // Returns the number of empty spaces in the most empty column of all the bookshelf
+    /**
+     * Returns the maximum number of empty spaces among all the columns in the Bookshelf.
+     *
+     * @return the maximum number of empty spaces
+     */
     public int getMaxEmptySpaces() {
         int maxEmptySpaces = 0;
         int emptySpaces;
         for (int i = 0; i < 5; i++) {
             emptySpaces = 0;
             for (int j = 0; j < 6; j++) {
-                if(get(j, i) == null)
+                if (get(j, i) == null)
                     emptySpaces++;
             }
-            if(emptySpaces > maxEmptySpaces)
+            if (emptySpaces > maxEmptySpaces)
                 maxEmptySpaces = emptySpaces;
         }
         return maxEmptySpaces;
     }
-
-    /* ************************************************************************************************************
-     *                          END OF CUSTOM METHODS
-     ************************************************************************************************************ */
-
 }

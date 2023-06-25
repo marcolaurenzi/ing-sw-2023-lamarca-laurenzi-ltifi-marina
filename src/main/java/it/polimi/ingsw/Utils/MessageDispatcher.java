@@ -12,8 +12,11 @@ import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class MessageDispatcher extends Thread{
-    //TODO good synchronization
+/**
+ * The MessageDispatcher class handles the communication between the server and the client.
+ * It manages the input and output streams and queues for method calls and responses.
+ */
+public class MessageDispatcher extends Thread {
     private final Gson gson = new Gson();
     private String playerId;
     private final DataInputStream inputStream;
@@ -21,21 +24,37 @@ public class MessageDispatcher extends Thread{
     private final BlockingQueue<String> methodCallsQueue = new LinkedBlockingQueue<>();
     private final BlockingQueue<String> responsesQueue = new LinkedBlockingQueue<>();
 
+    /**
+     * Constructs a MessageDispatcher object with the specified socket.
+     *
+     * @param socket the socket for communication with the client
+     * @throws IOException if an I/O error occurs when creating the input and output streams
+     */
     public MessageDispatcher(Socket socket) throws IOException {
         this.inputStream = new DataInputStream(socket.getInputStream());
         this.outputStream = new DataOutputStream(socket.getOutputStream());
     }
+
+    /**
+     * Sets the player ID associated with the MessageDispatcher.
+     *
+     * @param playerId the player ID
+     */
     public void setPlayerId(String playerId) {
         this.playerId = playerId;
     }
 
+    /**
+     * Runs the MessageDispatcher thread, continuously reading messages from the input stream
+     * and putting them into the appropriate queues.
+     */
     public void run() {
         boolean connected = true;
-        while(connected) {
+        while (connected) {
             try {
                 String message = inputStream.readUTF();
                 System.out.println(message);
-                if(gson.fromJson(message, Message.class).getType().equals(MessageTypeEnum.methodCall))
+                if (gson.fromJson(message, Message.class).getType().equals(MessageTypeEnum.methodCall))
                     methodCallsQueue.put(message);
                 else
                     responsesQueue.put(message);
@@ -51,28 +70,34 @@ public class MessageDispatcher extends Thread{
                 e.printStackTrace();
                 System.exit(-1);
             }
-
         }
     }
+
+    /**
+     * Sends a message to the client.
+     *
+     * @param message the message to send
+     * @throws IOException if an I/O error occurs when writing the message to the output stream
+     */
     public void send(String message) throws IOException {
-        synchronized(outputStream) {
+        synchronized (outputStream) {
             outputStream.writeUTF(message);
         }
     }
 
+    /**
+     * Receives a message of the specified message class from the appropriate queue.
+     *
+     * @param messageClassEnum the message class enum
+     * @return the received message
+     * @throws InterruptedException             if the thread is interrupted while waiting for the message
+     * @throws WrongMessageClassEnumException    if the specified message class enum is invalid
+     */
     public String receive(MessageClassEnum messageClassEnum) throws InterruptedException, WrongMessageClassEnumException {
-            switch (messageClassEnum) {
-
-                case methodCall -> {
-                    return methodCallsQueue.take();
-                }
-
-                case response -> {
-                    return responsesQueue.take();
-                }
-
-                default -> throw new WrongMessageClassEnumException();
-
-            }
-        }
+        return switch (messageClassEnum) {
+            case methodCall -> methodCallsQueue.take();
+            case response -> responsesQueue.take();
+            default -> throw new WrongMessageClassEnumException();
+        };
+    }
 }
