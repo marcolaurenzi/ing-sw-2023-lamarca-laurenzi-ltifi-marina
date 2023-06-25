@@ -344,8 +344,8 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         commonGoalPointStacksTops[1] = game.getCommonGoalPointStacks()[1].getTopPoints();
         commonGoalPointStacksNames[0] = game.getCommonGoalPointStacks()[0].getCommonGoal().getGoalName();
         commonGoalPointStacksNames[1] = game.getCommonGoalPointStacks()[1].getCommonGoal().getGoalName();
-        commonGoalPointStacksDescription[0] = game.getCommonGoalPointStacks()[0].getCommonGoal().getGoalName();
-        commonGoalPointStacksDescription[1] = game.getCommonGoalPointStacks()[1].getCommonGoal().getGoalName();
+        commonGoalPointStacksDescription[0] = game.getCommonGoalPointStacks()[0].getCommonGoal().getGoalDescription();
+        commonGoalPointStacksDescription[1] = game.getCommonGoalPointStacks()[1].getCommonGoal().getGoalDescription();
 
         return new GameStatusToSend(
                 game.getId(),
