@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-
+/**
+ *The ControllerRemoteInterface interface represents the remote interface of the controller.
+ */
 public interface ControllerRemoteInterface extends Remote {
         /**
          * Chooses the player ID for a new player.

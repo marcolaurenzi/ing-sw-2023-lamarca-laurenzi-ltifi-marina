@@ -7,6 +7,9 @@ import it.polimi.ingsw.View.LoginController;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 
+/**
+ *The UI interface represents a user interface.
+ */
 public class UserApp {
     /**
      * The main method of the UserApp class.

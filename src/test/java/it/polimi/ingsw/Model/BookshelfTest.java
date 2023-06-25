@@ -8,8 +8,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Test unit for the Bookshelf class.
+ */
 public class BookshelfTest {
+    /**
+     * Test case for inserting items into the bookshelf at an out-of-bounds column index.
+     * It expects the PickedColumnOutOfBoundsException to be thrown.
+     */
     @Test
     void insertOutOfBounds() {
         Bookshelf bookshelf = new Bookshelf();
@@ -21,6 +27,13 @@ public class BookshelfTest {
 
         assertThrows(PickedColumnOutOfBoundsException.class, () -> bookshelf.insert(-1, toInsert));
     }
+
+    /**
+     * Test case for inserting three items into an empty bookshelf.
+     * It verifies that the items are inserted correctly and other positions remain empty.
+     * @throws PickDoesntFitColumnException if the picked items cannot fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
+     */
     @Test
     void insertWhenEmptyThreeElements() throws PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         Bookshelf bookshelf = new Bookshelf();
@@ -42,6 +55,13 @@ public class BookshelfTest {
                     assertNull(bookshelf.get(i, j));
 
     }
+
+    /**
+     * Test case for inserting items into a non-empty bookshelf.
+     * It verifies that the items are inserted correctly and other positions remain unchanged.
+     * @throws PickDoesntFitColumnException if the picked items cannot fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
+     */
     @Test
     void insertWhenNotEmpty() throws PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         Bookshelf bookshelf = new Bookshelf();
@@ -67,6 +87,12 @@ public class BookshelfTest {
 
     }
 
+    /**
+     * Test case for inserting two items into an empty bookshelf.
+     * It verifies that the items are inserted correctly and other positions remain empty.
+     * @throws PickDoesntFitColumnException if the picked items cannot fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
+     */
     @Test
     void insertWhenEmptyTwoElements() throws PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         Bookshelf bookshelf = new Bookshelf();
@@ -86,6 +112,11 @@ public class BookshelfTest {
                     assertNull(bookshelf.get(i, j));
 
     }
+
+    /**
+     * Test case for inserting items into a column that is already full.
+     * It expects the PickDoesntFitColumnException to be thrown.
+     */
     @Test
     void insertWhenColumnIsFull() {
         Bookshelf bookshelf = new Bookshelf();
@@ -104,4 +135,3 @@ public class BookshelfTest {
         assertThrows(PickDoesntFitColumnException.class, () -> bookshelf.insert(0, toInsert));
     }
 }
-

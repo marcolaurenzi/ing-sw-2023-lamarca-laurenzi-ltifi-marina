@@ -1,4 +1,3 @@
-
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
@@ -14,10 +13,18 @@ import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test unit for the Board class.
+ */
 public class BoardTest {
 
     private Board board;
 
+    /**
+     * Sets up the board before each test.
+     *
+     * @throws Exception if an error occurs during the setup.
+     */
     @Before
     @Name("Setting Up Board")
     public void setUp() throws Exception {
@@ -26,6 +33,9 @@ public class BoardTest {
         board.setItemDeck(new ItemDeck());
     }
 
+    /**
+     * Tests the hasFree method of the Board class.
+     */
     @Test
     public void hasFreeTest() {
 
@@ -55,6 +65,9 @@ public class BoardTest {
     }
 
 
+    /**
+     * Tests the toRefresh method of the Board class.
+     */
     @Test
     public void toRefreshTest() {
 
@@ -83,6 +96,12 @@ public class BoardTest {
         assert !board.toRefresh();
     }
 
+    /**
+     * Tests the refreshBoard method of the Board class.
+     *
+     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
+     * @throws IOException if an I/O error occurs.
+     */
     @Test
     public void refreshTest() throws MaxNumberOfPlayersException, IOException {
 

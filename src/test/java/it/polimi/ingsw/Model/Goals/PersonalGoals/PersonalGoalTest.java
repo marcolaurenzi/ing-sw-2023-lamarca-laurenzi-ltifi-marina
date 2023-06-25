@@ -13,10 +13,18 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Unit tests for the PersonalGoal class.
+ */
 public class PersonalGoalTest {
 
     final List<PersonalGoal> goals = new ArrayList<>();
 
+    /**
+     * Sets up the test environment by initializing the goals list.
+     *
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
     @Before
     public void setUp() throws IOException {
         for(int i = 0; i<12; i++) {
@@ -24,6 +32,11 @@ public class PersonalGoalTest {
         }
     }
 
+    /**
+     * Tests the case where the bookshelf pointer is null.
+     *
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Testing the corner case where the pointer is null")
     public void nullBookshelfTest() throws IOException{
@@ -34,6 +47,12 @@ public class PersonalGoalTest {
         }
     }
 
+    /**
+     * Tests the case where the whole matrix of the bookshelf is void.
+     *
+     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Testing corner case where the whole matrix is void")
     public void voidBookshelfTest() throws WrongConfigurationException, IOException {
@@ -43,6 +62,12 @@ public class PersonalGoalTest {
         }
     }
 
+    /**
+     * Tests the case where the bookshelf is exactly the same as the personal goal.
+     *
+     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Testing corner case where the bookshelf is exactly the same as the personal goal")
     public void fullBookshelfTest() throws WrongConfigurationException, IOException {
@@ -52,6 +77,13 @@ public class PersonalGoalTest {
         }
     }
 
+    /**
+     * Tests the case where the bookshelf is exactly the same as the personal goal,
+     * but all other tiles in the bookshelf are full.
+     *
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
+     */
     @Test
     @DisplayName("Testing corner case where the bookshelf is exactly the same as the personal goal but all other tiles are full")
     public void completelyFullBookshelfTest() throws IOException, WrongConfigurationException {

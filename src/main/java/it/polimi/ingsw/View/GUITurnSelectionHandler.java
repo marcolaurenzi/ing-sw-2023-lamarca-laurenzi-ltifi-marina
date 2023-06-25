@@ -16,7 +16,9 @@ import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
-
+/**
+ * This class represents Turn Selection Handler.
+ */
 public class GUITurnSelectionHandler {
     private final Board board;
     private final ArrayList<Coordinates> selection;

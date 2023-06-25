@@ -4,7 +4,9 @@ import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Coordinates;
 
 import java.util.ArrayList;
-
+/**
+ * This class represents the navigator of the game board.
+ */
 public class BoardNavigator {
 
     private Board board;

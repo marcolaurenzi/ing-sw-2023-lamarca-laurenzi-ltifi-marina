@@ -7,7 +7,9 @@ import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 
 import java.io.IOException;
-
+/**
+ *The ServerMethodCallHandler class represents a handler for a method call from the server.
+ */
 public class ServerMethodCallHandler extends Thread {
 
     private final ClientSocket clientSocket;
