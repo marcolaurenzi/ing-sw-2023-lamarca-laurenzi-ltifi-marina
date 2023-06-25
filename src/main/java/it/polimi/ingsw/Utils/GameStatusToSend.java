@@ -12,17 +12,53 @@ import java.util.ArrayList;
  * It contains information about the game state, player status, common goals, personal goals, and more.
  */
 public class GameStatusToSend implements Serializable {
+    /**
+     * The ID of the game.
+     */
     private final int gameID;
+    /**
+     * The tops of the common goal point stacks.
+     */
     private final Integer[] commonGoalPointStacksTops;
+    /**
+     * The names of the common goal point stacks.
+     */
     private final String[] commonGoalPointStacksNames;
+    /**
+     * The descriptions of the common goal point stacks.
+     */
     private final String[] commonGoalPointStacksDescriptions;
+    /**
+     * An array indicating whether each common goal has been achieved.
+     */
     private final boolean[] isCommonGoalAlreadyAchieved;
+    /**
+     * The personal goal of the player.
+     */
     private final PersonalGoal personalGoal;
+    /**
+     * The current player's name.
+     */
     private final String currentPlayer;
+    /**
+     * The names of all players.
+     */
     private final ArrayList<String> players;
+    /**
+     * The points earned by each player.
+     */
     private final ArrayList<Integer> points;
+    /**
+     * The bookshelves of each player.
+     */
     private final ArrayList<Bookshelf> bookshelves;
+    /**
+     * The game board.
+     */
     private final Board board;
+    /**
+     * Indicates whether it is the last turn of the game.
+     */
     private final boolean isLastTurn;
 
     /**

@@ -11,10 +11,21 @@ import java.io.IOException;
  *The ServerMethodCallHandler class represents a handler for a method call from the server.
  */
 public class ServerMethodCallHandler extends Thread {
-
+    /**
+     * The client socket associated with the handler.
+     */
     private final ClientSocket clientSocket;
+    /**
+     * The data output stream used to send messages.
+     */
     private final ProxyDataOutputStream dataOutput;
+    /**
+     * The data input stream used to receive messages.
+     */
     private final ProxyDataInputStream dataInput;
+    /**
+     * The Gson object used to parse messages.
+     */
     private final Gson gson = new Gson();
 
     /**

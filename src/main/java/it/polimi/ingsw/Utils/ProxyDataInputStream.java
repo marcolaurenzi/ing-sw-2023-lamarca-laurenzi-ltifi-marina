@@ -10,7 +10,13 @@ import java.io.InputStream;
  * The ProxyDataInputStream class is used to read UTF-encoded strings from a message dispatcher based on the message class.
  */
 public class ProxyDataInputStream {
+    /**
+     * The message dispatcher used to receive messages.
+     */
     private final MessageDispatcher messageDispatcher;
+    /**
+     * The message class to filter the received messages.
+     */
     private final MessageClassEnum messageClass;
 
     /**

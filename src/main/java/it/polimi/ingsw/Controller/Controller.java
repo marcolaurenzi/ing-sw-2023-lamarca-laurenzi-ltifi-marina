@@ -34,15 +34,54 @@ import java.nio.file.*;
  */
 public class Controller extends UnicastRemoteObject implements ControllerRemoteInterface {
 
+    /**
+     * Gson object used for JSON serialization and deserialization.
+     */
     private static final Gson gson = new Gson();
+
+    /**
+     * List of active games.
+     */
     private static List<Game> games;
+
+    /**
+     * Currently active game.
+     */
     private static Game currentGame;
+
+    /**
+     * ID of the current game.
+     */
     private static Integer currentGameId;
+
+    /**
+     * ID of the first player in the current game.
+     */
     private static String currentGameFirstPlayerId = null;
+
+    /**
+     * Map of already used player IDs.
+     */
     private static HashMap<String, Integer> alreadyUsedPlayerIds;
+
+    /**
+     * Map of player observers.
+     */
     private static  HashMap<String, Observer> listObserver;
+
+    /**
+     * Map of connected players.
+     */
     private static  HashMap<String, Boolean> listConnected;
+
+    /**
+     * Map of player credentials.
+     */
     private static  HashMap<String, String> listCredentials;
+
+    /**
+     * RemoteClient object for controller communication.
+     */
     private static RemoteClient controllerConnection;
 
     /**

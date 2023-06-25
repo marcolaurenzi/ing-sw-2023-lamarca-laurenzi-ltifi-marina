@@ -9,9 +9,24 @@ import java.util.ArrayList;
  */
 public class BoardNavigator {
 
+    /**
+     * The game board.
+     */
     private Board board;
+
+    /**
+     * The list of selected tiles.
+     */
     private ArrayList<Coordinates> selection;
+
+    /**
+     * The current cursor position.
+     */
     private Coordinates cursor;
+
+    /**
+     * Flag indicating if the current tile is a middle tile.
+     */
     private boolean middleTile;
 
     /**

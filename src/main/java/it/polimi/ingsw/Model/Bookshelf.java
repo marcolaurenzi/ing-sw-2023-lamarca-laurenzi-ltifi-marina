@@ -10,8 +10,13 @@ import java.util.ArrayList;
  * This class represents the Bookshelf of the game, a 6x5 Matrix of Item elements.
  */
 public class Bookshelf implements Serializable {
-
+    /**
+     * Represents the Bookshelf.
+     */
     private final Matrix<Item> items;
+    /**
+     * Represents the number of free tiles in the Bookshelf.
+     */
     private int freeTiles;
 
     /**

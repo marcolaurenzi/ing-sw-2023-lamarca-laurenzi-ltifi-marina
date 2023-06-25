@@ -40,8 +40,8 @@ public abstract class PlayerState {
         int y = tilesSelection.get(0).getY();
 
         // Same column
-        for (int i = 0; i < tilesSelection.size(); i++) {
-            if (tilesSelection.get(i).getY() != y) {
+        for (Coordinates coordinates : tilesSelection) {
+            if (coordinates.getY() != y) {
                 ret = false;
                 break;
             }
@@ -134,8 +134,8 @@ public abstract class PlayerState {
     private Boolean haveAllOneSidesFree(ArrayList<Coordinates> tilesSelection, Board board) throws VoidBoardTileException {
         Boolean ret = true;
 
-        for (int i = 0; i < tilesSelection.size(); i++) {
-            if (board.hasFree(tilesSelection.get(i).getY(), tilesSelection.get(i).getX()) == 0) {
+        for (Coordinates coordinates : tilesSelection) {
+            if (board.hasFree(coordinates.getY(), coordinates.getX()) == 0) {
                 ret = false;
                 break;
             }

@@ -19,7 +19,13 @@ import java.util.ArrayList;
  * Represents a client using the RMI protocol.
  */
 public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClient {
+    /**
+     * The remote user interface.
+     */
     private RemoteUI remoteUI;
+    /**
+     * The controller for remote interface.
+     */
     static ControllerRemoteInterface controller;
 
     /**

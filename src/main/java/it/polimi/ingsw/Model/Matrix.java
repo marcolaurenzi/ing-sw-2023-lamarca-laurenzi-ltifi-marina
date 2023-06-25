@@ -8,8 +8,17 @@ import java.io.Serializable;
  * @param <T> the generic element of the matrix
  */
 public class Matrix<T> implements Serializable {
+    /**
+     * Represents a matrix.
+     */
     private final T[][] matrix;
+    /**
+     * Represents the number of rows in the matrix.
+     */
     private final int columnDimension;
+    /**
+     * Represents the number of columns in the matrix.
+     */
     private final int rowDimension;
 
     /**

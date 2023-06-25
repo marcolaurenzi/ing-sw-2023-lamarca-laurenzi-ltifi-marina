@@ -19,10 +19,17 @@ public class Utils {
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
-
+    /**
+     * The path of the configuration files.
+     */
     private final static String configurationPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "configurations" + File.separator;
+    /**
+     * The path of the test files.
+     */
     private final static String testFilesPath = "src" + File.separator + "test" + File.separator + "testFiles" + File.separator;
-
+    /**
+     * The path of the assets.
+     */
     private final static String assetsPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator;
 
     /* ************************************************************************************************************

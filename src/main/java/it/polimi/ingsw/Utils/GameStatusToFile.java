@@ -12,15 +12,41 @@ import java.util.Stack;
  * It contains information about the current state of the game.
  */
 public class GameStatusToFile {
+    /**
+     * The ID of the game.
+     */
     private final int gameID;
+    /**
+     * The stacks containing the points for each common goal.
+     */
     private final ArrayList<Stack<Integer>> commonGoalPointStacks;
+    /**
+     * The names of the common goal point stacks.
+     */
     private final String[] commonGoalPointStacksNames;
+    /**
+     * The index of the current player.
+     */
     private final int currentPlayerIndex;
+    /**
+     * The game board.
+     */
     private final Board board;
-    //game state 0 for Finished, 1 for LastTurn, 2 for Running, 3 for Starting
+    /**
+     * The state of the game.
+     */
     private final int gameState;
+    /**
+     * The item deck.
+     */
     private final ItemDeck itemDeck;
+    /**
+     * The personal goal deck.
+     */
     private final PersonalGoalDeck personalGoalDeck;
+    /**
+     * The maximum number of players.
+     */
     private final int maxPlayers;
 
     /**

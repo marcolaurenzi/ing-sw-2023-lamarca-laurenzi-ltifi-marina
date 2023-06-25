@@ -4,7 +4,30 @@ package it.polimi.ingsw.Model;
  * This enum is used to set the type of the items used in the game.
  */
 public enum TypeEnum {
-	CATS, BOOKS, GAMES, FRAMES, TROPHIES, PLANTS;
+	/**
+	 * Represents the type "CATS".
+	 */
+	CATS,
+	/**
+	 * Represents the type "BOOKS".
+	 */
+	BOOKS,
+	/**
+	 * Represents the type "GAMES".
+	 */
+	GAMES,
+	/**
+	 * Represents the type "FRAMES".
+	 */
+	FRAMES,
+	/**
+	 * Represents the type "TROPHIES".
+	 */
+	TROPHIES,
+	/**
+	 * Represents the type "PLANTS".
+	 */
+	PLANTS;
 
 	/**
 	 * Returns the string representation of the type.

@@ -20,20 +20,50 @@ public class Player {
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
+    /**
+     * Represents the player's ID.
+     */
     private final String playerID;
+    /**
+     * Represents the player's total points.
+     */
     private int totalPoints;
+    /**
+     * Represents the player's points for the common goal.
+     */
     private int commonGoalPoints;
+    /**
+     * Represents the player's state.
+     */
     private PlayerState state;
+    /**
+     * Represents the player's bookshelf.
+     */
     private final Bookshelf bookshelf;
+    /**
+     * Represents the player's personal goal.
+     */
     private final PersonalGoal personalGoal;
+    /**
+     * Represents the player's common goal points.
+     */
     private final boolean[] isCommonGoalAlreadyAchieved;
+    /**
+     * Represents the game the player is playing.
+     */
     private final Game game;
     /* ************************************************************************************************************
      *                          END OF ATTRIBUTES DECLARATION
      *                          START OF CONSTRUCTORS
      ************************************************************************************************************ */
 
-    //in case of retrieved status
+    /**
+     * This is the player's constructor. It initializes some variables and initialize the state
+     * of the player to PlayerStateWaiting
+     *
+     * @param playerStatus the player's status
+     * @param game the game the player accessed
+     */
     public Player(PlayerStatusToFile playerStatus, Game game) {
         this.playerID = playerStatus.getPlayerID();
         this.totalPoints = playerStatus.getTotalPoints();

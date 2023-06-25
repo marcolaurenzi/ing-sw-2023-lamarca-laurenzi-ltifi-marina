@@ -13,13 +13,33 @@ import java.util.List;
  * It encapsulates various information such as the message type, exception, return value, method name, parameters, and game status.
  */
 public class Message {
-
+    /**
+     * The message type.
+     */
     private final MessageTypeEnum type;
+    /**
+     * The exception type.
+     */
     private final ExceptionEnum exception;
+    /**
+     * The return value.
+     */
     private final Object returnValue;
+    /**
+     * The method name.
+     */
     private final MethodNameEnum method;
+    /**
+     * The list of parameters.
+     */
     private final List<Object> parameters;
+    /**
+     * The game status parameter.
+     */
     private final GameStatusToSend gameStatusParam;
+    /**
+     * The selection parameter.
+     */
     private final ArrayList<Coordinates> selectionParam;
 
     /**

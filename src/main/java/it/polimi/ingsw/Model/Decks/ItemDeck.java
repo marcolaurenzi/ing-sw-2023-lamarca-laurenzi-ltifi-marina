@@ -11,7 +11,9 @@ import java.util.List;
  * This class represents the concrete ItemDeck.
  */
 public class ItemDeck implements Deck<Item> {
-
+    /**
+     * Represents the deck of items.
+     */
     private List<Item> deck;
 
     /**

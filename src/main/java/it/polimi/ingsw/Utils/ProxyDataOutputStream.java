@@ -7,7 +7,9 @@ import java.io.IOException;
  * using a message dispatcher.
  */
 public class ProxyDataOutputStream {
-
+    /**
+     * The message dispatcher used to send messages.
+     */
     private final MessageDispatcher messageDispatcher;
 
     /**

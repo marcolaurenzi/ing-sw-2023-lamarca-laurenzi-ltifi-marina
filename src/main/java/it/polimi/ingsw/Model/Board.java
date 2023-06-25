@@ -9,8 +9,13 @@ import java.io.Serializable;
  * This class represents the game board of the game.
  */
 public class Board implements Serializable {
-
+    /**
+     * Represents the game board.
+     */
     private Matrix<BoardTile> gameBoard;
+    /**
+     * Represents the item deck of the game.
+     */
     private ItemDeck itemDeck;
 
     /**
@@ -221,15 +226,21 @@ public class Board implements Serializable {
     public boolean isFreeWest(int i, int j) {
         return j != 0 && gameBoard.get(i, j - 1).getPlacedItem() == null;
     }
-
+    /**
+     * Getter method for the gameBoard.
+     */
     public Matrix<BoardTile> getGameBoard() {
         return gameBoard;
     }
-
+    /**
+     * Getter method for the ItemDeck.
+     */
     public ItemDeck getItemDeck() {
         return itemDeck;
     }
-
+    /**
+     * Setter method for the ItemDeck.
+     */
     public void setItemDeck(ItemDeck deck) {
         this.itemDeck = deck;
     }

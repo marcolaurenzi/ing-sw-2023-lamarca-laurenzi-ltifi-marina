@@ -26,12 +26,22 @@ import java.util.concurrent.atomic.AtomicInteger;
  * It handles the user interface interactions and game creation logic.
  */
 public class CreateNewGameController implements ViewController {
-
+    /**
+     * The anchor pane of the scene.
+     */
     @FXML
     private AnchorPane anchorPane;
-
+    /**
+     * The text field for entering the number of players.
+     */
     private static Stage stage = null;
+    /**
+     * The root of the scene.
+     */
     static Parent root;
+    /**
+     * The global counter.
+     */
     private int globalCounter;
 
 

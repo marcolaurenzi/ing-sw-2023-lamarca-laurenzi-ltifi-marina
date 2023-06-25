@@ -9,12 +9,33 @@ import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
  * bookshelf, personal goal, and the status of already achieved common goals.
  */
 public class PlayerStatusToFile {
+    /**
+     * The ID of the player.
+     */
     private final String playerID;
+    /**
+     * The total points earned by the player.
+     */
     private final int totalPoints;
+    /**
+     * The points earned from common goals by the player.
+     */
     private final int commonGoalPoints;
+    /**
+     * The state of the player.
+     */
     private final int state;
+    /**
+     * The bookshelf of the player.
+     */
     private final Bookshelf bookshelf;
+    /**
+     * The personal goal of the player.
+     */
     private final PersonalGoal personalGoal;
+    /**
+     * An array indicating whether each common goal has been achieved.
+     */
     private final boolean[] isCommonGoalAlreadyAchieved;
 
     /**

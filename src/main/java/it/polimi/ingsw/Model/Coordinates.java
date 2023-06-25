@@ -6,7 +6,13 @@ import java.io.Serializable;
  * This class represents the coordinates of a point on a grid.
  */
 public class Coordinates implements Serializable {
+    /**
+     * Represents the x-coordinate of the point.
+     */
     final int x;
+    /**
+     * Represents the y-coordinate of the point.
+     */
     final int y;
 
     /**
