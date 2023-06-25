@@ -132,7 +132,7 @@ public class GUITurnSelectionHandler {
             GamePageController.incrementCurrentPickDimension();
             pickLabelSetUp(button, imageView);
             if(middletile && selection.size() == 2) {
-                if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0 || Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
+                if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
                     selection.add(new Coordinates(j, i));
                     middletile = false;
                     Platform.runLater(() -> {
@@ -228,7 +228,6 @@ public class GUITurnSelectionHandler {
 
         // If I just deselected the 1st or 2nd tile, I have to decrement the number of the tiles that I have still selected
         if(x <= GamePageController.getGlobalPickCounter()) {
-            GamePageController.decrementCurrentPickDimension();
             for(Node n : controller.getBoardGridPane().getChildren()) {
                 Button b = (Button) n;
                 StackPane sp = null;
@@ -239,7 +238,7 @@ public class GUITurnSelectionHandler {
                     for(Node e : sp.getChildren()) {
                         if(e instanceof Label) {
                             // If the label is not empty, the tile has a value that must be decremented and is not the first tile (as it must stay the same) then I decrement its value
-                            if (!((Label) e).getText().equals("") && (Integer.parseInt(((Label) e).getText()) >= GamePageController.getCurrentPickDimension()) && (Integer.parseInt(((Label) e).getText()) > 1)) {
+                            if (!((Label) e).getText().equals("") && (Integer.parseInt(((Label) e).getText()) > 1)) {
                                 ((Label) e).setText(String.valueOf(Integer.parseInt(((Label) e).getText()) - 1));
                             }
                         }
