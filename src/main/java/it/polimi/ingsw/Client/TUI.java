@@ -21,12 +21,29 @@ import java.util.Scanner;
  * Implements the RemoteUI and UI interfaces.
  */
 public class TUI implements RemoteUI, UI {
+    /**
+     * The scanner used to read the user input.
+     */
     private Scanner scanner;
+    /**
+     * The game ID.
+     */
     private int gameId;
-    //private int bookshelfIndex;
+    /**
+     * The client.
+     */
     private Client client;
+    /**
+     * The player ID.
+     */
     private String playerId;
+    /**
+     * Boolean value indicating if the game has ended.
+     */
     private boolean isEnded;
+    /**
+     * The game status.
+     */
     private GameStatusToSend gameStatus;
 
     /**

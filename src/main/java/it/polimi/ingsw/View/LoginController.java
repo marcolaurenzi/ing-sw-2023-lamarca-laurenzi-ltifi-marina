@@ -22,15 +22,35 @@ import java.rmi.NotBoundException;
  * The LoginController class handles the user login process.
  */
 public class LoginController extends Application implements ViewController {
-
+    /**
+     * The text field for entering the username.
+     */
     @FXML
     private TextField usernameTextField;
+    /**
+     * Menu for choosing the connection mode.
+     */
     @FXML
     private ChoiceBox<String> connectionMenu;
+    /**
+     * Stage
+     */
     private static Stage stage = null;
+    /**
+     * Username
+     */
     private static String username;
+    /**
+     *Password
+     */
     private static String password;
+    /**
+     * Connection mode
+     */
     static String connectionMode;
+    /**
+     * The root of the scene
+     */
     static Parent root;
 
     /**

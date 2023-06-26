@@ -4,6 +4,9 @@ package it.polimi.ingsw.View;
  * The SharedObject class represents an object that can be shared between multiple threads.
  */
 class SharedObject {
+    /**
+     * The variable of the object.
+     */
     private int variable;
 
     /**

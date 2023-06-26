@@ -25,15 +25,41 @@ public class Game {
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
-
+    /**
+     * Represents the current state of the game.
+     */
     private GameState gameState;
+    /**
+     * Represents the ID of the game.
+     */
     final int gameID;
+    /**
+     * Represents the item deck of the game.
+     */
     private ItemDeck itemDeck;
+    /**
+     * Represents the personal goal deck of the game.
+     */
     private PersonalGoalDeck personalGoalDeck;
+    /**
+     * Represents the common goal point stacks of the game.
+     */
     private CommonGoalPointStack[] commonGoalPointStacks;
+    /**
+     * Represents the maximum number of players in the game.
+     */
     private final int maxPlayers;
+    /**
+     * Represents the current player in the game.
+     */
     private int currentPlayer;
+    /**
+     * Represents the list of players in the game.
+     */
     private final ArrayList<Player> players;
+    /**
+     * Represents the board of the game.
+     */
     private final Board board;
 
     /* ************************************************************************************************************

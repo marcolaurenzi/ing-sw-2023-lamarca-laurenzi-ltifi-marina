@@ -15,7 +15,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ *The ObserverSocket class represents an observer that communicates with the server via socket.
+ */
 public class ObserverSocket implements Observer, Serializable {
     private final ProxyDataOutputStream dataOutput;
     private final ProxyDataInputStream dataInput;

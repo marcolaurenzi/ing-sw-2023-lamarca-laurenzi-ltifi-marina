@@ -10,9 +10,24 @@ import java.io.IOException;
  * It allows moving the cursor, selecting a column, and printing the bookshelf.
  */
 public class BookshelfNavigator {
+    /**
+     * The length of the selection.
+     */
     private final int selectionLength;
+
+    /**
+     * The bookshelf to navigate.
+     */
     private final Bookshelf bookshelf;
+
+    /**
+     * The current cursor position.
+     */
     private int cursor;
+
+    /**
+     * The current selected column.
+     */
     private int column;
 
     /**

@@ -16,14 +16,37 @@ import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
-
+/**
+ * This class represents Turn Selection Handler.
+ */
 public class GUITurnSelectionHandler {
+    /**
+     * The board of the game.
+     */
     private final Board board;
+    /**
+     * The current selection of coordinates.
+     */
     private final ArrayList<Coordinates> selection;
+    /**
+     * The GridPane representing the board.
+     */
     private final GridPane boardGridPane;
+    /**
+     * The Bookshelf of the game.
+     */
     private final Bookshelf bookshelf;
+    /**
+     * Boolean representing whether the selected tile is in the middle.
+     */
     private boolean middletile;
+    /**
+     * The selected column.
+     */
     private int column;
+    /**
+     * The selected row.
+     */
     private int row;
 
 

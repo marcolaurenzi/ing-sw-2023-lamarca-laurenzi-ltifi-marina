@@ -15,10 +15,14 @@ import java.io.IOException;
  * Controller class for the end game screen.
  */
 public class EndGameController {
-
+    /**
+     * The anchor pane of the scene.
+     */
     @FXML
     private AnchorPane endGameAnchorPane;
-
+    /**
+     * The label for displaying the winner's name.
+     */
     @FXML
     private Label winnerLabel;
 

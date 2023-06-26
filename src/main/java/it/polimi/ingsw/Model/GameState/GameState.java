@@ -6,7 +6,9 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 
 import java.util.ArrayList;
-
+/**
+ *This interface represents the abstract concept of a generic GameState
+ */
 public interface GameState {
     /**
      * Advances the game to the next player's turn.

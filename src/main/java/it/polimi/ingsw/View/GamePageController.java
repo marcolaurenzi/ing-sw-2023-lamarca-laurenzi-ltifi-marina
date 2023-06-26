@@ -31,7 +31,9 @@ import java.util.stream.Stream;
  * Controller class for the game page view.
  */
 public class GamePageController implements ViewController{
+
     private final LoginController loginController = new LoginController();
+
     private static String username;
 
     private static double height;

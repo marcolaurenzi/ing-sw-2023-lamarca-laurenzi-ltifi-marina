@@ -11,8 +11,17 @@ import java.util.List;
  * already used player IDs, and a list of credentials.
  */
 public class ControllerStatusToFile {
+    /**
+     * The ID of the current game.
+     */
     private final Integer currentGameId;
+    /**
+     * A mapping of player names to their corresponding used IDs.
+     */
     private final HashMap<String, Integer> alreadyUsedPlayerIds;
+    /**
+     * A mapping of player names to their corresponding credentials.
+     */
     private final HashMap<String, String> listCredentials;
 
     /**

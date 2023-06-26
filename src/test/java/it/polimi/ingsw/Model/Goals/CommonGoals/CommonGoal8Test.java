@@ -10,10 +10,19 @@ import java.io.IOException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Unit tests for the CommonGoal8 class.
+ */
 public class CommonGoal8Test {
+
     CommonGoal8 commonGoal8 = new CommonGoal8();
     Bookshelf bookshelf;
 
+    /**
+     * Test if the empty Bookshelf is handled correctly.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the empty Bookshelf is handled correctly")
     public void emptyBookshelfTest() throws IOException {
@@ -21,6 +30,11 @@ public class CommonGoal8Test {
         assertFalse("The empty bookshelf should not achieve the goal", commonGoal8.isAchieved(bookshelf));
     }
 
+    /**
+     * Test with two valid columns formed by six different types of tiles.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test with two valid columns formed by six different types of tiles")
     public void bookshelfTwoValidColumns() throws IOException {
@@ -28,6 +42,11 @@ public class CommonGoal8Test {
         assertTrue("The bookshelf with two valid columns should be ok", commonGoal8.isAchieved(bookshelf));
     }
 
+    /**
+     * Test with valid columns but some identical combinations.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test with valid columns but some identical combinations")
     public void bookshelfSomeIdenticalCombinations() throws IOException {
@@ -35,6 +54,11 @@ public class CommonGoal8Test {
         assertTrue("The bookshelf with some identical combinations should be ok", commonGoal8.isAchieved(bookshelf));
     }
 
+    /**
+     * Test with only one type of tile in the bookshelf.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test with only one type of tile in the bookshelf")
     public void bookshelfOnlyOneType() throws IOException {
@@ -42,6 +66,11 @@ public class CommonGoal8Test {
         assertFalse("The bookshelf with with only one type of tile in the bookshelf should not be ok", commonGoal8.isAchieved(bookshelf));
     }
 
+    /**
+     * Test with different columns but no valid ones.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test with different columns but no valid ones")
     public void bookshelfNoValidColumns() throws IOException {
@@ -49,6 +78,11 @@ public class CommonGoal8Test {
         assertFalse("The bookshelf with no valid columns should not check the goal", commonGoal8.isAchieved(bookshelf));
     }
 
+    /**
+     * Test with all valid columns.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test with all valid columns")
     public void bookshelfAllValidColumns() throws IOException {

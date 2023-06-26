@@ -6,16 +6,18 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 
+/**
+ * Unit tests for CommonGoal7 class.
+ */
 public class CommonGoal7Test {
     final CommonGoal goal = new CommonGoal7();
 
     /**
-     * Testing the corner case where the pointer is null
+     * Testing the corner case where the pointer is null.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Test
     public void nullPointerTest() throws IOException {
@@ -24,46 +26,46 @@ public class CommonGoal7Test {
     }
 
     /**
-     * Testing corner case where the whole matrix is void
+     * Testing the corner case where the whole matrix is void.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Test
     public void voidBookshelfTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 0);
-        assertEquals(false, goal.isAchieved(bookshelf));
+        assertFalse(goal.isAchieved(bookshelf));
     }
 
     /**
-     * Testing the corner case where the matrix has exactly 4 rows with exactly 4 different types for each row
+     * Testing the corner case where the matrix has exactly 4 rows with exactly 4 different types for each row.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Test
     public void enoughRowsEnoughTypesTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 1);
-        assertEquals(true, goal.isAchieved(bookshelf));
+        assertTrue(goal.isAchieved(bookshelf));
     }
 
     /**
-     * Testing the corner case where the matrix has 4 rows with more than 4 different types
+     * Testing the corner case where the matrix has 4 rows with more than 4 different types.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Test
     public void moreTypesTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 2);
-        assertEquals(false, goal.isAchieved(bookshelf));
+        assertFalse(goal.isAchieved(bookshelf));
     }
 
     /**
-     * Testing the corner case where the matrix has only 3 rows with exactly 4 different types
+     * Testing the corner case where the matrix has only 3 rows with exactly 4 different types.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     @Test
     public void lessRowsTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 3);
-        assertEquals(false, goal.isAchieved(bookshelf));
+        assertFalse(goal.isAchieved(bookshelf));
     }
 }

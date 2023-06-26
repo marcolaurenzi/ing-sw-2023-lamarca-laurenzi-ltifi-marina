@@ -6,42 +6,47 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 
+/**
+ * Unit tests for the CommonGoal10 class.
+ */
 public class CommonGoal10Test {
     final CommonGoal goal = new CommonGoal10();
 
     /**
-     * Testing the corner case where the pointer is null
+     * Tests the scenario where the pointer is null.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs
      */
     @Test
     public void nullPointerTest() throws IOException {
+        // Load the bookshelf from a JSON file containing null values
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookShelfTest.JSON");
         assertThrows(NullPointerException.class, () -> goal.isAchieved(bookshelf));
     }
 
     /**
-     * Testing corner case where the whole matrix is void
+     * Tests the scenario where the bookshelf is completely empty.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs
      */
     @Test
     public void voidBookshelfTest() throws IOException {
+        // Load the bookshelf from a JSON file with an empty matrix
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 0);
-        assertEquals(false, goal.isAchieved(bookshelf));
+        assertFalse(goal.isAchieved(bookshelf));
     }
 
     /**
-     * Testing the corner case where the matrix has only one X, the minimum allowed value
+     * Tests the scenario where the bookshelf contains only one 'X', which is the minimum allowed value.
      *
-     * @throws IOException
+     * @throws IOException if an I/O error occurs
      */
     @Test
     public void oneXBookshelfTest() throws IOException {
+        // Load the bookshelf from a JSON file with a matrix containing one 'X'
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 1);
-        assertEquals(true, goal.isAchieved(bookshelf));
+        assertTrue(goal.isAchieved(bookshelf));
     }
 }

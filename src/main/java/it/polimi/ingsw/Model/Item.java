@@ -9,7 +9,13 @@ import java.io.Serializable;
  * This class represents an item in the game.
  */
 public class Item implements Serializable {
+    /**
+     * Represents the type of the item.
+     */
     private final TypeEnum type;
+    /**
+     * Represents the number associated with the item.
+     */
     private final int num;
 
     /**

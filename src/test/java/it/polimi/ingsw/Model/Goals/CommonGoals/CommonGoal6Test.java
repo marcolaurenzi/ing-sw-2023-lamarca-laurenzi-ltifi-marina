@@ -10,63 +10,126 @@ import java.io.IOException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Unit tests for the CommonGoal6 class.
+ */
 public class CommonGoal6Test {
     CommonGoal6 commonGoal6 = new CommonGoal6();
     Bookshelf bookshelf;
+
+    /**
+     * Test if the empty Bookshelf is handled correctly.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the empty Bookshelf is handled correctly")
     public void emptyBookshelfTest() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "bookshelfOfNullTest.json");
         assertFalse("The empty bookshelf should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 4 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest1() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 0);
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 4 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest2() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 1);
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 4 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest3() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 2);
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 4 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest4() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 3);
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 5 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest1() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 4);
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 5 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest2() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 5);
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 5 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest3() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 6);
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf with 5 elements on a diagonal achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest4() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 7);
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
     @Test
     @DisplayName("Test if the Bookshelf filled all with the same element achieves the goal")
     public void bookshelfFilledAllWithTheSameElementTest() throws IOException {

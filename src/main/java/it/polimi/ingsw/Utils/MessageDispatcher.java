@@ -17,11 +17,29 @@ import java.util.concurrent.LinkedBlockingQueue;
  * It manages the input and output streams and queues for method calls and responses.
  */
 public class MessageDispatcher extends Thread {
+    /**
+     * The Gson object used to serialize and deserialize JSON objects.
+     */
     private final Gson gson = new Gson();
+    /**
+     * The player ID associated with the MessageDispatcher.
+     */
     private String playerId;
+    /**
+     * The input stream.
+     */
     private final DataInputStream inputStream;
+    /**
+     * The output stream.
+     */
     private final DataOutputStream outputStream;
+    /**
+     * The queue for method calls.
+     */
     private final BlockingQueue<String> methodCallsQueue = new LinkedBlockingQueue<>();
+    /**
+     * The queue for responses.
+     */
     private final BlockingQueue<String> responsesQueue = new LinkedBlockingQueue<>();
 
     /**

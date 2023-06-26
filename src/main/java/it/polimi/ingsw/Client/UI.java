@@ -4,7 +4,9 @@ import it.polimi.ingsw.Model.Exceptions.*;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-
+/**
+ *The UI interface represents a user interface.
+ */
 public interface UI {
 
     /**

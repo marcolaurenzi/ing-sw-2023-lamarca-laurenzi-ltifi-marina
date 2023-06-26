@@ -6,7 +6,9 @@ import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 import it.polimi.ingsw.Model.PlayerState.PlayerStateWaiting;
 
 import java.util.ArrayList;
-
+/**
+ *This class represents the state of the game when it is running
+ */
 public class GameStateRunning implements GameState {
 
     /**

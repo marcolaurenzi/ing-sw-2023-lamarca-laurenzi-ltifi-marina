@@ -20,15 +20,40 @@ import java.util.List;
  * It implements the Client and RemoteClient interfaces.
  */
 public class ClientSocket implements Client, RemoteClient {
+    /**
+     * The socket used for the client-server communication.
+     */
     private final Socket socket;
+
+    /**
+     * The message dispatcher for sending and receiving messages.
+     */
     private final MessageDispatcher messageDispatcher;
+
+    /**
+     * The server method call handler for handling method calls from the server.
+     */
     private ServerMethodCallHandler serverMethodCallHandler;
 
+    /**
+     * The remote user interface associated with the client.
+     */
     private RemoteUI remoteUI;
 
+    /**
+     * The data input stream for receiving data from the server.
+     */
     private ProxyDataInputStream dataInput;
+
+    /**
+     * The data output stream for sending data to the server.
+     */
     private ProxyDataOutputStream dataOutput;
-    Gson gson = new Gson();;
+
+    /**
+     * The Gson object for converting JSON messages.
+     */
+    private Gson gson = new Gson();
 
     /**
      * Constructs a ClientSocket object with the specified RemoteUI.

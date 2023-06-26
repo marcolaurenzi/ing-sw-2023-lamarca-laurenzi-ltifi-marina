@@ -6,7 +6,9 @@ import it.polimi.ingsw.Utils.GameStatusToSend;
 
 import java.io.IOException;
 import java.io.Serializable;
-
+/**
+ *The Observer interface represents an observer in the game.
+ */
 public interface Observer extends Serializable {
 
     /**

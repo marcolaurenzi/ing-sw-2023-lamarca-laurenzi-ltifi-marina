@@ -12,7 +12,9 @@ import java.util.List;
  * It implements the Deck interface with CommonGoal as the generic type.
  */
 public class CommonGoalDeck implements Deck<CommonGoal> {
-
+    /**
+     * Represents the deck of common goals.
+     */
     List<CommonGoal> deck;
     private static final String pathToConfigFile = "resources/configuration/configurationFile.json";
 

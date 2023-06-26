@@ -4,12 +4,29 @@ import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Coordinates;
 
 import java.util.ArrayList;
-
+/**
+ * This class represents the navigator of the game board.
+ */
 public class BoardNavigator {
 
+    /**
+     * The game board.
+     */
     private Board board;
+
+    /**
+     * The list of selected tiles.
+     */
     private ArrayList<Coordinates> selection;
+
+    /**
+     * The current cursor position.
+     */
     private Coordinates cursor;
+
+    /**
+     * Flag indicating if the current tile is a middle tile.
+     */
     private boolean middleTile;
 
     /**

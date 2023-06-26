@@ -10,8 +10,17 @@ import java.util.Stack;
  * It tracks the points earned for completing the goal by the players.
  */
 public class CommonGoalPointStack implements Serializable {
+    /**
+     * Represents the stack of Common Goal Points.
+     */
     private final Stack<Integer> pointStack;
+    /**
+     * Represents the number of points at the top of the stack.
+     */
     private Integer top;
+    /**
+     * Represents the common goal associated with the stack.
+     */
     private final CommonGoal commonGoal;
 
     /**

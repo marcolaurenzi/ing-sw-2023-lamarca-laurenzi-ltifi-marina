@@ -21,13 +21,37 @@ import static it.polimi.ingsw.View.LoginController.connectionMode;
  * This class represents the GUI interface for the game.
  */
 public class GUI implements RemoteUI {
+    /**
+     * The controller of the game.
+     */
     private static GamePageController controller;
+    /**
+     * The ID of the player.
+     */
     private static String playerId;
+    /**
+     * The ID of the game.
+     */
     private static int gameId;
+    /**
+     * The client of the game.
+     */
     private static Client client;
+    /**
+     * Boolean representing whether the game has ended.
+     */
     private static boolean isEnded;
+    /**
+     * The game status.
+     */
     protected static GameStatusToSend gameStatus;
+    /**
+     * Turn selection handler.
+     */
     private static GUITurnSelectionHandler turnSelectionHandler;
+    /**
+     * The shared object.
+     */
     private static SharedObject sharedObject;
 
     /**

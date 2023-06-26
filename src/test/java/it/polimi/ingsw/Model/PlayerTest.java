@@ -14,8 +14,19 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test unit for the Player class.
+ */
 class PlayerTest {
 
+    /**
+     * Tests the method insertInOrderInBookshelf.
+     *
+     * @throws PlayerIsWaitingException    if the player is in a waiting state.
+     * @throws ColumnNotValidException     if the column is not valid.
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException if the picked items don't fit the column.
+     */
     @Test
     void insertInOrderInBookshelf() throws PlayerIsWaitingException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
         PlayerState playerState = new PlayerStateSelecting();
@@ -35,12 +46,19 @@ class PlayerTest {
     }
 
 
+    /**
+     * Tests the method numberOfAdjacentSameTypeAndSpreadFalse.
+     *
+     * @throws NoSuchMethodException     if the specified method does not exist.
+     * @throws InvocationTargetException if the underlying method throws an exception.
+     * @throws IllegalAccessException    if the specified method is inaccessible.
+     */
     @Test
     public void numberOfAdjacentSameTypeAndSpreadFalseTest() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         // Create an instance of the class
         Bookshelf bookshelf = new Bookshelf();
-        Matrix<Boolean> matrix = new Matrix<>(6,5);
+        Matrix<Boolean> matrix = new Matrix<>(6, 5);
         matrix.setAll(true);
 
         Method privateMethod = Player.class.getDeclaredMethod("numberOfAdjacentSameTypeAndSpreadFalse", int.class, int.class, Bookshelf.class, Matrix.class, TypeEnum.class);
@@ -59,13 +77,13 @@ class PlayerTest {
                 bookshelf.set(i, j, new Item(TypeEnum.CATS));
             }
         }
-        matrix = new Matrix<>(6,5);
+        matrix = new Matrix<>(6, 5);
         matrix.setAll(true);
         result = privateMethod.invoke(instance, 0, 0, bookshelf, matrix, TypeEnum.CATS);
         assertEquals(30, result);
 
         // Testing bookshelf with some items from different coordinates
-        matrix = new Matrix<>(6,5);
+        matrix = new Matrix<>(6, 5);
         matrix.setAll(true);
         bookshelf = new Bookshelf();
         for (int i = 0; i < bookshelf.getColumnDimension(); i++) {
@@ -78,6 +96,13 @@ class PlayerTest {
 
     }
 
+    /**
+     * Tests the method getRewardGoals.
+     *
+     * @throws MaxNumberOfPlayersException   if the maximum number of players is reached.
+     * @throws IOException                   if there is an I/O error.
+     * @throws WrongConfigurationException  if the configuration is incorrect.
+     */
     @Test
     public void getRewardGoalsTest() throws MaxNumberOfPlayersException, IOException, WrongConfigurationException {
 
@@ -91,33 +116,33 @@ class PlayerTest {
         player.getBookshelf().set(4, 0, new Item(TypeEnum.CATS));
         player.getBookshelf().set(3, 0, new Item(TypeEnum.CATS));
         player.computeRewardGoals();
-        assert(player.getTotalPoints() >= 2);
+        assert (player.getTotalPoints() >= 2);
 
         player.getBookshelf().set(2, 0, new Item(TypeEnum.CATS));
         player.computeRewardGoals();
-        assert(player.getTotalPoints() >= 3);
+        assert (player.getTotalPoints() >= 3);
 
         player.getBookshelf().set(1, 0, new Item(TypeEnum.CATS));
         player.computeRewardGoals();
-        assert(player.getTotalPoints() >= 5);
+        assert (player.getTotalPoints() >= 5);
 
         player.getBookshelf().set(0, 0, new Item(TypeEnum.CATS));
         player.computeRewardGoals();
-        assert(player.getTotalPoints() >= 8);
+        assert (player.getTotalPoints() >= 8);
 
         player.getBookshelf().set(5, 1, new Item(TypeEnum.CATS));
         player.computeRewardGoals();
-        assert(player.getTotalPoints() >= 8);
+        assert (player.getTotalPoints() >= 8);
 
         int k = 0;
         //player completes private goal tasks
         for (int i = 0; i < player.getBookshelf().getColumnDimension(); i++) {
             for (int j = 0; j < player.getBookshelf().getRowDimension(); j++) {
-                if(player.getPersonalGoal().get(i,j) != null) {
+                if (player.getPersonalGoal().get(i, j) != null) {
                     k++;
                     player.getBookshelf().set(i, j, new Item(player.getPersonalGoal().get(i, j).getType()));
                     player.computeRewardGoals();
-                    assert(player.getTotalPoints() >= 8 + getCurrentPoints(k));
+                    assert (player.getTotalPoints() >= 8 + getCurrentPoints(k));
                 }
             }
         }
@@ -125,7 +150,11 @@ class PlayerTest {
     }
 
     /**
-     * Testing method to get the points of the private goal
+     * Calculates the points of the private goal.
+     *
+     * @param i the index of the private goal.
+     * @return the points corresponding to the private goal.
+     * @throws WrongConfigurationException if the configuration is incorrect.
      */
     private int getCurrentPoints(int i) throws WrongConfigurationException {
         int result;
