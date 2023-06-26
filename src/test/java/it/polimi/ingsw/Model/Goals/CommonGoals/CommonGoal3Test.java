@@ -13,7 +13,15 @@ import static org.junit.Assert.*;
  * Unit tests for the CommonGoal3 class.
  */
 public class CommonGoal3Test {
+    /**
+     * Class constructor.
+     */
+    public CommonGoal3Test() {
 
+    }
+    /**
+     * CommonGoal3 instance to test.
+     */
     final CommonGoal goal = new CommonGoal3();
 
     /**

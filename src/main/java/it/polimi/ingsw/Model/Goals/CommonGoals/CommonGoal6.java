@@ -8,7 +8,12 @@ import it.polimi.ingsw.Model.TypeEnum;
  * of the same ElementType in the Bookshelf.
  */
 public class CommonGoal6 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal6 object.
+     */
+    public CommonGoal6() {
 
+    }
     /**
      * Checks whether the goal is achieved or not.
      *

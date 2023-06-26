@@ -12,7 +12,12 @@ import java.util.ArrayList;
  * This state represents the state of a player that is selecting the tiles from the board.
  */
 public class PlayerStateSelecting extends PlayerState {
-
+    /**
+     * Constructs a PlayerStateSelecting instance.
+     */
+    public PlayerStateSelecting() {
+        super();
+    }
     /**
      * This method takes an ArrayList of coordinates from the controller indicating the tiles that the player
      * wants to pick and inserts the items in those tiles in the bookshelf in the order specified by the player. It

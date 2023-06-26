@@ -31,6 +31,12 @@ import java.util.stream.Stream;
  * Controller class for the game page view.
  */
 public class GamePageController implements ViewController{
+    /**
+     * Constructs a GamePageController object.
+     */
+    public GamePageController() {
+
+    }
 
     /**
      * The login controller.

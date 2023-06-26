@@ -13,6 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class BookshelfTest {
     /**
+     * Constructs a BookshelfTest object.
+     */
+    public BookshelfTest() {
+    }
+    /**
      * Test case for inserting items into the bookshelf at an out-of-bounds column index.
      * It expects the PickedColumnOutOfBoundsException to be thrown.
      */

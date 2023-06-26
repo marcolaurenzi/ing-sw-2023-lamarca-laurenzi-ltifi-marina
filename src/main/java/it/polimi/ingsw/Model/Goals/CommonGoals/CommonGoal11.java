@@ -7,7 +7,10 @@ import it.polimi.ingsw.Model.Bookshelf;
  * The goal is achieved when there are 5 columns that progressively have one tile more than the previous one.
  */
 public class CommonGoal11 extends CommonGoal {
-
+    /**
+     * Constructs a CommonGoal11 object.
+     */
+    public CommonGoal11() {}
     /**
      * Checks whether the goal is achieved or not.
      *

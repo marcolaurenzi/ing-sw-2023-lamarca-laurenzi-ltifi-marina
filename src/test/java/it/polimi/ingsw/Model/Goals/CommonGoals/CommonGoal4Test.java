@@ -12,7 +12,15 @@ import static org.junit.Assert.*;
  * This class is used to test the isAchieved() method for CommonGoal4.
  */
 public class CommonGoal4Test {
+    /**
+     * Constructor for the CommonGoal4Test class.
+     */
+    public CommonGoal4Test() {
 
+    }
+    /**
+     * CommonGoal4 instance to test.
+     */
     final CommonGoal goal = new CommonGoal4();
 
     /**

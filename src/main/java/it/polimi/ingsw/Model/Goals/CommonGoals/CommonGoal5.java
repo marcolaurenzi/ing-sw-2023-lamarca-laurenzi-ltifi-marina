@@ -10,7 +10,12 @@ import java.util.HashMap;
  * in the whole Bookshelf.
  */
 public class CommonGoal5 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal5 object.
+     */
+    public CommonGoal5() {
 
+    }
     /**
      * Checks whether the goal is achieved or not.
      *

@@ -10,6 +10,12 @@ import java.util.*;
  * of six consecutive tiles with no more than three different colors in each column.
  */
 public class CommonGoal4 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal4 object.
+     */
+    public CommonGoal4() {
+
+    }
 
     /**
      * Checks whether there are at least three completely filled columns each containing tiles of three types at most.

@@ -13,7 +13,9 @@ import java.rmi.UnmarshalException;
  *The ObserverRMI class represents an observer in the game.
  */
 public class ObserverRMI implements Observer {
-
+    /**
+     *The Remote Client for the observer.
+     */
     private RemoteClient client;
 
     /**

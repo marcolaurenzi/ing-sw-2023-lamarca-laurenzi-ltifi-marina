@@ -17,7 +17,9 @@ public class CommonGoal01 extends CommonGoal {
      * The number of groups that must be present in the bookshelf.
      */
     private final int numberOfGroups;
-
+    /**
+     * Constructor for common goals 0 and 1.
+     */
     public CommonGoal01(int dim, int numberOfGroups) {
         this.dim = dim;
         this.numberOfGroups = numberOfGroups;

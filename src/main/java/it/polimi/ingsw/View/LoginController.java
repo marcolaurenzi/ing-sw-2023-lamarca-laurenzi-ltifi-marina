@@ -20,6 +20,12 @@ import java.rmi.NotBoundException;
  */
 public class LoginController extends Application implements ViewController {
     /**
+     * Constructs a LoginController object.
+     */
+    public LoginController() {
+
+    }
+    /**
      * The text field for entering the username.
      */
     @FXML

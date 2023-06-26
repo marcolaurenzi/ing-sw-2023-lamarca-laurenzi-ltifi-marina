@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 public class EndGameController {
     /**
+     * Constructs an EndGameController object.
+     */
+    public EndGameController() {
+    }
+
+    /**
      * The anchor pane of the scene.
      */
     @FXML

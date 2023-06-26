@@ -9,6 +9,16 @@ import org.junit.Test;
  * Test unit for the CommonGoalPointStack class.
  */
 public class CommonGoalPointStackTest {
+    /**
+     * CommonGoalPointStack instance to test.
+     */
+    public CommonGoalPointStackTest() {
+
+    }
+
+    /**
+     * CommonGoalPointStack instance to test.
+     */
 
     private CommonGoalPointStack commonGoalPointStack;
 

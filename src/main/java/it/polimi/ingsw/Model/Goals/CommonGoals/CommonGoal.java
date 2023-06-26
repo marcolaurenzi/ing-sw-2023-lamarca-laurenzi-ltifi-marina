@@ -12,6 +12,11 @@ import java.io.Serializable;
  */
 public abstract class CommonGoal implements Serializable {
     /**
+     * Constructs a CommonGoal object.
+     */
+    public CommonGoal() {
+    }
+    /**
      * Checks whether the goal is achieved or not.
      *
      * @param bookshelf The reference to the actual Bookshelf object on which the algorithm operates.

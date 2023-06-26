@@ -10,7 +10,12 @@ import java.util.ArrayList;
  *This class represents the state of the game when it is running
  */
 public class GameStateRunning implements GameState {
+    /**
+     * Constructs a GameStateRunning instance.
+     */
+    public GameStateRunning() {
 
+    }
     /**
      * Moves the game to the next player's turn.
      * If the current player's bookshelf is full:

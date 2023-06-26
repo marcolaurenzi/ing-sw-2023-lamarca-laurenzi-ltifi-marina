@@ -11,7 +11,12 @@ import java.util.ArrayList;
  * Represents the game state for the last turn of the game.
  */
 public class GameStateLastTurn implements GameState {
+    /**
+     * Constructs a GameStateLastTurn instance.
+     */
+    public GameStateLastTurn() {
 
+    }
     /**
      * Advances the game to the next player's turn.
      *

@@ -14,7 +14,19 @@ import static org.junit.Assert.assertTrue;
  * Unit tests for the CommonGoal5 class.
  */
 public class CommonGoal5Test {
+    /**
+     * Class constructor.
+     */
+    public CommonGoal5Test() {
+
+    }
+    /**
+     * CommonGoal5 instance to test.
+     */
     CommonGoal5 commonGoal5 = new CommonGoal5();
+    /**
+     * Bookshelf instance to test.
+     */
     Bookshelf bookshelf;
 
     /**

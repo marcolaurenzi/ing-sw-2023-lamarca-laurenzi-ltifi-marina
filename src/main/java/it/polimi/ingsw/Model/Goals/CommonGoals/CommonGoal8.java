@@ -11,7 +11,12 @@ import java.util.Set;
  * two columns, each formed by 6 different types of tiles, in the Bookshelf.
  */
 public class CommonGoal8 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal8 object.
+     */
+    public CommonGoal8() {
 
+    }
     /**
      * Checks whether the goal is achieved or not.
      *

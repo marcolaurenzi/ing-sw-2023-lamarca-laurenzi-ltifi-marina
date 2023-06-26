@@ -7,6 +7,11 @@ import it.polimi.ingsw.Model.Bookshelf;
  * This goal is achieved when there are 4 tiles of the same ElementType placed in the 4 corners of the player's Bookshelf
  */
 public class CommonGoal2 extends CommonGoal{
+    /**
+     * Constructs a CommonGoal2 object.
+     */
+    public CommonGoal2() {
+    }
 
     /**
      * Checks if the given bookshelf meets the achievement criteria.

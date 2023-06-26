@@ -17,7 +17,12 @@ import static org.junit.Assert.*;
  * Unit tests for the PersonalGoal class.
  */
 public class PersonalGoalTest {
+    /**
+     * Constructs a PersonalGoalTest .
+     */
+    public PersonalGoalTest() {
 
+    }
     final List<PersonalGoal> goals = new ArrayList<>();
 
     /**

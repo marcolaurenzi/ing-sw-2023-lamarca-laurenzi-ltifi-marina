@@ -10,6 +10,10 @@ import it.polimi.ingsw.Model.TypeEnum;
  * Four tiles of the same Type representing a perfect square (boarding tiles MUST be of different Types)
  */
 public class CommonGoal3 extends CommonGoal{
+    /**
+     * Constructs a CommonGoal3 object
+     */
+    public CommonGoal3(){}
 
     /**
      * Counts the number of groups of four adjacent elements of the same type forming a 2x2 square.

@@ -10,7 +10,12 @@ import java.util.ArrayList;
  * Represents the state of the game when it has finished.
  */
 public class GameStateFinished implements GameState{
+    /**
+     * Constructs a GameStateFinished instance.
+     */
+    public GameStateFinished() {
 
+    }
     /**
      * Throws a FinishedGameException to indicate that the game has already finished.
      *

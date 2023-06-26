@@ -11,6 +11,12 @@ import java.util.ArrayList;
  *This class represents the state of a player during the game.
  */
 public abstract class PlayerState {
+    /**
+     * Constructs a PlayerState
+     */
+    public PlayerState() {
+
+    }
 
     /**
      * Checks if the selection is full, i.e., all three elements are not null.

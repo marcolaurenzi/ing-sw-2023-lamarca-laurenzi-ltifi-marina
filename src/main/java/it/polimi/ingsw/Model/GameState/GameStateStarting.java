@@ -9,7 +9,12 @@ import java.util.ArrayList;
  *This class represents the state of the game when it has not started yet.
  */
 public class GameStateStarting implements GameState {
+    /**
+     * Constructs a GameStateStarting instance.
+     */
+    public GameStateStarting() {
 
+    }
     /**
      * Throws a GameNotStartedException when attempting to move to the next player's turn.
      *

@@ -14,8 +14,19 @@ import static org.junit.Assert.assertTrue;
  * Unit tests for the CommonGoal8 class.
  */
 public class CommonGoal8Test {
+    /**
+     * Class constructor.
+     */
+    public CommonGoal8Test() {
 
+    }
+    /**
+     * CommonGoal8 instance to test.
+     */
     CommonGoal8 commonGoal8 = new CommonGoal8();
+    /**
+     * Bookshelf instance to test.
+     */
     Bookshelf bookshelf;
 
     /**

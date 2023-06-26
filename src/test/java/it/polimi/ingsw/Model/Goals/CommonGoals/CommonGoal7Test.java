@@ -12,6 +12,12 @@ import static org.junit.Assert.*;
  * Unit tests for CommonGoal7 class.
  */
 public class CommonGoal7Test {
+    /**
+     * Class constructor.
+     */
+    public CommonGoal7Test() {
+
+    }
     final CommonGoal goal = new CommonGoal7();
 
     /**

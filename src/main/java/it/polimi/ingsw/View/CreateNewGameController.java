@@ -27,6 +27,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class CreateNewGameController implements ViewController {
     /**
+     * Constructs a CreateNewGameController object.
+     */
+    public CreateNewGameController() {
+    }
+
+    /**
      * The anchor pane of the scene.
      */
     @FXML

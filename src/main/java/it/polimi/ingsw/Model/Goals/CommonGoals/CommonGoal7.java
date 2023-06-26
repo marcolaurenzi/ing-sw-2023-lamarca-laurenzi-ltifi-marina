@@ -11,7 +11,12 @@ import java.util.Set;
  * of five consecutive tiles with no more than three different colors in each row.
  */
 public class CommonGoal7 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal7 object.
+     */
+    public CommonGoal7() {
 
+    }
     /**
      * Checks whether the goal is achieved or not.
      *

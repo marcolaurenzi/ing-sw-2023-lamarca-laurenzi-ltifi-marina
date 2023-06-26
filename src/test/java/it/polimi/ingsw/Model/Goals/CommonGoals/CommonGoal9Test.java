@@ -14,7 +14,19 @@ import static org.junit.Assert.assertTrue;
  * Unit tests for the CommonGoal9 class.
  */
 public class CommonGoal9Test {
+    /**
+     * Class constructor.
+     */
+    public CommonGoal9Test() {
+
+    }
+    /**
+     * CommonGoal9 instance to test.
+     */
     CommonGoal9 commonGoal9 = new CommonGoal9();
+    /**
+     * Bookshelf instance to test.
+     */
     Bookshelf bookshelf;
 
     /**

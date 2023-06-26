@@ -13,6 +13,11 @@ import java.util.List;
  */
 public class CommonGoalDeck implements Deck<CommonGoal> {
     /**
+     * Constructs a CommonGoalDeck object.
+     */
+    public CommonGoalDeck() {
+    }
+    /**
      * Represents the deck of common goals.
      */
     List<CommonGoal> deck;

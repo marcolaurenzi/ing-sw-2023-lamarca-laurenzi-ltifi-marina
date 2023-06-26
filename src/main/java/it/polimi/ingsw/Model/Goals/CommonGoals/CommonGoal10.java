@@ -11,6 +11,12 @@ import java.util.Set;
  * five tiles of the same color forming an X in the Bookshelf.
  */
 public class CommonGoal10 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal10 object.
+     */
+    public CommonGoal10() {
+
+    }
 
     /**
      * Checks whether the goal is achieved or not.

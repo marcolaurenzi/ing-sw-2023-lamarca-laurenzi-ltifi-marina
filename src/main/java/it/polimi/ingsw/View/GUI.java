@@ -23,6 +23,12 @@ import static it.polimi.ingsw.View.LoginController.connectionMode;
  */
 public class GUI implements RemoteUI {
     /**
+     * The gui constructor.
+     */
+    public GUI() {
+
+    }
+    /**
      * The controller of the game.
      */
     private static GamePageController controller;
@@ -79,6 +85,9 @@ public class GUI implements RemoteUI {
      *
      * @throws WrongPasswordException if the entered password is wrong
      * @throws IOException            if there is an I/O error during the process
+     * @throws PlayerOnlineException  if the player is already online
+     * @throws WrongMessageClassEnumException if the message class enum is wrong
+     * @throws InterruptedException if the thread is interrupted
      */
     public static void askForUsername() throws WrongPasswordException, IOException, PlayerOnlineException, WrongMessageClassEnumException, InterruptedException {
         boolean isUsernameAlreadyInUse = false;

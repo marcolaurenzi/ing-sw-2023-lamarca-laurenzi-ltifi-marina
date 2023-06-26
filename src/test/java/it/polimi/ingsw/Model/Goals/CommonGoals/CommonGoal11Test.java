@@ -14,7 +14,18 @@ import static org.junit.Assert.assertTrue;
  * Unit tests for the CommonGoal11 class.
  */
 public class CommonGoal11Test {
+    /**
+     * Class constructor.
+     */
+    public CommonGoal11Test() {
+    }
+    /**
+     * CommonGoal11 instance to test.
+     */
     CommonGoal11 commonGoal11 = new CommonGoal11();
+    /**
+     * Bookshelf instance to test.
+     */
     Bookshelf bookshelf;
 
     /**

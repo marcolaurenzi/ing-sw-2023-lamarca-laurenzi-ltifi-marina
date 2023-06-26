@@ -19,9 +19,17 @@ import java.util.Objects;
  *The ObserverSocket class represents an observer that communicates with the server via socket.
  */
 public class ObserverSocket implements Observer, Serializable {
+    /**
+     *The input stream for receiving data.
+     */
     private final ProxyDataOutputStream dataOutput;
+    /**
+     *The output stream for sending data.
+     */
     private final ProxyDataInputStream dataInput;
-
+    /**
+     *The Gson object for serializing and deserializing objects.
+     */
     private final Gson gson = new Gson();
 
     /**

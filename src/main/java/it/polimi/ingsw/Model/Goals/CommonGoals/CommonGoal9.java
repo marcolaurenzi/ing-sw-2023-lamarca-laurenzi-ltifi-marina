@@ -12,6 +12,15 @@ import java.util.Set;
  * or a different combination of the other line.
  */
 public class CommonGoal9 extends CommonGoal {
+    /**
+     * Constructs a CommonGoal9 object.
+     */
+    public CommonGoal9() {
+
+    }
+    /**
+     * Number of different types required to achieve the goal.
+     */
     private static final int NUM_TYPES_REQUIRED = 5;
 
     /**

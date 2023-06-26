@@ -13,6 +13,12 @@ import java.util.List;
  */
 public class PersonalGoalDeck implements Deck<PersonalGoal> {
     /**
+     * Constructs a PersonalGoalDeck instance.
+     */
+    public PersonalGoalDeck() {
+
+    }
+    /**
      * Represents the deck of personal goals.
      */
     List<PersonalGoal> deck;
