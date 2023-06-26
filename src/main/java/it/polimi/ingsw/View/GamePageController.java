@@ -352,8 +352,8 @@ public class GamePageController implements ViewController{
             ImageView pointsImage0View = new ImageView();
             ImageView pointsImage1View = new ImageView();
 
-            goal0ImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "common_goal_cards" + File.separator + gameStatus.getCommonGoalPointStacksDescriptions()[0]+ ".jpg") );
-            goal1ImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "common_goal_cards" + File.separator + gameStatus.getCommonGoalPointStacksDescriptions()[1]+ ".jpg") );
+            goal0ImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "common_goal_cards" + File.separator + gameStatus.getCommonGoalPointStacksNames()[0]+ ".jpg") );
+            goal1ImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "common_goal_cards" + File.separator + gameStatus.getCommonGoalPointStacksNames()[1]+ ".jpg") );
             goal0ImageView.setFitHeight(104);
             goal1ImageView.setFitHeight(104);
             goal0ImageView.setFitWidth(166);

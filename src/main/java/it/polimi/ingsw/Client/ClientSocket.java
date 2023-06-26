@@ -39,7 +39,7 @@ public class ClientSocket implements Client, RemoteClient {
      */
     public ClientSocket(RemoteUI remoteUI) throws IOException {
         this.remoteUI = remoteUI;
-        socket = new Socket("localhost", 59090);
+        socket = new Socket("172.16.1.146", 59090);
         messageDispatcher = new MessageDispatcher(socket);
         dataInput = new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response);
         dataOutput = new ProxyDataOutputStream(messageDispatcher);
