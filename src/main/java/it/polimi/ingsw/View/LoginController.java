@@ -1,9 +1,6 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
-import it.polimi.ingsw.Model.Exceptions.ConnectionException;
-import it.polimi.ingsw.Model.Exceptions.CreateNewGameException;
-import it.polimi.ingsw.Model.Exceptions.WrongPasswordException;
+import it.polimi.ingsw.Model.Exceptions.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -123,7 +120,7 @@ public class LoginController extends Application implements ViewController {
         } catch (WrongPasswordException e) {
             printError("Username already in use, Wrong password");
         } catch (AlreadyStartedGameException e) {
-            System.out.println("sasasasas");
+            printError("The game has already started");
         } catch (CreateNewGameException e) {
             stage.close();
             FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/CreateNewGamePage.fxml"));
@@ -134,6 +131,12 @@ public class LoginController extends Application implements ViewController {
             stage.setResizable(false);
             stage.show();
             controller.setLayout(newScene);
+        } catch (PlayerOnlineException e) {
+            printError("This username belongs to a player already online");
+        } catch (WrongMessageClassEnumException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -154,7 +157,7 @@ public class LoginController extends Application implements ViewController {
      * @throws WrongPasswordException In case of an incorrect password.
      * @throws IOException            In case of an input/output exception.
      */
-    private void askForUsername() throws WrongPasswordException, IOException {
+    private void askForUsername() throws WrongPasswordException, IOException, PlayerOnlineException, WrongMessageClassEnumException, InterruptedException {
         GUI.askForUsername();
     }
 
@@ -199,6 +202,7 @@ public class LoginController extends Application implements ViewController {
         alert.setContentText(string);
         alert.showAndWait();
     }
+
 
     /**
      * Returns the stage.

@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.UnmarshalException;
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.View.LoginController.connectionMode;
@@ -79,19 +80,13 @@ public class GUI implements RemoteUI {
      * @throws WrongPasswordException if the entered password is wrong
      * @throws IOException            if there is an I/O error during the process
      */
-    public static void askForUsername() throws WrongPasswordException, IOException {
+    public static void askForUsername() throws WrongPasswordException, IOException, PlayerOnlineException, WrongMessageClassEnumException, InterruptedException {
         boolean isUsernameAlreadyInUse = false;
         try {
             client.choosePlayerId(LoginController.getUsername());
             playerId = LoginController.getUsername();
         } catch (PlayerIdAlreadyInUseException e) {
             isUsernameAlreadyInUse = true;
-        } catch (PlayerOnlineException e) {
-            System.out.println("Player is already online");
-        } catch (Exception e) {
-            System.out.println("Exception in GUI ask for username " + e);
-            e.printStackTrace();
-            System.exit(-1);
         }
 
         if (isUsernameAlreadyInUse) {

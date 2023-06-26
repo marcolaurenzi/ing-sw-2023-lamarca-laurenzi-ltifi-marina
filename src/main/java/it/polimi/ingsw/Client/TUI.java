@@ -110,12 +110,12 @@ public class TUI implements RemoteUI, UI {
                     isUsernameAlreadyInUse = false;
                 }
 
+            } catch (PlayerOnlineException e) {
+                System.out.println("Player already online!");
             } catch (Exception e) {
                 System.out.println("Exception in TUI ask for username " + e);
                 e.printStackTrace();
                 System.exit(-1);
-            } catch (PlayerOnlineException e) {
-                System.out.println("Player already online!");
             }
         }
         while (!isPasswordCorrect) {

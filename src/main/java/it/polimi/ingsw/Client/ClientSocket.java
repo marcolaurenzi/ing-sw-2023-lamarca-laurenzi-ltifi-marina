@@ -83,15 +83,18 @@ public class ClientSocket implements Client, RemoteClient {
      * @throws WrongMessageClassEnumException      If the received message class is not valid.
      */
     @Override
-    public void choosePlayerId(String playerId) throws PlayerIdAlreadyInUseException, IOException, InterruptedException, WrongMessageClassEnumException {
+    public void choosePlayerId(String playerId) throws PlayerOnlineException, PlayerIdAlreadyInUseException, IOException, InterruptedException, WrongMessageClassEnumException {
         List<Object> parameters = new ArrayList<>();
         parameters.add(playerId);
 
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.choosePlayerId, parameters, null, null)));
         Message response = gson.fromJson(dataInput.readUTF(), Message.class);
 
-        if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.PlayerIdAlreadyInUseException))
+        if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.PlayerIdAlreadyInUseException)) {
             throw new PlayerIdAlreadyInUseException();
+        } else if(response.getType().equals(MessageTypeEnum.exception) && response.getException().equals(ExceptionEnum.PlayerOnlineException)) {
+            throw new PlayerOnlineException();
+        }
     }
 
     /**
