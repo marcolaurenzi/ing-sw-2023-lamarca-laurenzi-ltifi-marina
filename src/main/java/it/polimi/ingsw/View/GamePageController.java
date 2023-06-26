@@ -32,62 +32,156 @@ import java.util.stream.Stream;
  */
 public class GamePageController implements ViewController{
 
+    /**
+     * The login controller.
+     */
     private final LoginController loginController = new LoginController();
 
+    /**
+     * The username.
+     */
     private static String username;
 
+    /**
+     * The height of the game page.
+     */
     private static double height;
+
+    /**
+     * The width of the game page.
+     */
     private static double width;
+
+    /**
+     * The message label.
+     */
     @FXML
     private Label messageLabel;
+
+    /**
+     * The playerID of player 0.
+     */
     @FXML
     private Label playerId0;
+
+    /**
+     * The playerID of player 1.
+     */
     @FXML
     private Label playerId1;
+
+    /**
+     * The playerID of player 2.
+     */
     @FXML
     private Label playerId2;
+
+    /**
+     * The playerID of player 3.
+     */
     @FXML
     private Label playerId3;
 
+    /**
+     * The points of player 0.
+     */
     @FXML
     private Label points0;
+
+    /**
+     * The points of player 1.
+     */
     @FXML
     private Label points1;
+
+    /**
+     * The points of player 2.
+     */
     @FXML
     private Label points2;
+
+    /**
+     * The points of player 3.
+     */
     @FXML
     private Label points3;
 
+    /**
+     * The Common Goals Grid.
+     */
     @FXML
     private GridPane commonGoalsGridPane;
+
+    /**
+     * The Personal Goals View.
+     */
     @FXML
     private ImageView personalGoalImageView;
+
+    /**
+     * The GUI background.
+     */
     @FXML
     private HBox mainHBox;
 
+    /**
+     * The board grid pane.
+     */
     @FXML
-    private  GridPane boardGridPane;
+    private GridPane boardGridPane;
 
+    /**
+     * The bookshelf grid pane for player 0.
+     */
     @FXML
     private GridPane bookshelfGridPane0;
 
+    /**
+     * The bookshelf grid pane for player 1.
+     */
     @FXML
     private GridPane bookshelfGridPane1;
 
+    /**
+     * The bookshelf grid pane for player 2.
+     */
     @FXML
     private GridPane bookshelfGridPane2;
 
+    /**
+     * The bookshelf grid pane for player 3.
+     */
     @FXML
     private GridPane bookshelfGridPane3;
 
+    /**
+     * The global pick counter.
+     */
     private static int globalPickCounter = 0;
 
+    /**
+     * The current pick dimension.
+     */
     private static int currentPickDimension = 0;
 
+    /**
+     * The turn selection handler.
+     */
     protected static GUITurnSelectionHandler turnSelectionHandler;
+
+    /**
+     * The GUI.
+     */
     private static GUI gui;
+
+    /**
+     * The list of buttons.
+     */
     protected static List<Button> buttons = new ArrayList<>();
 
+    /**
+     * The player that triggered the end of the game.
+     */
     private String endGamePlayer;
 
     /**

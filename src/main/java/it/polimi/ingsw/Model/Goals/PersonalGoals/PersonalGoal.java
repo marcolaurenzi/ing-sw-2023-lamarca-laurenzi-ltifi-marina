@@ -13,6 +13,9 @@ import java.io.Serializable;
  */
 public class PersonalGoal implements Serializable {
     private Bookshelf personalGoal;
+    /**
+     * The number of the personal goal.
+     */
     private int number;
 
     /**

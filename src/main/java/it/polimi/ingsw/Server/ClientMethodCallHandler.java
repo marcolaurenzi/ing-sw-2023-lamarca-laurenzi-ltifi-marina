@@ -16,10 +16,21 @@ import java.util.ArrayList;
  * This class handles the method calls received from the client.
  */
 public class ClientMethodCallHandler extends Thread {
-
+    /**
+     * Represents the message dispatcher to handle the communication with the client.
+     */
     private final MessageDispatcher messageDispatcher;
+    /**
+     * Represents the data input stream to receive messages from the client.
+     */
     private final ProxyDataInputStream dataInput;
+    /**
+     * Represents the data output stream to send messages to the client.
+     */
     private final ProxyDataOutputStream dataOutput;
+    /**
+     * Represents the Gson object to convert Java objects into JSON strings and vice versa.
+     */
     private final Gson gson = new Gson();
 
     /**
