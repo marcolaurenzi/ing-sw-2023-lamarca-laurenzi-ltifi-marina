@@ -78,9 +78,9 @@ public class CommonGoal3Test {
      * @throws IOException if an I/O error occurs while loading the bookshelf.
      */
     @Test
-    @DisplayName("Testing the corner case where there are enough groups, but they are not isolated")
+    @DisplayName("Testing the corner case where there are enough valid groups and they are not isolated")
     public void invalidGroupsTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal3Test.JSON", 3);
-        assertFalse(goal.isAchieved(bookshelf));
+        assertTrue(goal.isAchieved(bookshelf));
     }
 }
