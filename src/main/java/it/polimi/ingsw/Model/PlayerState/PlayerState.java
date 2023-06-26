@@ -20,9 +20,11 @@ public abstract class PlayerState {
      */
     protected Boolean selectionIsFull(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
-        for (int i = 0; i < tilesSelection.size(); i++)
-            if (tilesSelection.get(i) == null)
+        for (Coordinates coordinates : tilesSelection)
+            if (coordinates == null) {
                 ret = false;
+                break;
+            }
 
         return ret;
     }
@@ -169,8 +171,8 @@ public abstract class PlayerState {
     private boolean isAnyTileNull(ArrayList<Coordinates> tilesSelection, Board board) {
         boolean ret = false;
 
-        for (int i = 0; i < tilesSelection.size(); i++) {
-            if (board.getGameBoard().get(tilesSelection.get(i).getY(), tilesSelection.get(i).getX()).getPlacedItem() == null) {
+        for (Coordinates coordinates : tilesSelection) {
+            if (board.getGameBoard().get(coordinates.getY(), coordinates.getX()).getPlacedItem() == null) {
                 ret = true;
                 break;
             }

@@ -9,7 +9,13 @@ import it.polimi.ingsw.Model.TypeEnum;
  * the tiles of one group can be different from those of another group
  */
 public class CommonGoal01 extends CommonGoal {
+    /**
+     * The number of tiles of the same type that must be present in a group.
+     */
     private final int dim;
+    /**
+     * The number of groups that must be present in the bookshelf.
+     */
     private final int numberOfGroups;
 
     public CommonGoal01(int dim, int numberOfGroups) {
@@ -44,7 +50,6 @@ public class CommonGoal01 extends CommonGoal {
     }
 
 
-
     /**
      * Deletes a cluster of elements in the flag matrix recursively starting from the specified position (i, j).
      * <p>
@@ -68,7 +73,6 @@ public class CommonGoal01 extends CommonGoal {
             deleteCluster(flagMatrix, i, j + 1);
         }
     }
-
 
 
     /**
@@ -99,7 +103,6 @@ public class CommonGoal01 extends CommonGoal {
         }
         return counter;
     }
-
 
 
     /**
@@ -165,7 +168,6 @@ public class CommonGoal01 extends CommonGoal {
         }
         return "Error";
     }
-
 
 
 

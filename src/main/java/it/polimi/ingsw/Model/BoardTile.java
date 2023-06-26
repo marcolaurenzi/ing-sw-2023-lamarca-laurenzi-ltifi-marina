@@ -11,7 +11,9 @@ public class BoardTile implements Serializable {
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION
      ************************************************************************************************************ */
-
+    /**
+     * Represents the number of players who have placed their dice on the board tile.
+     */
     private final int numberOfPlayersSign;
     /**
      * Represents the item placed on the tile
