@@ -17,7 +17,15 @@ import static org.junit.Assert.assertTrue;
  * Test unit for the Board class.
  */
 public class BoardTest {
+    /**
+     * Constructor for the BoardTest class.
+     */
+    public BoardTest() {
 
+    }
+    /**
+     * The board used for testing.
+     */
     private Board board;
 
     /**

@@ -19,6 +19,12 @@ import java.util.Scanner;
  * The server class for the game.
  */
 public class Server {
+    /**
+     * Constructs a Server object.
+     */
+    public Server() {
+
+    }
 
     /**
      * The controller instance for managing the game logic.

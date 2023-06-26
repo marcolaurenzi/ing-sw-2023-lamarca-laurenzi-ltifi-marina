@@ -10,6 +10,12 @@ import java.io.Serializable;
  */
 public class Board implements Serializable {
     /**
+     * Constructs a Board object.
+     */
+    public Board() {
+
+    }
+    /**
      * Represents the game board.
      */
     private Matrix<BoardTile> gameBoard;
@@ -228,18 +234,21 @@ public class Board implements Serializable {
     }
     /**
      * Getter method for the gameBoard.
+     * @return the gameBoard
      */
     public Matrix<BoardTile> getGameBoard() {
         return gameBoard;
     }
     /**
      * Getter method for the ItemDeck.
+     * @return the ItemDeck
      */
     public ItemDeck getItemDeck() {
         return itemDeck;
     }
     /**
      * Setter method for the ItemDeck.
+     * @param deck the ItemDeck to be set
      */
     public void setItemDeck(ItemDeck deck) {
         this.itemDeck = deck;

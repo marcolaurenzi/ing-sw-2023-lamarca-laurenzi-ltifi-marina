@@ -15,6 +15,12 @@ import java.util.Scanner;
  * Represents a collection of utility functions.
  */
 public class Utils {
+    /**
+     * Constructor for the Utils class.
+     */
+    public Utils() {
+
+    }
 
     /* ************************************************************************************************************
      *                          START OF ATTRIBUTES DECLARATION

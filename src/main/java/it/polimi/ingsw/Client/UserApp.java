@@ -12,6 +12,12 @@ import java.rmi.NotBoundException;
  */
 public class UserApp {
     /**
+     * Constructs a UserApp object.
+     */
+    public UserApp() {
+
+    }
+    /**
      * The main method of the UserApp class.
      * It initializes the user interface (UI) and starts the application.
      *
