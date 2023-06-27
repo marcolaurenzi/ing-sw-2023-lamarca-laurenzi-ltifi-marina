@@ -38,9 +38,9 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
      */
     public ClientRMI(RemoteUI remoteUI) throws MalformedURLException, NotBoundException, RemoteException {
         this.remoteUI = remoteUI;
-        System.setProperty("java.rmi.server.hostname", IpConfig.ip /*"localhost"*/);
+        System.setProperty("java.rmi.server.hostname", IpConfig.ipClient /*"localhost"*/);
         //qui va l'ip di chi ha solo client
-        controller = (ControllerRemoteInterface) Naming.lookup("rmi://169.254.18.181/controller");
+        controller = (ControllerRemoteInterface) Naming.lookup("rmi://"+IpConfig.ipServer+"/controller");
     }
 
     /**

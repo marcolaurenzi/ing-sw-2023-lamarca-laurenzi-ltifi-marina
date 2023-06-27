@@ -37,9 +37,12 @@ public class App {
     public static void main(String[] args) throws WrongMessageClassEnumException, NotBoundException,
             MaxNumberOfPlayersException, AlreadyStartedGameException, IOException, InterruptedException {
 
-        System.out.println("Welcome to MyShelfie! Type your IP (localhost) address.");
+        System.out.println("Welcome to MyShelfie! Type your own IP address.");      /*localhost*/
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        IpConfig.ip = scanner.nextLine();
+        IpConfig.ipClient = scanner.nextLine();
+
+        System.out.println("Type the Server IP you want to connect to.");      /*localhost*/
+        IpConfig.ipServer = scanner.nextLine();
 
         System.out.println("Welcome to MyShelfie! Please select the UI you want to use.");
         System.out.println("TUI - GUI");
