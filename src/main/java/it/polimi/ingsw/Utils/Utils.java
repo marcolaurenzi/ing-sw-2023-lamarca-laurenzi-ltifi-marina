@@ -28,7 +28,7 @@ public class Utils {
     /**
      * The path of the configuration files.
      */
-    private final static String configurationPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "configurations" + File.separator;
+    private final static String configurationPath = /*"src" + File.separator + "main" + File.separator + "resources" + File.separator + */"configurations" + "/";
     /**
      * The path of the test files.
      */
@@ -36,7 +36,7 @@ public class Utils {
     /**
      * The path of the assets.
      */
-    private final static String assetsPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "assets" + File.separator;
+    private final static String assetsPath = /*"src" + File.separator + "main" + File.separator + "resources" + File.separator + */ "assets" + "/";
 
     /* ************************************************************************************************************
      *                          END OF ATTRIBUTES DECLARATION
@@ -83,9 +83,10 @@ public class Utils {
      * @throws IOException if the file is not found
      */
     public static Board loadBoardFromFile(String filePath) throws IOException {
+        InputStream inputStream = Utils.class.getClassLoader().getResourceAsStream(filePath);
 
         Gson gson = new Gson();
-        String json = new String(Files.readAllBytes(Paths.get(filePath)));
+        String json = new String(inputStream.readAllBytes());
         return gson.fromJson(json, Board.class);
     }
 
@@ -113,14 +114,20 @@ public class Utils {
     public static Bookshelf loadBookshelfFromFile(String filePath, int index) throws IOException {
 
         StringBuilder jsonString = new StringBuilder();
-        try (FileReader reader = new FileReader(filePath)) {
-            int character;
-            while ((character = reader.read()) != -1) {
-                jsonString.append((char) character);
+        InputStream inputStream = Utils.class.getClassLoader().getResourceAsStream(filePath);
+        if (inputStream != null) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                int character;
+                while ((character = reader.read()) != -1) {
+                    jsonString.append((char) character);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            System.out.println("Resource not found: " + filePath);
         }
+
 
         Gson gson = new Gson();
         Bookshelf[] bookshelves = gson.fromJson(jsonString.toString(), Bookshelf[].class);

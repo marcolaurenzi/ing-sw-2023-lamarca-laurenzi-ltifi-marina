@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -217,7 +218,7 @@ public class GamePageController implements ViewController{
      *
      * @param gameStatus the game status to update the UI with
      */
-    protected void uiUpdate(GameStatusToSend gameStatus){
+    protected void uiUpdate(GameStatusToSend gameStatus) {
         turnSelectionHandler = new GUITurnSelectionHandler(this, gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
 
         Platform.runLater(() -> {
@@ -232,8 +233,12 @@ public class GamePageController implements ViewController{
                     Item item = gameStatus.getBoard().getGameBoard().get(i, j).getPlacedItem();
                     if(item != null) {
                         ImageView imageView = new ImageView();
-                        String itemPath = Utils.getAssetsPath() + "itemTiles" + File.separator + item.getType().toString() + item.getNum() + ".png";
-                        imageView.imageProperty().setValue(new Image("file:" + itemPath));
+                        URL itemPath = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + "itemTiles" + /*File.separator*/ "/" + item.getType().toString() + item.getNum() + ".png");
+                        try {
+                            imageView.imageProperty().setValue(new Image(itemPath.openStream()));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                         imageView.setFitHeight(height);
                         imageView.setFitWidth(width);
                         Button button = new Button();
@@ -301,8 +306,12 @@ public class GamePageController implements ViewController{
                             Item item = currentBookshelf.get(i, j);
                             if(item != null) {
                                 ImageView imageView = new ImageView();
-                                String itemPath = Utils.getAssetsPath() + "itemTiles" + File.separator + item.getType().toString() + item.getNum() + ".png";
-                                imageView.imageProperty().setValue(new Image("file:" + itemPath));
+                                URL itemURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + "itemTiles" + "/" + item.getType().toString() + item.getNum() + ".png");
+                                try {
+                                    imageView.imageProperty().setValue(new Image(itemURL.openStream()));
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
                                 imageView.setFitHeight(height);
                                 imageView.setFitWidth(width);
                                 imageView.setPreserveRatio(false);
@@ -327,8 +336,13 @@ public class GamePageController implements ViewController{
                             Item item = currentBookshelf.get(i, j);
                             if(item != null) {
                                 ImageView imageView = new ImageView();
-                                String itemPath = Utils.getAssetsPath() + "itemTiles" + File.separator + item.getType().toString() + item.getNum() + ".png";
-                                imageView.imageProperty().setValue(new Image("file:" + itemPath));
+                                URL itemURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + "itemTiles" + "/" + item.getType().toString() + item.getNum() + ".png");
+
+                                try {
+                                    imageView.imageProperty().setValue(new Image(itemURL.openStream()));
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
                                 imageView.setFitHeight(height);
                                 imageView.setFitWidth(width);
                                 imageView.setPreserveRatio(false);
@@ -358,7 +372,12 @@ public class GamePageController implements ViewController{
                 if(getEndGamePlayer().equals(GUI.getPlayerId())) {
                     System.out.println("Endgame1");
                     ImageView imageView = (ImageView) scene.lookup("#endGame1");
-                    imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
+                    URL imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + /*File.separator*/ "scoring_tokens" + /*File.separator*/ "/" + "end game.jpg");
+                    try {
+                        imageView.setImage(new Image(imageURL.openStream()));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 else {
                     // if the endGamePLayer is not the current player, then all the other players are stored in an arraylist so that
@@ -366,22 +385,33 @@ public class GamePageController implements ViewController{
                     ArrayList<String> players = gameStatus.getPlayers();
                     players.remove(GUI.getPlayerId());
                     int index = players.indexOf(getEndGamePlayer());
-                    switch (index) {
-                        case 0 -> {
-                            System.out.println("Endgame2");
-                            ImageView imageView = (ImageView) scene.lookup("#endGame2");
-                            imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
+
+                    try {
+                        switch (index) {
+                            case 0 -> {
+                                System.out.println("Endgame2");
+                                ImageView imageView = (ImageView) scene.lookup("#endGame2");
+                                URL imageURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + /*File.separator*/  "scoring_tokens" + /*File.separator*/ "/" + "end game.jpg");
+                                imageView.setImage(new Image(imageURL.openStream()));
+
+                            }
+                            case 1 -> {
+                                System.out.println("Endgame3");
+                                ImageView imageView = (ImageView) scene.lookup("#endGame3");
+                                URL imageURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + /*File.separator*/  "scoring_tokens" + /*File.separator*/ "/" + "end game.jpg");
+                                imageView.setImage(new Image(imageURL.openStream()));
+
+                            }
+                            case 2 -> {
+                                System.out.println("Endgame4");
+                                ImageView imageView = (ImageView) scene.lookup("#endGame4");
+                                URL imageURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + /*File.separator*/  "scoring_tokens" + /*File.separator*/ "/" + "end game.jpg");
+                                imageView.setImage(new Image(imageURL.openStream()));
+
+                            }
                         }
-                        case 1 -> {
-                            System.out.println("Endgame3");
-                            ImageView imageView = (ImageView) scene.lookup("#endGame3");
-                            imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
-                        }
-                        case 2 -> {
-                            System.out.println("Endgame4");
-                            ImageView imageView = (ImageView) scene.lookup("#endGame4");
-                            imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "scoring_tokens" + File.separator + "end game.jpg"));
-                        }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }
@@ -390,14 +420,24 @@ public class GamePageController implements ViewController{
             if(GUI.getPlayerId().equals(gameStatus.getPlayers().get(0))) {
                 Scene scene = messageLabel.getScene();
                 ImageView imageView = (ImageView) scene.lookup("#chair1");
-                imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "misc" + File.separator + "firstplayertoken.png"));
+                URL imageURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath() + /*File.separator*/ "misc" + /*File.separator*/ "/" + "firstplayertoken.png");
+                try {
+                    imageView.setImage(new Image(imageURL.openStream()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
             // if the current player is not the first player then the label is the second one
             // as the first player in the list is always stored in the TOP-LEFT bookshelf
             else {
                 Scene scene = messageLabel.getScene();
                 ImageView imageView = (ImageView) scene.lookup("#chair2");
-                imageView.setImage(new Image("file:" + Utils.getAssetsPath() + File.separator + "misc" + File.separator + "firstplayertoken.png"));
+                URL imageURL = GamePageController.class.getClassLoader().getResource(Utils.getAssetsPath()  + /*File.separator*/ "misc" + /*File.separator*/ "/" + "firstplayertoken.png");
+                try {
+                    imageView.setImage(new Image(imageURL.openStream()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             if (isLastTurn() && isYourTurn()) {
@@ -446,7 +486,12 @@ public class GamePageController implements ViewController{
             }
 
             //set up personal goal
-            personalGoalImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "personal_goal_cards" +  File.separator + gameStatus.getPersonalGoal().getPersonalGoalName() + ".png"));
+            URL imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "personal_goal_cards" +  /*File.separator*/ "/" + gameStatus.getPersonalGoal().getPersonalGoalName() + ".png");
+            try {
+                personalGoalImageView.imageProperty().setValue(new Image(imageURL.openStream()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             //set up common goals
             ImageView goal0ImageView = new ImageView();
@@ -454,8 +499,14 @@ public class GamePageController implements ViewController{
             ImageView pointsImage0View = new ImageView();
             ImageView pointsImage1View = new ImageView();
 
-            goal0ImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "common_goal_cards" + File.separator + gameStatus.getCommonGoalPointStacksNames()[0]+ ".jpg") );
-            goal1ImageView.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "common_goal_cards" + File.separator + gameStatus.getCommonGoalPointStacksNames()[1]+ ".jpg") );
+            try {
+            imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "common_goal_cards" + /*File.separator*/ "/" + gameStatus.getCommonGoalPointStacksNames()[0]+ ".jpg");
+            goal0ImageView.imageProperty().setValue(new Image(imageURL.openStream()));
+            imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "common_goal_cards" + /*File.separator*/ "/" + gameStatus.getCommonGoalPointStacksNames()[1]+ ".jpg");
+            goal1ImageView.imageProperty().setValue(new Image(imageURL.openStream()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             goal0ImageView.setFitHeight(104);
             goal1ImageView.setFitHeight(104);
             goal0ImageView.setFitWidth(166);
@@ -463,7 +514,12 @@ public class GamePageController implements ViewController{
 
             // If common goal 0 is not null -> still achievable
             if(gameStatus.getCommonGoalPointStacksTops()[0] != null) {
-                pointsImage0View.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "scoring_tokens" + File.separator + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[0]+ ".jpg") );
+                imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "common_goal_cards" + /*File.separator*/ "/" + gameStatus.getCommonGoalPointStacksNames()[0]+ ".jpg");
+                try {
+                    pointsImage0View.imageProperty().setValue(new Image(imageURL.openStream()) );
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 if(gameStatus.getIsCommonGoalAlreadyAchieved()[0]) {
                     pointsImage0View.setOpacity(0.5);
                 }
@@ -473,7 +529,12 @@ public class GamePageController implements ViewController{
 
             // If common goal 1 is not null -> still achievable
             if(gameStatus.getCommonGoalPointStacksTops()[1] != null) {
-                pointsImage1View.imageProperty().setValue(new Image("file:" + Utils.getAssetsPath() + "scoring_tokens" + File.separator + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[1]+ ".jpg") );
+                imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "scoring_tokens" + /*File.separator*/ "/" + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[1]+ ".jpg");
+                try {
+                    pointsImage1View.imageProperty().setValue(new Image(imageURL.openStream()) );
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 if(gameStatus.getIsCommonGoalAlreadyAchieved()[1]) {
                     pointsImage1View.setOpacity(0.5);
                 }
