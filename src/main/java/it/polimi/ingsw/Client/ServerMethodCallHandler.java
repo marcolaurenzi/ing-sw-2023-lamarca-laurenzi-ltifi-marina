@@ -112,6 +112,8 @@ public class ServerMethodCallHandler extends Thread {
                     case playTurn -> playTurn();
                     case endGame -> endGame((String)received.getParameters().get(0));
                 }
+            } catch (IOException e) {
+                System.out.println("server crashed");
             } catch (Exception e) {
                 System.out.println("Exception catch in ClientHandler" + e);
                 e.printStackTrace();

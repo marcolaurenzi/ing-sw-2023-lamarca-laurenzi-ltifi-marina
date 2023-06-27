@@ -64,7 +64,7 @@ public class ClientSocket implements Client, RemoteClient {
      */
     public ClientSocket(RemoteUI remoteUI) throws IOException {
         this.remoteUI = remoteUI;
-        socket = new Socket(/*"172.16.1.146"*/ "172.21.112.1", 59090);
+        socket = new Socket(/*"172.16.1.146"*/ "localhost", 59090);
         messageDispatcher = new MessageDispatcher(socket);
         dataInput = new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response);
         dataOutput = new ProxyDataOutputStream(messageDispatcher);
@@ -216,6 +216,7 @@ public class ClientSocket implements Client, RemoteClient {
                 case TilesSelectionSizeDifferentFromOrderLengthException -> throw new TilesSelectionSizeDifferentFromOrderLengthException();
                 case VoidBoardTileException -> throw new VoidBoardTileException();
                 case WrongConfigurationException -> throw new WrongConfigurationException();
+                case DisconnectedPlayerException -> throw new IOException();
             }
         }
     }
