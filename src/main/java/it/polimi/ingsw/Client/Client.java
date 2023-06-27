@@ -103,4 +103,6 @@ public interface Client {
      * @throws PlayerIdAlreadyInUseException     if the player ID is already in use
      */
     void choosePassword(String playerId, String password) throws IOException, InterruptedException, WrongMessageClassEnumException, PlayerIdAlreadyInUseException;
+
+    void ping() throws RemoteException;
 }

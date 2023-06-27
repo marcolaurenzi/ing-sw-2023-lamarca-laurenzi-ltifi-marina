@@ -71,7 +71,6 @@ public class MessageDispatcher extends Thread {
         while (connected) {
             try {
                 String message = inputStream.readUTF();
-                System.out.println(message);
                 if (gson.fromJson(message, Message.class).getType().equals(MessageTypeEnum.methodCall))
                     methodCallsQueue.put(message);
                 else

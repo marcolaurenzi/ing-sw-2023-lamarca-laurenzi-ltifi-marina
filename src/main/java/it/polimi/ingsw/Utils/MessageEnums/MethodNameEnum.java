@@ -50,6 +50,7 @@ public enum MethodNameEnum {
      */
     checkPassword,
 
+    ping,
     /**
      * Method name for picking and inserting a dice in the bookshelf.
      */

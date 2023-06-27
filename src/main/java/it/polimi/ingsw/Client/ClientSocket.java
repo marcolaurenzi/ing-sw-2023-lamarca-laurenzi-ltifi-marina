@@ -64,7 +64,7 @@ public class ClientSocket implements Client, RemoteClient {
      */
     public ClientSocket(RemoteUI remoteUI) throws IOException {
         this.remoteUI = remoteUI;
-        socket = new Socket("169.254.18.181" /*"localhost"*/, 59090);
+        socket = new Socket("localhost" /*"localhost"*/, 59090);
         messageDispatcher = new MessageDispatcher(socket);
         dataInput = new ProxyDataInputStream(messageDispatcher, MessageClassEnum.response);
         dataOutput = new ProxyDataOutputStream(messageDispatcher);
@@ -175,6 +175,16 @@ public class ClientSocket implements Client, RemoteClient {
         List<Object> parameters = new ArrayList<>();
         parameters.add(playerId);
         dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters, null, null)));
+    }
+
+    @Override
+    public void ping() throws RemoteException {
+        List<Object> parameters = new ArrayList<>();
+        try {
+            dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.ping, parameters, null, null)));
+        } catch (IOException e) {
+            System.out.println("Server crashed :( please restart your client and login using the same username and password");
+        }
     }
 
     /**

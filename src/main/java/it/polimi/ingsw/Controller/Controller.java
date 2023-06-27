@@ -348,6 +348,9 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             System.exit(-1);
         }
     }
+    public void ping() throws RemoteException {
+        //do nothing
+    }
 
     /**
      * Assigns the turn to the current player in the specified game.

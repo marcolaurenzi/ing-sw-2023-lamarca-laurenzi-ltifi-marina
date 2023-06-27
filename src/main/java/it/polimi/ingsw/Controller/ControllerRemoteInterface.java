@@ -97,4 +97,6 @@ public interface ControllerRemoteInterface extends Remote {
          * @throws PlayerIdAlreadyInUseException          If the player ID is already in use.
          */
         void choosePassword(String playerId, String password) throws RemoteException, PlayerIdAlreadyInUseException;
+
+        void ping() throws RemoteException;
 }

@@ -106,7 +106,6 @@ public class ServerMethodCallHandler extends Thread {
         while(true) {
             try {
                 Message received = gson.fromJson(dataInput.readUTF(), Message.class);
-                System.out.println(received);
                 switch (received.getMethod()) {
                     case update -> update(received.getGameStatusParam());
                     case playTurn -> playTurn();

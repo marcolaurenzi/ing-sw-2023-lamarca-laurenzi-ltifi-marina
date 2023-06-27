@@ -32,7 +32,7 @@ public class TUI implements RemoteUI, UI {
     /**
      * The client.
      */
-    private Client client;
+    protected Client client;
     /**
      * The player ID.
      */
@@ -80,6 +80,8 @@ public class TUI implements RemoteUI, UI {
         }
 
         System.out.println("Connection to server: SUCCESSFUL");
+        PingingTUI pingingTUI = new PingingTUI(this);
+        pingingTUI.start();
     }
 
     /**

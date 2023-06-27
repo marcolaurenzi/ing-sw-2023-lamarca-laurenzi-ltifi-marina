@@ -150,6 +150,9 @@ public class ClientMethodCallHandler extends Thread {
             dataOutput.writeUTF(gson.toJson(toSend));
         }
     }
+    private void ping() throws IOException {
+        Server.controller.ping();
+    }
 
     /**
      * Handles the method call to pick and insert tiles in the bookshelf.
@@ -230,6 +233,7 @@ public class ClientMethodCallHandler extends Thread {
                     }
                     case choosePassword -> choosePassword((String) received.getParameters().get(0), (String) received.getParameters().get(1));
                     case checkPassword -> checkPassword((String) received.getParameters().get(0), (String) received.getParameters().get(1));
+                    case ping -> ping();
                 }
             } catch (Exception e) {
                 System.out.println("Exception caught in ClientHandler: " + e);

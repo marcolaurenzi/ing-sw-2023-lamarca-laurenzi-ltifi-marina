@@ -165,6 +165,10 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
         remoteUI.endGame(winnerPlayer);
     }
 
+    public void ping() throws RemoteException {
+        controller.ping();
+    }
+
     /**
      * Checks the password for a player.
      *
