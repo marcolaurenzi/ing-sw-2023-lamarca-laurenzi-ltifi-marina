@@ -6,7 +6,6 @@ import it.polimi.ingsw.Utils.Utils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -23,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
@@ -178,7 +174,7 @@ public class GamePageController implements ViewController{
     /**
      * The GUI.
      */
-    private static GUI gui;
+    private Stage currentStage;
 
     /**
      * The list of buttons.
@@ -489,6 +485,7 @@ public class GamePageController implements ViewController{
             commonGoalsGridPane.add(pointsImage1View, 1, 1);
 
             Stage stage = (Stage) boardGridPane.getScene().getWindow();
+            currentStage = stage;
             stage.show();
         });
     }
@@ -556,11 +553,12 @@ public class GamePageController implements ViewController{
                 throw new RuntimeException(e);
             }
             EndGameController endGameController = loader.getController();
-            Stage stage = new  Stage();
-            stage.setScene(newScene);
-            stage.setResizable(false);
+            currentStage.close();
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
             endGameController.endGame(winner);
-            stage.show();
+            newStage.show();
         });
 
     }
