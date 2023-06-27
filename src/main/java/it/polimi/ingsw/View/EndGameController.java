@@ -1,20 +1,25 @@
 package it.polimi.ingsw.View;
 
-import javafx.application.Platform;
+import it.polimi.ingsw.Controller.Observer;
+import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Utils.GameStatusToSend;
+import it.polimi.ingsw.Utils.Utils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.File;
+import java.util.*;
 
 /**
  * Controller class for the end game screen.
  */
 public class EndGameController {
+
+    private Stage currentStage;
+
     /**
      * Constructs an EndGameController object.
      */
@@ -48,5 +53,10 @@ public class EndGameController {
      */
     public void printWinner(String winnerPlayer) {
         winnerLabel.setText("The winner is " + winnerPlayer);
+        winnerLabel.setFont(javafx.scene.text.Font.font("Verdana", 20));
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
     }
 }

@@ -187,6 +187,11 @@ public class GamePageController implements ViewController{
     private String endGamePlayer;
 
     /**
+     * The game status to send.
+     */
+    private GameStatusToSend gameStatusToSend;
+
+    /**
      * Initializes the game page view.
      */
     public void initialize() {
@@ -215,7 +220,7 @@ public class GamePageController implements ViewController{
      */
     protected void uiUpdate(GameStatusToSend gameStatus){
         turnSelectionHandler = new GUITurnSelectionHandler(this, gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
-
+        setGameStatusToSend(gameStatus);
         Platform.runLater(() -> {
             // First, clear all previous children
             boardGridPane.getChildren().clear();
@@ -490,6 +495,10 @@ public class GamePageController implements ViewController{
         });
     }
 
+    private void setGameStatusToSend(GameStatusToSend gameStatus) {
+        this.gameStatusToSend = gameStatus;
+    }
+
     /**
      * Enables the bookshelf buttons.
      */
@@ -546,7 +555,7 @@ public class GamePageController implements ViewController{
         Platform.runLater(() -> {
             System.out.println("Last turn");
             FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/EndGamePage.fxml"));
-            Scene newScene = null;
+            Scene newScene;
             try {
                 newScene = new Scene(loader.load());
             } catch (IOException e) {
@@ -557,6 +566,7 @@ public class GamePageController implements ViewController{
             Stage newStage = new Stage();
             newStage.setScene(newScene);
             newStage.setResizable(false);
+            endGameController.setCurrentStage(newStage);
             endGameController.endGame(winner);
             newStage.show();
         });

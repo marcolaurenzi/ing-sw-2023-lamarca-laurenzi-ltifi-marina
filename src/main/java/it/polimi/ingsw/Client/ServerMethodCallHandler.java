@@ -2,11 +2,14 @@ package it.polimi.ingsw.Client;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Model.Exceptions.*;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 
 import java.io.IOException;
+import java.util.List;
+
 /**
  *The ServerMethodCallHandler class represents a handler for a method call from the server.
  */
