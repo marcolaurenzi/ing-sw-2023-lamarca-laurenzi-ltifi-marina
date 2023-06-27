@@ -59,7 +59,7 @@ public class Server {
      * @throws AlreadyBoundException if the registry is already bound to the specified name
      */
     public static void main(String[] args) throws IOException, AlreadyBoundException {
-        System.setProperty("java.rmi.server.hostname", /*"172.16.1.146"*/ "localhost");
+        System.setProperty("java.rmi.server.hostname", /*"172.16.1.146"*/ "172.21.112.1");
         Scanner scanner = new Scanner(System.in);
 
         controller = new Controller();
