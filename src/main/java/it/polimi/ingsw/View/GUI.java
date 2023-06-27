@@ -7,6 +7,7 @@ import it.polimi.ingsw.Client.RemoteUI;
 import it.polimi.ingsw.Controller.Controller;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import javafx.scene.control.TextField;
 
@@ -15,6 +16,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.UnmarshalException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static it.polimi.ingsw.View.LoginController.connectionMode;
 
@@ -165,7 +167,11 @@ public class GUI implements RemoteUI {
         for (int i = 0; i < tilesSelection.size(); i++) {
             order[i] = i;
         }
-        client.pickAndInsertInBookshelf(tilesSelection, turnSelectionHandler.getColumn(), order, playerId);
+        try {
+            client.pickAndInsertInBookshelf(tilesSelection, turnSelectionHandler.getColumn(), order, playerId);
+        } catch (IOException e) {
+            System.out.println("server crashed");
+        }
     }
 
     /**

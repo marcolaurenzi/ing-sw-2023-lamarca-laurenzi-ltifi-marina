@@ -413,6 +413,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     public static void sendWinnerInfo(int gameId) throws IOException, WrongMessageClassEnumException, InterruptedException {
         String winnerPlayer = null;
         int tempMaxPoints = 0;
+
         for(Player player : games.get(gameId).getPlayers()){
             if(listConnected.get(player.getPlayerID())) {
                 if (player.getTotalPoints() > tempMaxPoints) {

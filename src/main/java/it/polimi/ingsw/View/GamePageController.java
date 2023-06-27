@@ -6,7 +6,6 @@ import it.polimi.ingsw.Utils.Utils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -24,8 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
@@ -179,7 +175,7 @@ public class GamePageController implements ViewController{
     /**
      * The GUI.
      */
-    private static GUI gui;
+    private Stage currentStage;
 
     /**
      * The list of buttons.
@@ -190,6 +186,11 @@ public class GamePageController implements ViewController{
      * The player that triggered the end of the game.
      */
     private String endGamePlayer;
+
+    /**
+     * The game status to send.
+     */
+    private GameStatusToSend gameStatusToSend;
 
     /**
      * Initializes the game page view.
@@ -220,7 +221,7 @@ public class GamePageController implements ViewController{
      */
     protected void uiUpdate(GameStatusToSend gameStatus) {
         turnSelectionHandler = new GUITurnSelectionHandler(this, gameStatus.getBoard(), boardGridPane, gameStatus.getBookshelf(gameStatus.getPlayers().indexOf(GUI.getPlayerId())));
-
+        setGameStatusToSend(gameStatus);
         Platform.runLater(() -> {
             // First, clear all previous children
             boardGridPane.getChildren().clear();
@@ -550,8 +551,13 @@ public class GamePageController implements ViewController{
             commonGoalsGridPane.add(pointsImage1View, 1, 1);
 
             Stage stage = (Stage) boardGridPane.getScene().getWindow();
+            currentStage = stage;
             stage.show();
         });
+    }
+
+    private void setGameStatusToSend(GameStatusToSend gameStatus) {
+        this.gameStatusToSend = gameStatus;
     }
 
     /**
@@ -610,18 +616,20 @@ public class GamePageController implements ViewController{
         Platform.runLater(() -> {
             System.out.println("Last turn");
             FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/EndGamePage.fxml"));
-            Scene newScene = null;
+            Scene newScene;
             try {
                 newScene = new Scene(loader.load());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             EndGameController endGameController = loader.getController();
-            Stage stage = new  Stage();
-            stage.setScene(newScene);
-            stage.setResizable(false);
+            currentStage.close();
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            endGameController.setCurrentStage(newStage);
             endGameController.endGame(winner);
-            stage.show();
+            newStage.show();
         });
 
     }

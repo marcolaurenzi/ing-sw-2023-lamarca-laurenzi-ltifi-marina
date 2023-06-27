@@ -2,10 +2,13 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Model.Exceptions.DisconnectedPlayerException;
 import it.polimi.ingsw.Model.Exceptions.WrongMessageClassEnumException;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
+
 /**
  *The Observer interface represents an observer in the game.
  */

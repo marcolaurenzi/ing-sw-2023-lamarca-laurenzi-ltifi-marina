@@ -2,6 +2,7 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Client.RemoteClient;
 import it.polimi.ingsw.Model.Exceptions.*;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 
 import java.io.EOFException;
@@ -9,6 +10,8 @@ import java.io.IOException;
 import java.rmi.ConnectException;
 import java.rmi.RemoteException;
 import java.rmi.UnmarshalException;
+import java.util.List;
+
 /**
  *The ObserverRMI class represents an observer in the game.
  */
