@@ -252,11 +252,12 @@ public class GUITurnSelectionHandler {
      * @return true if the tile is a middletile, false otherwise
      */
     public boolean select(int i, int j, ImageView imageView, Button button) {
+        ArrayList<Coordinates> prevSelection = new ArrayList<>(selection);
         // is selectable
         if(!selection.contains(new Coordinates(j, i)) && selection.size() < 3 && (isAdjacentToOthers(i , j) || selectionNotAdjacent(i, j)) && !isTileEmpty(i , j) && hasTileOneSideFree(i , j)) {
             GamePageController.incrementGlobalPickCounter();
             GamePageController.incrementCurrentPickDimension();
-            pickLabelSetUp(button, imageView);
+            //pickLabelSetUp(button, imageView);
             if(middletile && selection.size() == 2) {
                 if(Math.abs(selection.get(0).getX() + selection.get(1).getX() - j * 2) == 0 && Math.abs(selection.get(0).getY() + selection.get(1).getY() - i * 2) == 0) {
                     selection.add(new Coordinates(j, i));
@@ -270,8 +271,10 @@ public class GUITurnSelectionHandler {
                             stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                         });
                     });
+                    updateLittleNumbers(selection, prevSelection);
                     return middletile;
                 }
+                updateLittleNumbers(selection, prevSelection);
                 return middletile;
             } else {
                 if(selectionNotAdjacent(i, j)) {
@@ -289,6 +292,7 @@ public class GUITurnSelectionHandler {
                 });
             }
         }
+        updateLittleNumbers(selection, prevSelection);
         return middletile;
     }
 
@@ -302,9 +306,11 @@ public class GUITurnSelectionHandler {
      * @return true if the tile is a middletile, false otherwise
      */
     public boolean deselect(int i, int j, ImageView imageView, Button button) {
+        ArrayList<Coordinates> prevSelection = new ArrayList<>(selection);
+
         GamePageController.decrementGlobalPickCounter();
         GamePageController.decrementCurrentPickDimension();
-        pickLabelClear(button);
+        //pickLabelClear(button);
         if (selection.size() >= 3) {
             boolean toRemove = false;
             ArrayList<Coordinates> tempSelection = new ArrayList<>(selection);
@@ -335,7 +341,55 @@ public class GUITurnSelectionHandler {
                 });
             });
         }
+
+        updateLittleNumbers(selection, prevSelection);
         return middletile;
+    }
+
+    private void updateLittleNumbers(ArrayList<Coordinates> currSelection, ArrayList<Coordinates> prevSelection) {
+        //case of deselection
+            //remove all little numbers from prev selection
+        for (Coordinates c: prevSelection) {
+            Button button = (Button) controller.getBoardGridPane().lookup("#button" + c.getY() + c.getX());
+            removeLittleNumberFromButton(button);
+        }
+
+        //add the little button to the currSelection
+        for(Coordinates c: currSelection) {
+            Button button = (Button) controller.getBoardGridPane().lookup("#button" + c.getY() + c.getX());
+            putLittleNumberOnButton(button, currSelection.indexOf(c) + 1);
+        }
+    }
+
+    private void removeLittleNumberFromButton (Button button) {
+        StackPane stackPane = (StackPane) button.getGraphic();
+
+        for(Node n : stackPane.getChildren()) {
+            if(n instanceof Label) {
+                ((Label) n).setText("");
+            }
+        }
+    }
+
+    private void putLittleNumberOnButton (Button button, int val){
+        Node n = button.getGraphic();
+        if(n instanceof ImageView) {
+            ImageView imageView = (ImageView) button.getGraphic();
+            Label label = new Label(String.valueOf(val));
+            label.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
+            label.setAlignment(Pos.TOP_RIGHT);
+            label.setPrefSize(GamePageController.getWidth(), GamePageController.getHeight());
+            label.setMouseTransparent(true);
+            StackPane stackPane = new StackPane(imageView, label);
+            button.setGraphic(stackPane);
+        } else {
+            StackPane stackPane = (StackPane) button.getGraphic();
+            for(Node e : stackPane.getChildren()) {
+                if(e instanceof Label) {
+                    ((Label) e).setText(String.valueOf(val));
+                }
+            }
+        }
     }
 
     /**
@@ -344,7 +398,7 @@ public class GUITurnSelectionHandler {
      * @param button the button to set up the pick label on
      * @param imageView the ImageView associated with the button
      */
-    public void pickLabelSetUp(Button button, ImageView imageView) {
+    /*public void pickLabelSetUp(Button button, ImageView imageView) {
         Label label = new Label(String.valueOf(GamePageController.getGlobalPickCounter()));
         label.setStyle("-fx-text-fill: black; -fx-font-weight: bold;");
         label.setAlignment(Pos.TOP_RIGHT);
@@ -352,14 +406,14 @@ public class GUITurnSelectionHandler {
         label.setMouseTransparent(true);
         StackPane stackPane = new StackPane(imageView, label);
         button.setGraphic(stackPane);
-    }
+    }*/
 
     /**
      * Clears the pick label on the specified button.
      *
      * @param button the button to clear the pick label from
      */
-    public void pickLabelClear(Button button) {
+    /*public void pickLabelClear(Button button) {
         StackPane stackPane = (StackPane) button.getGraphic();
 
         int x = 0;
@@ -389,5 +443,5 @@ public class GUITurnSelectionHandler {
                 }
             }
         }
-    }
+    }*/
 }
