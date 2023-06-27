@@ -48,6 +48,7 @@ public class App {
         System.out.println("TUI - GUI");
         //Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String ui = scanner.nextLine();
+
         boolean started = false;
         while (!started) {
             if (ui.equals("TUI") || ui.equals("tui") || ui.equals("Tui")) {

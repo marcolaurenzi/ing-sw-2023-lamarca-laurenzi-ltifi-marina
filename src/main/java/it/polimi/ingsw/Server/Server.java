@@ -9,6 +9,7 @@ import java.rmi.*;
 import java.rmi.registry.*;
 
 import it.polimi.ingsw.Controller.Controller;
+import it.polimi.ingsw.Utils.IpConfig;
 import it.polimi.ingsw.Utils.MessageDispatcher;
 
 import java.io.IOException;
@@ -59,8 +60,13 @@ public class Server {
      * @throws AlreadyBoundException if the registry is already bound to the specified name
      */
     public static void main(String[] args) throws IOException, AlreadyBoundException {
-        System.setProperty("java.rmi.server.hostname", "169.254.18.181" /*"localhost" */);
+
         Scanner scanner = new Scanner(System.in);
+        System.out.print("IP address of the host: (localhost for local debugging): ");
+        String userInput = scanner.nextLine();
+        IpConfig.ipServer= userInput;
+
+        System.setProperty("java.rmi.server.hostname", IpConfig.ipServer /*"localhost" */);
 
         controller = new Controller();
 

@@ -41,6 +41,7 @@ public class ObserverRMI implements Observer {
         try {
             client.update(game);
         } catch (ConnectException e) {
+            e.printStackTrace();
             throw new DisconnectedPlayerException();
         } catch (IOException e) {
             throw new RuntimeException(e);
