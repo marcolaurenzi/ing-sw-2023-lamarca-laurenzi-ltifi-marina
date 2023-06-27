@@ -12,6 +12,12 @@ import java.util.ArrayList;
  * This state represents the state of a player that is waiting for their turn.
  */
 public class PlayerStateWaiting extends PlayerState {
+    /**
+     * Constructs a PlayerStateWaiting object.
+     */
+    public PlayerStateWaiting() {
+        super();
+    }
 
     /**
      * Throws a PlayerIsWaitingException indicating that the player cannot pick and insert tiles into the bookshelf in the waiting state.

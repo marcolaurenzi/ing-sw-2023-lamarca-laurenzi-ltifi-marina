@@ -12,6 +12,9 @@ import static org.junit.Assert.*;
  * Unit tests for the CommonGoal01 class for goal 0.
  */
 public class CommonGoal0Test {
+    /**
+     * Constructor for the CommonGoal0Test class.
+     */
     public CommonGoal0Test() {
     }
     final CommonGoal goal = new CommonGoal01(2, 6);

@@ -19,6 +19,12 @@ import java.util.Scanner;
  * The server class for the game.
  */
 public class Server {
+    /**
+     * Constructs a Server object.
+     */
+    public Server() {
+
+    }
 
     /**
      * The controller instance for managing the game logic.
@@ -53,7 +59,7 @@ public class Server {
      * @throws AlreadyBoundException if the registry is already bound to the specified name
      */
     public static void main(String[] args) throws IOException, AlreadyBoundException {
-        System.setProperty("java.rmi.server.hostname", "172.16.1.146");
+        System.setProperty("java.rmi.server.hostname", /*"172.16.1.146"*/ "localhost");
         Scanner scanner = new Scanner(System.in);
 
         controller = new Controller();

@@ -19,6 +19,10 @@ public class CommonGoal01 extends CommonGoal {
     private final int numberOfGroups;
     /**
      * Constructor for common goals 0 and 1.
+     * @param dim The number of tiles of the same type that must be present in a group.
+     *            Must be greater than 0.
+     * @param numberOfGroups The number of groups that must be present in the bookshelf.
+     *
      */
     public CommonGoal01(int dim, int numberOfGroups) {
         this.dim = dim;

@@ -15,6 +15,12 @@ import java.util.Scanner;
  * The main class that serves as the entry point for the application.
  */
 public class App {
+    /**
+     * Constructs an App object.
+     */
+    public App() {
+
+    }
 
     /**
      * The main method of the application.

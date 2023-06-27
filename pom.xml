@@ -59,6 +59,7 @@
       <artifactId>javafx-fxml</artifactId>
       <version>19</version>
     </dependency>
+
     <dependency>
       <groupId>org.controlsfx</groupId>
       <artifactId>controlsfx</artifactId>
@@ -70,43 +71,6 @@
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (maybe moved to parent pom) -->
       <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-shade-plugin</artifactId>
-          <version>3.2.4</version>
-          <executions>
-            <execution>
-              <id>server-jar</id>
-              <phase>package</phase>
-              <goals>
-                <goal>shade</goal>
-              </goals>
-              <configuration>
-                <transformers>
-                  <transformer implementation=
-                                       "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                    <mainClass>it.polimi.ingsw.Server.Server</mainClass>
-                  </transformer>
-                </transformers>
-              </configuration>
-            </execution>
-            <execution>
-              <id>MyShelfie-jar</id>
-              <phase>package</phase>
-              <goals>
-                <goal>shade</goal>
-              </goals>
-              <configuration>
-                <transformers>
-                  <transformer implementation=
-                                       "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                    <mainClass>it.polimi.ingsw.App</mainClass>
-                  </transformer>
-                </transformers>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -146,7 +110,52 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.4.2</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.4</version>
+          <executions>
+            <execution>
+              <id>server-jar</id>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <outputFile>${project.basedir}/deliverables/jar/Server.jar</outputFile>
+                <transformers>
+                  <transformer implementation=
+                                       "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>it.polimi.ingsw.Server.Server</mainClass>
+                  </transformer>
+                </transformers>
+              </configuration>
+            </execution>
+            <execution>
+              <id>MyShelfie-jar</id>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <outputFile>${project.basedir}/deliverables/jar/Client.jar</outputFile>
+                <transformers>
+                  <transformer implementation=
+                                       "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>it.polimi.ingsw.App</mainClass>
+                  </transformer>
+                </transformers>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 </project>

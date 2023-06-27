@@ -12,6 +12,9 @@ import java.io.Serializable;
  * to initialize and evaluate personal goals for a player.
  */
 public class PersonalGoal implements Serializable {
+    /**
+     * The personal goal bookshelf.
+     */
     private Bookshelf personalGoal;
     /**
      * The number of the personal goal.

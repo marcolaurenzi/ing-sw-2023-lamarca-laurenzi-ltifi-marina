@@ -43,10 +43,10 @@ public class CommonGoal8 extends CommonGoal {
 
         for (int i = 0; i < bookshelf.getRowDimension(); i++) {
             for (int j = 0; j < bookshelf.getColumnDimension(); j++) {
-                if (bookshelf.get(i, j) == null) {
+                if (bookshelf.get(j, i) == null) {
                     break; // No point in checking that column, a full column of different types is needed
                 } else {
-                    typesFound.add(bookshelf.get(i, j).getType());
+                    typesFound.add(bookshelf.get(j, i).getType());
                 }
             }
             if (typesFound.size() == 6) {
