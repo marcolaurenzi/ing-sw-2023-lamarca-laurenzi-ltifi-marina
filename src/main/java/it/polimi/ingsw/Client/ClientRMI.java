@@ -1,11 +1,11 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Controller.ControllerRemoteInterface;
-import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Controller.ObserverRMI;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatusToSend;
+import it.polimi.ingsw.Utils.IpConfig;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -38,7 +38,9 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
      */
     public ClientRMI(RemoteUI remoteUI) throws MalformedURLException, NotBoundException, RemoteException {
         this.remoteUI = remoteUI;
-        controller = (ControllerRemoteInterface) Naming.lookup("rmi://172.16.1.148/controller");
+        System.setProperty("java.rmi.server.hostname", IpConfig.ip /*"localhost"*/);
+        //qui va l'ip di chi ha solo client
+        controller = (ControllerRemoteInterface) Naming.lookup("rmi://169.254.18.181/controller");
     }
 
     /**

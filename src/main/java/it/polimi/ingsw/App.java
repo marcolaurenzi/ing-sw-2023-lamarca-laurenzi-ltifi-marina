@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.Utils.IpConfig;
 import it.polimi.ingsw.Client.TUI;
 import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
 import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
@@ -36,9 +37,13 @@ public class App {
     public static void main(String[] args) throws WrongMessageClassEnumException, NotBoundException,
             MaxNumberOfPlayersException, AlreadyStartedGameException, IOException, InterruptedException {
 
+        System.out.println("Welcome to MyShelfie! Type your IP (localhost) address.");
+        Scanner scanner = new Scanner(new InputStreamReader(System.in));
+        IpConfig.ip = scanner.nextLine();
+
         System.out.println("Welcome to MyShelfie! Please select the UI you want to use.");
         System.out.println("TUI - GUI");
-        Scanner scanner = new Scanner(new InputStreamReader(System.in));
+        //Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String ui = scanner.nextLine();
         boolean started = false;
         while (!started) {
