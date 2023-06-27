@@ -515,7 +515,7 @@ public class GamePageController implements ViewController{
 
             // If common goal 0 is not null -> still achievable
             if(gameStatus.getCommonGoalPointStacksTops()[0] != null) {
-                imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "common_goal_cards" + /*File.separator*/ "/" + gameStatus.getCommonGoalPointStacksNames()[0]+ ".jpg");
+                imageURL = GamePageController.class.getClassLoader().getResource( Utils.getAssetsPath() + "scoring_tokens" + /*File.separator*/ "/" + "scoring_" + gameStatus.getCommonGoalPointStacksTops()[0]+ ".jpg");
                 try {
                     pointsImage0View.imageProperty().setValue(new Image(imageURL.openStream()) );
                 } catch (IOException e) {
