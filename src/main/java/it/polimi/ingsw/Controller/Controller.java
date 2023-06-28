@@ -97,7 +97,8 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         listConnected = new HashMap<>();
         currentGame = null;
 
-        try {
+
+            /*
             Path path = Paths.get("SavedGames");
             if (Files.exists(path)) {
                 DirectoryStream<Path> dirStream = Files.newDirectoryStream(path);
@@ -146,19 +147,12 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                             System.out.println("Corrupted file, game files are lost");
                         }
                     }
-                }
+                } */
 
-            } else {
-                currentGameId = 0;
-                alreadyUsedPlayerIds = new HashMap<>();
-                listCredentials = new HashMap<>();
-            }
+        currentGameId = 0;
+        alreadyUsedPlayerIds = new HashMap<>();
+        listCredentials = new HashMap<>();
 
-        } catch (Exception e) {
-            System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
-            e.printStackTrace();
-            System.exit(-1);
-        }
 
     }
 
