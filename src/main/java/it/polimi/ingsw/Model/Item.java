@@ -12,6 +12,7 @@ public class Item implements Serializable {
     /**
      * Represents the type of the item.
      */
+
     private final TypeEnum type;
     /**
      * Represents the number associated with the item.

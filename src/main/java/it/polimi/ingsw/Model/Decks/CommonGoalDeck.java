@@ -15,6 +15,7 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
     /**
      * Constructs a CommonGoalDeck object.
      */
+
     public CommonGoalDeck() {
     }
     /**

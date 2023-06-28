@@ -38,6 +38,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     /**
      * Gson object used for json serialization and deserialization.
      */
+
     private static final Gson gson = new Gson();
 
     /**

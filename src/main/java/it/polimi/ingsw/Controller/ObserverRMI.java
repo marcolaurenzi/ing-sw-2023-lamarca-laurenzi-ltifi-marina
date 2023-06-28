@@ -19,6 +19,7 @@ public class ObserverRMI implements Observer {
     /**
      *The Remote Client for the observer.
      */
+
     private RemoteClient client;
 
     /**

@@ -11,6 +11,7 @@ public class Matrix<T> implements Serializable {
     /**
      * Represents a matrix.
      */
+
     private final T[][] matrix;
     /**
      * Represents the number of rows in the matrix.

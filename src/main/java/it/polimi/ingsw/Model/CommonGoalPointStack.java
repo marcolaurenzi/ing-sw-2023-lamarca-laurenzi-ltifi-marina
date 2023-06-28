@@ -14,6 +14,7 @@ public class CommonGoalPointStack implements Serializable {
     /**
      * Represents the stack of Common Goal Points.
      */
+
     private final Stack<Integer> pointStack;
     /**
      * Represents the number of points at the top of the stack.

@@ -19,6 +19,7 @@ public interface ControllerRemoteInterface extends Remote {
          * @throws PlayerIdAlreadyInUseException       If the player ID is already in use.
          * @throws PlayerOnlineException               If the player is already online.
          */
+
         void choosePlayerId(String playerId) throws RemoteException, PlayerIdAlreadyInUseException, PlayerOnlineException;
 
         /**

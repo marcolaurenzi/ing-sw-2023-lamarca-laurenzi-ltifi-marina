@@ -15,6 +15,7 @@ public class BookshelfNavigator {
      */
     private final int selectionLength;
 
+
     /**
      * The bookshelf to navigate.
      */

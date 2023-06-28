@@ -9,6 +9,7 @@ public class Coordinates implements Serializable {
     /**
      * Represents the x-coordinate of the point.
      */
+
     final int x;
     /**
      * Represents the y-coordinate of the point.

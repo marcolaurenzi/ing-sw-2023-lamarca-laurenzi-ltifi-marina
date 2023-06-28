@@ -18,6 +18,7 @@ public abstract class PlayerState {
 
     }
 
+
     /**
      * Checks if the selection is full, i.e., all three elements are not null.
      *

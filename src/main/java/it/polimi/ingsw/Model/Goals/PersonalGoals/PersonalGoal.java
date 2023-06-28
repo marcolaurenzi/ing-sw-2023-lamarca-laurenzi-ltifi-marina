@@ -86,6 +86,7 @@ public class PersonalGoal implements Serializable {
      * @param j The column index.
      * @return The item at the specified position.
      */
+
     public Item get(int i, int j) {
         return personalGoal.get(i, j);
     }

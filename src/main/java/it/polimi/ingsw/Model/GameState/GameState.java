@@ -18,6 +18,7 @@ public interface GameState {
      * @throws FinishedGameException   if the game has already finished
      * @throws GameNotStartedException if the game has not yet started
      */
+
     void nextPlayer(Game game, ArrayList<Player> players) throws FinishedGameException, GameNotStartedException;
 
     /**

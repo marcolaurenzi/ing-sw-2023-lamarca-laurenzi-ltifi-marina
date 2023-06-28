@@ -22,6 +22,7 @@ public class PersonalGoalDeck implements Deck<PersonalGoal> {
     /**
      * Represents the deck of personal goals.
      */
+
     List<PersonalGoal> deck;
 
     public int remaining;

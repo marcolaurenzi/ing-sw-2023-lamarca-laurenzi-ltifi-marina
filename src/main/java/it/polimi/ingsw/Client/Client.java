@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public interface Client {
 
+
     /**
      * Chooses the player ID for the client.
      *

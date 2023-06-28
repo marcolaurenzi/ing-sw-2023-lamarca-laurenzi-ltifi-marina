@@ -23,6 +23,7 @@ public class ClientSocket implements Client, RemoteClient {
     /**
      * The socket used for the client-server communication.
      */
+
     private final Socket socket;
 
     /**
