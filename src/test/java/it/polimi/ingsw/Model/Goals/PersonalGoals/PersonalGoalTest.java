@@ -45,7 +45,7 @@ public class PersonalGoalTest {
     @Test
     @DisplayName("Testing the corner case where the pointer is null")
     public void nullBookshelfTest() throws IOException{
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookshelfTest.JSON");
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookshelfTest.json");
         for(int i = 0; i<12; i++) {
             final int j = i;
             assertThrows(NullPointerException.class, ()->goals.get(j).getPoints(bookshelf));
@@ -61,7 +61,7 @@ public class PersonalGoalTest {
     @Test
     @DisplayName("Testing corner case where the whole matrix is void")
     public void voidBookshelfTest() throws WrongConfigurationException, IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest.JSON", 0);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest0.json");
         for(int i = 0; i<12; i++) {
             assertEquals(0, goals.get(i).getPoints(bookshelf));
         }
@@ -77,7 +77,7 @@ public class PersonalGoalTest {
     @DisplayName("Testing corner case where the bookshelf is exactly the same as the personal goal")
     public void fullBookshelfTest() throws WrongConfigurationException, IOException {
         for(int i = 0; i<12; i++) {
-            Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest.JSON", i+1);
+            Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest"+(i+1)+".json");
             assertEquals(12, goals.get(i).getPoints(bookshelf));
         }
     }
@@ -95,7 +95,7 @@ public class PersonalGoalTest {
 
         // Cycles through all the personal goals
         for(int i = 0; i<12; i++) {
-            Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest.JSON", i+1);
+            Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest"+(i+1)+".json");
 
             // Cycles through all the tiles of the bookshelf
             for(int j = 0; j<6; j++) {

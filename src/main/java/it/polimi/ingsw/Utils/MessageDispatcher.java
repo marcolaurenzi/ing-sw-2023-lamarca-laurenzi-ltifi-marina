@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class MessageDispatcher extends Thread {
     /**
-     * The Gson object used to serialize and deserialize JSON objects.
+     * The Gson object used to serialize and deserialize json objects.
      */
     private final Gson gson = new Gson();
     /**

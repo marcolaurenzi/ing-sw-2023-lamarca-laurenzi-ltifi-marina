@@ -29,7 +29,7 @@ public class PersonalGoal implements Serializable {
      */
     public PersonalGoal(int i) throws IOException {
         this.number = i + 1;
-        personalGoal = Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.JSON", i);
+        personalGoal = Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration"+(i+1)+".json");
     }
 
     /**

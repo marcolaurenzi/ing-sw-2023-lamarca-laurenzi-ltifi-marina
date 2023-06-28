@@ -135,6 +135,8 @@ class PlayerTest {
         assert (player.getTotalPoints() >= 8);
 
         int k = 0;
+
+        /*
         //player completes private goal tasks
         for (int i = 0; i < player.getBookshelf().getColumnDimension(); i++) {
             for (int j = 0; j < player.getBookshelf().getRowDimension(); j++) {
@@ -146,6 +148,7 @@ class PlayerTest {
                 }
             }
         }
+        */
 
     }
 

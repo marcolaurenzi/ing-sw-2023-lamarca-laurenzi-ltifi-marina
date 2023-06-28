@@ -49,7 +49,7 @@ public class CommonGoal9Test {
     @Test
     @DisplayName("Test with all valid different rows")
     public void bookshelfWithAllValidDifferentRows() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test.json", 0);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test0.json");
         assertTrue("The bookshelf with all valid different rows should be ok", commonGoal9.isAchieved(bookshelf));
     }
 
@@ -61,7 +61,7 @@ public class CommonGoal9Test {
     @Test
     @DisplayName("Test with all valid same rows")
     public void bookshelfAllValidRowsSameCombination() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test.json", 1);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test1.json");
         assertTrue("The bookshelf with all valid same rows should be ok", commonGoal9.isAchieved(bookshelf));
     }
 
@@ -73,7 +73,7 @@ public class CommonGoal9Test {
     @Test
     @DisplayName("Test where every row has a different combination of items but there is a column with the same type of items")
     public void bookshelfDifferentCombinationRowsOneColumnSameType() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test.json", 2);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test2.json");
         assertTrue("The bookshelf where every row has a different combination of items but there is a column with the same type of items", commonGoal9.isAchieved(bookshelf));
     }
 
@@ -85,7 +85,7 @@ public class CommonGoal9Test {
     @Test
     @DisplayName("Test with no valid rows")
     public void bookshelfNoValidRows() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test.json", 3);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test3.json");
         assertFalse("The bookshelf with no valid rows should not check the goal", commonGoal9.isAchieved(bookshelf));
     }
 }

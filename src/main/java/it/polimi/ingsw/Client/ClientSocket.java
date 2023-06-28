@@ -51,7 +51,7 @@ public class ClientSocket implements Client, RemoteClient {
     private ProxyDataOutputStream dataOutput;
 
     /**
-     * The Gson object for converting JSON messages.
+     * The Gson object for converting json messages.
      */
     private Gson gson = new Gson();
 

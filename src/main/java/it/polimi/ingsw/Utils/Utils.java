@@ -28,7 +28,7 @@ public class Utils {
     /**
      * The path of the configuration files.
      */
-    private final static String configurationPath = /*"src" + File.separator + "main" + File.separator + "resources" + File.separator + */"configurations" + "/";
+    private final static String configurationPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "configurations" + File.separator;
     /**
      * The path of the test files.
      */
@@ -72,11 +72,11 @@ public class Utils {
 
     /* ************************************************************************************************************
      *                          END OF PATH FUNCTIONS
-     *                          START OF JSON FUNCTIONS
+     *                          START OF json FUNCTIONS
      ************************************************************************************************************ */
 
     /**
-     * Loads a board from a JSON file.
+     * Loads a board from a json file.
      *
      * @param filePath the path of the file
      * @return the board
@@ -91,7 +91,7 @@ public class Utils {
     }
 
     /**
-     * Loads a bookshelf from a JSON file containing only one bookshelf.
+     * Loads a bookshelf from a json file containing only one bookshelf.
      *
      * @param filePath the path of the file
      * @return the bookshelf
@@ -104,7 +104,7 @@ public class Utils {
     }
 
     /**
-     * Loads a bookshelf from a JSON file containing multiple bookshelves and returns the one at the specified index.
+     * Loads a bookshelf from a json file containing multiple bookshelves and returns the one at the specified index.
      *
      * @param filePath the path of the file
      * @param index    the index of the bookshelf to load
@@ -136,7 +136,7 @@ public class Utils {
     }
 
     /**
-     * Saves an object to a JSON file.
+     * Saves an object to a json file.
      *
      * @param filePath the path of the file
      * @param object   the object to save
@@ -161,7 +161,7 @@ public class Utils {
     }
 
     /* ************************************************************************************************************
-     *                          END OF JSON FUNCTIONS
+     *                          END OF json FUNCTIONS
      *                         START OF CUSTOM FUNCTIONS
      ************************************************************************************************************ */
 

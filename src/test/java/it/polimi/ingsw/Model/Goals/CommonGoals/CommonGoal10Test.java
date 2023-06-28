@@ -26,8 +26,8 @@ public class CommonGoal10Test {
      */
     @Test
     public void nullPointerTest() throws IOException {
-        // Load the bookshelf from a JSON file containing null values
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookShelfTest.JSON");
+        // Load the bookshelf from a json file containing null values
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookshelfTest.json");
         assertThrows(NullPointerException.class, () -> goal.isAchieved(bookshelf));
     }
 
@@ -38,8 +38,8 @@ public class CommonGoal10Test {
      */
     @Test
     public void voidBookshelfTest() throws IOException {
-        // Load the bookshelf from a JSON file with an empty matrix
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON");
+        // Load the bookshelf from a json file with an empty matrix
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test0.json");
         assertFalse(goal.isAchieved(bookshelf));
     }
 
@@ -50,7 +50,7 @@ public class CommonGoal10Test {
      */
     @Test
     public void oneXBookshelfTest() throws IOException {
-        // Load the bookshelf from a JSON file with a matrix containing one 'X'
+        // Load the bookshelf from a json file with a matrix containing one 'X'
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test1.json");
         assertTrue(goal.isAchieved(bookshelf));
     }

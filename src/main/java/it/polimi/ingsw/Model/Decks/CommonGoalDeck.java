@@ -45,7 +45,7 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
 
     /**
      * Initializes the concrete instance of the deck and shuffles it.
-     * Reads the configuration from a JSON file.
+     * Reads the configuration from a json file.
      *
      * @throws FileNotFoundException if the configuration file is not found.
      */

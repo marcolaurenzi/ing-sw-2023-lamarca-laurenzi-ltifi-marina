@@ -27,7 +27,7 @@ public class CommonGoal7Test {
      */
     @Test
     public void nullPointerTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookShelfTest.JSON");
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "nullBookshelfTest.json");
         assertThrows(NullPointerException.class, () -> goal.isAchieved(bookshelf));
     }
 
@@ -38,7 +38,7 @@ public class CommonGoal7Test {
      */
     @Test
     public void voidBookshelfTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 0);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test0.json");
         assertFalse(goal.isAchieved(bookshelf));
     }
 
@@ -49,7 +49,7 @@ public class CommonGoal7Test {
      */
     @Test
     public void enoughRowsEnoughTypesTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 1);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test1.json");
         assertTrue(goal.isAchieved(bookshelf));
     }
 
@@ -60,7 +60,7 @@ public class CommonGoal7Test {
      */
     @Test
     public void moreTypesTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 2);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test2.json");
         assertFalse(goal.isAchieved(bookshelf));
     }
 
@@ -71,7 +71,7 @@ public class CommonGoal7Test {
      */
     @Test
     public void lessRowsTest() throws IOException {
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test.JSON", 3);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test3.json");
         assertFalse(goal.isAchieved(bookshelf));
     }
 }

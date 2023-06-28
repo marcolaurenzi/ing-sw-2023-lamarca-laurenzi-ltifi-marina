@@ -29,7 +29,7 @@ public class ClientMethodCallHandler extends Thread {
      */
     private final ProxyDataOutputStream dataOutput;
     /**
-     * Represents the Gson object to convert Java objects into JSON strings and vice versa.
+     * Represents the Gson object to convert Java objects into json strings and vice versa.
      */
     private final Gson gson = new Gson();
 

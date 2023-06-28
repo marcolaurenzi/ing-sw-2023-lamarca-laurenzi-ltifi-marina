@@ -37,7 +37,7 @@ public class BoardTest {
     @Name("Setting Up Board")
     public void setUp() throws Exception {
 
-        board = Utils.loadBoardFromFile(Utils.getConfigurationPath() + "BoardConfiguration.JSON");
+        board = Utils.loadBoardFromFile(  "configurations/BoardConfiguration.json");
         board.setItemDeck(new ItemDeck());
     }
 
