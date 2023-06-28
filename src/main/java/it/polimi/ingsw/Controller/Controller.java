@@ -10,7 +10,6 @@ import it.polimi.ingsw.Utils.ControllerStatusToFile;
 import it.polimi.ingsw.Utils.GameStatusToFile;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.PlayerStatusToFile;
-import it.polimi.ingsw.View.GUI;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -122,6 +121,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                         e.printStackTrace();
                         System.exit(-1);
                     }
+
 
                     while (it.hasNext()) {
                         try (BufferedReader reader = Files.newBufferedReader(it.next())) {
@@ -258,7 +258,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     private static void reconnectClient(String playerId, Observer observer) throws AlreadyStartedGameException {
         Game game = null;
         for(Game g: games) {
-            if(g.getId() == (alreadyUsedPlayerIds.get(playerId))) {
+            if(g.getId() == alreadyUsedPlayerIds.get(playerId)) {
                 game = g;
                 break;
             }

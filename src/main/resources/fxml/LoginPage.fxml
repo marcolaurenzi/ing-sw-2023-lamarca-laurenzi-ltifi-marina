@@ -3,6 +3,7 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,72 +21,35 @@
             <Rectangle2D />
          </viewport>
       </ImageView>
-      <ImageView fitHeight="345.0" fitWidth="807.0" layoutX="101.0" layoutY="109.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/misc/base_pagina2.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="268.0" fitWidth="634.0" layoutX="184.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/Publisher material/Title 2000x618px.png" />
-         </image>
-      </ImageView>
-      <Button layoutX="675.0" layoutY="476.0" mnemonicParsing="false" onAction="#login" prefHeight="85.0" prefWidth="110.0" text="LOGIN" AnchorPane.leftAnchor="675.0" AnchorPane.rightAnchor="215.0">
-         <font>
-            <Font name="Arial Bold" size="22.0" />
-         </font></Button>
-      <TextField fx:id="usernameTextField" layoutX="310.0" layoutY="454.0" />
-      <TextField fx:id="passwordTextField" layoutX="310.0" layoutY="509.0" />
-      <ChoiceBox fx:id="connectionMenu" layoutX="315.0" layoutY="559.0" prefWidth="150.0" />
-      <Text layoutX="141.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="123.06787109375">
+      <Button layoutX="675.0" layoutY="580.0" mnemonicParsing="false" onAction="#login" prefHeight="87.0" prefWidth="110.0" text="Login" AnchorPane.leftAnchor="675.0" AnchorPane.rightAnchor="215.0" />
+      <TextField fx:id="usernameTextField" layoutX="310.0" layoutY="519.0" />
+      <TextField fx:id="passwordTextField" layoutX="310.0" layoutY="610.0" />
+      <ChoiceBox fx:id="connectionMenu" layoutX="315.0" layoutY="730.0" prefWidth="150.0" />
+      <Text layoutX="141.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="123.06787109375">
          <font>
             <Font name="Arial Bold" size="22.0" />
          </font>
       </Text>
-      <Text layoutX="141.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="123.06787109375">
+      <Text layoutX="141.0" layoutY="631.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="123.06787109375">
          <font>
             <Font name="Arial Bold" size="22.0" />
          </font>
       </Text>
-      <Text layoutX="104.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Mode:" wrappingWidth="196.5">
+      <Text layoutX="104.0" layoutY="751.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connection Mode:" wrappingWidth="196.5">
          <font>
             <Font name="Arial Bold" size="22.0" />
          </font>
       </Text>
-      <ImageView fitHeight="61.0" fitWidth="89.0" layoutX="919.0" layoutY="922.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="268.0" fitWidth="634.0" layoutX="263.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/Publisher material/Publisher.png" />
+            <Image url="@../assets/Publisher%20material/Title%202000x618px.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="230.0" fitWidth="300.0" layoutX="30.0" layoutY="680.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" styleClass="publisher" AnchorPane.leftAnchor="30.0">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="836.0" layoutY="841.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/Publisher%20material/Display_1.jpg" />
+            <Image url="@../assets/Publisher%20material/Publisher.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="230.0" fitWidth="300.0" layoutX="351.0" layoutY="680.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" styleClass="publisher">
-         <image>
-            <Image url="@../assets/Publisher%20material/Display_2.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="230.0" fitWidth="300.0" layoutX="677.0" layoutY="680.0" opacity="0.8" pickOnBounds="true" preserveRatio="true" styleClass="publisher" AnchorPane.rightAnchor="30.0">
-         <image>
-            <Image url="@../assets/Publisher%20material/Display_3.jpg" />
-         </image>
-      </ImageView>
-      <Text layoutX="28.0" layoutY="900.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyShelfie is a Cranio Greation s.r.l. board game based on developing your personal Bookshelf!" wrappingWidth="305.48299980163574">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="349.0" layoutY="900.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Play with your firend with a minimum of 2 people and a maximum of 4!" wrappingWidth="300.5381164550781">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="668.0" layoutY="900.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Try to build your personal Bookshelf to collect as much points as you can!" wrappingWidth="289.95330810546875">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Text>
+      <Label fx:id="errorLabel" layoutX="340.0" layoutY="833.0" prefHeight="17.0" prefWidth="300.0" />
    </children>
 </AnchorPane>
