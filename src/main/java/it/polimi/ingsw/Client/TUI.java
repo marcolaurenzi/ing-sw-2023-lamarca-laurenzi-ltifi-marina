@@ -288,7 +288,7 @@ public class TUI implements RemoteUI, UI {
                 case "d" -> bookshelfNavigator.moveRight();
                 case "a" -> bookshelfNavigator.moveLeft();
                 case " " -> {
-                    if (tilesSelection.size() < bookshelfNavigator.getEmptySpaces(bookshelfNavigator.getColumn())) {
+                    if (tilesSelection.size() <= bookshelfNavigator.getEmptySpaces(bookshelfNavigator.getColumn())) {
                         bookshelfNavigator.select();
                         bookshelfNavigator.print();
                         System.out.println("Column selected: " + bookshelfNavigator.getColumn() + "\nAre you sure? (y/n)");
