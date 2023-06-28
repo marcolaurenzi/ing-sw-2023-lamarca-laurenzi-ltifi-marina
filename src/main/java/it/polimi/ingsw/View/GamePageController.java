@@ -764,13 +764,11 @@ public class GamePageController implements ViewController{
     }
 
     public void printError(String s) {
-        Stage currentStage = (Stage) mainHBox.getScene().getWindow();
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setContentText(s);
             alert.showAndWait();
-            currentStage.close();
             returnToLogin();
         });
     }
