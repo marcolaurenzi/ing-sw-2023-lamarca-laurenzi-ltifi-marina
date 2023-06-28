@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-
-
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
 <AnchorPane fx:id="endGameAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.EndGameController">
 
    <children>
@@ -14,6 +14,25 @@
             <Image url="@../assets/misc/sfondo_parquet.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="winnerLabel" layoutX="107.0" layoutY="192.0" prefHeight="17.0" prefWidth="355.0" />
+      <ImageView fitHeight="333.0" fitWidth="515.0" layoutX="136.0" layoutY="84.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/misc/base_pagina2.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="121.0" fitWidth="395.0" layoutX="202.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Publisher material/Title 2000x618px.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="winnerLabel" layoutX="208.0" layoutY="298.0" prefHeight="17.0" prefWidth="355.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="210.0">
+         <font>
+            <Font name="Zapf Dingbats" size="13.0" />
+         </font></Label>
+      <Label fx:id="rankingLabel" layoutX="207.0" layoutY="364.0" prefHeight="219.0" prefWidth="355.0" />
+      <ImageView fitHeight="124.0" fitWidth="108.0" layoutX="610.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Publisher material/Publisher.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
