@@ -57,21 +57,12 @@ public class CreateNewGameController implements ViewController {
     public void initialize() {
 
         Button button2 = new Button("2");
-        button2.setFont(javafx.scene.text.Font.font("Arial Bold", 22));
-        button2.setPrefWidth(110);
-        button2.setPrefHeight(85);
         anchorPane.getChildren().add(button2);
 
         Button button3 = new Button("3");
-        button3.setFont(javafx.scene.text.Font.font("Arial Bold", 22));
-        button3.setPrefWidth(110);
-        button3.setPrefHeight(85);
         anchorPane.getChildren().add(button3);
 
         Button button4 = new Button("4");
-        button4.setFont(javafx.scene.text.Font.font("Arial Bold", 22));
-        button4.setPrefWidth(110);
-        button4.setPrefHeight(85);
         anchorPane.getChildren().add(button4);
 
         anchorPane.getChildren().forEach(node -> {
@@ -154,15 +145,15 @@ public class CreateNewGameController implements ViewController {
                 switch (((Button) node).getText()) {
                     case "2" -> {
                         node.setLayoutX(width / 2 - width / 3);
-                        node.setLayoutY(height / 2 - 50);
+                        node.setLayoutY(2 * height / 3);
                     }
                     case "3" -> {
-                        node.setLayoutX(width / 2 - 55);
-                        node.setLayoutY(height / 2 - 50);
+                        node.setLayoutX(width / 2);
+                        node.setLayoutY(2 * height / 3);
                     }
                     case "4" -> {
-                        node.setLayoutX(width / 2 + width / 3 - 110);
-                        node.setLayoutY(height / 2 - 50);
+                        node.setLayoutX(width / 2 + width / 3);
+                        node.setLayoutY(2 * height / 3);
                     }
                 }
             }

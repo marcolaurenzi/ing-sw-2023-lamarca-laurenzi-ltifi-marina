@@ -3,9 +3,7 @@ package it.polimi.ingsw.Model.Goals.CommonGoals;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,7 +35,7 @@ public class CommonGoal10 extends CommonGoal {
         int numberOfRows = bookshelf.getColumnDimension();
         int numberOfColumns = bookshelf.getRowDimension();
 
-        List<TypeEnum> temp = new ArrayList<>();
+        Set<TypeEnum> temp = new HashSet<>();
         int count = 0;
         TypeEnum currTypeEnum;
 

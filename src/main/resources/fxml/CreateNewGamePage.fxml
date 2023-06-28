@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+=======
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+>>>>>>> parent of a3e4e1e (major graphic updates)
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.View.CreateNewGameController">
    <children>
@@ -12,40 +20,19 @@
             <Image url="@../assets/misc/sfondo_parquet.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="197.0" fitWidth="550.0" layoutX="111.0" layoutY="70.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/misc/base_pagina2.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="473.0" layoutX="150.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="152.0">
+      <ImageView fitHeight="150.0" fitWidth="473.0" layoutX="166.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="166.0" AnchorPane.rightAnchor="136.0">
          <image>
             <Image url="@../assets/Publisher material/Title 2000x618px.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="230.0" fitWidth="300.0" layoutX="419.0" layoutY="490.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/Publisher%20material/Display_5.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="230.0" fitWidth="300.0" layoutX="72.0" layoutY="490.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/Publisher%20material/Display_4.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="171.0" layoutY="248.0" prefHeight="74.0" prefWidth="434.0" text="Please select the number of players:">
+      <Label layoutX="169.0" layoutY="235.0" prefHeight="74.0" prefWidth="494.0" text="Please select the number of players:">
          <font>
+<<<<<<< HEAD
             <Font size="18.0" />
+=======
+            <Font name="Verdana" size="24.0" />
+>>>>>>> parent of a3e4e1e (major graphic updates)
          </font>
       </Label>
-      <Text layoutX="74.0" layoutY="710.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Common Goals are are the same for every player, be the first to achieve them!" wrappingWidth="295.3573598811678">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text layoutX="416.0" layoutY="710.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the tiles wisely, and be aware of other's strategies!" wrappingWidth="300.0">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
