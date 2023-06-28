@@ -49,7 +49,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest1() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 0);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test0.json");
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -61,7 +61,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest2() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 1);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test1.json");
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -73,7 +73,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest3() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 2);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test2.json");
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -85,7 +85,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 4 elements on a diagonal achieves the goal")
     public void bookshelfWith4ElementsOnADiagonalTest4() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 3);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test3.json");
         assertFalse("The bookshelf with 4 elements on a diagonal should not achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -97,7 +97,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest1() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 4);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test4.json");
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -109,7 +109,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest2() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 5);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test5.json");
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -121,7 +121,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest3() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 6);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test6.json");
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -133,7 +133,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf with 5 elements on a diagonal achieves the goal")
     public void bookshelfWith5ElementsOnADiagonalTest4() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 7);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test7.json");
         assertTrue("The bookshelf with 5 elements on a diagonal should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 
@@ -145,7 +145,7 @@ public class CommonGoal6Test {
     @Test
     @DisplayName("Test if the Bookshelf filled all with the same element achieves the goal")
     public void bookshelfFilledAllWithTheSameElementTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test.json", 8);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test8.json");
         assertTrue("The bookshelf filled all with the same element should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
 }

@@ -49,7 +49,7 @@ public class CommonGoal5Test {
     @Test
     @DisplayName("Test if the Bookshelf with less than 8 elements of one kind is handled correctly")
     public void bookshelfWithLessThan8ElementsOfOneKindTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test.json", 0);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test0.json");
         assertFalse("The bookshelf with less than 8 elements of one kind should not achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
 
@@ -61,7 +61,7 @@ public class CommonGoal5Test {
     @Test
     @DisplayName("Test if the Bookshelf with exactly 8 elements of one kind achieves the goal")
     public void bookshelfWith8ElementsOfOneKindTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test.json", 1);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test1.json");
         assertTrue("The bookshelf with 8 elements of one kind should achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
 
@@ -73,7 +73,7 @@ public class CommonGoal5Test {
     @Test
     @DisplayName("Test if the Bookshelf with more than 8 elements of one kind achieves the goal")
     public void bookshelfWithMoreThan8ElementsOfOneKindTest() throws IOException {
-        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test.json", 2);
+        bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test2.json");
         assertTrue("The bookshelf with more than 8 elements of one kind should achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
 }

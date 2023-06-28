@@ -1,0 +1,13 @@
+{
+  "items":
+  {
+    "matrix":
+    [[{"type":"GAMES"},{"type":"GAMES"},{"type":"CATS"},{"type":"GAMES"},{"type":"TROPHIES"}],
+      [{"type":"GAMES"},{"type":"PLANTS"},{"type":"FRAMES"},{"type":"CATS"},{"type":"PLANTS"}],
+      [{"type":"FRAMES"},{"type":"TROPHIES"},{"type":"CATS"},{"type":"GAMES"},{"type":"GAMES"}],
+      [{"type":"FRAMES"},{"type":"FRAMES"},{"type":"FRAMES"},{"type":"GAMES"},{"type":"GAMES"}],
+      [{"type":"GAMES"},{"type":"CATS"},{"type":"GAMES"},{"type":"PLANTS"},{"type":"TROPHIES"}],
+      [{"type":"CATS"},{"type":"GAMES"},{"type":"GAMES"},{"type":"GAMES"},{"type":"PLANTS"}]],
+    "columnDimension":6,
+    "rowDimension":5},
+  "freeTiles":0}

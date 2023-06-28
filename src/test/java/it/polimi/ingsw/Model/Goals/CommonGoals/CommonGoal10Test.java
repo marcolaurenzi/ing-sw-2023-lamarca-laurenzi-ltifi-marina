@@ -39,7 +39,7 @@ public class CommonGoal10Test {
     @Test
     public void voidBookshelfTest() throws IOException {
         // Load the bookshelf from a JSON file with an empty matrix
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 0);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON");
         assertFalse(goal.isAchieved(bookshelf));
     }
 
@@ -51,7 +51,7 @@ public class CommonGoal10Test {
     @Test
     public void oneXBookshelfTest() throws IOException {
         // Load the bookshelf from a JSON file with a matrix containing one 'X'
-        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test.JSON", 1);
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test1.json");
         assertTrue(goal.isAchieved(bookshelf));
     }
 }

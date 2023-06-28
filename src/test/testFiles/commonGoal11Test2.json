@@ -1,0 +1,13 @@
+{
+  "items":
+  {
+    "matrix":
+    [[null,null,null,null,null],
+      [{"type":"BOOKS"},null,null,null,null],
+      [{"type":"BOOKS"},{"type":"BOOKS"},null,null,null],
+      [{"type":"BOOKS"},{"type":"PLANTS"},{"type":"BOOKS"},null,null],
+      [{"type":"PLANTS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},null],
+      [{"type":"BOOKS"},{"type":"BOOKS"},{"type":"BOOKS"},{"type":"FRAMES"},{"type":"FRAMES"}]],
+    "columnDimension":6,
+    "rowDimension":5},
+  "freeTiles":15}

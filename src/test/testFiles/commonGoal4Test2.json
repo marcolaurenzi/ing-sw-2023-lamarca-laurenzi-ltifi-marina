@@ -1,0 +1,13 @@
+{
+  "items":
+  {
+    "matrix":
+    [[{"type":"TROPHIES"},{"type":"TROPHIES"},{"type":"TROPHIES"},null,null],
+      [{"type":"GAMES"},{"type":"GAMES"},{"type":"GAMES"},null,null],
+      [{"type":"FRAMES"},{"type":"FRAMES"},{"type":"FRAMES"},null,null],
+      [{"type":"CATS"},{"type":"CATS"},{"type":"CATS"},null,null],
+      [{"type":"TROPHIES"},{"type":"TROPHIES"},{"type":"TROPHIES"},null,null],
+      [{"type":"GAMES"},{"type":"GAMES"},{"type":"GAMES"},null,null]],
+    "columnDimension":6,
+    "rowDimension":5},
+  "freeTiles":12}
