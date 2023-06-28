@@ -6,6 +6,7 @@ import it.polimi.ingsw.Utils.Utils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -649,15 +651,19 @@ public class GamePageController implements ViewController{
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            EndGameController endGameController = loader.getController();
+            EndGameController endGameController = loader.getController(); // Get the controller instance
+            sendEndGameMessage(endGameController);
+            endGameController.setScene(newScene);
             currentStage.close();
             Stage newStage = new Stage();
             newStage.setScene(newScene);
             newStage.setResizable(false);
             endGameController.setCurrentStage(newStage);
             endGameController.endGame(winner);
+            endGameController.printPlayerInfo();
             newStage.show();
         });
+
 
     }
 
@@ -771,6 +777,28 @@ public class GamePageController implements ViewController{
             alert.showAndWait();
             returnToLogin();
         });
+    }
+
+    public void sendEndGameMessage(EndGameController endGameController) {
+        HashMap<String, Integer> points = new HashMap<>();
+        Integer p0, p1, p2, p3;
+        if(!points0.getText().equals("")) {
+            p0 = Integer.parseInt(points0.getText());
+            points.put(playerId0.getText(), p0);
+        }
+        if(!points1.getText().equals("")) {
+            p1 = Integer.parseInt(points1.getText());
+            points.put(playerId1.getText(), p1);
+        }
+        if(!points2.getText().equals("")) {
+            p2 = Integer.parseInt(points2.getText());
+            points.put(playerId2.getText(), p2);
+        }
+        if(!points3.getText().equals("")) {
+            p3 = Integer.parseInt(points3.getText());
+            points.put(playerId3.getText(), p3);
+        }
+        endGameController.setPlayerPoints(points);
     }
 
     public void returnToLogin() {
