@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
 
 import java.io.Serializable;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -32,7 +33,11 @@ public class CommonGoalPointStack implements Serializable {
     public CommonGoalPointStack(CommonGoal commonGoal, Stack<Integer> pointStack) {
         this.pointStack = pointStack;
         this.commonGoal = commonGoal;
-        this.top = pointStack.get(pointStack.size() - 2);
+        try {
+            this.top = pointStack.peek();
+        } catch (EmptyStackException e) {
+            this.top = null;
+        }
     }
 
     /**

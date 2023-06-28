@@ -171,7 +171,7 @@ public class GUI implements RemoteUI {
             client.pickAndInsertInBookshelf(tilesSelection, turnSelectionHandler.getColumn(), order, playerId);
         } catch (IOException e) {
             System.out.println("server crashed");
-            controller.printError("Server crashed, please restart the program using your credentials");
+            //controller.printError("Server crashed, please restart the program using your credentials");
 
         }
     }

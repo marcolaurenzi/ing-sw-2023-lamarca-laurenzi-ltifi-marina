@@ -60,8 +60,11 @@ public class GameThread extends Thread {
         while (game.getGameState() instanceof GameStateRunning || game.getGameState() instanceof GameStateLastTurn) {
             try {
                 if (Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
-                    Controller.update(game.getId());
-                    Controller.assignTurn(game.getId());
+                    synchronized (game) {
+                        Controller.update(game.getId());
+                        Controller.assignTurn(game.getId());
+                        game.notifyAll();
+                    }
                     game.refreshBoard();
                 }
                 game.nextTurn();
@@ -70,6 +73,7 @@ public class GameThread extends Thread {
                     if (!Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
                         game.nextTurn();
                         if (i == game.getMaxPlayers() - 1) {
+                            System.out.println("Porcozio" + i);
                             Thread.sleep(1000);
                         }
                     } else {

@@ -111,6 +111,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                         alreadyUsedPlayerIds = controllerStatus.getAlreadyUsedPlayerIds();
                         listCredentials = controllerStatus.getListCredentials();
 
+                        for(String s : alreadyUsedPlayerIds.keySet()) {
+                            listConnected.put(s, false);
+                        }
+
                     } catch (Exception e) {
                         System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
                         e.printStackTrace();
@@ -122,6 +126,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                         try (BufferedReader reader = Files.newBufferedReader(it.next())) {
                             ArrayList<PlayerStatusToFile> playerStatus = new ArrayList<>();
                             GameStatusToFile gameStatus = gson.fromJson(reader.readLine(), GameStatusToFile.class);
+
 
                             for (int i = 0; i < gameStatus.getMaxPlayers(); i++) {
                                 playerStatus.add(gson.fromJson(reader.readLine(), PlayerStatusToFile.class));
@@ -138,9 +143,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                             }
 
                         } catch (Exception e) {
-                            System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
-                            e.printStackTrace();
-                            System.exit(-1);
+                            System.out.println("Corrupted file, game files are lost");
                         }
                     }
                 }
@@ -259,8 +262,18 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
      * @throws AlreadyStartedGameException if the game has already started.
      */
     private static void reconnectClient(String playerId, Observer observer) throws AlreadyStartedGameException {
-        listObserver.put(playerId, observer);
-        listConnected.replace(playerId, true);
+        Game game = null;
+        for(Game g: games) {
+            if(g.getId() == alreadyUsedPlayerIds.get(playerId)) {
+                game = g;
+                break;
+            }
+        }
+        synchronized (game) {
+            listObserver.put(playerId, observer);
+            listConnected.replace(playerId, true);
+            game.notifyAll();
+        }
     }
 
     /**
