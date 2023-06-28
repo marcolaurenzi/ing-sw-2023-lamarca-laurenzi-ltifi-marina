@@ -338,11 +338,18 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     public static void update(int gameID) throws RemoteException, MissingPlayerException {
         String playerId = null;
         try {
-            for (Player player : games.get(gameID).getPlayers()) {
+            Game game = null;
+            for(Game g: games) {
+                if(g.getId() == gameID) {
+                    game = g;
+                    break;
+                }
+            }
+            for (Player player : game.getPlayers()) {
                 if(listConnected.get(player.getPlayerID())) {
                     playerId = player.getPlayerID();
                     if(listObserver.get(player.getPlayerID()) != null) {
-                        listObserver.get(player.getPlayerID()).update(retrieveGameStatus(games.get(gameID), player.getPlayerID()));
+                        listObserver.get(player.getPlayerID()).update(retrieveGameStatus(game, player.getPlayerID()));
                     }
                 }
             }
@@ -362,16 +369,23 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     /**
      * Assigns the turn to the current player in the specified game.
      *
-     * @param game the ID of the game.
+     * @param gameID the ID of the game.
      * @throws Exception if an error occurs during the assignment of the turn.
      */
-    public static void assignTurn(int game) throws Exception {
-        if(listConnected.get(games.get(game).getCurrentPlayer().getPlayerID())) {
+    public static void assignTurn(int gameID) throws Exception {
+        Game game = null;
+        for(Game g: games) {
+            if(g.getId() == gameID) {
+                game = g;
+                break;
+            }
+        }
+        if(listConnected.get(game.getCurrentPlayer().getPlayerID())) {
             try {
-                listObserver.get(games.get(game).getCurrentPlayer().getPlayerID()).playTurn();
+                listObserver.get(game.getCurrentPlayer().getPlayerID()).playTurn();
             } catch (DisconnectedPlayerException e) {
-                System.out.println("Player " + games.get(game).getCurrentPlayer().getPlayerID() + " disconnected");
-                disconnectClient(games.get(game).getCurrentPlayer().getPlayerID());
+                System.out.println("Player " + game.getCurrentPlayer().getPlayerID() + " disconnected");
+                disconnectClient(game.getCurrentPlayer().getPlayerID());
             }
         }
     }
@@ -424,7 +438,15 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         String winnerPlayer = null;
         int tempMaxPoints = 0;
 
-        for(Player player : games.get(gameId).getPlayers()){
+        Game game = null;
+        for(Game g: games) {
+            if(g.getId() == gameId) {
+                game = g;
+                break;
+            }
+        }
+
+        for(Player player : game.getPlayers()){
             if(listConnected.get(player.getPlayerID())) {
                 if (player.getTotalPoints() > tempMaxPoints) {
                     tempMaxPoints = player.getTotalPoints();
@@ -432,7 +454,7 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
                 }
             }
         }
-        for (Player player : games.get(gameId).getPlayers()) {
+        for (Player player : game.getPlayers()) {
             if(listConnected.get(player.getPlayerID())) {
                 try {
                     listObserver.get(player.getPlayerID()).endGame(winnerPlayer);
