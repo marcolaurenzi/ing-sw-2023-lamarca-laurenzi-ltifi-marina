@@ -18,7 +18,6 @@ import java.rmi.RemoteException;
  */
 public class GameThread extends Thread {
 
-
     private final Gson gson = new Gson();
     private final Game game;
 

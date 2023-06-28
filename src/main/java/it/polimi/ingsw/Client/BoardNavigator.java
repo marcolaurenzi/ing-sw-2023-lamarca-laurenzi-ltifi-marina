@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 public class BoardNavigator {
 
-
     /**
      * The game board.
      */

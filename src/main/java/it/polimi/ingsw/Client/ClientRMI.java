@@ -22,7 +22,6 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
     /**
      * The remote user interface.
      */
-
     private RemoteUI remoteUI;
     /**
      * The controller for remote interface.

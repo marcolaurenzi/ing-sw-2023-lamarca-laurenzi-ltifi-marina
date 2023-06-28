@@ -24,7 +24,6 @@ public class GameStateFinished implements GameState{
      * @throws FinishedGameException if the game has already finished
      */
     @Override
-
     public void nextPlayer(Game game, ArrayList<Player> players) throws FinishedGameException {
         throw new FinishedGameException();
     }

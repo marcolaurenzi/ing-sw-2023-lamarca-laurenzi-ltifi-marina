@@ -12,7 +12,6 @@ public interface UI {
     /**
      * Connects the client to the server.
      */
-
     void connectToServer();
 
     /**

@@ -23,7 +23,6 @@ public class ObserverSocket implements Observer, Serializable {
     /**
      *The input stream for receiving data.
      */
-
     private final ProxyDataOutputStream dataOutput;
     /**
      *The output stream for sending data.

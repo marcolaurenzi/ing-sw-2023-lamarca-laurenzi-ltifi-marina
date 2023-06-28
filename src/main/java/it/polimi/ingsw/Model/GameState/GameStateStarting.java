@@ -22,7 +22,6 @@ public class GameStateStarting implements GameState {
      * @param players The list of players.
      * @throws GameNotStartedException If the game has not started yet.
      */
-
     @Override
     public void nextPlayer(Game game, ArrayList<Player> players) throws GameNotStartedException {
         throw new GameNotStartedException();

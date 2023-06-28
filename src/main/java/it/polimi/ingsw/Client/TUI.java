@@ -24,7 +24,6 @@ public class TUI implements RemoteUI, UI {
     /**
      * The scanner used to read the user input.
      */
-
     private Scanner scanner;
     /**
      * The game ID.

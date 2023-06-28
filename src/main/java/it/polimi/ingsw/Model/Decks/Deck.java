@@ -16,7 +16,6 @@ public interface Deck<T> extends Serializable {
     /**
      * Shuffles the Deck using the Collections class's shuffle() method.
      */
-
     void shuffle();
 
     /**

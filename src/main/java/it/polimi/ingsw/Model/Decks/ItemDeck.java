@@ -20,7 +20,6 @@ public class ItemDeck implements Deck<Item> {
      * Initializes a new instance of the ItemDeck class.
      * It calls the initializeDeck method to correctly initialize the deck and shuffle it.
      */
-
     public ItemDeck() {
         initializeDeck();
     }

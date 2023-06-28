@@ -26,7 +26,6 @@ public class GameStateRunning implements GameState {
      * @param game    the game object
      * @param players the list of players in the game
      */
-
     @Override
     public void nextPlayer(Game game, ArrayList<Player> players) {
         if(players.get(game.getCurrentPlayerIndex()).getBookshelf().isFull()) {

@@ -12,7 +12,6 @@ public class Board implements Serializable {
     /**
      * Constructs a Board object.
      */
-
     public Board() {
 
     }

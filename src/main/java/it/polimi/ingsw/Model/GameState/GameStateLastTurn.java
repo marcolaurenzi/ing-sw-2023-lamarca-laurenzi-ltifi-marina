@@ -23,7 +23,6 @@ public class GameStateLastTurn implements GameState {
      * @param game    The game instance.
      * @param players The list of players in the game.
      */
-
     @Override
     public void nextPlayer(Game game, ArrayList<Player> players) {
         players.get(game.getCurrentPlayerIndex()).changeState(new PlayerStateWaiting());

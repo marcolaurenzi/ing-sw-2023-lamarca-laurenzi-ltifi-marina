@@ -11,7 +11,6 @@ public enum TypeEnum {
 	/**
 	 * Represents the type "BOOKS".
 	 */
-
 	BOOKS,
 	/**
 	 * Represents the type "GAMES".

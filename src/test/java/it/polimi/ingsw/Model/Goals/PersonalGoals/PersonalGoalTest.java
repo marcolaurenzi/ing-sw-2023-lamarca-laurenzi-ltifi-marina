@@ -22,7 +22,6 @@ public class PersonalGoalTest {
      */
     public PersonalGoalTest() {
 
-
     }
     final List<PersonalGoal> goals = new ArrayList<>();
 

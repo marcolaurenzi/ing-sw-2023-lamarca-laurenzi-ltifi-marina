@@ -16,7 +16,6 @@ import java.util.List;
  */
 public interface RemoteClient extends Remote, Serializable {
 
-
     /**
      * Updates the client with the current game status.
      *

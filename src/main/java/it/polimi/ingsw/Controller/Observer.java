@@ -14,7 +14,6 @@ import java.util.List;
  */
 public interface Observer extends Serializable {
 
-
     /**
      * Updates the observer with the current game status.
      *

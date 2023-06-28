@@ -14,7 +14,6 @@ public class UserApp {
     /**
      * Constructs a UserApp object.
      */
-
     public UserApp() {
 
     }

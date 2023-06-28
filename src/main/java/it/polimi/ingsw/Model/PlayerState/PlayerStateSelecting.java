@@ -15,7 +15,6 @@ public class PlayerStateSelecting extends PlayerState {
     /**
      * Constructs a PlayerStateSelecting instance.
      */
-
     public PlayerStateSelecting() {
         super();
     }

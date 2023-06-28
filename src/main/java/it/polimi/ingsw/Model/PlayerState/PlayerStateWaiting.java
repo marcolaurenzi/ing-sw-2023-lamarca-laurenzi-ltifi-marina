@@ -15,7 +15,6 @@ public class PlayerStateWaiting extends PlayerState {
     /**
      * Constructs a PlayerStateWaiting object.
      */
-
     public PlayerStateWaiting() {
         super();
     }

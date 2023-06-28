@@ -17,7 +17,6 @@ import java.util.List;
  */
 public interface RemoteUI extends Remote, Serializable {
 
-
     /**
      * Updates the game status on the client.
      *
