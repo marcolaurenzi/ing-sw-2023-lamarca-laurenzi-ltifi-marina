@@ -78,5 +78,6 @@ public class PersonalGoalDeck implements Deck<PersonalGoal> {
         for (int i = 0; i < 12; i++) {
             deck.add(i, new PersonalGoal(i));
         }
+        this.shuffle();
     }
 }
