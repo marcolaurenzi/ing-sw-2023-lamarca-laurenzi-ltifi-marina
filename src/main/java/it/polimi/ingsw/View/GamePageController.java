@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import javax.imageio.IIOException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -734,5 +736,33 @@ public class GamePageController implements ViewController{
      */
     public void setEndGamePlayer(String endGamePlayer) {
         this.endGamePlayer = endGamePlayer;
+    }
+
+    public void printError(String s) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText(s);
+            alert.showAndWait();
+            returnToLogin();
+        });
+    }
+
+    public void returnToLogin() {
+        Platform.runLater(() -> {
+            FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource("fxml/LoginPage.fxml"));
+            Scene newScene;
+            try {
+                newScene = new Scene(loader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            LoginController loginController = loader.getController();
+            try {
+                loginController.start(new Stage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
