@@ -28,7 +28,7 @@ public class Utils {
     /**
      * The path of the configuration files.
      */
-    private final static String configurationPath = /*"src" + File.separator + "main" + File.separator + "resources" + File.separator +*/ "configurations" + "/";
+    private final static String configurationPath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "configurations" + File.separator;
     /**
      * The path of the test files.
      */
