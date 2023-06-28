@@ -1,8 +1,21 @@
 package it.polimi.ingsw.Model;
 
+import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TypeEnumTest {
     public TypeEnumTest() {
 
+    }
+
+    @Test
+    public void toString_returnsCorrectStringRepresentation() {
+        // Arrange
+        TypeEnum type = TypeEnum.CATS;
+
+        // Act & Assert
+        assertEquals("CATS", type.toString());
     }
 
     @org.junit.Test
