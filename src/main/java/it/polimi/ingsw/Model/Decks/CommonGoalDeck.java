@@ -53,7 +53,6 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
     public void initializeDeck() throws FileNotFoundException {
 
         deck = new ArrayList<>();
-
         deck.add(new CommonGoal01(2, 6));
         deck.add(new CommonGoal01(4, 4));
         deck.add(new CommonGoal2());
@@ -66,7 +65,6 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
         deck.add(new CommonGoal9());
         deck.add(new CommonGoal10());
         deck.add(new CommonGoal11());
-
         this.shuffle();
     }
 }
