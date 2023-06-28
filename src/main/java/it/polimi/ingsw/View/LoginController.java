@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jdk.jshell.execution.Util;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -74,6 +75,7 @@ public class LoginController extends Application implements ViewController {
     public void start(Stage primaryStage) throws IOException {
         root = FXMLLoader.load(ClassLoader.getSystemResource("fxml/LoginPage.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("style/mystyle.css");
         stage = primaryStage;
         primaryStage.setTitle("My Shelfie");
         primaryStage.setScene(scene);
