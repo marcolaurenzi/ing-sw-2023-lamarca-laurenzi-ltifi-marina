@@ -32,6 +32,11 @@ public class Player {
      * Represents the player's points for the common goal.
      */
     private int commonGoalPoints;
+
+    public PlayerState getState() {
+        return state;
+    }
+
     /**
      * Represents the player's state.
      */
