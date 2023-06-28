@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 public class PingingTUI extends Thread{
@@ -16,6 +17,10 @@ public class PingingTUI extends Thread{
                 tui.client.ping();
             } catch (RemoteException e) {
                 System.out.println("Server crashed :( Please try restart your client and login with your credentials again");
+                running = false;
+            } catch (IOException e) {
+                System.out.println("Server crashed :( Please try restart your client and login with your credentials again");
+                running = false;
             }
             try {
                 Thread.sleep(5000);

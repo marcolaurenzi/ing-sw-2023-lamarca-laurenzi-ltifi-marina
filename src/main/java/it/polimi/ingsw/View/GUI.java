@@ -42,6 +42,7 @@ public class GUI implements RemoteUI {
      * The ID of the game.
      */
     private static int gameId;
+    public static Thread thread;
     /**
      * The client of the game.
      */
@@ -62,7 +63,6 @@ public class GUI implements RemoteUI {
      * The shared object.
      */
     private static SharedObject sharedObject;
-
     /**
      * Connects to the server based on the selected connection mode.
      *
@@ -80,6 +80,7 @@ public class GUI implements RemoteUI {
             throw new ConnectionException();
         }
         System.out.println("Connection to server: SUCCESSFUL");
+        thread.start();
     }
 
     /**
@@ -124,6 +125,9 @@ public class GUI implements RemoteUI {
                 System.exit(-1);
             }
         }
+    }
+    public static void ping() throws IOException, RemoteException {
+        client.ping();
     }
 
     /**

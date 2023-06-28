@@ -7,7 +7,7 @@ public enum TypeEnum {
 	/**
 	 * Represents the type "CATS".
 	 */
-	CATS,
+	CATS,  
 	/**
 	 * Represents the type "BOOKS".
 	 */

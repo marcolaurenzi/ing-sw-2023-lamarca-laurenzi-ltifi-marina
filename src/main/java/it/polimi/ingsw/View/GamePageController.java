@@ -22,6 +22,7 @@ import javax.imageio.IIOException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -199,6 +200,30 @@ public class GamePageController implements ViewController{
      */
     public void initialize() {
         GUI.setController(this);
+        Thread t1 = new Thread(new Runnable() {
+            boolean running = true;
+            public void run() {
+                while (running) {
+                    try {
+                        GUI.ping();
+                    } catch (RemoteException e) {
+                        running = false;
+                        System.out.println("server crashed, please restart your client");
+                        printError("server crashed, please restart your client");
+                    } catch (IOException e) {
+                        running = false;
+                        System.out.println("server crashed, please restart your client");
+                        printError("server crashed, please restart your client");
+                    }
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        GUI.thread = t1;
         setEndGamePlayer(null);
         for(int i = 0; i < 5; i++) {
             Button currButton = (Button) mainHBox.lookup("#column" + i + "Button");

@@ -124,7 +124,7 @@ public class CreateNewGameController implements ViewController {
      *
      * @param string the error message to display
      */
-    private void printError(String string) {
+    public void printError(String string) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Attention");
         alert.setContentText(string);

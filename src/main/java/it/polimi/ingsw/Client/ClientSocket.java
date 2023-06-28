@@ -178,13 +178,10 @@ public class ClientSocket implements Client, RemoteClient {
     }
 
     @Override
-    public void ping() throws RemoteException {
+    public void ping() throws RemoteException, IOException {
         List<Object> parameters = new ArrayList<>();
-        try {
-            dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.ping, parameters, null, null)));
-        } catch (IOException e) {
-            System.out.println("Server crashed :( please restart your client and login using the same username and password");
-        }
+        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.ping, parameters, null, null)));
+
     }
 
     /**

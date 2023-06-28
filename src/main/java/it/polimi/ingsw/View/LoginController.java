@@ -200,7 +200,7 @@ public class LoginController extends Application implements ViewController {
      * @param string The error message to display.
      * @throws IOException In case of an input/output exception.
      */
-    public static void printError(String string) throws IOException {
+    public void printError(String string)  {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("ERROR");
         alert.setHeaderText(null);

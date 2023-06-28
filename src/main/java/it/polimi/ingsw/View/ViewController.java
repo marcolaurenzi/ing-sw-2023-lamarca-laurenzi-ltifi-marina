@@ -7,4 +7,5 @@ import javafx.application.Application;
  * The ViewController interface represents the view for classes that act as controllers.
  */
 public interface ViewController {
+    void printError(String serverCrashed);
 }
