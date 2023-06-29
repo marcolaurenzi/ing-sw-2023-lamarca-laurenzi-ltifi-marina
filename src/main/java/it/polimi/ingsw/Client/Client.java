@@ -104,5 +104,10 @@ public interface Client {
      */
     void choosePassword(String playerId, String password) throws IOException, InterruptedException, WrongMessageClassEnumException, PlayerIdAlreadyInUseException;
 
+    /**
+     *ping
+     * @throws RemoteException if the remote object is not bound
+     * @throws IOException if an I/O error occurs
+     */
     void ping() throws RemoteException, IOException;
 }

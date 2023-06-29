@@ -3,10 +3,18 @@ package it.polimi.ingsw.Client;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
+/**
+ * The PingingTUI class represents a thread that pings the server every 5 seconds.
+ */
 public class PingingTUI extends Thread{
     private final TUI tui;
     private boolean running = true;
 
+    /**
+     * Initializes a new instance of the PingingTUI class with the specified TUI.
+     *
+     * @param tui The TUI.
+     */
     public PingingTUI(TUI tui) {
         this.tui = tui;
     }
@@ -30,7 +38,4 @@ public class PingingTUI extends Thread{
         }
     }
 
-    public synchronized void stopThread() {
-        running = false;
-    }
 }

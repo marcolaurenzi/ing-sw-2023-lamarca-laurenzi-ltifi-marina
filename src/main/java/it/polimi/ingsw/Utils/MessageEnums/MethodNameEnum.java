@@ -49,10 +49,12 @@ public enum MethodNameEnum {
      * Method name for checking a password.
      */
     checkPassword,
-
+    /**
+     * Method name for pinging.
+     */
     ping,
     /**
-     * Method name for picking and inserting a dice in the bookshelf.
+     * Method name for picking and inserting a tile and put it in the bookshelf.
      */
     pickAndInsertInBookshelf
 }

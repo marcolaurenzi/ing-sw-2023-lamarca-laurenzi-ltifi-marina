@@ -42,6 +42,9 @@ public class GUI implements RemoteUI {
      * The ID of the game.
      */
     private static int gameId;
+    /**
+     * Threads.
+     */
     public static Thread thread;
     /**
      * The client of the game.
@@ -126,7 +129,13 @@ public class GUI implements RemoteUI {
             }
         }
     }
-    public static void ping() throws IOException, RemoteException {
+
+    /**
+     * ping.
+     *
+     * @throws IOException if there is an I/O error during the process
+     */
+    public static void ping() throws IOException {
         client.ping();
     }
 

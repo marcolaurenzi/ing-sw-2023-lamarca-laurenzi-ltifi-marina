@@ -33,6 +33,10 @@ public class Player {
      */
     private int commonGoalPoints;
 
+    /**
+     *getter for the player's state
+     * @return the player's state
+     */
     public PlayerState getState() {
         return state;
     }

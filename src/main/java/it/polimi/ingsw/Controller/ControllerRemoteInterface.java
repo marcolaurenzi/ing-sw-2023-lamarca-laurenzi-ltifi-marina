@@ -98,5 +98,10 @@ public interface ControllerRemoteInterface extends Remote {
          */
         void choosePassword(String playerId, String password) throws RemoteException, PlayerIdAlreadyInUseException;
 
+        /**
+         * ping
+         * @throws RemoteException If a communication-related error occurs.
+         */
+
         void ping() throws RemoteException;
 }

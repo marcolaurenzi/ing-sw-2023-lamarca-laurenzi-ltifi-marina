@@ -1,18 +1,10 @@
 package it.polimi.ingsw.View;
 
-import it.polimi.ingsw.Controller.Observer;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Utils.GameStatusToSend;
-import it.polimi.ingsw.Utils.Utils;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -23,8 +15,14 @@ import java.util.*;
  */
 public class EndGameController {
 
+    /**
+     * The current stage.
+     */
     private Stage currentStage;
 
+    /**
+     * The current scene.
+     */
     private Scene currentScene;
 
     /**
@@ -39,26 +37,23 @@ public class EndGameController {
     @FXML
     private AnchorPane endGameAnchorPane;
 
+    /**
+     * The map containing the points of each player.
+     */
     private HashMap<String, Integer> playerPoints;
 
-    public HashMap<String, Integer> getPointsMap() {
-        return playerPoints;
-    }
-
+    /**
+     * Sets player's points.
+     *
+     * @param playerPoints the map containing the points of each player
+     */
     public void setPlayerPoints(HashMap<String, Integer> playerPoints) {
         this.playerPoints = playerPoints;
     }
 
-    private HashMap<Integer, String> playersId;
-
-    public HashMap<Integer, String> getPlayersId() {
-        return playersId;
-    }
-
-    public void setPlayersId(HashMap<Integer, String> players) {
-        this.playersId = players;
-    }
-
+    /**
+     * Initializes the scene.
+     */
     public void initialize() {
 
     }
@@ -85,9 +80,17 @@ public class EndGameController {
         });
     }
 
+    /**
+     * Sets the current stage.
+     * @param currentStage the current stage
+     */
     public void setCurrentStage(Stage currentStage) {
         this.currentStage = currentStage;
     }
+
+    /**
+     * Prints the ranking of the players on the screen.
+     */
 
     public void printPlayerInfo() {
 
@@ -114,6 +117,10 @@ public class EndGameController {
         });
     }
 
+    /**
+     * Sets the current scene.
+     * @param scene the current scene
+     */
     public void setScene(Scene scene) {
         currentScene = scene;
     }

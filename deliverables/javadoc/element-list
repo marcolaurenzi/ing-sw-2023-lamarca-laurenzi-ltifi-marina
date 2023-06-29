@@ -1,0 +1,14 @@
+it.polimi.ingsw
+it.polimi.ingsw.Client
+it.polimi.ingsw.Controller
+it.polimi.ingsw.Model
+it.polimi.ingsw.Model.Decks
+it.polimi.ingsw.Model.Exceptions
+it.polimi.ingsw.Model.GameState
+it.polimi.ingsw.Model.Goals.CommonGoals
+it.polimi.ingsw.Model.Goals.PersonalGoals
+it.polimi.ingsw.Model.PlayerState
+it.polimi.ingsw.Server
+it.polimi.ingsw.Utils
+it.polimi.ingsw.Utils.MessageEnums
+it.polimi.ingsw.View

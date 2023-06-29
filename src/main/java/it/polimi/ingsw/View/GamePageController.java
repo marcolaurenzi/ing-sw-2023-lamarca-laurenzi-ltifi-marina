@@ -779,6 +779,11 @@ public class GamePageController implements ViewController{
         });
     }
 
+    /**
+     * Sends the end game message to the controller.
+     * @param endGameController the end game controller.
+     */
+
     public void sendEndGameMessage(EndGameController endGameController) {
         HashMap<String, Integer> points = new HashMap<>();
         Integer p0, p1, p2, p3;
@@ -800,6 +805,10 @@ public class GamePageController implements ViewController{
         }
         endGameController.setPlayerPoints(points);
     }
+
+    /**
+     * Returns to the login page.
+     */
 
     public void returnToLogin() {
         Platform.runLater(() -> {
