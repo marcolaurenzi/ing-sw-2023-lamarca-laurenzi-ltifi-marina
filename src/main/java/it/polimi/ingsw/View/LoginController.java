@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import jdk.jshell.execution.Util;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -112,8 +111,6 @@ public class LoginController extends Application implements ViewController {
         this.username = username.getText();
         this.password = password.getText();
         this.connectionMode = connectionMenu.getValue();
-
-        System.out.println(username.getText() + password.getText() + connectionMode);
 
         try {
             connectToServer();

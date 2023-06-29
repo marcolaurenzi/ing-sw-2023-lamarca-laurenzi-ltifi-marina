@@ -233,7 +233,6 @@ public class GamePageController implements ViewController{
             final int finalI = i;
             buttons.add(currButton);
             currButton.setOnAction(event -> {
-                System.out.println("bookShelf button " + finalI + " clicked");
                 turnSelectionHandler.selectColumn(finalI);
                 resetGlobalPickCounter();
             });
@@ -288,10 +287,8 @@ public class GamePageController implements ViewController{
                         final int finalI = i;
                         final int finalJ = j;
                         if (isYourTurn()) {
-                            System.out.println("Setting on action: ");
                             button.setOnAction(event -> {
                                 turnSelectionHandler.select(finalI, finalJ, imageView, button);
-                                System.out.println("Button " + finalI + " " + finalJ + " selected");
                                 Stream<Button> stream = GamePageController.buttons.stream();
                                 stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
                             });

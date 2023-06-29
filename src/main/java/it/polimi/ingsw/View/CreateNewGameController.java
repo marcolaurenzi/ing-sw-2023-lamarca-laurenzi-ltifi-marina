@@ -147,8 +147,6 @@ public class CreateNewGameController implements ViewController {
     public void setLayout(Scene scene) {
         double width = scene.lookup("#background").getLayoutBounds().getWidth();
         double height = scene.lookup("#background").getLayoutBounds().getHeight();
-        System.out.println(width);
-        System.out.println(height);
         anchorPane.getChildren().forEach(node -> {
             if (node instanceof Button) {
                 switch (((Button) node).getText()) {

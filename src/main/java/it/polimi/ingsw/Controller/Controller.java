@@ -564,7 +564,6 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
             throw new PlayerIdAlreadyInUseException();
         } else {
             String temp = calcDigest(password);
-            System.out.println("Password: " + temp);
             listCredentials.put(playerId, temp);
         }
     }
