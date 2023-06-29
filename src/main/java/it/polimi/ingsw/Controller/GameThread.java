@@ -73,7 +73,6 @@ public class GameThread extends Thread {
                     if (!Controller.isPlayerConnected(game.getCurrentPlayer().getPlayerID())) {
                         game.nextTurn();
                         if (i == game.getMaxPlayers() - 1) {
-                            System.out.println("Porcozio" + i);
                             Thread.sleep(1000);
                         }
                     } else {
