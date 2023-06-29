@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Model.Exceptions.*;
-
 import java.io.IOException;
 import java.rmi.NotBoundException;
 /**

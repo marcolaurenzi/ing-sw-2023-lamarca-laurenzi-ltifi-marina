@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Model.Bookshelf;
-import it.polimi.ingsw.Utils.Utils;
-
 import java.io.IOException;
 
 /**

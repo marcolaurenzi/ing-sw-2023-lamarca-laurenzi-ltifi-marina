@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Exceptions.PickDoesntFitColumnException;
 import it.polimi.ingsw.Model.Exceptions.PickedColumnOutOfBoundsException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -1,11 +1,23 @@
 package it.polimi.ingsw.Model.Exceptions;
 
-import it.polimi.ingsw.Model.Exceptions.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for the Exceptions classes.
+ */
 public class ExceptionsTest {
 
+    /**
+     * Class constructor.
+     */
+    public ExceptionsTest() {
+
+    }
+
+    /**
+     * Test of AlreadyStartedGameException class.
+     */
     @Test
     public void testAlreadyStartedGameException() {
         AlreadyStartedGameException exception = Assertions.assertThrows(AlreadyStartedGameException.class, () -> {
@@ -14,6 +26,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Game already started.", exception.getMessage());
     }
 
+    /**
+     * Test of ColumnNotValidException class.
+     */
     @Test
     public void testColumnNotValidException() {
         ColumnNotValidException exception = Assertions.assertThrows(ColumnNotValidException.class, () -> {
@@ -22,6 +37,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Column is not valid.", exception.getMessage());
     }
 
+    /**
+     * Test of ConnectionException class.
+     */
     @Test
     public void testConnectionException() {
         ConnectionException exception = Assertions.assertThrows(ConnectionException.class, () -> {
@@ -30,6 +48,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Connection error.", exception.getMessage());
     }
 
+    /**
+     * Test of CreateNewGameException class.
+     */
     @Test
     public void testCreateNewGameException() {
         CreateNewGameException exception = Assertions.assertThrows(CreateNewGameException.class, () -> {
@@ -38,6 +59,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Error creating new game.", exception.getMessage());
     }
 
+    /**
+     * Test of DisconnectedPlayerException class.
+     */
     @Test
     public void testDisconnectedPlayerException() {
         DisconnectedPlayerException exception = Assertions.assertThrows(DisconnectedPlayerException.class, () -> {
@@ -46,6 +70,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Player disconnected.", exception.getMessage());
     }
 
+    /**
+     * Test of FinishedGameException class.
+     */
     @Test
     public void testFinishedGameException() {
         FinishedGameException exception = Assertions.assertThrows(FinishedGameException.class, () -> {
@@ -54,6 +81,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Game has finished.", exception.getMessage());
     }
 
+    /**
+     * Test of GameAlreadyCreatedException class.
+     */
     @Test
     public void testGameAlreadyCreatedException() {
         GameAlreadyCreatedException exception = Assertions.assertThrows(GameAlreadyCreatedException.class, () -> {
@@ -62,6 +92,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Game already created.", exception.getMessage());
     }
 
+    /**
+     * Test of GameNotStartedException class.
+     */
     @Test
     public void testGameNotStartedException() {
         GameNotStartedException exception = Assertions.assertThrows(GameNotStartedException.class, () -> {
@@ -70,6 +103,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Game has not started.", exception.getMessage());
     }
 
+    /**
+     * Test of MaxNumberOfPlayersException class.
+     */
     @Test
     public void testMaxNumberOfPlayersException() {
         MaxNumberOfPlayersException exception = Assertions.assertThrows(MaxNumberOfPlayersException.class, () -> {
@@ -78,6 +114,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Maximum number of players exceeded.", exception.getMessage());
     }
 
+    /**
+     * Test of MissingPlayerException class.
+     */
     @Test
     public void testMissingPlayerException() {
         MissingPlayerException exception = Assertions.assertThrows(MissingPlayerException.class, () -> {
@@ -86,6 +125,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Player is missing.", exception.getMessage());
     }
 
+    /**
+     * Test of NumberOfPlayersException class.
+     */
     @Test
     public void testNumberOfPlayersException() {
         NumberOfPlayersException exception = Assertions.assertThrows(NumberOfPlayersException.class, () -> {
@@ -94,6 +136,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Number of players is not valid.", exception.getMessage());
     }
 
+    /**
+     * Test of PickDoesntFitColumnException class.
+     */
     @Test
     public void testPickDoesntFitColumnException() {
         PickDoesntFitColumnException exception = Assertions.assertThrows(PickDoesntFitColumnException.class, () -> {
@@ -102,6 +147,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Picked item doesn't fit in the column.", exception.getMessage());
     }
 
+    /**
+     * Test of PickedColumnOutOfBoundsException class.
+     */
     @Test
     public void testPickedColumnOutOfBoundsException() {
         PickedColumnOutOfBoundsException exception = Assertions.assertThrows(PickedColumnOutOfBoundsException.class, () -> {
@@ -110,6 +158,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Column index is out of bounds.", exception.getMessage());
     }
 
+    /**
+     * Test of PlayerIdAlreadyInUseException class.
+     */
     @Test
     public void testPlayerIdAlreadyInUseException() {
         PlayerIdAlreadyInUseException exception = Assertions.assertThrows(PlayerIdAlreadyInUseException.class, () -> {
@@ -118,6 +169,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Player ID is already in use.", exception.getMessage());
     }
 
+    /**
+     * Test of PlayerIsWaitingException class.
+     */
     @Test
     public void testPlayerIsWaitingException() {
         PlayerIsWaitingException exception = Assertions.assertThrows(PlayerIsWaitingException.class, () -> {
@@ -126,6 +180,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Player is in a waiting state.", exception.getMessage());
     }
 
+    /**
+     * Test of PlayerOnlineException class.
+     */
     @Test
     public void testPlayerOnlineException() {
         PlayerOnlineException exception = Assertions.assertThrows(PlayerOnlineException.class, () -> {
@@ -134,6 +191,9 @@ public class ExceptionsTest {
         Assertions.assertNotNull(exception);
     }
 
+    /**
+     * Test of SelectionIsEmptyException class.
+     */
     @Test
     public void testSelectionIsEmptyException() {
         SelectionIsEmptyException exception = Assertions.assertThrows(SelectionIsEmptyException.class, () -> {
@@ -142,6 +202,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Selection is empty.", exception.getMessage());
     }
 
+    /**
+     * Test of SelectionIsFullException class.
+     */
     @Test
     public void testSelectionIsFullException() {
         SelectionIsFullException exception = Assertions.assertThrows(SelectionIsFullException.class, () -> {
@@ -150,6 +213,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Selection is full.", exception.getMessage());
     }
 
+    /**
+     * Test of SelectionNotValidException class.
+     */
     @Test
     public void testSelectionNotValidException() {
         SelectionNotValidException exception = Assertions.assertThrows(SelectionNotValidException.class, () -> {
@@ -158,6 +224,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Selection is not valid.", exception.getMessage());
     }
 
+    /**
+     * Test of SelectionSizeDifferentFromOrderLengthException class.
+     */
     @Test
     public void testTilesSelectionSizeDifferentFromOrderLengthException() {
         TilesSelectionSizeDifferentFromOrderLengthException exception = Assertions.assertThrows(TilesSelectionSizeDifferentFromOrderLengthException.class, () -> {
@@ -166,6 +235,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Selected tiles size is different from order length.", exception.getMessage());
     }
 
+    /**
+     * Test of VoidBoardTileException class.
+     */
     @Test
     public void testVoidBoardTileException() {
         VoidBoardTileException exception = Assertions.assertThrows(VoidBoardTileException.class, () -> {
@@ -174,6 +246,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Attempting to access a void board tile.", exception.getMessage());
     }
 
+    /**
+     * Test of WrongConfigurationException class.
+     */
     @Test
     public void testWrongConfigurationException() {
         WrongConfigurationException exception = Assertions.assertThrows(WrongConfigurationException.class, () -> {
@@ -182,6 +257,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Incorrect game configuration.", exception.getMessage());
     }
 
+    /**
+     * Test of WrongMessageClassEnumException class.
+     */
     @Test
     public void testWrongMessageClassEnumException() {
         WrongMessageClassEnumException exception = Assertions.assertThrows(WrongMessageClassEnumException.class, () -> {
@@ -190,6 +268,9 @@ public class ExceptionsTest {
         Assertions.assertEquals("Incorrect message class enumeration.", exception.getMessage());
     }
 
+    /**
+     * Test of WrongPasswordException class.
+     */
     @Test
     public void testWrongPasswordException() {
         WrongPasswordException exception = Assertions.assertThrows(WrongPasswordException.class, () -> {

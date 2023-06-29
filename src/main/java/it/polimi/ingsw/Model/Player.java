@@ -6,7 +6,6 @@ import it.polimi.ingsw.Model.PlayerState.PlayerState;
 import it.polimi.ingsw.Model.PlayerState.PlayerStateSelecting;
 import it.polimi.ingsw.Model.PlayerState.PlayerStateWaiting;
 import it.polimi.ingsw.Utils.PlayerStatusToFile;
-
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.Model.TypeEnum.BOOKS;

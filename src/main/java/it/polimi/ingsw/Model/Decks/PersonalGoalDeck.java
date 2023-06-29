@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model.Decks;
 
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;

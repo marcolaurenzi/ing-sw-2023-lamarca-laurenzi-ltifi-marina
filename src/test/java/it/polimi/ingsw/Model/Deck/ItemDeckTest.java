@@ -1,13 +1,16 @@
 package it.polimi.ingsw.Model.Deck;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
-import it.polimi.ingsw.Model.Item;
 import org.junit.Test;
 
+/**
+ * Unit tests for the ItemDeck class.
+ */
 public class ItemDeckTest {
 
-
-
+    /**
+     * Tests the initializeDeck method.
+     */
     @Test
     public void testInitializeDeck() {
         ItemDeck deck = new ItemDeck();
@@ -17,6 +20,9 @@ public class ItemDeckTest {
         }
     }
 
+    /**
+     * Tests the shuffle method.
+     */
     @Test
     public void testShuffle() {
         ItemDeck deck1 = new ItemDeck();
@@ -28,6 +34,9 @@ public class ItemDeckTest {
         }
     }
 
+    /**
+     * Tests the getDeck method.
+     */
     @Test
     public void testGetDeck() {
         ItemDeck deck = new ItemDeck();

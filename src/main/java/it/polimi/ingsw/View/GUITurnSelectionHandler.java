@@ -78,11 +78,6 @@ public class GUITurnSelectionHandler {
      */
     public void disableButtons(Button button) {
         button.setDisable(middletile);
-
-        if(middletile)
-            System.out.println("Button disabled");
-        else
-            System.out.println("Button enabled");
     }
 
     /**

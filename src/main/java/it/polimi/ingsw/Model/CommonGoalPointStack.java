@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
-
 import java.io.Serializable;
 import java.util.EmptyStackException;
 import java.util.Stack;

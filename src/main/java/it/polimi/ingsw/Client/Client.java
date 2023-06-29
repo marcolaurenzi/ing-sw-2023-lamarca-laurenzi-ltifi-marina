@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 

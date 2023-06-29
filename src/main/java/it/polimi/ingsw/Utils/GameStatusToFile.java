@@ -3,7 +3,6 @@ package it.polimi.ingsw.Utils;
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Decks.ItemDeck;
 import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
-
 import java.util.ArrayList;
 import java.util.Stack;
 

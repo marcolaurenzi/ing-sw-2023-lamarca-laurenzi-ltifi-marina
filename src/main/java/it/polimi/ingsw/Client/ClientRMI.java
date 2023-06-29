@@ -6,7 +6,6 @@ import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.IpConfig;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -109,17 +108,6 @@ public class ClientRMI extends UnicastRemoteObject implements Client, RemoteClie
     @Override
     public void pickAndInsertInBookshelf(ArrayList<Coordinates> tilesSelection, int column, int[] order, String playerId) throws PlayerIsWaitingException, SelectionIsEmptyException, SelectionNotValidException, ColumnNotValidException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, TilesSelectionSizeDifferentFromOrderLengthException, VoidBoardTileException, WrongConfigurationException, RemoteException {
         controller.pickAndInsertInBookshelf(tilesSelection, column, order, playerId);
-    }
-
-    /**
-     * Fills the bookshelf completely.
-     *
-     * @throws RemoteException if a remote communication error occurs.
-     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
-     * @throws PickDoesntFitColumnException if the pick doesn't fit the column.
-     */
-    public void fillCompletely() throws RemoteException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
-        controller.fillCompletely();
     }
 
     /**

@@ -1,14 +1,12 @@
 package it.polimi.ingsw.Client;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MethodNameEnum;
-
 import java.io.IOException;
 import java.net.Socket;
 import java.rmi.RemoteException;
@@ -125,7 +123,6 @@ public class ClientSocket implements Client, RemoteClient {
             }
         }
 
-        // todo avoid casting
         return ((Double)response.getReturnValue()).intValue();
     }
 
@@ -165,17 +162,6 @@ public class ClientSocket implements Client, RemoteClient {
         return  ((Double)response.getReturnValue()).intValue();
     }
 
-    /**
-     * Adds an observer to the game.
-     *
-     * @param playerId The ID of the player.
-     * @throws IOException If an I/O error occurs.
-     */
-    public void addObserver(String playerId) throws IOException {
-        List<Object> parameters = new ArrayList<>();
-        parameters.add(playerId);
-        dataOutput.writeUTF(gson.toJson(new Message(MessageTypeEnum.methodCall, null, null, MethodNameEnum.addObserver, parameters, null, null)));
-    }
 
     @Override
     public void ping() throws RemoteException, IOException {

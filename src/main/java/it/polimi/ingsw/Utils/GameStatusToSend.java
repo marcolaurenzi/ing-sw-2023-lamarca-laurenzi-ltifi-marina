@@ -3,7 +3,6 @@ package it.polimi.ingsw.Utils;
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 

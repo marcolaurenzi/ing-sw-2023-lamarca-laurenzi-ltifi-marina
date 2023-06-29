@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
-
 import java.io.Serializable;
 
 /**

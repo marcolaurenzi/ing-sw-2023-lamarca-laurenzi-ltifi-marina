@@ -1,14 +1,11 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.GameStatusToSend;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
 
 /**
  * The RemoteClient interface represents a remote client in the game.

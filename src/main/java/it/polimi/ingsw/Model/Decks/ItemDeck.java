@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model.Decks;
 
 import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Model.Item;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

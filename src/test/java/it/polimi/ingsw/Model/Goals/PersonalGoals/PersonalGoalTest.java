@@ -105,7 +105,6 @@ public class PersonalGoalTest {
     /**
      * Tests the get method.
      *
-     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
      * @throws IOException if there is an error loading the bookshelf from a file.
      */
     @Test
@@ -119,7 +118,6 @@ public class PersonalGoalTest {
     /**
      * Test the setPersonalGoal method.
      *
-     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
      * @throws IOException if there is an error loading the bookshelf from a file.
      */
     @Test
@@ -134,7 +132,6 @@ public class PersonalGoalTest {
     /**
      * Test the setPersonalGoal method.
      *
-     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
      * @throws IOException if there is an error loading the bookshelf from a file.
      */
     @Test

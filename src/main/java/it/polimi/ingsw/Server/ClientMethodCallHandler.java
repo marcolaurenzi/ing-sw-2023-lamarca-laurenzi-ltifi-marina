@@ -7,7 +7,6 @@ import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
-
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;

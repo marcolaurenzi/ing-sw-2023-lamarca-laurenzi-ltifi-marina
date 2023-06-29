@@ -1,10 +1,6 @@
 package it.polimi.ingsw.Utils;
 
-import it.polimi.ingsw.Controller.Observer;
-import it.polimi.ingsw.Model.Game;
-
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * This class represents the controller status to file, which contains information about the current game ID,

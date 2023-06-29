@@ -106,11 +106,8 @@ public class BoardTest {
         assert !board.toRefresh();
     }
 
-    /** Tests the initializeBoard method of the Board class.
-     *
-     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
-     * @throws IOException if an I/O error occurs.
-     * @throws AlreadyStartedGameException if the game has already started.
+    /**
+     * Tests the initializeBoard method of the Board class.
      */
     @Test
     public void removeItemTest() {

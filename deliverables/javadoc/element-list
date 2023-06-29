@@ -2,6 +2,7 @@ it.polimi.ingsw
 it.polimi.ingsw.Client
 it.polimi.ingsw.Controller
 it.polimi.ingsw.Model
+it.polimi.ingsw.Model.Deck
 it.polimi.ingsw.Model.Decks
 it.polimi.ingsw.Model.Exceptions
 it.polimi.ingsw.Model.GameState

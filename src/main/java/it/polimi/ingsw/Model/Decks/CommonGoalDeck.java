@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model.Decks;
 
 import it.polimi.ingsw.Model.Goals.CommonGoals.*;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +20,6 @@ public class CommonGoalDeck implements Deck<CommonGoal> {
      * Represents the deck of common goals.
      */
     List<CommonGoal> deck;
-    private static final String pathToConfigFile = "resources/configuration/configurationFile.json";
 
     /**
      * Shuffles the deck of common goals.

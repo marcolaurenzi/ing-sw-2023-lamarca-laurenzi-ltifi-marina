@@ -5,8 +5,8 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.Item;
-
 import java.util.ArrayList;
+
 /**
  *This class represents the state of a player during the game.
  */

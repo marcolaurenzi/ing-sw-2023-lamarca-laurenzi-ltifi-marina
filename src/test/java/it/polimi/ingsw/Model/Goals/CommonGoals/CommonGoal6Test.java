@@ -152,8 +152,6 @@ public class CommonGoal6Test {
 
     /**
      * Test if the Bookshelf filled all with the same element achieves the goal.
-     *
-     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
      */
     @Test
     public void getGoalNameTest() {
@@ -162,8 +160,6 @@ public class CommonGoal6Test {
 
     /**
      * Test if the Bookshelf filled all with the same element achieves the goal.
-     *
-     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
      */
     @Test
     public void getGoalDescriptionTest() {
@@ -172,8 +168,6 @@ public class CommonGoal6Test {
 
     /**
      * Test if the Bookshelf filled all with the same element achieves the goal.
-     *
-     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
      */
     @Test
     public void getGoalFileNumberTest() {

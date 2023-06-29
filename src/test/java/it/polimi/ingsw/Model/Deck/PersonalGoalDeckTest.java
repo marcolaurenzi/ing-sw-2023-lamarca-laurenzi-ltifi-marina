@@ -4,8 +4,15 @@ import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 import org.junit.Test;
 
+/**
+ * Unit tests for the PersonalGoalDeck class.
+ */
 public class PersonalGoalDeckTest {
 
+    /**
+     * Tests the initializeDeck method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     public void testInitializeDeck() throws Exception {
         PersonalGoalDeck personalGoalDeck = new PersonalGoalDeck();
@@ -15,6 +22,10 @@ public class PersonalGoalDeckTest {
         }
     }
 
+    /**
+     * Tests the shuffle method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     public void testShuffle() throws Exception {
         PersonalGoalDeck personalGoalDeck = new PersonalGoalDeck();
@@ -28,6 +39,10 @@ public class PersonalGoalDeckTest {
         }
     }
 
+    /**
+     * Tests the draw method.
+     * @throws Exception if an error occurs during the test.
+     */
     @Test
     public void testDraw() throws Exception {
         PersonalGoalDeck personalGoalDeck = new PersonalGoalDeck();

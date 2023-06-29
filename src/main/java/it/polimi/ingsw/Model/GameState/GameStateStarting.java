@@ -3,8 +3,8 @@ package it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Exceptions.GameNotStartedException;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
-
 import java.util.ArrayList;
+
 /**
  *This class represents the state of the game when it has not started yet.
  */

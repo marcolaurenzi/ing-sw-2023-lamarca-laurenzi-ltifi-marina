@@ -36,8 +36,6 @@ public class CommonGoal4Test {
 
     /**
      * Testing the corner case where the pointer is null.
-     *
-     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     public void getGoalNameTest() {
@@ -46,8 +44,6 @@ public class CommonGoal4Test {
 
     /**
      * Testing the corner case where the pointer is null.
-     *
-     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     public void getGoalFileNumberTest() {
@@ -56,8 +52,6 @@ public class CommonGoal4Test {
 
     /**
      * Testing the corner case where the pointer is null.
-     *
-     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     public void getGoalDescriptionTest() {

@@ -1,13 +1,11 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Controller.Observer;
 import it.polimi.ingsw.Model.Board;
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.Utils;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;
@@ -147,8 +145,6 @@ public class TUI implements RemoteUI, UI {
 
         }
     }
-
-    //TODO understand why the compiler tells "Variable 'maxPlayers' might not have been initialized" if not initialized at the start of the code. May lead to a bug
 
     /**
      * Adds the player to an existing game or creates a new game and adds the player to it.

@@ -69,8 +69,6 @@ public class CommonGoal1Test {
 
     /**
      * Test case to verify that isAchieved() method returns true for a specific Bookshelf.
-     *
-     * @throws IOException if there is an I/O error.
      */
     @Test
     public void getGoalNameTest() {
@@ -82,8 +80,6 @@ public class CommonGoal1Test {
 
     /**
      * Test case to verify that isAchieved() method returns true for a specific Bookshelf.
-     *
-     * @throws IOException if there is an I/O error.
      */
     @Test
     public void getGoalDescriptionTest() {
@@ -95,6 +91,10 @@ public class CommonGoal1Test {
                 "Different groups may have tiles of different types."));
     }
 
+
+    /**
+     * Test case to verify the file number.
+     */
     @Test
     public void getGoalFileNumberTest() {
         CommonGoal01 goal = new CommonGoal01(2, 2);

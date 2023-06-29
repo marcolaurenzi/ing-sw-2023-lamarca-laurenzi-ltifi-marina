@@ -1,11 +1,7 @@
 package it.polimi.ingsw.Model.Decks;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * This abstract class represents the abstract concept of a generic Deck made of Objects

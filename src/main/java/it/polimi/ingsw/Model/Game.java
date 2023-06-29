@@ -6,12 +6,10 @@ import it.polimi.ingsw.Model.Decks.PersonalGoalDeck;
 import it.polimi.ingsw.Model.Exceptions.*;
 import it.polimi.ingsw.Model.GameState.*;
 import it.polimi.ingsw.Model.Goals.CommonGoals.*;
-
 import it.polimi.ingsw.Model.Goals.PersonalGoals.PersonalGoal;
 import it.polimi.ingsw.Utils.GameStatusToFile;
 import it.polimi.ingsw.Utils.PlayerStatusToFile;
 import it.polimi.ingsw.Utils.Utils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;

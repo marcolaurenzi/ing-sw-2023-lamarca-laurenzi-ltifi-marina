@@ -4,12 +4,12 @@ import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Utils.Utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
+/**
+ * Unit tests for the CommonGoal8 class.
+ */
 public class CommonGoal8Test {
 
     CommonGoal8 commonGoal8 = new CommonGoal8();
@@ -40,6 +40,7 @@ public class CommonGoal8Test {
 
 /**
      * This method tests the isAchieved method in CommonGoal8 class.
+ * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     @DisplayName("Test with valid columns but some identical combinations")
@@ -50,6 +51,7 @@ public class CommonGoal8Test {
 
     /**
      * This method tests the isAchieved method in CommonGoal8 class.
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     @DisplayName("Test with only one type of tile in the bookshelf")
@@ -60,6 +62,7 @@ public class CommonGoal8Test {
 
     /**
      * This method tests the isAchieved method in CommonGoal8 class.
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     @DisplayName("Test with different columns but no valid ones")
@@ -70,6 +73,7 @@ public class CommonGoal8Test {
 
     /**
      * This method tests the isAchieved method in CommonGoal8 class.
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     @DisplayName("Test with all valid columns")

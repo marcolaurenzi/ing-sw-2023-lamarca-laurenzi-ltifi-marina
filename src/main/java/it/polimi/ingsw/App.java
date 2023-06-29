@@ -6,7 +6,6 @@ import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
 import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Model.Exceptions.WrongMessageClassEnumException;
 import it.polimi.ingsw.View.LoginController;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.rmi.NotBoundException;

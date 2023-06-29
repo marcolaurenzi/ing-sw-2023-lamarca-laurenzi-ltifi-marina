@@ -5,10 +5,11 @@ import it.polimi.ingsw.Utils.Utils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Unit tests for the CommonGoal3 class.
+ */
 public class CommonGoal3Test {
 
     /**
@@ -43,6 +44,7 @@ public class CommonGoal3Test {
 
     /**
      * This method tests the isAchieved method in CommonGoal3 class.
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
      */
     @Test
     @DisplayName("Testing corner case where the whole matrix is void")

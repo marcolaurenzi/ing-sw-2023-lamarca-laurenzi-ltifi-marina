@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
-import it.polimi.ingsw.Model.Exceptions.VoidBoardTileException;
-
 import java.io.Serializable;
 
 /**

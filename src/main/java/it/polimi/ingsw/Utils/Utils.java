@@ -136,20 +136,6 @@ public class Utils {
         return bookshelves[index];
     }
 
-    /**
-     * Saves an object to a json file.
-     *
-     * @param filePath the path of the file
-     * @param object   the object to save
-     * @throws IOException if the file is not found
-     */
-    public static void saveToFile(String filePath, Object object) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(object);
-        FileWriter writer = new FileWriter(filePath);
-        writer.write(json);
-        writer.close();
-    }
 
     /**
      * Returns the item dimension.
@@ -164,29 +150,6 @@ public class Utils {
     /* ************************************************************************************************************
      *                          END OF json FUNCTIONS
      *                         START OF CUSTOM FUNCTIONS
-     ************************************************************************************************************ */
-
-    /**
-     * Returns a random item.
-     *
-     * @return the random item
-     */
-    public static Item getRandomItem() {
-        int random = (int) (Math.random() * 6);
-        return switch (random) {
-            case 0 -> new Item(TypeEnum.CATS);
-            case 1 -> new Item(TypeEnum.BOOKS);
-            case 2 -> new Item(TypeEnum.TROPHIES);
-            case 3 -> new Item(TypeEnum.PLANTS);
-            case 4 -> new Item(TypeEnum.GAMES);
-            case 5 -> new Item(TypeEnum.FRAMES);
-            default -> null;
-        };
-    }
-
-    /* ************************************************************************************************************
-     *                          END OF CUSTOM FUNCTIONS
-     *                         START OF COLOR FUNCTIONS
      ************************************************************************************************************ */
 
     /**

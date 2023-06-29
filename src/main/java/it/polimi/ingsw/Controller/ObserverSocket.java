@@ -2,7 +2,6 @@ package it.polimi.ingsw.Controller;
 
 import com.google.gson.Gson;
 import it.polimi.ingsw.Model.Exceptions.*;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.GameStatusToSend;
 import it.polimi.ingsw.Utils.Message;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
@@ -10,12 +9,12 @@ import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MethodNameEnum;
 import it.polimi.ingsw.Utils.ProxyDataInputStream;
 import it.polimi.ingsw.Utils.ProxyDataOutputStream;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 /**
  *The ObserverSocket class represents an observer that communicates with the server via socket.
  */

@@ -4,11 +4,20 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit test for the TypeEnum class.
+ */
 public class TypeEnumTest {
+    /**
+     * Constructor test.
+     */
     public TypeEnumTest() {
 
     }
 
+    /**
+     * Test for the toString method.
+     */
     @Test
     public void toString_returnsCorrectStringRepresentation() {
         // Arrange
@@ -18,6 +27,9 @@ public class TypeEnumTest {
         assertEquals("CATS", type.toString());
     }
 
+    /**
+     * Test for the getType method.
+     */
     @org.junit.Test
     public void getType() {
         assert (TypeEnum.CATS.toString().equals("CATS"));

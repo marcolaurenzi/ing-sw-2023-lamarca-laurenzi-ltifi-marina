@@ -56,11 +56,6 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     private static Integer currentGameId;
 
     /**
-     * ID of the first player in the current game.
-     */
-    private static String currentGameFirstPlayerId = null;
-
-    /**
      * Map of already used player IDs.
      */
     private static HashMap<String, Integer> alreadyUsedPlayerIds;
@@ -81,11 +76,6 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
     private static  HashMap<String, String> listCredentials;
 
     /**
-     * RemoteClient object for controller communication.
-     */
-    private static RemoteClient controllerConnection;
-
-    /**
      * Creates an instance of the Controller class.
      * Initializes the lists and variables used to manage games and players.
      * Loads the saved games from the file system, if any.
@@ -99,60 +89,10 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         currentGame = null;
 
 
-            /*
-            Path path = Paths.get("SavedGames");
-            if (Files.exists(path)) {
-                DirectoryStream<Path> dirStream = Files.newDirectoryStream(path);
-                Iterator<Path> it = dirStream.iterator();
-                if (it.hasNext()) {
-
-                    try (BufferedReader reader = Files.newBufferedReader(it.next())) {
-                        ControllerStatusToFile controllerStatus = gson.fromJson(reader.readLine(), ControllerStatusToFile.class);
-
-                        currentGameId = controllerStatus.getCurrentGameId();
-                        alreadyUsedPlayerIds = controllerStatus.getAlreadyUsedPlayerIds();
-                        listCredentials = controllerStatus.getListCredentials();
-
-                        for(String s : alreadyUsedPlayerIds.keySet()) {
-                            listConnected.put(s, false);
-                        }
-
-                    } catch (Exception e) {
-                        System.out.println("Exception " + e + " occurred when reading from SavedGames directory");
-                        e.printStackTrace();
-                        System.exit(-1);
-                    }
-
-                    while (it.hasNext()) {
-                        try (BufferedReader reader = Files.newBufferedReader(it.next())) {
-                            ArrayList<PlayerStatusToFile> playerStatus = new ArrayList<>();
-                            GameStatusToFile gameStatus = gson.fromJson(reader.readLine(), GameStatusToFile.class);
-
-
-                            for (int i = 0; i < gameStatus.getMaxPlayers(); i++) {
-                                playerStatus.add(gson.fromJson(reader.readLine(), PlayerStatusToFile.class));
-                            }
-
-                            Game game = new Game(gameStatus, playerStatus);
-                            games.add(game);
-                            GameThread gameThread = new GameThread(game);
-                            gameThread.start();
-
-
-                            for (PlayerStatusToFile p : playerStatus) {
-                                listConnected.put(p.getPlayerID(), false);
-                            }
-
-                        } catch (Exception e) {
-                            System.out.println("Corrupted file, game files are lost");
-                        }
-                    }
-                } */
 
         currentGameId = 0;
         alreadyUsedPlayerIds = new HashMap<>();
         listCredentials = new HashMap<>();
-
 
     }
 
@@ -587,48 +527,4 @@ public class Controller extends UnicastRemoteObject implements ControllerRemoteI
         return games;
     }
 
-    /**
-     * Returns the ID of the first player in the current game.
-     *
-     * @return the ID of the first player.
-     */
-    public static String getCurrentGameFirstPlayerId() {
-        return currentGameFirstPlayerId;
-    }
-
-    /**
-     * Returns the map of already used player IDs.
-     *
-     * @return the map of already used player IDs.
-     */
-    public static HashMap<String, Integer> getAlreadyUsedPlayerIds() {
-        return alreadyUsedPlayerIds;
-    }
-
-    /**
-     * Returns the map of player observers.
-     *
-     * @return the map of player observers.
-     */
-    public static HashMap<String, Observer> getListObserver() {
-        return listObserver;
-    }
-
-    /**
-     * Returns the map of connected players.
-     *
-     * @return the map of connected players.
-     */
-    public static HashMap<String, Boolean> getListConnected() {
-        return listConnected;
-    }
-
-    /**
-     * Returns the map of player credentials.
-     *
-     * @return the map of player credentials.
-     */
-    public static HashMap<String, String> getListCredentials() {
-        return listCredentials;
-    }
 }

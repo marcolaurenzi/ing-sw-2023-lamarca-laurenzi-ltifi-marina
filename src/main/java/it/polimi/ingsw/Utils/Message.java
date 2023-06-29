@@ -4,7 +4,6 @@ import it.polimi.ingsw.Model.Coordinates;
 import it.polimi.ingsw.Utils.MessageEnums.ExceptionEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MessageTypeEnum;
 import it.polimi.ingsw.Utils.MessageEnums.MethodNameEnum;
-
 import java.util.ArrayList;
 import java.util.List;
 

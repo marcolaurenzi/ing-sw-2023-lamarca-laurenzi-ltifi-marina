@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model.Goals.CommonGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.TypeEnum;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

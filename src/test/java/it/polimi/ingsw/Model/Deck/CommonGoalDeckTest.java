@@ -2,18 +2,29 @@ package it.polimi.ingsw.Model.Deck;
 
 import it.polimi.ingsw.Model.Decks.CommonGoalDeck;
 import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal;
-import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal01;
-import it.polimi.ingsw.Model.Goals.CommonGoals.CommonGoal2;
 import org.junit.Test;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
+
+/**
+ * Unit tests for the CommonGoalDeck class.
+ */
 public class CommonGoalDeckTest {
+    /**
+     * Constructor for the CommonGoalDeckTest class.
+     */
     public CommonGoalDeckTest() {
     }
+    /**
+     * CommonGoalDeck instance to test.
+     */
     CommonGoalDeck deck = new CommonGoalDeck();
 
+    /**
+     * Test of initializeDeck method.
+     *
+     * @throws FileNotFoundException if there is an I/O error.
+     */
     @Test
     public void testInitializeDeck() throws FileNotFoundException {
         deck.initializeDeck();
@@ -31,6 +42,11 @@ public class CommonGoalDeckTest {
         assert (deck.draw() instanceof CommonGoal);
     }
 
+    /**
+     * Test of draw method.
+     *
+     * @throws FileNotFoundException if there is an I/O error.
+     */
     @Test
     public void testShuffle() throws FileNotFoundException {
         deck.initializeDeck();

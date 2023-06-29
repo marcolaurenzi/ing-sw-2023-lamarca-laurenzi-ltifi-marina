@@ -7,11 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.rmi.*;
 import java.rmi.registry.*;
-
 import it.polimi.ingsw.Controller.Controller;
 import it.polimi.ingsw.Utils.IpConfig;
 import it.polimi.ingsw.Utils.MessageDispatcher;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Scanner;
