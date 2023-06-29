@@ -29,10 +29,10 @@
                                                 <Font name="System Bold Italic" size="12.0" />
                                              </font>
                                           </Label>
-                                          <VBox prefHeight="20.0" prefWidth="87.0" />
-                                          <Label fx:id="points1" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="34.0" textAlignment="RIGHT">
+                                          <VBox prefHeight="18.0" prefWidth="42.0" />
+                                          <Label fx:id="points1" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="81.0" textAlignment="RIGHT">
                                              <font>
-                                                <Font name="System Bold Italic" size="14.0" />
+                                                <Font name="System Bold Italic" size="12.0" />
                                              </font>
                                           </Label>
                                           <VBox prefHeight="20.0" prefWidth="42.0" />
@@ -105,7 +105,7 @@
                                           <VBox prefHeight="20.0" prefWidth="87.0" />
                                           <Label fx:id="points2" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="106.0" textAlignment="RIGHT">
                                              <font>
-                                                <Font name="System Bold Italic" size="14.0" />
+                                                <Font name="System Bold Italic" size="12.0" />
                                              </font>
                                           </Label>
                                           <VBox prefHeight="20.0" prefWidth="42.0" />
@@ -169,14 +169,14 @@
                                     <HBox prefHeight="18.0" prefWidth="104.0">
                                        <children>
                                           <VBox prefHeight="20.0" prefWidth="0.0" />
-                                          <Label fx:id="playerId3" prefHeight="18.0" prefWidth="180.0">
+                                          <Label fx:id="playerId3" prefHeight="18.0" prefWidth="142.0">
                                              <font>
                                                 <Font name="System Bold Italic" size="12.0" />
                                              </font></Label>
-                                          <VBox prefHeight="20.0" prefWidth="87.0" />
-                                          <Label fx:id="points3" alignment="CENTER_RIGHT" prefHeight="20.0" prefWidth="80.0" textAlignment="RIGHT">
+                                          <VBox prefHeight="18.0" prefWidth="66.0" />
+                                          <Label fx:id="points3" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="90.0" textAlignment="RIGHT">
                                              <font>
-                                                <Font name="System Bold Italic" size="14.0" />
+                                                <Font name="System Bold Italic" size="12.0" />
                                              </font></Label>
                                           <VBox prefHeight="20.0" prefWidth="42.0" />
                                        </children>
