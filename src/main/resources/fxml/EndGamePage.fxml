@@ -24,11 +24,11 @@
             <Image url="@../assets/Publisher material/Title 2000x618px.png" />
          </image>
       </ImageView>
-      <Label fx:id="winnerLabel" layoutX="208.0" layoutY="298.0" prefHeight="17.0" prefWidth="355.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="210.0">
+      <Label fx:id="winnerLabel" layoutX="111.0" layoutY="298.0" prefHeight="28.0" prefWidth="542.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="122.0">
          <font>
             <Font name="Zapf Dingbats" size="13.0" />
          </font></Label>
-      <Label fx:id="rankingLabel" layoutX="207.0" layoutY="364.0" prefHeight="219.0" prefWidth="355.0" />
+      <Label fx:id="rankingLabel" layoutX="80.0" layoutY="364.0" prefHeight="219.0" prefWidth="625.0" />
       <ImageView fitHeight="124.0" fitWidth="108.0" layoutX="610.0" layoutY="616.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Publisher material/Publisher.png" />

@@ -45,7 +45,7 @@ Java 19 is required to run.
 ## Running the Server
 To start the server, run the jar with the following line:
 ```
-java -jar Server.jar
+java -jar Server.jar 
 ```
 Once started the Server will ask you to provide your personal IP address. Be careful, a wrong IP will lead to an unsuccessful execution.
 
