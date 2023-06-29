@@ -35,6 +35,36 @@ public class CommonGoal4Test {
     }
 
     /**
+     * Testing the corner case where the pointer is null.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertEquals("CommonGoal4", goal.getGoalName());
+    }
+
+    /**
+     * Testing the corner case where the pointer is null.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assertEquals("5", goal.getGoalFileNumber());
+    }
+
+    /**
+     * Testing the corner case where the pointer is null.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assertEquals("Three full columns each containing tiles of three types at most.\nDifferent columns may have the same combination of tiles.", goal.getGoalDescription());
+    }
+
+    /**
      * Testing corner case where the whole matrix is void.
      *
      * @throws IOException if an I/O error occurs while loading the bookshelf from a file

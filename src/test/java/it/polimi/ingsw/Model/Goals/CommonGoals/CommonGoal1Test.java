@@ -66,4 +66,41 @@ public class CommonGoal1Test {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal1Test1Bookshelf.json");
         assertFalse(goal.isAchieved(bookshelf));
     }
+
+    /**
+     * Test case to verify that isAchieved() method returns true for a specific Bookshelf.
+     *
+     * @throws IOException if there is an I/O error.
+     */
+    @Test
+    public void getGoalNameTest() {
+        CommonGoal01 goal = new CommonGoal01(2, 2);
+        assertTrue(goal.getGoalName().equals("CommonGoal0"));
+        CommonGoal01 goal1 = new CommonGoal01(4, 4);
+        assertTrue(goal1.getGoalName().equals("CommonGoal1"));
+    }
+
+    /**
+     * Test case to verify that isAchieved() method returns true for a specific Bookshelf.
+     *
+     * @throws IOException if there is an I/O error.
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        CommonGoal01 goal = new CommonGoal01(2, 2);
+        assertTrue(goal.getGoalDescription().equals("2 groups each containing at least 2 tiles of the same type.\n" +
+                "Different groups may have tiles of different types."));
+        CommonGoal01 goal1 = new CommonGoal01(4, 4);
+        assertTrue(goal1.getGoalDescription().equals("4 groups each containing at least 4 tiles of the same type.\n" +
+                "Different groups may have tiles of different types."));
+    }
+
+    @Test
+    public void getGoalFileNumberTest() {
+        CommonGoal01 goal = new CommonGoal01(2, 2);
+        assertTrue(goal.getGoalFileNumber() == "2");
+        CommonGoal01 goal1 = new CommonGoal01(4, 4);
+        assertTrue(goal1.getGoalFileNumber() == "1");
+    }
+
 }

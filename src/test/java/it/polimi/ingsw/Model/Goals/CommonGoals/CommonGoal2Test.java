@@ -7,8 +7,9 @@ import org.junit.jupiter.api.DisplayName;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 /**
  * Unit tests for the CommonGoal2 class.
  */
@@ -38,6 +39,36 @@ public class CommonGoal2Test {
     public void emptyBookshelfTest() throws IOException {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "bookshelfOfNullTest.json");
         assertFalse("The empty bookshelf does not achieve the goal", commonGoal2.isAchieved(bookshelf));
+    }
+
+    /**
+     * Testing the corner case where the pointer is null.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertEquals("CommonGoal2", commonGoal2.getGoalName());
+    }
+
+    /**
+     * Testing the corner case where the pointer is null.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assertEquals("Four tiles of the same type at the four corners of the bookshelf.", commonGoal2.getGoalDescription());
+    }
+
+    /**
+     * Testing the corner case where the pointer is null.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assertEquals("3", commonGoal2.getGoalFileNumber());
     }
 
     /**

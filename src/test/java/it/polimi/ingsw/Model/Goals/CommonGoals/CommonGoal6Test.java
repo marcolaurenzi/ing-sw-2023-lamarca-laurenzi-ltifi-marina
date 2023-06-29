@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the CommonGoal6 class.
@@ -148,4 +149,35 @@ public class CommonGoal6Test {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal6Test8.json");
         assertTrue("The bookshelf filled all with the same element should achieve the goal", commonGoal6.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalNameTest() {
+    	assertEquals("CommonGoal6", commonGoal6.getGoalName());
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assert (commonGoal6.getGoalDescription().equals("Five tiles of the same type forming a diagonal.\nThe diagonal formed may be in any of the two directions."));
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assert (commonGoal6.getGoalFileNumber() == "7");
+    }
+
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the CommonGoal10 class.
@@ -54,4 +55,34 @@ public class CommonGoal10Test {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal10Test1.json");
         assertTrue(goal.isAchieved(bookshelf));
     }
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertEquals("CommonGoal10", goal.getGoalName());
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assert (goal.getGoalDescription().equals("Five tiles of the same color forming an X."));
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assert (goal.getGoalFileNumber() == "11");
+    }
+
 }

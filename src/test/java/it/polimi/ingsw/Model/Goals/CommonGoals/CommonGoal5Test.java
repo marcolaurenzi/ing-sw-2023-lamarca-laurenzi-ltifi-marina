@@ -76,4 +76,29 @@ public class CommonGoal5Test {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal5Test2.json");
         assertTrue("The bookshelf with more than 8 elements of one kind should achieve the goal", commonGoal5.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the name of the goal is correct.
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertTrue("The name should be Common Goal 5", commonGoal5.getGoalName().equals("CommonGoal5"));
+    }
+
+    /**
+     * Test if the description of the goal is correct.
+     */
+    @Test
+    public void getGoalDescription() {
+        assertTrue("The description should be \"Have 8 elements of the same type in the whole Bookshelf\"", commonGoal5.getGoalDescription().equals("Eight tiles of the same type in the whole bookshelf.\nNo restrictions on the position of the tiles."));
+    }
+
+    /**
+     * Test if the file number of the goal is correct.
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assertTrue("The file number should be 6", commonGoal5.getGoalFileNumber() == "6");
+    }
+
 }

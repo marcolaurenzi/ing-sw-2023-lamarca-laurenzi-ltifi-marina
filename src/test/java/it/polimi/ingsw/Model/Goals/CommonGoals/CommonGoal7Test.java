@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for CommonGoal7 class.
@@ -73,5 +74,35 @@ public class CommonGoal7Test {
     public void lessRowsTest() throws IOException {
         Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal7Test3.json");
         assertFalse(goal.isAchieved(bookshelf));
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertEquals("CommonGoal7", goal.getGoalName());
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assert (goal.getGoalDescription().equals("Four full lines each containing tiles of three types at most.\nDifferent lines may have the same combination of tiles."));
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assert (goal.getGoalFileNumber() == "8");
     }
 }

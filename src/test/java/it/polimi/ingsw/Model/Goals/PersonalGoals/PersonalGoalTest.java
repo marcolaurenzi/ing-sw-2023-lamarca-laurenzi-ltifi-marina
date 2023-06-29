@@ -2,11 +2,13 @@ package it.polimi.ingsw.Model.Goals.PersonalGoals;
 
 import it.polimi.ingsw.Model.Bookshelf;
 import it.polimi.ingsw.Model.Exceptions.WrongConfigurationException;
+import it.polimi.ingsw.Model.TypeEnum;
 import it.polimi.ingsw.Utils.Utils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
+import java.awt.print.Book;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,4 +101,46 @@ public class PersonalGoalTest {
             assertEquals(12, goals.get(i).getPoints(bookshelf));
         }
     }*/
+
+    /**
+     * Tests the get method.
+     *
+     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
+    @Test
+    public void getTest() throws IOException {
+        Bookshelf bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "personalGoalTest1.json");
+        PersonalGoal personalGoal = new PersonalGoal(1);
+        personalGoal.setPersonalGoal(bookshelf);
+        assert personalGoal.get(5, 2).getType().equals(TypeEnum.TROPHIES);
+    }
+
+    /**
+     * Test the setPersonalGoal method.
+     *
+     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
+    @Test
+    public void setPersonalGoalTest() throws IOException {
+        PersonalGoal personalGoal = new PersonalGoal(1);
+        Bookshelf bookshelf = new Bookshelf();
+        personalGoal.setPersonalGoal(bookshelf);
+        assertEquals(bookshelf, personalGoal.getPersonalGoalBookshelf());
+    }
+
+
+    /**
+     * Test the setPersonalGoal method.
+     *
+     * @throws WrongConfigurationException if there is an error in the bookshelf configuration.
+     * @throws IOException if there is an error loading the bookshelf from a file.
+     */
+    @Test
+    public void getPersonalGoalNameTest() throws IOException {
+        for(int i = 0; i<12; i++) {
+            assertEquals("Personal_Goals" + (i+1), goals.get(i).getPersonalGoalName());
+        }
+    }
 }

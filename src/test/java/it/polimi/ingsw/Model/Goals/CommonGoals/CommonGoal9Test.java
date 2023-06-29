@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the CommonGoal9 class.
@@ -88,4 +89,34 @@ public class CommonGoal9Test {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal9Test3.json");
         assertFalse("The bookshelf with no valid rows should not check the goal", commonGoal9.isAchieved(bookshelf));
     }
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertEquals("CommonGoal9", commonGoal9.getGoalName());
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assert (commonGoal9.getGoalDescription().equals("Two lines each having no duplicate types.\nThe two lines may have the same combination of tiles."));
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assert (commonGoal9.getGoalFileNumber() == "10");
+    }
+
 }

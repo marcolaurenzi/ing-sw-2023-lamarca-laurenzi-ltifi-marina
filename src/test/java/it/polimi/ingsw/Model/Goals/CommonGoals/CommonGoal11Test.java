@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for the CommonGoal11 class.
@@ -111,4 +112,38 @@ public class CommonGoal11Test {
         bookshelf = Utils.loadBookshelfFromFile(Utils.getTestFilesPath() + "commonGoal11Test3.json");
         assertTrue("The bookshelf with 5 columns that progressively has one tile more than the previous one should achieve the goal", commonGoal11.isAchieved(bookshelf));
     }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalNameTest() {
+        assertEquals("CommonGoal11", commonGoal11.getGoalName());
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalDescriptionTest() {
+        assert (commonGoal11.getGoalDescription().equals("""
+                Five columns of increasing or decreasing height.
+                Starting from the shortest column and going up, each next column must have exactly one more tile.
+                The tiles may be of any type."""));
+    }
+
+    /**
+     * Test if the Bookshelf filled all with the same element achieves the goal.
+     *
+     * @throws IOException if an I/O error occurs while loading the bookshelf from a file.
+     */
+    @Test
+    public void getGoalFileNumberTest() {
+        assert (commonGoal11.getGoalFileNumber() == "12");
+    }
+
 }

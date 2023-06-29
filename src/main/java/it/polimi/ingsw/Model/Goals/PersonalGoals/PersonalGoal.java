@@ -19,7 +19,7 @@ public class PersonalGoal implements Serializable {
     /**
      * The number of the personal goal.
      */
-    private int number;
+    int number;
 
     /**
      * Constructs a personal goal object with the specified number.
