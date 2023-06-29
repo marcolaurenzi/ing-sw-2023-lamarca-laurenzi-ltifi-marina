@@ -157,7 +157,7 @@
         [{"type": "GAMES"}, null, null, null, null],
         [null, null, {"type": "FRAMES"} ,null, null],
         [null, null, null, null, {"type": "CATS"}],
-        [null, null, null, {"type": "THROPIES"}, null]
+        [null, null, null, {"type": "TROPHIES"}, null]
       ],
       "columnDimension": 6,
       "rowDimension": 5

@@ -28,7 +28,7 @@ public class PersonalGoal implements Serializable {
      * @throws IOException If there is an error loading the personal goal configuration file.
      */
     public PersonalGoal(int i) throws IOException {
-        this.number = i;
+        this.number = i+1;
         personalGoal = Utils.loadBookshelfFromFile(Utils.getConfigurationPath() + "PersonalGoalConfiguration.json",i);
     }
 
