@@ -1,11 +1,11 @@
 ![Icona](src/main/resources/assets/Publisher%20material/Icon%2050x50px.png)
-## My Shelfie Board Game
+# My Shelfie Board Game
 
 A game by Phil Walker-Harding and Matthew Dunstan. You've just brought your new **shelf** home, and it's time to fill it with your favourite objects: collect books, plants, board games, portraits, prizes... and don't forget to leave some space for your cats! Who will manage to have the best organized **shelf**?
 
 The game is a _Cranio Creations s.r.l._'s property
 
-# ing-sw-2023-lamarca-laurenzi-ltifi-marina
+## ing-sw-2023-lamarca-laurenzi-ltifi-marina
 
 This is the **Ingegneria del Software**'s final test held at **Politecnico di Milano** (A.Y. 2022/2023)
 
