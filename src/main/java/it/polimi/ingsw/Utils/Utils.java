@@ -8,6 +8,7 @@ import it.polimi.ingsw.Model.Item;
 import it.polimi.ingsw.Model.TypeEnum;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -259,17 +260,18 @@ public class Utils {
      * Prints the game's logo.
      */
     public static void printLogo() {
-        try {
-            File file = new File(Utils.getConfigurationPath() + "logo.txt");
-            Scanner scanner = new Scanner(file);
-            String ANSI_RESET = "\u001B[0m";
-            String ANSI_WHITE = "\u001B[43m";
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_WHITE = "\u001B[43m";
+
+        try (InputStream is = Utils.class.getResourceAsStream("/configurations/logo.txt");
+             Scanner scanner = new Scanner(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             while (scanner.hasNextLine()) {
                 System.out.println("                        " + ANSI_WHITE + scanner.nextLine() + ANSI_RESET);
             }
-            scanner.close();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }
