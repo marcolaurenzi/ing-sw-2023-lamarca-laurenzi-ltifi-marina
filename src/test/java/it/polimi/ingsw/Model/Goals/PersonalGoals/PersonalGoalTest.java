@@ -140,7 +140,7 @@ public class PersonalGoalTest {
     @Test
     public void getPersonalGoalNameTest() throws IOException {
         for(int i = 0; i<12; i++) {
-            assertEquals("Personal_Goals" + (i), goals.get(i).getPersonalGoalName());
+            assertEquals("Personal_Goals" + (i+1), goals.get(i).getPersonalGoalName());
         }
     }
 }
