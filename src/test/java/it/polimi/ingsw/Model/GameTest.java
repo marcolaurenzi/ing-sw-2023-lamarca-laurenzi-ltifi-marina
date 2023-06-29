@@ -146,17 +146,19 @@ class GameTest {
      */
     @Test
     void gameTest() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException {
-        Game game = new Game(1, 3);
-        game.addPlayer("54336");
-        game.addPlayer("54337");
-        game.addPlayer("54338");
-        ArrayList<PlayerStatusToFile> playerstat = new ArrayList<>();
-        playerstat.add(game.getPlayers().get(0).getPlayerStatusToFile());
-        playerstat.add(game.getPlayers().get(1).getPlayerStatusToFile());
-        playerstat.add(game.getPlayers().get(2).getPlayerStatusToFile());
-        GameStatusToFile gameStatusToFile = game.getGameStatusToFile();
-        Game gam2 = new Game(gameStatusToFile, playerstat);
-        assertEquals(game.getId(), gam2.getId());
+        for(int i = 0; i<100; i++) {
+            Game game = new Game(1, 3);
+            game.addPlayer("54336");
+            game.addPlayer("54337");
+            game.addPlayer("54338");
+            ArrayList<PlayerStatusToFile> playerstat = new ArrayList<>();
+            playerstat.add(game.getPlayers().get(0).getPlayerStatusToFile());
+            playerstat.add(game.getPlayers().get(1).getPlayerStatusToFile());
+            playerstat.add(game.getPlayers().get(2).getPlayerStatusToFile());
+            GameStatusToFile gameStatusToFile = game.getGameStatusToFile();
+            Game gam2 = new Game(gameStatusToFile, playerstat);
+            assertEquals(game.getId(), gam2.getId());
+        }
     }
 
     /**
