@@ -20,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -474,8 +475,7 @@ public class GamePageController implements ViewController{
 
                 // Upper Label set up
                 messageLabel.setText("Last Turn, make your last move!");
-                messageLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-                messageLabel.setPrefWidth(300);
+                messageLabel.setFont(Font.font("Arial Bold", 20));
 
                 // Activate bookshelf buttons
                 for(int i = 0; i < 5; i++) {
@@ -486,7 +486,8 @@ public class GamePageController implements ViewController{
             else if(isLastTurn()) {
 
                 // Upper Label set up
-                messageLabel.setText("Last Turn, wait for other players to finish!");
+                messageLabel.setText("Last Turn completed, wait the end!");
+                messageLabel.setFont(Font.font("Arial Bold", 20));
 
                 // Deactivate bookshelf buttons
                 for(int i = 0; i < 5; i++) {
@@ -498,6 +499,7 @@ public class GamePageController implements ViewController{
 
                 // Upper Label set up
                 messageLabel.setText("Your turn!");
+                messageLabel.setFont(Font.font("Arial Bold", 20));
 
                 // Activate bookshelf buttons
                 for(int i = 0; i < 5; i++) {
