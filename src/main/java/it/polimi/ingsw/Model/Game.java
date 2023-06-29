@@ -241,23 +241,6 @@ public class Game {
     public void nextTurn() throws FinishedGameException, GameNotStartedException {
         gameState.nextPlayer(this, players);
     }
-
-    /**
-     * Removes a player from the game.
-     *
-     * @param playerID the ID of the player to be removed
-     * @throws MissingPlayerException if the player is not found in the game
-     */
-    public void removePlayer(String playerID) throws MissingPlayerException {
-        for (Player player : players) {
-            if (player.getPlayerID().equals(playerID)) {
-                players.remove(player);
-                return;
-            }
-        }
-        throw new MissingPlayerException();
-    }
-
     /* ************************************************************************************************************
      *                          END OF CUSTOM METHODS
      *                          START OF GETTER METHODS

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Decks.ItemDeck;
+import it.polimi.ingsw.Model.Exceptions.AlreadyStartedGameException;
 import it.polimi.ingsw.Model.Exceptions.MaxNumberOfPlayersException;
 import it.polimi.ingsw.Utils.Utils;
 import jdk.jfr.Name;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -102,6 +104,62 @@ public class BoardTest {
         board.getGameBoard().get(4,4).placeItem(board.getItemDeck().draw());
         board.getGameBoard().get(4,5).placeItem(board.getItemDeck().draw());
         assert !board.toRefresh();
+    }
+
+    /** Tests the initializeBoard method of the Board class.
+     *
+     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
+     * @throws IOException if an I/O error occurs.
+     * @throws AlreadyStartedGameException if the game has already started.
+     */
+    @Test
+    public void removeItemTest() {
+        board.removeItem(4,4);
+        assert board.getGameBoard().get(4,4).isEmpty();
+    }
+
+    /**
+     * Tests the removeAllItems method of the Board class.
+     *
+     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
+     * @throws IOException if an I/O error occurs.
+     */
+    @Test
+    public void removeAllItemsTest() throws MaxNumberOfPlayersException, IOException {
+        board.initializeBoard(new Game(1, 4));
+        board.removeAllItems();
+        for(int i = 0; i<board.getGameBoard().getColumnDimension(); i++) {
+            for(int j = 0; j<board.getGameBoard().getRowDimension(); j++) {
+                assert board.getGameBoard().get(i,j).isEmpty();
+            }
+        }
+    }
+
+    /**
+     * Tests the isFreeNorth method of the Board class.
+     *
+     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
+     * @throws IOException if an I/O error occurs.
+     */
+    @Test
+    public void isFreeEastTest() throws MaxNumberOfPlayersException, IOException {
+        board.initializeBoard(new Game(1, 4));
+        assertFalse(board.isFreeEast(3,1));
+        assertTrue(board.isFreeEast(1,1));
+    }
+
+    /**
+     * Tests the isFreeNorth method of the Board class.
+     *
+     * @throws MaxNumberOfPlayersException if the maximum number of players is exceeded.
+     * @throws IOException if an I/O error occurs.
+     */
+    @Test
+    public void isFreeWestTest() throws MaxNumberOfPlayersException, IOException {
+        board.initializeBoard(new Game(1, 4));
+        assertTrue(board.isFreeWest(3,1));
+        assertFalse(board.isFreeWest(3,2));
+
     }
 
     /**

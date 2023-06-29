@@ -19,23 +19,6 @@ public abstract class PlayerState {
     }
 
     /**
-     * Checks if the selection is full, i.e., all three elements are not null.
-     *
-     * @param tilesSelection the selection to verify
-     * @return true if and only if the selection is full
-     */
-    protected Boolean selectionIsFull(ArrayList<Coordinates> tilesSelection) {
-        Boolean ret = true;
-        for (Coordinates coordinates : tilesSelection)
-            if (coordinates == null) {
-                ret = false;
-                break;
-            }
-
-        return ret;
-    }
-
-    /**
      * Checks if the tiles selected are all on the same column, i.e., all have the same y-coordinate.
      *
      * @param tilesSelection the tilesSelection to check
@@ -64,7 +47,7 @@ public abstract class PlayerState {
      * @param tilesSelection the tilesSelection to check
      * @return true if and only if the tiles selected are all on the same row
      */
-    private Boolean areAllSameRow(ArrayList<Coordinates> tilesSelection) {
+    protected Boolean areAllSameRow(ArrayList<Coordinates> tilesSelection) {
         Boolean ret = true;
 
         int x = tilesSelection.get(0).getX();

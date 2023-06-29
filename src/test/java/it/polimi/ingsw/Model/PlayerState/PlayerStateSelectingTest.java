@@ -14,12 +14,23 @@ class PlayerStateSelectingTest {
     private Board board;
     private Bookshelf bookshelf;
 
+    /**
+     * Initializes the attributes for the test class.
+     */
     @BeforeEach
     void setUp() {
         playerStateSelecting = new PlayerStateSelecting();
         board = new Board();
         bookshelf = new Bookshelf();
     }
+
+    /**
+     * Tests the method pickAndInsertInBookshelf.
+     *
+     * @throws ColumnNotValidException     if the column is not valid.
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException if the picked items don't fit the column.
+     */
     @Test
     void pickAndInsertInBookshelf_invalidSelection_throwsException() {
         // Arrange
@@ -32,6 +43,13 @@ class PlayerStateSelectingTest {
         assertThrows(NullPointerException.class, () -> playerStateSelecting.pickAndInsertInBookshelf(tilesSelection, board, bookshelf, 0, order));
     }
 
+    /**
+     * Tests the method pickAndInsertInBookshelf.
+     *
+     * @throws ColumnNotValidException     if the column is not valid.
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException if the picked items don't fit the column.
+     */
     @Test
     void pickAndInsertInBookshelf_emptySelection_throwsException() {
         // Arrange
@@ -43,6 +61,13 @@ class PlayerStateSelectingTest {
         assertThrows(SelectionIsEmptyException.class, () -> playerStateSelecting.pickAndInsertInBookshelf(tilesSelection, board, bookshelf, 0, order));
     }
 
+    /**
+     * Tests the method pickAndInsertInBookshelf.
+     *
+     * @throws ColumnNotValidException     if the column is not valid.
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException if the picked items don't fit the column.
+     */
     @Test
     void pickAndInsertInBookshelf_wrongOrder_throwsException() {
         // Arrange
@@ -56,6 +81,13 @@ class PlayerStateSelectingTest {
         assertThrows(NullPointerException.class, () -> playerStateSelecting.pickAndInsertInBookshelf(tilesSelection, board, bookshelf, 0, order));
     }
 
+    /**
+     * Tests the method insertPickInBookshelf.
+     *
+     * @throws ColumnNotValidException     if the column is not valid.
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException if the picked items don't fit the column.
+     */
     @Test
     void insertPickInBookShelf_validInsertion_insertsItemsInBookshelf() throws ColumnNotValidException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         // Arrange
@@ -78,6 +110,9 @@ class PlayerStateSelectingTest {
         assert(bookshelf.get(3, 0) != null);
     }
 
+    /**
+     * This test checks if the method insertPickInBookShelf() throws an exception if the column is not valid
+     */
     @Test
     void insertPickInBookShelf_invalidInsertion_throwsException() {
         // Arrange
@@ -93,6 +128,44 @@ class PlayerStateSelectingTest {
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> playerStateSelecting.insertPickInBookShelf(pickedItems, bookshelf, 77, new int[]{}));
     }
 
+    /**
+     *
+     */
+    @Test
+    void areAllSameRowTest() {
+        // Arrange
+        ArrayList<Coordinates> tilesSelection = new ArrayList<>();
+        tilesSelection.add(new Coordinates(0, 0));
+        tilesSelection.add(new Coordinates(0, 1));
+        tilesSelection.add(new Coordinates(0, 2));
+        int[] order = {1, 2, 0};
+
+        // Act
+        boolean result = playerStateSelecting.areAllSameRow(tilesSelection);
+
+        // Assert
+        assertTrue(result);
+    }
+
+    /**
+     * This test checks if the method areAllAdjacentNotOrdered() returns true if the tiles selected are not ordered
+     */
+    @Test
+    void areAllAdjacentNotOrderedTest() {
+        // Arrange
+        ArrayList<Coordinates> tilesSelection = new ArrayList<>();
+        tilesSelection.add(new Coordinates(0, 0));
+        tilesSelection.add(new Coordinates(0, 2));
+        tilesSelection.add(new Coordinates(0, 1));
+        int[] order = {1, 2, 0};
+
+        assertTrue (playerStateSelecting.areAllAjdacentsNotOrdered(tilesSelection));
+
+    }
+
+    /**
+     * This test checks if the method insertPickInBookShelf() throws an exception if the column is not valid
+     */
     @Test
     void insertPickInBookShelf_wrongOrder_insertsItemsInBookshelf() throws ColumnNotValidException, PickDoesntFitColumnException, PickedColumnOutOfBoundsException {
         // Arrange
@@ -115,6 +188,9 @@ class PlayerStateSelectingTest {
         assert (bookshelf.get(3, 0) == null);
     }
 
+    /**
+     * This test checks if the method getStateNumber() returns the correct number of the state
+     */
     @Test
     void getStateNumber_returnsZero() {
         // Act & Assert

@@ -135,20 +135,70 @@ class PlayerTest {
         assert (player.getTotalPoints() >= 8);
 
         int k = 0;
+    }
 
-        /*
-        //player completes private goal tasks
-        for (int i = 0; i < player.getBookshelf().getColumnDimension(); i++) {
-            for (int j = 0; j < player.getBookshelf().getRowDimension(); j++) {
-                if (player.getPersonalGoal().get(i, j) != null) {
-                    k++;
-                    player.getBookshelf().set(i, j, new Item(player.getPersonalGoal().get(i, j).getType()));
-                    player.computeRewardGoals();
-                    assert (player.getTotalPoints() >= 8 + getCurrentPoints(k));
-                }
-            }
-        }
-        */
+    /**
+     * Tests the method setBookshelf.
+     *
+     * @throws MaxNumberOfPlayersException if the maximum number of players is reached.
+     * @throws IOException if there is an I/O error.
+     * @throws PickedColumnOutOfBoundsException if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException if the pick doesn't fit the column.
+     */
+    @Test
+    void setBookshelfTest() throws MaxNumberOfPlayersException, IOException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException {
+        Player player = new Player("test", new Game(0, 2));
+        player.setBookshelf();
+        Bookshelf bookshelf = player.getBookshelf();
+        assertEquals(bookshelf, player.getBookshelf());
+    }
+
+    /**
+     * Tests the method endTurn.
+     *
+     * @throws WrongConfigurationException if the configuration is incorrect.
+     * @throws MaxNumberOfPlayersException if the maximum number of players is reached.
+     * @throws IOException if there is an I/O error.
+     */
+    @Test
+    void endTurnTest() throws WrongConfigurationException, MaxNumberOfPlayersException, IOException {
+        Player player = new Player("test", new Game(0, 2));
+        player.endTurn();
+        assert (player.getState() instanceof PlayerStateWaiting);
+    }
+
+    /**
+     * Tests the method pickAndInsertInBookshelf.
+     *
+     * @throws MaxNumberOfPlayersException                  if the maximum number of players is reached.
+     * @throws IOException                                  if there is an I/O error.
+     * @throws AlreadyStartedGameException                  if the game has already started.
+     * @throws SelectionNotValidException                   if the selection is not valid.
+     * @throws PlayerIsWaitingException                     if the player is waiting.
+     * @throws TilesSelectionSizeDifferentFromOrderLengthException if the size of the tiles selection is different from the length of the order.
+     * @throws ColumnNotValidException                      if the column is not valid.
+     * @throws SelectionIsEmptyException                    if the selection is empty.
+     * @throws WrongConfigurationException                 if the configuration is incorrect.
+     * @throws PickedColumnOutOfBoundsException            if the picked column is out of bounds.
+     * @throws PickDoesntFitColumnException                 if the pick doesn't fit the column.
+     * @throws VoidBoardTileException                       if the board tile is void.
+     */
+    @Test
+    void pickAndInsertInBookshelfTest() throws MaxNumberOfPlayersException, IOException, AlreadyStartedGameException, SelectionNotValidException, PlayerIsWaitingException, TilesSelectionSizeDifferentFromOrderLengthException, ColumnNotValidException, SelectionIsEmptyException, WrongConfigurationException, PickedColumnOutOfBoundsException, PickDoesntFitColumnException, VoidBoardTileException {
+        Game game = new Game(0, 2);
+        game.addPlayer("test");
+        game.addPlayer("test2");
+        Player player = game.getPlayers().get(0);
+        Player player2 = game.getPlayers().get(1);
+        game.startGame();
+        game.refreshBoard();
+        player.changeState(new PlayerStateSelecting());
+        ArrayList<Coordinates> coordinates = new ArrayList<>();
+        coordinates.add(new Coordinates(3, 1));
+        int[] order = {0};
+        player.pickAndInsertInBookshelf(coordinates, 1, order);
+        assert (player.getBookshelf().get(5, 1) != null);
+
 
     }
 

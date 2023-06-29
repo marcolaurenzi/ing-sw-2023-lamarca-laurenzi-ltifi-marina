@@ -47,17 +47,6 @@ public class Board implements Serializable {
     }
 
     /**
-     * Calls the BoardTile class' method to place an item on the single tile.
-     *
-     * @param itemToPlace reference to the Item to place
-     * @param x           the first axis of the board representing the row of the tile
-     * @param y           the second axis of the board representing the column of the tile
-     */
-    private void placeItem(Item itemToPlace, int x, int y) {
-        this.gameBoard.get(x, y).placeItem(itemToPlace);
-    }
-
-    /**
      * Removes an item from the BoardTile and re-inserts it in the ItemDeck.
      *
      * @param x the first axis of the board representing the row of the tile
@@ -90,28 +79,6 @@ public class Board implements Serializable {
      */
     public Item drawItem(int x, int y) {
         return this.gameBoard.get(x, y).drawItem();
-    }
-
-    /**
-     * Calls the BoardTile class' method to check the item present on the single tile.
-     *
-     * @param x the first axis of the board representing the row of the tile
-     * @param y the second axis of the board representing the column of the tile
-     * @return the tile if it is present, null otherwise
-     */
-    private Item checkItem(int x, int y) {
-        return this.gameBoard.get(x, y).checkItem();
-    }
-
-    /**
-     * Prints the Board.
-     */
-    public void printBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.println(gameBoard.get(i, j).getNumberOfPlayersSign());
-            }
-        }
     }
 
     /**

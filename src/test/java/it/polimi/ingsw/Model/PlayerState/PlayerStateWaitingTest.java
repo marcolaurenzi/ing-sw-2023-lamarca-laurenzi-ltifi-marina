@@ -14,6 +14,9 @@ class PlayerStateWaitingTest {
     private Board board;
     private Bookshelf bookshelf;
 
+    /**
+     * Initializes the attributes for the test class.
+     */
     @BeforeEach
     void setUp() {
         playerStateWaiting = new PlayerStateWaiting();
@@ -21,6 +24,11 @@ class PlayerStateWaitingTest {
         bookshelf = new Bookshelf();
     }
 
+    /**
+     * Tests the method pickAndInsertInBookshelf.
+     *
+     * @throws PlayerIsWaitingException if the player is waiting.
+     */
     @Test
     void pickAndInsertInBookshelf_throwsException() {
         // Arrange
@@ -34,6 +42,11 @@ class PlayerStateWaitingTest {
         assertThrows(PlayerIsWaitingException.class, () -> playerStateWaiting.pickAndInsertInBookshelf(tilesSelection, board, bookshelf, 0, order));
     }
 
+    /**
+     * Tests the method insertPickInBookShelf.
+     *
+     * @throws PlayerIsWaitingException if the player is waiting.
+     */
     @Test
     void insertPickInBookShelf_throwsException() {
         // Arrange
@@ -50,6 +63,11 @@ class PlayerStateWaitingTest {
         assertThrows(PlayerIsWaitingException.class, () -> playerStateWaiting.insertPickInBookShelf(pickedItems, bookshelf, 0, order));
     }
 
+    /**
+     * Tests the method pickAndInsertInWarehouse.
+     *
+     * @throws PlayerIsWaitingException if the player is waiting.
+     */
     @Test
     void getStateNumber_returnsOne() {
         // Act & Assert

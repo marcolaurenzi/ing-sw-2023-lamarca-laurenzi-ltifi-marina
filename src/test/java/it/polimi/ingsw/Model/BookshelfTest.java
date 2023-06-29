@@ -92,6 +92,28 @@ public class BookshelfTest {
 
     }
 
+    /** Test case for inserting items into a non-empty bookshelf.
+     * It verifies that the items are inserted correctly and other positions remain unchanged.
+     * @throws PickDoesntFitColumnException if the picked items cannot fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
+     */
+    @Test
+    void isEmptyTest() {
+        Bookshelf bookshelf = new Bookshelf();
+        assertTrue(bookshelf.isEmpty());
+    }
+
+    /**
+     * Test case for checking if a position in the bookshelf is empty.
+     * It expects the position to be empty.
+     */
+    @Test
+    void isEmptyTest2() {
+        Bookshelf bookshelf = new Bookshelf();
+        bookshelf.set(5, 0, new Item(TypeEnum.CATS));
+        assertFalse(bookshelf.isEmpty(5, 0));
+    }
+
     /**
      * Test case for inserting two items into an empty bookshelf.
      * It verifies that the items are inserted correctly and other positions remain empty.
@@ -116,6 +138,30 @@ public class BookshelfTest {
                 if(i != 5 && i != 4)
                     assertNull(bookshelf.get(i, j));
 
+    }
+
+    /**
+     * Test case for inserting one item into an empty bookshelf.
+     * It verifies that the item is inserted correctly and other positions remain empty.
+     * @throws PickDoesntFitColumnException if the picked items cannot fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
+     */
+    @Test
+    void getEmptySpacesTest() {
+        Bookshelf bookshelf = new Bookshelf();
+        assertEquals(6, bookshelf.getEmptySpaces(1));
+    }
+
+    /**
+     * Test case for inserting one item into an empty bookshelf.
+     * It verifies that the item is inserted correctly and other positions remain empty.
+     * @throws PickDoesntFitColumnException if the picked items cannot fit in the column
+     * @throws PickedColumnOutOfBoundsException if the column index is out of bounds
+     */
+    @Test
+    void getMaxEmptySpacesTest() {
+        Bookshelf bookshelf = new Bookshelf();
+        assertEquals(6, bookshelf.getMaxEmptySpaces());
     }
 
     /**
