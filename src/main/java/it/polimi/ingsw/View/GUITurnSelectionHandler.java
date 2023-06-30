@@ -260,7 +260,6 @@ public class GUITurnSelectionHandler {
                     Platform.runLater(() -> {
                         button.setOpacity(0.5);
                         button.setOnAction(event -> {
-                            System.out.println("Button " + i + " " + j + " deselected!");
                             deselect(i, j, imageView, button);
                             Stream<Button> stream = GamePageController.buttons.stream();
                             stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
@@ -279,7 +278,6 @@ public class GUITurnSelectionHandler {
                 Platform.runLater(() -> {
                     button.setOpacity(0.5);
                     button.setOnAction(event -> {
-                        System.out.println("Button " + i + " " + j + " deselected!");
                         deselect(i, j, imageView, button);
                         Stream<Button> stream = GamePageController.buttons.stream();
                         stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
@@ -317,7 +315,6 @@ public class GUITurnSelectionHandler {
             Platform.runLater(() -> {
                 button.setOpacity(1);
                 button.setOnAction(event -> {
-                    System.out.println("Button " + i + " " + j + " selected!");
                     select(i, j, imageView, button);
                     Stream<Button> stream = GamePageController.buttons.stream();
                     stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
@@ -329,7 +326,6 @@ public class GUITurnSelectionHandler {
             Platform.runLater(() -> {
                 button.setOpacity(1);
                 button.setOnAction(event -> {
-                    System.out.println("Button " + i + " " + j + " selected!");
                     select(i, j, imageView, button);
                     Stream<Button> stream = GamePageController.buttons.stream();
                     stream.forEach(b -> GamePageController.turnSelectionHandler.disableButtons(b));
