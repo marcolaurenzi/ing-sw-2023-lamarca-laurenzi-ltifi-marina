@@ -58,4 +58,6 @@ java -jar Client.jar
 ```
 Once started the client wil ask you to provide your personal IP address and the Server's one. Be careful, a wrong IP will lead to an unsuccessful execution.
 
+### Running the GUI
 
+Be careful, if ouy have already installed JavaFX on your computer the provided .jar files may not work properly. To fix this issue you will need to delete the JavaFX version on you computer and let Maven generate again the jar's for you.
